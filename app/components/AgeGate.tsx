@@ -44,7 +44,7 @@ export default function AgeGate() {
           <div className={styles.promptState}>
             <div className={styles.logoWrap}>
               <img
-                src="/image/afterdarkFavicon.webp"
+                src="/afterdarkFavicon.webp"
                 alt="After Dark Cannabis"
                 className={styles.logo}
               />
