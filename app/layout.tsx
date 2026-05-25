@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AgeGate from "./components/AgeGate";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://afterdarkcannabis.com"),
@@ -136,7 +137,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <AgeGate />
+      </body>
     </html>
   );
 }
