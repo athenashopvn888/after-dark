@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import FlowerCard from "./components/FlowerCard";
 import { allFlowers } from "./lib/products";
 
 /* ── Bento Mosaic Config ── */
@@ -180,42 +181,24 @@ export default function HomePage() {
       tierCounts[f.tier] = tc + 1;
     }
 
-    const formatted = picked.map((f) => ({
-      name: f.name,
-      sku: f.sku,
-      tier: f.tier.toUpperCase(),
-      thc: f.thc,
-      type: f.type === "indica" ? "IH" : f.type === "sativa" ? "SH" : "H",
-      price3g: f.price3g ? `$${f.price3g.sale ?? f.price3g.regular}` : "—",
-      image: f.image,
-    }));
-    setFeaturedStrains(formatted);
+    setFeaturedStrains(picked);
   }, []);
-
-  function getTypeLabel(type: string) {
-    if (type.startsWith("IH")) return "Indica";
-    if (type.startsWith("SH")) return "Sativa";
-    return "Hybrid";
-  }
-
-  function getTypeClass(type: string) {
-    if (type.startsWith("IH")) return styles.badgeIndica;
-    if (type.startsWith("SH")) return styles.badgeSativa;
-    return styles.badgeHybrid;
-  }
-
-  function getTierColor(tier: string) {
-    if (tier === "EXOTIC") return "#f59e0b";
-    if (tier === "PREMIUM") return "#a78bfa";
-    if (tier === "AAA+") return "#22d3ee";
-    if (tier === "AA") return "#34d399";
-    return "#94a3b8";
-  }
 
   return (
     <main className={styles.main}>
       {/* ── NAVBAR ── */}
       <Navbar />
+
+      {/* ── WELCOME BANNER ── */}
+      <section className={styles.welcomeBannerSection}>
+        <div className={styles.welcomeBannerContainer}>
+          <img
+            src="/banners/after_dark_welcome_banner.webp"
+            alt="Welcome to After Dark Cannabis — Premium York Cannabis Dispensary"
+            className={styles.welcomeBannerImg}
+          />
+        </div>
+      </section>
 
       {/* ── BENTO MOSAIC HERO ── */}
       <section className={styles.hero}>
@@ -298,51 +281,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className={styles.featuredGrid}>
+          <div className={styles.featuredScroll}>
             {featuredStrains.map((strain, i) => (
-              <Link
-                key={`${strain.sku}-${i}`}
-                href={`/flower/${strain.name.toLowerCase().replace(/\s+/g, "-")}`}
-                className={styles.productCard}
-              >
-                <div className={styles.productMedia}>
-                  <img
-                    src={strain.image}
-                    alt={strain.name}
-                    loading="lazy"
-                    className={strain.image ? styles.productImg : ""}
-                  />
-                  <div className={styles.productBadges}>
-                    <span className={styles.productBadgeThc}>
-                      THC {strain.thc}
-                    </span>
-                    <span
-                      className={styles.productBadgeTier}
-                      style={{
-                        background: `linear-gradient(135deg, ${getTierColor(strain.tier)}, ${getTierColor(strain.tier)}dd)`,
-                        color: strain.tier === "BUDGET" ? "#020617" : "white",
-                      }}
-                    >
-                      {strain.tier}
-                    </span>
-                  </div>
-                </div>
-                <div className={styles.productBody}>
-                  <span
-                    className={`${styles.productType} ${getTypeClass(strain.type)}`}
-                  >
-                    {getTypeLabel(strain.type)}
-                  </span>
-                  <h3 className={styles.productName}>{strain.name}</h3>
-                  <div className={styles.productPricing}>
-                    <span className={styles.productPrice}>
-                      {strain.price3g}
-                    </span>
-                    <span className={styles.productPriceUnit}>/ 3g</span>
-                  </div>
-                  <div className={styles.productCta}>View Strain →</div>
-                </div>
-              </Link>
+              <div key={`${strain.sku}-${i}`} className={styles.scrollItem}>
+                <FlowerCard flower={strain} tierKey={strain.tier} />
+              </div>
             ))}
           </div>
         </div>

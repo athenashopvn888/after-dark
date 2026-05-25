@@ -17,13 +17,34 @@
 .hero {
   position: relative;
   width: 100%;
-  padding: 140px 24px 80px;
+  padding: 40px 24px 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background-color: #020617;
   animation: heroPulse 6s ease-in-out infinite;
+}
+
+.welcomeBannerSection {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 92px;
+  background-color: #020617;
+}
+
+.welcomeBannerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+}
+
+.welcomeBannerImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
 }
 
 .heroBg {
@@ -324,10 +345,40 @@
   background-color: #020617;
 }
 
-.featuredGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.featuredScroll {
+  display: flex;
+  overflow-x: auto;
   gap: 20px;
+  padding: 12px 4px 24px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-mid, #2d6a4f) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.featuredScroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.featuredScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.featuredScroll::-webkit-scrollbar-thumb {
+  background-color: var(--green-dark, #1b4332);
+  border-radius: 99px;
+  border: 1px solid transparent;
+}
+
+.scrollItem {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 600px) {
+  .scrollItem {
+    flex: 0 0 240px;
+  }
 }
 
 .productCard {
