@@ -6,7 +6,7 @@ import styles from "./contact.module.css";
 export const metadata: Metadata = {
   title: "Contact Us — After Dark Cannabis | 1664 Jane St, York",
   description:
-    "Visit After Dark Cannabis at 1664 Jane St, York, ON M9N 2S1. Open 24 hours, 7 days a week. Walk-ins welcome. ByWard Market.",
+    "Visit After Dark Cannabis at 1664 Jane St, York, ON M9N 2S1. Open 24 hours, 7 days a week. Walk-ins welcome.",
   openGraph: {
     title: "Contact After Dark Cannabis — York Dispensary",
     description:
@@ -39,10 +39,10 @@ export default function ContactPage() {
                 <br />
                 York, ON M9N 2S1
                 <br />
-                <span className={styles.infoMuted}>ByWard Market &amp; Bathurst</span>
+                <span className={styles.infoMuted}>Jane St &amp; Lawrence Ave W</span>
               </p>
               <a
-                href="https://maps.app.goo.gl/YFPDuRCjwiuZL4J86"
+                href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.infoBtn}

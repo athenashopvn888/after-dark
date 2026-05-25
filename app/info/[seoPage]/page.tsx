@@ -102,7 +102,7 @@ export default async function SeoLandingPage({
             </div>
             <div className={styles.visitBtns}>
               <a
-                href="https://maps.app.goo.gl/ChIJha2UQegxK4gRAGK9yMNa6Fo"
+                href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.visitBtn}

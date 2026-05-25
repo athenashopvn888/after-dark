@@ -13,11 +13,11 @@ const FAQ_CATEGORIES = [
   {
     title: "📍 Location & Hours",
     faqs: [
-      { q: "Where is After Dark Cannabis located?", a: "We are located at 1664 Jane St, York, ON M5S 2H7 — in the heart of York. We're near the Eaton Centre, CN Tower, and major OC Transpo bus routes." },
+      { q: "Where is After Dark Cannabis located?", a: "We are located at 1664 Jane St, York, ON M9N 2S1. We're easily accessible by TTC bus routes and close to major highways like the 401." },
       { q: "What are your hours?", a: "We are open Open 24 Hours a day, 7 days a week, 365 days a year. Walk in anytime — no appointment needed." },
-      { q: "Is there parking nearby?", a: "Yes. Free street parking is available on Center St and surrounding streets in the evenings. Paid parking lots are available nearby during the day. We're also accessible by OC Transpo and STO buses." },
+      { q: "Is there parking nearby?", a: "Yes. Free street parking is available nearby on Jane St and surrounding streets in the evenings. We're also easily accessible by TTC buses." },
       { q: "How far are you from Mississauga?", a: "We're just 5 minutes from the Gardiner Expressway and 7 minutes from the Don Valley Parkway. We're one of the closest dispensaries to the Ontario border." },
-      { q: "What's the best way to get to After Dark Cannabis?", a: "We're easily accessible by car, bus, or foot. From Eaton Centre, walk north on Center St — we're a 5-minute walk. By bus, several OC Transpo routes stop within walking distance. Free evening parking is available on surrounding streets." },
+      { q: "What's the best way to get to After Dark Cannabis?", a: "We're easily accessible by car, bus, or foot. By TTC bus, the 35 Jane bus stops right near our store. Free parking is available on surrounding streets." },
     ],
   },
   {
@@ -114,7 +114,7 @@ export default function FAQPage() {
               Call us at <strong>(437) 577-2589</strong> or visit us at 1664 Jane St, York.
             </p>
             <a
-              href="https://www.google.com/maps/dir//654+York+Ave,+York,+ON+M5S+2H7"
+              href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.ctaLink}

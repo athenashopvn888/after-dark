@@ -707,7 +707,7 @@ export default function TVMenuPage() {
 
         {/* TV BANNER */}
         <div style={{ margin: "-40px -40px 30px -40px", width: "calc(100% + 80px)" }}>
-          <img src="/banners/FlowerTV.webp" alt="Blouds TV Menu" style={{ width: "100%", display: "block" }} />
+          <img src="/banners/FlowerTV.webp" alt="After Dark TV Menu" style={{ width: "100%", display: "block" }} />
         </div>
 
         {/* GRID */}

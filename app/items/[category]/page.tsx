@@ -120,7 +120,7 @@ export default async function ItemsCategoryPage({
               1664 Jane St, York, ON M9N 2S1 · Open 24 Hours
             </p>
             <a
-              href="https://maps.app.goo.gl/ChIJha2UQegxK4gRAGK9yMNa6Fo"
+              href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.visitBtn}

@@ -18,7 +18,7 @@ export default function DeliveryPage() {
     try {
       // Save to Google Sheets via Apps Script
       const res = await fetch(
-        `https://script.google.com/macros/s/AKfycbymVE6EzwMRAiAa7OBvwEdoUF36PIuxgfUYYazmPDwngO0ueXINTtrlDZ-Dpna6ZK7znQ/exec?action=delivery_email&email=${encodeURIComponent(email)}&store=MJ01`,
+        `https://script.google.com/macros/s/AKfycbySrZYxI-NNnXfxY1jXOqHgT2HQi4zst2Fgte6FXTeymat_W_r0o1E3P83EfnVCjEk0/exec?action=delivery_email&email=${encodeURIComponent(email)}&store=MJ01`,
         { method: "GET", mode: "no-cors" }
       );
       setStatus("success");
@@ -32,7 +32,6 @@ export default function DeliveryPage() {
     <main className={styles.main}>
       <Navbar />
       <div className={styles.content}>
-        <img src="/banners/Blouds_Delivery.webp" alt="Blouds Delivery" style={{ width: "100%", maxWidth: "1200px", display: "block", margin: "0 auto 2rem auto", borderRadius: "var(--radius-lg)" }} />
         <h1 className={styles.pageTitle}>
           Delivery <span className={styles.highlight}>Coming Soon</span>
         </h1>

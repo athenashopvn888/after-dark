@@ -101,10 +101,10 @@ const jsonLd = {
     },
   ],
   sameAs: [
-    "https://maps.app.goo.gl/ChIJha2UQegxK4gRAGK9yMNa6Fo",
-    "https://www.google.com/maps/place/?q=place_id:ChIJha2UQegxK4gRAGK9yMNa6Fo",
+    "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
+    "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
   ],
-  hasMap: "https://maps.app.goo.gl/ChIJha2UQegxK4gRAGK9yMNa6Fo",
+  hasMap: "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
   areaServed: {
     "@type": "City",
     name: "York",

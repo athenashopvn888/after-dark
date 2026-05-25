@@ -419,7 +419,7 @@ export default function HomePage() {
 
           <div className={styles.reviewCtaRow}>
             <a
-              href="https://search.google.com/local/writereview?placeid=ChIJha2UQegxK4gRAGK9yMNa6Fo"
+              href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.reviewsWrite}
@@ -458,7 +458,7 @@ export default function HomePage() {
                 York, ON M9N 2S1
                 <br />
                 <a
-                  href="https://maps.app.goo.gl/ChIJha2UQegxK4gRAGK9yMNa6Fo"
+                  href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.storeLink}

@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "./blog.module.css";
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymVE6EzwMRAiAa7OBvwEdoUF36PIuxgfUYYazmPDwngO0ueXINTtrlDZ-Dpna6ZK7znQ/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySrZYxI-NNnXfxY1jXOqHgT2HQi4zst2Fgte6FXTeymat_W_r0o1E3P83EfnVCjEk0/exec";
 
 interface BlogPost {
   id: string;
@@ -94,7 +94,7 @@ export default function BlogPage() {
   const [dynamicPosts, setDynamicPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
-    fetch(`${APPS_SCRIPT_URL}?action=blog&store=CHC01`)
+    fetch(`${APPS_SCRIPT_URL}?action=blog&store=MJ01`)
       .then((r) => r.json())
       .then((data) => setDynamicPosts(data.posts || []))
       .catch(() => {});
@@ -192,7 +192,7 @@ export default function BlogPage() {
           </div>
           <div className={styles.reviewsCta}>
             <a
-              href="https://maps.app.goo.gl/YFPDuRCjwiuZL4J86"
+              href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.reviewsBtn}
