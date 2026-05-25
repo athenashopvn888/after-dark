@@ -126,7 +126,7 @@ export default function ContactPage() {
           {/* Map */}
           <div className={styles.mapSection}>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.0!2d-75.6928!3d45.4292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce04c8524ed59b%3A0x5836a82438336497!2s251+York+St%2C+York%2C+ON+K1N+1E7!5e0!3m2!1sen!2sca!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2884.225547632616!2d-79.50005702382025!3d43.698944971099616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b31494094ad85%3A0x5ae85accb8bd6200!2s1664%20Jane%20St%2C%20York%2C%20ON%20M9N%202S1!5e0!3m2!1sen!2sca!4v1"
               width="100%"
               height="400"
               style={{ border: 0 }}
