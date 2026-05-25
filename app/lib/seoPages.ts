@@ -7,6 +7,7 @@ export interface SeoPageData {
   h1: string;
   icon: string;
   heroTagline: string;
+  banner?: string;
   sections: { heading: string; body: string }[];
   faqs: { q: string; a: string }[];
 }
@@ -19,6 +20,7 @@ export const SEO_PAGES: SeoPageData[] = [
     h1: "York Weed Dispensary — After Dark Cannabis",
     icon: "✨",
     heroTagline: "Premium Cannabis on Jane St · Open 24 Hours · Walk-In Welcome",
+    banner: "/banners/after_dark_welcome_banner.webp",
     sections: [
       {
         heading: "York's Premier Cannabis Destination",
@@ -64,6 +66,7 @@ export const SEO_PAGES: SeoPageData[] = [
     h1: "Cheap Weed York — Budget Cannabis Deals",
     icon: "💰",
     heroTagline: "Budget Flower From $3/g · Ounces From $40 · Always Open",
+    banner: "/banners/after_dark_budget_banner.webp",
     sections: [
       {
         heading: "York's Best Prices on Quality Cannabis",
@@ -99,6 +102,7 @@ export const SEO_PAGES: SeoPageData[] = [
     h1: "Native Cigarettes York — Discount Tobacco",
     icon: "🏷️",
     heroTagline: "Premium & Value Brands · Best Prices in York · Open 24 Hours",
+    banner: "/banners/after_dark_edibles_prerolls_more_banner.webp",
     sections: [
       {
         heading: "York's Best Selection of Native Cigarettes",
@@ -134,6 +138,7 @@ export const SEO_PAGES: SeoPageData[] = [
     h1: "Weed Store Near Mississauga — After Dark Cannabis",
     icon: "🚗",
     heroTagline: "Just Minutes From Mississauga via Highway 410 & 401 · Open 24 Hours",
+    banner: "/banners/after_dark_welcome_banner.webp",
     sections: [
       {
         heading: "The Closest Quality Dispensary to Mississauga",
@@ -174,6 +179,7 @@ export const SEO_PAGES: SeoPageData[] = [
     h1: "Cannabis Dispensary Near Me — York",
     icon: "🗺️",
     heroTagline: "Walk-In Welcome · Open 24 Hours · 200+ Strains In Stock",
+    banner: "/banners/after_dark_welcome_banner.webp",
     sections: [
       {
         heading: "Find Premium Cannabis Near You in York",

@@ -2,9 +2,22 @@
 
 .main { min-height: 100vh; background: var(--bg-primary); }
 
+/* Banner */
+.bannerSection {
+  padding: 88px 24px 0;
+}
+.bannerImg {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
 /* Hero */
 .hero {
-  padding: 120px 24px 48px;
+  padding: 40px 24px 48px;
   background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   text-align: center;
   border-bottom: 1px solid var(--border-subtle);

@@ -44,6 +44,17 @@ export default async function SeoLandingPage({
     <main className={styles.main}>
       <Navbar />
 
+      {/* Banner Image */}
+      {page.banner && (
+        <section className={styles.bannerSection}>
+          <img
+            src={page.banner}
+            alt={page.h1}
+            className={styles.bannerImg}
+          />
+        </section>
+      )}
+
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
