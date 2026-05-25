@@ -33,7 +33,7 @@ ITEMS_OUT = os.path.join(SCRIPT_DIR, "app", "lib", "items.json")
 # ============================================================
 #   CONFIGURATION - Set these values
 # ============================================================
-STORE_CODE = "MJ01"  # Blouds store code
+STORE_CODE = "MJ01"  # After Dark store code
 
 # Google Sheet IDs (the long string in the URL)
 # https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit

@@ -84,7 +84,7 @@ export default function FAQPage() {
         {/* FAQ Banner */}
         <section style={{ width: "100%", overflow: "hidden", marginTop: "92px" }}>
           <img
-            src="/banners/Blouds_FAQ_Info.webp"
+            src="/banners/07_FAQ.webp"
             alt="After Dark Cannabis FAQ — Your Questions Answered"
             style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
           />

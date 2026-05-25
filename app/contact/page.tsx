@@ -22,7 +22,7 @@ export default function ContactPage() {
       {/* ── Hero ── */}
       <section className={styles.hero} style={{ paddingTop: "92px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-          <img src="/banners/Blouds_Contact_Us.webp" alt="Contact Us" style={{ width: "100%", height: "auto", display: "block", borderRadius: "var(--radius-lg)" }} />
+          <img src="/banners/08_Contact_Us.webp" alt="Contact Us" style={{ width: "100%", height: "auto", display: "block", borderRadius: "var(--radius-lg)" }} />
         </div>
       </section>
 

@@ -33,9 +33,9 @@ try:
     resized_180.save(os.path.join(root_dir, 'app', 'apple-icon.png'), format='PNG')
     print("app/apple-icon.png updated successfully!")
     
-    # 6. Copy source WebP as blouds_favicon.webp in banners too, just in case any banner code references it!
-    img.save(os.path.join(root_dir, 'public', 'banners', 'blouds_favicon.webp'), format='WEBP')
-    print("public/banners/blouds_favicon.webp updated!")
+    # 6. Copy source WebP as after_dark_favicon.webp in banners too, just in case any banner code references it!
+    img.save(os.path.join(root_dir, 'public', 'banners', 'after_dark_favicon.webp'), format='WEBP')
+    print("public/banners/after_dark_favicon.webp updated!")
 
 except Exception as e:
     print(f"Error: {e}")

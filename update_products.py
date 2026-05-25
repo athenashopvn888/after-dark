@@ -1,7 +1,7 @@
 """
 After Dark Cannabis — Product Update Script
 ===================================
-Drop your ONHAND CSV into the always-lit folder as "onhand.csv" and run:
+Drop your ONHAND CSV into the after-dark folder as "onhand.csv" and run:
 
     python update_products.py
 

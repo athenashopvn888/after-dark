@@ -107,7 +107,7 @@ export default function BlogPage() {
       {/* Blog Banner */}
       <section style={{ width: "100%", overflow: "hidden", marginTop: "92px" }}>
         <img
-          src="/banners/Blouds_Blog.webp"
+          src="/banners/after_dark_welcome_banner.webp"
           alt="After Dark Cannabis Blog"
           style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
         />

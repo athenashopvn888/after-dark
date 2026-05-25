@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *   Always Lit — Email-to-Website Product Sync
+ *   After Dark — Email-to-Website Product Sync
  *   Google Apps Script (Code.gs)
  * ============================================================
  * 
