@@ -1,0 +1,510 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import styles from "./page.module.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { allFlowers } from "./lib/products";
+
+/* ── Bento Mosaic Config ── */
+const BENTO_TIERS = [
+  {
+    name: "EXOTICS",
+    slug: "exotic",
+    price: "$10-$12/g",
+    banner: "/banners/after_dark_exotics_banner.webp",
+    className: styles.bentoExotic,
+  },
+  {
+    name: "PREMIUM",
+    slug: "premium",
+    price: "$7-$10/g",
+    banner: "/banners/after_dark_premium_banner.webp",
+    className: styles.bentoPremium,
+  },
+  {
+    name: "AAA+",
+    slug: "aaa",
+    price: "$5-$6/g",
+    banner: "/banners/after_dark_aaa_plus_banner.webp",
+    className: styles.bentoTile,
+  },
+  {
+    name: "AA",
+    slug: "aa",
+    price: "$4/g",
+    banner: "/banners/after_dark_aa_banner.webp",
+    className: styles.bentoTile,
+  },
+  {
+    name: "BUDGET",
+    slug: "budget",
+    price: "$3/g",
+    banner: "/banners/after_dark_budget_banner.webp",
+    className: styles.bentoTile,
+  },
+  {
+    name: "EDIBLES • PREROLLS • MORE",
+    slug: "items/edibles",
+    price: "Shop Tiers",
+    banner: "/banners/after_dark_edibles_prerolls_more_banner.webp",
+    className: styles.bentoEdibles,
+  },
+];
+
+/* ── Explore Categories Config (New Banners) ── */
+const EXPLORE_CATEGORIES = [
+  { name: "Vape Pens", slug: "items/vapes", banner: "/banners/01_Vape_Pens.webp", icon: "💨" },
+  { name: "Nic Vape", slug: "items/vape-disposables", banner: "/banners/02_Vape_Disposable.webp", icon: "💨" },
+  { name: "Concentrates", slug: "items/concentrates", banner: "/banners/03_Concentrates.webp", icon: "💎" },
+  { name: "Pre-Rolls", slug: "items/prerolls", banner: "/banners/04_Pre_Rolls.webp", icon: "🚬" },
+  { name: "Accessories", slug: "items/add-ons", banner: "/banners/05_Accessories.webp", icon: "➕" },
+  { name: "Cigarettes", slug: "items/cigarettes", banner: "/banners/06_Cigarettes.webp", icon: "🏷️" },
+  { name: "Magic Stuff", slug: "items/magic", banner: "/banners/09_Magic_Stuff.webp", icon: "🍄" },
+  { name: "Games Arcade", slug: "games", banner: "/banners/10_Games.webp", icon: "🎮" },
+];
+
+/* ── Local FAQs for Jane St ── */
+const LOCAL_FAQS = [
+  {
+    q: "What are the hours for After Dark Cannabis?",
+    a: "After Dark Cannabis at 1664 Jane St, York is Open 24 Hours a day, 7 days a week. Walk in anytime — no appointment needed.",
+  },
+  {
+    q: "What cannabis products do you carry?",
+    a: "We carry five tiers of premium flower: Exotic ($10-$12/g), Premium ($7-$10/g), AAA+ ($5-$6/g), AA ($4/g), and Budget ($3/g), plus a wide variety of edibles, prerolls, vapes, and concentrates.",
+  },
+  {
+    q: "Where is After Dark Cannabis located?",
+    a: "We are located at 1664 Jane St, York, ON M9N 2S1. Visit us in person or call us at (416) 302-8127. Free evening street parking is available.",
+  },
+  {
+    q: "What is the cheapest weed at After Dark Cannabis?",
+    a: "Our budget flower starts at just $3/g. We also offer AA daily drivers from $4/g and AAA+ heavy hitters from $5-$6/g. View our budget menu for our latest deals.",
+  },
+];
+
+interface Review {
+  name: string;
+  comment: string;
+  date: string;
+}
+
+export default function HomePage() {
+  const [featuredStrains, setFeaturedStrains] = useState<any[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviewsStats, setReviewsStats] = useState({ total: 14, avg: 5.0 });
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+
+  /* ── 1. Fetch Client-Side Google Reviews ── */
+  useEffect(() => {
+    const STORE_KEY = "MJ01";
+    const SHEET_ID = "1-KeuyKFKprbU-Vl_qVQiZkEKMX_i5CmdScTToNTdkUY";
+    const SHEET_NAME = "WEBSITE_REVIEWS";
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    fetch(url)
+      .then((r) => r.text())
+      .then((raw) => {
+        const jsonStart = raw.indexOf("{");
+        const jsonEnd = raw.lastIndexOf("}");
+        const jsonString = raw.substring(jsonStart, jsonEnd + 1);
+        const json = JSON.parse(jsonString);
+        const rows = json.table.rows;
+        const cols = json.table.cols;
+
+        const colMap: Record<string, number> = {};
+        cols.forEach((col: any, idx: number) => {
+          if (col.label) colMap[col.label.trim()] = idx;
+        });
+
+        const skIdx = colMap["StoreKey"] !== undefined ? colMap["StoreKey"] : 0;
+        const rnIdx = colMap["ReviewerName"] !== undefined ? colMap["ReviewerName"] : 1;
+        const cmIdx = colMap["Comment"] !== undefined ? colMap["Comment"] : 2;
+        const dtIdx = colMap["CreateTime"] !== undefined ? colMap["CreateTime"] : 3;
+
+        const reviewsPool: Review[] = [];
+        let totalVal = 14;
+        let avgVal = 5.0;
+        let hasStats = false;
+
+        rows.forEach((row: any) => {
+          if (!row.c) return;
+          const sk = row.c[skIdx] ? row.c[skIdx].v || "" : "";
+          if (sk !== STORE_KEY) return;
+
+          const rn = row.c[rnIdx] ? row.c[rnIdx].v || "" : "";
+          if (rn === "__STATS__") {
+            totalVal = parseInt(row.c[cmIdx] ? row.c[cmIdx].v : 14) || 14;
+            avgVal = parseFloat(row.c[dtIdx] ? row.c[dtIdx].v : 5.0) || 5.0;
+            hasStats = true;
+            return;
+          }
+
+          const comment = row.c[cmIdx] ? row.c[cmIdx].v || "" : "";
+          if (!comment || comment.length < 10) return;
+          const name = rn || "Customer";
+          const dateStr = row.c[dtIdx] ? row.c[dtIdx].v || "" : "";
+          reviewsPool.push({ name, comment, date: dateStr });
+        });
+
+        setReviews(reviewsPool.slice(0, 6));
+        if (hasStats) setReviewsStats({ total: totalVal, avg: avgVal });
+        setReviewsLoading(false);
+      })
+      .catch((err) => {
+        console.warn("Reviews fetch failed:", err);
+        setReviewsLoading(false);
+      });
+  }, []);
+
+  /* ── 2. Build Featured Strains ── */
+  useEffect(() => {
+    const pool = [...allFlowers].filter((f) => f.image);
+    // Shuffle pool securely
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    const picked: typeof pool = [];
+    const tierCounts: Record<string, number> = {};
+
+    for (const f of pool) {
+      if (picked.length >= 8) break;
+      const tc = tierCounts[f.tier] || 0;
+      if (tc >= 2) continue; // max 2 per tier
+      if (picked.some((p) => p.name === f.name)) continue; // avoid exact duplicates
+      picked.push(f);
+      tierCounts[f.tier] = tc + 1;
+    }
+
+    const formatted = picked.map((f) => ({
+      name: f.name,
+      sku: f.sku,
+      tier: f.tier.toUpperCase(),
+      thc: f.thc,
+      type: f.type === "indica" ? "IH" : f.type === "sativa" ? "SH" : "H",
+      price3g: f.price3g ? `$${f.price3g.sale ?? f.price3g.regular}` : "—",
+      image: f.image,
+    }));
+    setFeaturedStrains(formatted);
+  }, []);
+
+  function getTypeLabel(type: string) {
+    if (type.startsWith("IH")) return "Indica";
+    if (type.startsWith("SH")) return "Sativa";
+    return "Hybrid";
+  }
+
+  function getTypeClass(type: string) {
+    if (type.startsWith("IH")) return styles.badgeIndica;
+    if (type.startsWith("SH")) return styles.badgeSativa;
+    return styles.badgeHybrid;
+  }
+
+  function getTierColor(tier: string) {
+    if (tier === "EXOTIC") return "#f59e0b";
+    if (tier === "PREMIUM") return "#a78bfa";
+    if (tier === "AAA+") return "#22d3ee";
+    if (tier === "AA") return "#34d399";
+    return "#94a3b8";
+  }
+
+  return (
+    <main className={styles.main}>
+      {/* ── NAVBAR ── */}
+      <Navbar />
+
+      {/* ── BENTO MOSAIC HERO ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroBg} />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroStars} />
+
+        <div className={styles.heroContent}>
+          {/* Brand branding */}
+          <div className={styles.brandBlock}>
+            <span className={styles.brandIcon}>🌙</span>
+            <h1 className={styles.brandTitle}>AFTER DARK CANNABIS</h1>
+            <p className={styles.brandSub}>Premium Cannabis Dispensary</p>
+            <div className={styles.brandBadge}>Open 24 Hours</div>
+          </div>
+
+          {/* Bento Grid */}
+          <div className={styles.bentoGrid}>
+            {BENTO_TIERS.map((tier) => (
+              <Link
+                key={tier.slug}
+                href={`/${tier.slug}`}
+                className={`${styles.bentoTile} ${tier.className}`}
+              >
+                <div
+                  className={styles.bentoTileBg}
+                  style={{ backgroundImage: `url('${tier.banner}')` }}
+                />
+                <div className={styles.bentoTileOverlay} />
+                <div className={styles.bentoTileContent}>
+                  <span className={styles.bentoLabel}>{tier.name}</span>
+                  <span className={styles.bentoPrice}>{tier.price}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── EXPLORE CATEGORIES ── */}
+      <section className={styles.categoriesSection} id="menu">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Explore Categories</h2>
+            <p className={styles.sectionSubtitle}>
+              From custom disposable vapes and concentrates to accessories and cigarettes.
+            </p>
+          </div>
+
+          <div className={styles.categoriesGrid}>
+            {EXPLORE_CATEGORIES.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/${cat.slug}`}
+                className={styles.categoryCard}
+              >
+                <div
+                  className={styles.categoryCardBg}
+                  style={{ backgroundImage: `url('${cat.banner}')` }}
+                />
+                <div className={styles.categoryCardOverlay} />
+                <div className={styles.categoryCardContent}>
+                  <h3 className={styles.categoryCardName}>
+                    {cat.icon} {cat.name} <span className={styles.categoryCardArrow}>→</span>
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURED PRODUCTS ── */}
+      <section className={styles.featuredSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Featured Strains</h2>
+            <p className={styles.sectionSubtitle}>
+              Staff picks and top sellers dynamically updated from our real-time stock sheet.
+            </p>
+          </div>
+
+          <div className={styles.featuredGrid}>
+            {featuredStrains.map((strain, i) => (
+              <Link
+                key={`${strain.sku}-${i}`}
+                href={`/flower/${strain.name.toLowerCase().replace(/\s+/g, "-")}`}
+                className={styles.productCard}
+              >
+                <div className={styles.productMedia}>
+                  <img
+                    src={strain.image}
+                    alt={strain.name}
+                    loading="lazy"
+                    className={strain.image ? styles.productImg : ""}
+                  />
+                  <div className={styles.productBadges}>
+                    <span className={styles.productBadgeThc}>
+                      THC {strain.thc}
+                    </span>
+                    <span
+                      className={styles.productBadgeTier}
+                      style={{
+                        background: `linear-gradient(135deg, ${getTierColor(strain.tier)}, ${getTierColor(strain.tier)}dd)`,
+                        color: strain.tier === "BUDGET" ? "#020617" : "white",
+                      }}
+                    >
+                      {strain.tier}
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.productBody}>
+                  <span
+                    className={`${styles.productType} ${getTypeClass(strain.type)}`}
+                  >
+                    {getTypeLabel(strain.type)}
+                  </span>
+                  <h3 className={styles.productName}>{strain.name}</h3>
+                  <div className={styles.productPricing}>
+                    <span className={styles.productPrice}>
+                      {strain.price3g}
+                    </span>
+                    <span className={styles.productPriceUnit}>/ 3g</span>
+                  </div>
+                  <div className={styles.productCta}>View Strain →</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEO PANEL WRITE-UP ── */}
+      <section className={styles.seoSection}>
+        <div className={styles.container}>
+          <div className={styles.seoPanel}>
+            <h2 className={styles.seoPanelTitle}>Jane Street's Premier After-Hours Dispensary</h2>
+            <p className={styles.seoPanelText}>
+              Welcome to <strong>After Dark Cannabis</strong>, your premier after-hours cannabis destination on Jane Street in York. When the sun goes down, we come alive — offering an electrifying selection of top-shelf strains, from ultra-rare exotics to solid everyday budget picks.
+            </p>
+            <p className={styles.seoPanelText}>
+              Open 24 hours, After Dark Cannabis is the night owl's paradise. Our live menu is constantly refreshed with the freshest drops, premium prerolls, artisan edibles, and everything in between. Whether you're winding down after a late shift or kicking off a legendary night out, our knowledgeable staff is here to light your way. The night is young — that's the After Dark promise.
+            </p>
+            <p className={styles.seoPanelText}>
+              Searching for a dispensary near Jane Street, Weston, or Mount Dennis that's open late? After Dark Cannabis is your 24-hour destination for premium flower, potent prerolls, and artisan edibles. Our six-tier pricing system means quality cannabis at every budget level.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLIENT-SIDE GOOGLE REVIEWS SHOWCASE ── */}
+      <section className={styles.reviewsSection}>
+        <div className={styles.container}>
+          <div className={styles.reviewsHeader}>
+            <h2 className={styles.sectionTitle}>What Our Customers Say</h2>
+            <div className={styles.reviewsStarsSummary}>
+              <span className={styles.reviewsStars}>★★★★★</span>
+              <span className={styles.reviewsAvg}>
+                {reviewsStats.avg.toFixed(1)}
+              </span>
+              <span className={styles.reviewsCount}>
+                ({reviewsStats.total} reviews on Google)
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.reviewsGrid}>
+            {reviewsLoading ? (
+              <div className={styles.reviewsLoading}>Loading reviews...</div>
+            ) : reviews.length === 0 ? (
+              <div className={styles.reviewsLoading}>
+                Rated {reviewsStats.avg.toFixed(1)}/5 across {reviewsStats.total} Google reviews
+              </div>
+            ) : (
+              reviews.map((rv, idx) => (
+                <div key={idx} className={styles.rvCard}>
+                  <div className={styles.rvTop}>
+                    <div className={styles.rvAvatar}>
+                      {rv.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className={styles.rvMeta}>
+                      <span className={styles.rvName}>{rv.name}</span>
+                      {rv.date && (
+                        <span className={styles.rvDate}>
+                          {new Date(rv.date).toLocaleDateString("en-CA", {
+                            year: "numeric",
+                            month: "short",
+                          })}
+                        </span>
+                      )}
+                    </div>
+                    <span className={styles.rvStars}>★★★★★</span>
+                  </div>
+                  <p className={styles.rvText}>
+                    {rv.comment.length > 180 ? `${rv.comment.substring(0, 177)}...` : rv.comment}
+                  </p>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className={styles.reviewCtaRow}>
+            <a
+              href="https://search.google.com/local/writereview?placeid=ChIJha2UQegxK4gRAGK9yMNa6Fo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.reviewsWrite}
+            >
+              ✍ Write a Google Review
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQS SECTION ── */}
+      <section className={styles.faqSection}>
+        <div className={styles.faqContainer}>
+          <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "32px" }}>
+            Frequently Asked Questions
+          </h2>
+          {LOCAL_FAQS.map((faq, i) => (
+            <details key={i} className={styles.faqItem}>
+              <summary className={styles.faqQuestion}>{faq.q}</summary>
+              <p className={styles.faqAnswer}>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* ── STORE LOCATION GRID ── */}
+      <section className={styles.storeSection} id="contact">
+        <div className={styles.container}>
+          <div className={styles.storeGrid}>
+            <div className={styles.storeCard}>
+              <span className={styles.storeIcon}>📍</span>
+              <h3 className={styles.storeCardTitle}>Location</h3>
+              <p className={styles.storeCardText}>
+                1664 Jane St
+                <br />
+                York, ON M9N 2S1
+                <br />
+                <a
+                  href="https://maps.app.goo.gl/ChIJha2UQegxK4gRAGK9yMNa6Fo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.storeLink}
+                >
+                  Get Directions →
+                </a>
+              </p>
+            </div>
+            <div className={styles.storeCard}>
+              <span className={styles.storeIcon}>🕒</span>
+              <h3 className={styles.storeCardTitle}>Hours</h3>
+              <p className={styles.storeCardText}>
+                Open 7 Days a Week
+                <br />
+                <span className={styles.storeHighlight}>Open Open 24 Hours</span>
+              </p>
+            </div>
+            <div className={styles.storeCard}>
+              <span className={styles.storeIcon}>🔥</span>
+              <h3 className={styles.storeCardTitle}>Walk In</h3>
+              <p className={styles.storeCardText}>
+                No appointment needed
+                <br />
+                <span className={styles.storeHighlight}>Jane St, York</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Map wrapper */}
+          <div className={styles.mapWrap}>
+            <iframe
+              src="https://maps.google.com/maps?q=1664%20Jane%20St,%20York,%20ON%20M9N%202S1&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="350"
+              style={{ border: 0, display: "block" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="After Dark Cannabis — 1664 Jane St, York"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <Footer />
+    </main>
+  );
+}
