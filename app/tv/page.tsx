@@ -108,6 +108,102 @@ function cleanName(name: string): string {
 }
 
 /* ============================================================
+   SLOT RESERVATION SYSTEM (matches original TVMenu.html)
+   ============================================================
+   Each tier shows max 10 rows at a time with reserved slots:
+   SALE (max 2) → TOP PICK (max 1) → MUST TRY (max 1) → SATIVA (max 3) → INDICA (fills rest)
+   Products rotate through their bucket windows over time.
+   ============================================================ */
+const MAX_VIS = 10;
+const CAP_SALE = 2;
+const CAP_TOP  = 1;
+const CAP_MUST = 1;
+const CAP_SAT  = 3;
+const CAP_IND  = 3;
+
+/** Build the visible window for a tier using the slot reservation system */
+function buildSlotWindow(flowers: Flower[], hiIdx: number): { vis: Flower[]; hiW: number; hi: Flower | undefined } {
+  if (!flowers.length) return { vis: [], hiW: 0, hi: undefined };
+
+  // 1) Sort into buckets
+  const saleAll: Flower[] = [];
+  const topAll: Flower[] = [];
+  const mustAll: Flower[] = [];
+  const satAll: Flower[] = [];
+  const indAll: Flower[] = [];
+
+  for (const f of flowers) {
+    if (f.isSale) { saleAll.push(f); continue; }
+    if (f.isHot) { topAll.push(f); continue; }
+    if (f.isMustTry) { mustAll.push(f); continue; }
+    if (f.type === "sativa") satAll.push(f);
+    else indAll.push(f);
+  }
+
+  // 2) Only first 1 TOP / 1 MUST — extras fall back to SAT/IND by type
+  const topWin = topAll.slice(0, CAP_TOP);
+  for (const r of topAll.slice(CAP_TOP)) {
+    (r.type === "sativa" ? satAll : indAll).push(r);
+  }
+  const mustWin = mustAll.slice(0, CAP_MUST);
+  for (const r of mustAll.slice(CAP_MUST)) {
+    (r.type === "sativa" ? satAll : indAll).push(r);
+  }
+
+  // 3) Rotate offsets based on hiIdx (batch rotation)
+  const cycle = Math.floor(hiIdx / MAX_VIS);
+
+  // SALE: pick CAP_SALE items to show, overflow the REST into SAT/IND by type
+  const saleOff = saleAll.length > CAP_SALE
+    ? (cycle * CAP_SALE) % saleAll.length
+    : 0;
+  const saleWin: Flower[] = [];
+  const saleOverflow: Flower[] = [];
+  for (let i = 0; i < saleAll.length; i++) {
+    const inWindow = saleAll.length <= CAP_SALE ||
+      (i >= saleOff && i < saleOff + CAP_SALE) ||
+      (saleOff + CAP_SALE > saleAll.length && i < (saleOff + CAP_SALE) % saleAll.length);
+    if (inWindow && saleWin.length < CAP_SALE) {
+      saleWin.push(saleAll[i]);
+    } else {
+      saleOverflow.push(saleAll[i]);
+    }
+  }
+  // Overflow sale items go back to SAT/IND by type
+  for (const r of saleOverflow) {
+    (r.type === "sativa" ? satAll : indAll).push(r);
+  }
+
+  // SAT: rotate through all sativa items, CAP_SAT at a time
+  const satOff = satAll.length > CAP_SAT
+    ? (cycle * CAP_SAT) % satAll.length
+    : 0;
+  const satWin = satAll.length > CAP_SAT
+    ? Array.from({length: CAP_SAT}, (_, i) => satAll[(satOff + i) % satAll.length])
+    : satAll.slice(0, CAP_SAT);
+
+  // IND: fills remaining slots
+  const used = saleWin.length + topWin.length + mustWin.length + satWin.length;
+  const remaining = Math.max(0, MAX_VIS - used);
+  const indCap = Math.max(CAP_IND, remaining);
+  const indOff = indAll.length > indCap
+    ? (cycle * indCap) % indAll.length
+    : 0;
+  const indWin = indAll.length > indCap
+    ? Array.from({length: indCap}, (_, i) => indAll[(indOff + i) % indAll.length])
+    : indAll.slice(0, indCap);
+
+  // 4) Assemble in fixed order: SALE → TOP → MUST → SAT → IND
+  const vis = [...saleWin, ...topWin, ...mustWin, ...satWin, ...indWin].slice(0, MAX_VIS);
+
+  // 5) Highlight within the visible window
+  const hiW = vis.length ? hiIdx % vis.length : 0;
+  const hi = vis[hiW] || flowers[0];
+
+  return { vis, hiW, hi };
+}
+
+/* ============================================================
    FLOWER CARD
    ============================================================ */
 function FlowerCard({
@@ -118,19 +214,7 @@ function FlowerCard({
 }) {
   const accent = TIER_ACCENT[tier] || "#2563eb";
 
-  const MAX = 10;
-  const saleItems = flowers.filter(f => f.isSale);
-  const nonSale = flowers.filter(f => !f.isSale);
-  const nonSaleSlots = Math.max(0, MAX - saleItems.length);
-  const nsOffset = nonSale.length > nonSaleSlots
-    ? Math.floor(Math.max(0, hiIdx - saleItems.length) / Math.max(1, nonSaleSlots)) * nonSaleSlots % nonSale.length
-    : 0;
-  const nonSaleWindow = nonSale.length > nonSaleSlots
-    ? Array.from({length: nonSaleSlots}, (_, i) => nonSale[(nsOffset + i) % nonSale.length])
-    : nonSale;
-  const vis = [...saleItems, ...nonSaleWindow].slice(0, MAX);
-  const hiW = Math.min(hiIdx % vis.length, vis.length - 1);
-  const hi = vis[hiW] || flowers[0];
+  const { vis, hiW, hi } = buildSlotWindow(flowers, hiIdx);
 
   const prevRef = useRef<string>("");
   const [fadeImg, setFadeImg] = useState("");
@@ -599,7 +683,19 @@ export default function TVMenuPage() {
         grouped[t].push(f);
       }
 
-      const oz = (grouped["BUDGET"]||[]).filter(f => f.price28g);
+      // OZ: pull from ALL tiers — any flower with 28g pricing (matches original TVMenu)
+      const oz: Flower[] = [];
+      const ozSeen = new Set<string>();
+      // First add any explicitly OZ-tier items
+      for (const f of (grouped["OZ"] || [])) {
+        if (!ozSeen.has(f.sku)) { oz.push(f); ozSeen.add(f.sku); }
+      }
+      // Then add items from all other tiers that have 28g pricing
+      for (const tier of ["EXOTIC","PREMIUM","AAA+","AA","BUDGET"]) {
+        for (const f of (grouped[tier] || [])) {
+          if (f.price28g && !ozSeen.has(f.sku)) { oz.push(f); ozSeen.add(f.sku); }
+        }
+      }
       setOzFlowers(oz);
 
       if (grouped["BUDGET"]) {
@@ -652,7 +748,10 @@ export default function TVMenuPage() {
     const interval = setInterval(() => {
       setHighlights(prev => {
         const next = {...prev};
-        for (const t of TIERS) { next[t] = ((prev[t]||0)+1) % Math.max(1, flowers[t]?.length||1); }
+        for (const t of TIERS) {
+            const total = flowers[t]?.length || 1;
+            next[t] = ((prev[t]||0)+1) % Math.max(MAX_VIS, total * MAX_VIS);
+          }
         next["OZ"] = ((prev["OZ"]||0)+1) % Math.max(1, ozFlowers.length);
         next["ADDONS"] = ((prev["ADDONS"]||0)+1) % Math.max(1, addOns.length);
         return next;
