@@ -461,7 +461,7 @@ def main():
             capture_output=True, text=True
         )
         if result.returncode == 0:
-            print("  [OK] Live at https://afterdarkcannabis.vercel.app")
+            print("  [OK] Live at https://afterdarkcannabis.com")
         else:
             print(f"  Output:\n{result.stdout[-500:]}")
     else:
