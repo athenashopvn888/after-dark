@@ -1,4 +1,4 @@
-/* -- Product & Item Types -- */
+﻿/* -- Product & Item Types -- */
 export interface FlowerProduct {
   sku: string;
   name: string;
@@ -100,8 +100,8 @@ export const TIER_CONFIG: Record<
     tagline: "Ultra-rare, top-shelf genetics \u00B7 THC 35-39%",
     banner: "/banners/after_dark_exotics_banner.webp",
     unitPrice: 20,
-    deal3g: { label: "Buy 2g Get 1g FREE", total: "3G", price: 40 },
-    deal6g: { label: "Buy 3g Get 3g FREE", total: "6G", price: 60 },
+    deal3g: { label: "Buy 2g Get 1g FREE = 3g", total: "3G", price: 40 },
+    deal6g: { label: "Buy 3g Get 3g FREE = 6g", total: "6G", price: 60 },
   },
   PREMIUM: {
     name: "Premium",
@@ -111,8 +111,8 @@ export const TIER_CONFIG: Record<
     tagline: "Hand-picked connoisseur grade \u00B7 THC 32-34%",
     banner: "/banners/after_dark_premium_banner.webp",
     unitPrice: 15,
-    deal3g: { label: "Buy 2g Get 1g FREE", total: "3G", price: 30 },
-    deal6g: { label: "Buy 3g Get 3g FREE", total: "6G", price: 45 },
+    deal3g: { label: "Buy 2g Get 1g FREE = 3g", total: "3G", price: 30 },
+    deal6g: { label: "Buy 3g Get 3g FREE = 6g", total: "6G", price: 45 },
   },
   "AAA+": {
     name: "AAA+",
@@ -122,8 +122,8 @@ export const TIER_CONFIG: Record<
     tagline: "Heavy hitters, proven strains \u00B7 THC 30-32%",
     banner: "/banners/after_dark_aaa_plus_banner.webp",
     unitPrice: 10,
-    deal3g: { label: "Buy 2g Get 1g FREE", total: "3G", price: 20 },
-    deal6g: { label: "Buy 3g Get 3g FREE", total: "6G", price: 30 },
+    deal3g: { label: "Buy 2g Get 1g FREE = 3g", total: "3G", price: 20 },
+    deal6g: { label: "Buy 3g Get 3g FREE = 6g", total: "6G", price: 30 },
   },
   AA: {
     name: "AA",
@@ -144,7 +144,7 @@ export const TIER_CONFIG: Record<
     tagline: "Shreds & value OZs \u00B7 From $40/oz",
     banner: "/banners/after_dark_budget_banner.webp",
     unitPrice: 3,
-    deal3g: { label: "Buy 2g Get 1g FREE", total: "3G", price: 10 },
+    deal3g: { label: "$10 / 3g Special", total: "3G", price: 10 },
     deal6g: null,
   },
 };

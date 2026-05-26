@@ -40,10 +40,10 @@ export default function FlowerCard({
   if (flower.price3g) {
     weights.push({
       key: "3g",
-      label: isPromoTier ? "3g" : "3g",
-      grams: isPromoTier ? 3 : 3,
+      label: "3g",
+      grams: 3,
       price: flower.price3g,
-      promo: "Buy 2g Get 1g FREE",
+      promo: isPromoTier ? "Buy 2g Get 1g FREE = 3g" : tierCfg?.deal3g?.label,
     });
   }
   if (flower.price5g) {
@@ -53,7 +53,7 @@ export default function FlowerCard({
       label: `${grams}g`,
       grams,
       price: flower.price5g,
-      promo: isPromoTier ? "Buy 3g Get 3g FREE" : undefined,
+      promo: isPromoTier ? "Buy 3g Get 3g FREE = 6g" : undefined,
     });
   }
   if (flower.price14g) {
@@ -115,9 +115,16 @@ export default function FlowerCard({
           ) : (
             <span className={styles.priceMain}>${active.price?.regular}</span>
           )}
-          <span className={styles.perGram}>
-            ${perGram}/g
-          </span>
+          <div className={styles.perGramWrap}>
+            {isPromoTier && tierCfg?.unitPrice ? (
+              <>
+                <span className={styles.perGramOld}>${tierCfg.unitPrice}/g</span>
+                <span className={styles.perGram}>${perGram}/g</span>
+              </>
+            ) : (
+              <span className={styles.perGram}>${perGram}/g</span>
+            )}
+          </div>
         </div>
 
         {/* Promo line */}
