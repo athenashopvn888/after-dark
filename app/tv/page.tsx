@@ -531,11 +531,11 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
    VERTICAL TICKER
    ============================================================ */
 const TICKER_SLIDES = [
-  "🔥 Mohawk Medicine — 2655 Eglinton Ave E, Scarborough",
+  "🔥 After Dark Cannabis — 1060 Britannia Rd W #9, Mississauga",
   "200+ Strains In Stock",
   "Open 24 Hours",
   "ALL SALES ARE FINAL",
-  "🎮 Play Games at mohawkmedicine.com/games",
+  "🎮 Play Games at afterdarkcannabis.com/games",
 ];
 
 function VerticalTicker() {
@@ -688,7 +688,7 @@ export default function TVMenuPage() {
 
         {/* TV BANNER */}
         <div style={{ margin: "-40px -40px 30px -40px", width: "calc(100% + 80px)" }}>
-          <img src="/banners/25_Mohawk_FlowerTV.webp" alt="Mohawk Medicine TV Menu" style={{ width: "100%", display: "block" }} />
+          <img src="/banners/FlowerTvBanner.webp" alt="After Dark Cannabis — Flower TV Menu" style={{ width: "100%", display: "block" }} />
         </div>
 
         {/* GRID */}

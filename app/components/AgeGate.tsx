@@ -9,14 +9,14 @@ export default function AgeGate() {
 
   useEffect(() => {
     // Check local storage for previous verification
-    const verified = localStorage.getItem("afterdark_age_verified");
+    const verified = localStorage.getItem("adc_age_verified");
     if (verified !== "true") {
       setShow(true);
     }
   }, []);
 
   const handleVerify = () => {
-    localStorage.setItem("afterdark_age_verified", "true");
+    localStorage.setItem("adc_age_verified", "true");
     setShow(false);
   };
 
