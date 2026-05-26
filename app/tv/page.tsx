@@ -531,7 +531,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
    VERTICAL TICKER
    ============================================================ */
 const TICKER_SLIDES = [
-  "🔥 After Dark Cannabis — 1060 Britannia Rd W #9, Mississauga",
+  "🔥 After Dark Cannabis — 1664 Jane St, York",
   "200+ Strains In Stock",
   "Open 24 Hours",
   "ALL SALES ARE FINAL",
