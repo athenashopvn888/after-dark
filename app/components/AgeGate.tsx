@@ -8,6 +8,12 @@ export default function AgeGate() {
   const [underage, setUnderage] = useState(false);
 
   useEffect(() => {
+    // Skip age verification for TV menu retail displays
+    const path = window.location.pathname;
+    if (path === "/tv" || path === "/tv2" || path.startsWith("/tv/") || path.startsWith("/tv2/")) {
+      return;
+    }
+
     // Check local storage for previous verification
     const verified = localStorage.getItem("adc_age_verified");
     if (verified !== "true") {

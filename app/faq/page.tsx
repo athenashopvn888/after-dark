@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "FAQ — After Dark Cannabis | York Dispensary Questions",
   description:
     "Frequently asked questions about After Dark Cannabis in York. Hours, location, products, pricing, promotions, and everything you need to know before visiting.",
+  alternates: {
+    canonical: "https://afterdarkcannabis.com/faq",
+  },
 };
 
 const FAQ_CATEGORIES = [

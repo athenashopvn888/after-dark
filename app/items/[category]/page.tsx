@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import SafeImage from "../../components/SafeImage";
 import {
   getItemsByCategory,
   getCategoryFromSlug,
@@ -30,6 +31,9 @@ export async function generateMetadata({
   return {
     title: catInfo.config.seoTitle || `${catInfo.config.name} — ${items.length} Products`,
     description: catInfo.config.seoIntro || `Shop ${items.length} ${catInfo.config.name.toLowerCase()} at After Dark Cannabis.`,
+    alternates: {
+      canonical: `https://afterdarkcannabis.com/items/${catSlug}`,
+    },
   };
 }
 
@@ -141,7 +145,7 @@ function ItemCard({ item, catColor }: { item: ItemProduct; catColor: string }) {
     <Link href={`/item/${item.slug}`} className={styles.card} style={{ "--cat-color": catColor } as React.CSSProperties}>
       <div className={styles.cardMedia}>
         {item.image ? (
-          <img src={item.image} alt={item.name} loading="lazy" className={styles.cardImg} />
+          <SafeImage src={item.image} alt={item.name} loading="lazy" className={styles.cardImg} />
         ) : (
           <div className={styles.cardPlaceholder}>
             {item.name[0]}

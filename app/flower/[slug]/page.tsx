@@ -65,6 +65,37 @@ function getJsonLd(flower: FlowerProduct) {
   };
 }
 
+/* -- Breadcrumb JSON-LD -- */
+function getBreadcrumbJsonLd(flower: FlowerProduct) {
+  const tierConfig = TIER_CONFIG[flower.tier];
+  const tierSlug = tierConfig?.slug || "exotic";
+  const tierName = tierConfig?.name || flower.tier;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://afterdarkcannabis.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": tierName,
+        "item": `https://afterdarkcannabis.com/${tierSlug}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": flower.name,
+        "item": `https://afterdarkcannabis.com/flower/${flower.slug}`
+      }
+    ]
+  };
+}
+
 /* Top 3 tiers get "6g" label (Buy 3g Get 3g FREE promo), AA stays "5g" */
 const TOP_TIERS = ["EXOTIC", "PREMIUM", "AAA+"];
 
@@ -114,6 +145,10 @@ export default async function FlowerPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLd(flower)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbJsonLd(flower)) }}
       />
 
       <main className={styles.main}>

@@ -28,6 +28,9 @@ export async function generateMetadata({
   return {
     title: `${item.name} | ${item.category} | After Dark Cannabis York`,
     description: itemData.metaDescription,
+    alternates: {
+      canonical: `https://afterdarkcannabis.com/item/${slug}`,
+    },
     openGraph: {
       title: `${item.name} | After Dark Cannabis`,
       description: itemData.metaDescription,
@@ -59,6 +62,35 @@ function getJsonLd(item: ItemProduct) {
   };
 }
 
+/* -- Breadcrumb JSON-LD -- */
+function getBreadcrumbJsonLd(item: ItemProduct) {
+  const catSlug = item.category.toLowerCase().replace(' ', '-');
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://afterdarkcannabis.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": item.category,
+        "item": `https://afterdarkcannabis.com/items/${catSlug}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": item.name,
+        "item": `https://afterdarkcannabis.com/item/${item.slug}`
+      }
+    ]
+  };
+}
+
 /* -- Page -- */
 export default async function ItemPage({
   params,
@@ -80,6 +112,10 @@ export default async function ItemPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLd(item)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbJsonLd(item)) }}
       />
 
       <main className={styles.main}>

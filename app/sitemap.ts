@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { TIER_CONFIG, CATEGORY_CONFIG, allFlowers } from "./lib/products";
+import {TIER_CONFIG, CATEGORY_CONFIG, allFlowers, allItems} from "./lib/products";
 import { SEO_PAGES } from "./lib/seoPages";
 
 const BASE = "https://afterdarkcannabis.com";
@@ -40,6 +40,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+    /* Item detail pages */
+  const itemDetailPages: MetadataRoute.Sitemap = allItems.map((i) => ({
+    url: `${BASE}/item/${i.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
   /* SEO landing pages */
   const seoPages: MetadataRoute.Sitemap = SEO_PAGES.map((p) => ({
     url: `${BASE}/info/${p.slug}`,
@@ -48,5 +56,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...seoPages];
+  return [...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...itemDetailPages, ...seoPages];
 }
