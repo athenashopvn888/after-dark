@@ -361,14 +361,6 @@ export default function HomePage() {
           </div>
 
           <div className={styles.reviewCtaRow}>
-            <a
-              href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.reviewsWrite}
-            >
-              ✍ Write a Google Review
-            </a>
           </div>
         </div>
       </section>
@@ -400,14 +392,6 @@ export default function HomePage() {
                 <br />
                 York, ON M9N 2S1
                 <br />
-                <a
-                  href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.storeLink}
-                >
-                  Get Directions →
-                </a>
               </p>
             </div>
             <div className={styles.storeCard}>
@@ -432,16 +416,6 @@ export default function HomePage() {
 
           {/* Map wrapper */}
           <div className={styles.mapWrap}>
-            <iframe
-              src="https://maps.google.com/maps?q=1664%20Jane%20St,%20York,%20ON%20M9N%202S1&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="350"
-              style={{ border: 0, display: "block" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="After Dark Cannabis — 1664 Jane St, York"
-            ></iframe>
           </div>
         </div>
       </section>

@@ -24,8 +24,8 @@ export const gbpLocation = {
     "Accessories"
   ],
   menuUrl: "/",
-  directionsUrl: "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
-  mapEmbedUrl: "https://maps.google.com/maps?q=After%20Dark%20Cannabis%201664%20Jane%20St%2C%20York%2C%20ON%20M9N%202S1&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  directionsUrl: "",
+  mapEmbedUrl: "",
   latitude: "43.6989",
   longitude: "-79.4975",
   hours: ["Open 24 Hours"],

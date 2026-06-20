@@ -101,20 +101,9 @@ const jsonLd = {
       closes: "23:59",
     },
   ],
-  sameAs: [
-    "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
-    "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
-  ],
-  hasMap: "https://maps.app.goo.gl/pX2JcDodriRwhVxF9",
   areaServed: {
     "@type": "City",
     name: "York",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "15",
-    bestRating: "5",
   },
 };
 

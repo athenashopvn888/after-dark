@@ -123,14 +123,6 @@ export default async function ItemsCategoryPage({
             <p className={styles.visitText}>
               1664 Jane St, York, ON M9N 2S1 · Open 24 Hours
             </p>
-            <a
-              href="https://maps.app.goo.gl/pX2JcDodriRwhVxF9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.visitBtn}
-            >
-              📍 Get Directions
-            </a>
           </div>
         </div>
       </section>
