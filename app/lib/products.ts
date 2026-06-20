@@ -1,4 +1,4 @@
-﻿/* -- Product & Item Types -- */
+/* -- Product & Item Types -- */
 export interface FlowerProduct {
   sku: string;
   name: string;
@@ -220,6 +220,16 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     seoDescription: "After Dark Cannabis carries all the accessories you need for the perfect smoke session. From premium grinders and rolling papers to lighters, trays, and storage containers, we have everything in stock. Visit us at 1664 Jane St, York.",
     faqs: [
       { q: "What accessories do you sell?", a: "We carry grinders, rolling papers, filter tips, lighters, rolling trays, storage jars, and more." },
+    ],
+  },
+  "MAGIC & OTHERS": {
+    name: "Magic Stuff", slug: "magic", color: "#64748b", icon: "*",
+    seoTitle: "Magic Stuff {{CITY}} - Specialty Items at {{STORE_NAME}}",
+    seoIntro: "Browse current menu for available specialty products at {{STORE_NAME}}, {{CITY}}. Availability may vary by store.",
+    seoDescription: "{{STORE_NAME}} lists available specialty items in {{CITY}} when they are carried on the current menu. Product availability may vary by store and by day. Visit us at {{STREET_ADDRESS}} or check the live menu for current selection.",
+    faqs: [
+      { q: "What specialty items are available?", a: "Selection varies by store and by day. Check the current menu or visit {{STORE_NAME}} for available specialty products." },
+      { q: "Does availability vary by location?", a: "Yes. Specialty item availability may vary by store, so please check the current menu for this location." },
     ],
   },
   CIGARETTES: {
