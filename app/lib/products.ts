@@ -172,12 +172,12 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
   "VAPE PENS": {
     banner: "/banners/01_Vape_Pens.webp",
     name: "THC Vape", slug: "vapes", color: "#8b5cf6", icon: "💨",
-    seoTitle: "Vape Pens York — THC & Nicotine Cartridges",
-    seoIntro: "Shop THC and nicotine vape pens at After Dark Cannabis, York. Cartridges, 510-thread batteries, and premium vape brands — all in stock.",
-    seoDescription: "After Dark Cannabis carries a curated selection of vape pens and cartridges in York. From 510-thread THC cartridges to nicotine vape pods, we stock the most popular brands and flavours. Our knowledgeable budtenders can help you choose the right cartridge and battery setup. Visit us at 1664 Jane St for the best vape selection in ByWard Market.",
+    seoTitle: "Vape Pens in York | After Dark Cannabis",
+    seoIntro: "Browse vape category information at After Dark Cannabis in York. Review vape-related menu details and confirm current store information before visiting.",
+    seoDescription: "After Dark Cannabis provides a vape category page for adult shoppers reviewing vape-related menu information in York. Use this page to review current menu details, then confirm store information before visiting After Dark Cannabis at 1664 Jane St in York.",
     faqs: [
-      { q: "What vape pens do you sell?", a: "We carry 510-thread THC cartridges, nicotine vape pods, disposable vapes, and compatible batteries from top Canadian brands." },
-      { q: "Do you sell vape batteries?", a: "Yes! We stock 510-thread batteries and pod systems that pair with our cartridge selection." },
+      { q: "What vape-related information can shoppers review?", a: "This category page helps adult shoppers review vape-related menu information when it is listed on the current menu." },
+      { q: "How should customers confirm current vape menu details?", a: "Review the current menu information on this page and confirm store details before visiting After Dark Cannabis." },
     ],
   },
   "VAPE DISPOSABLE": {
@@ -194,12 +194,12 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
   CONCENTRATES: {
     banner: "/banners/03_Concentrates.webp",
     name: "Concentrates", slug: "concentrates", color: "#f59e0b", icon: "💎",
-    seoTitle: "Cannabis Concentrates York — Shatter, Wax, Hash & Live Resin",
-    seoIntro: "Premium cannabis concentrates at After Dark Cannabis, York. Shatter, wax, hash, live resin, and diamonds — all in stock.",
-    seoDescription: "After Dark Cannabis offers a premium selection of cannabis concentrates in York. From traditional hash and kief to modern extracts like shatter, wax, live resin, and THC diamonds, we carry products for every preference and potency level. Our concentrates are sourced from trusted extractors and tested for purity. Visit us at 1664 Jane St.",
+    seoTitle: "Cannabis Concentrates in York | After Dark Cannabis",
+    seoIntro: "Browse concentrates category information at After Dark Cannabis in York. Review concentrate-related menu details and confirm current store information before visiting.",
+    seoDescription: "After Dark Cannabis provides a concentrates category page for adult shoppers reviewing concentrate-related menu information in York. Use this page to review current menu details, then confirm store information before visiting After Dark Cannabis at 1664 Jane St in York.",
     faqs: [
-      { q: "What types of concentrates do you carry?", a: "We stock shatter, wax, budder, live resin, rosin, hash, kief, and THC diamonds from top Canadian extractors." },
-      { q: "How do I consume concentrates?", a: "Concentrates can be dabbed with a rig, vaped with a concentrate pen, or added to flower in a joint or bowl for extra potency." },
+      { q: "What concentrate-related information can shoppers review?", a: "This category page helps adult shoppers review concentrate-related menu information when it is listed on the current menu." },
+      { q: "How should customers confirm current concentrate menu details?", a: "Review the current menu information on this page and confirm store details before visiting After Dark Cannabis." },
     ],
   },
   PREROLLS: {
