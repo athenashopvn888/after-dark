@@ -160,13 +160,13 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
   EDIBLES: {
     banner: "/banners/after_dark_edibles_prerolls_more_banner.webp",
     name: "Edibles", slug: "edibles", color: "#f97316", icon: "🍬",
-    seoTitle: "Cannabis Edibles York — Gummies, Chocolates & Drinks",
-    seoIntro: "Browse the full cannabis edibles menu at After Dark Cannabis on York St, York. We carry THC gummies, chocolates, drinks, and more from top Canadian brands.",
-    seoDescription: "Looking for cannabis edibles in York? After Dark Cannabis stocks a wide range of THC-infused gummies, chocolates, beverages, and baked goods. Our edibles range from micro-dose options for beginners to high-potency products for experienced consumers. All products are lab-tested and sourced from licensed Canadian producers. Visit us at 1664 Jane St — open daily 24 hours.",
+    seoTitle: "Cannabis Edibles Menu in York | After Dark Cannabis",
+    seoIntro: "Browse edibles category information at After Dark Cannabis in York. Review edible-related menu categories and confirm current menu details before visiting.",
+    seoDescription: "After Dark Cannabis provides edibles category and menu information for shoppers in York. Use this page to review edible-related menu categories and check current store details before visiting 1664 Jane St. Product selection can change, so confirm current menu information before you come in.",
     faqs: [
-      { q: "What cannabis edibles do you carry?", a: "We stock THC gummies, chocolates, beverages, capsules, and baked goods from top Canadian brands. Potencies range from 10mg to 1000mg+ THC." },
-      { q: "How long do edibles take to kick in?", a: "Cannabis edibles typically take 30-90 minutes to take effect. Start with a low dose (5-10mg) and wait at least 2 hours before consuming more." },
-      { q: "Can I buy edibles at After Dark Cannabis?", a: "Yes! Visit us at 1664 Jane St, York. We're open daily 24 hours with a full edibles selection in store." },
+      { q: "What edible categories can I review?", a: "You can review edible-related menu categories such as gummies, chocolates, drinks, and other listed sections when they appear on the current menu." },
+      { q: "How should I confirm current edible menu details?", a: "Check the current menu/category page or contact the store before visiting because menu details can change." },
+      { q: "Where can I review edibles information for After Dark Cannabis?", a: "Use the edibles category page for After Dark Cannabis in York and confirm current details before visiting." },
     ],
   },
   "VAPE PENS": {
