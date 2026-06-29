@@ -5,11 +5,11 @@ import AgeGate from "./components/AgeGate";
 export const metadata: Metadata = {
   metadataBase: new URL("https://afterdarkcannabis.com"),
   title: {
-    default: "After Dark Cannabis — Premium Cannabis Dispensary, York",
+    default: "After Dark Cannabis | York Cannabis Dispensary",
     template: "%s | After Dark Cannabis",
   },
   description:
-    "Shop 200+ premium cannabis strains at After Dark Cannabis. Exotic, Premium, AAA+, AA & Budget flower from $3/g. York's uplifting dispensary at 1664 Jane St. Open 24 Hours.",
+    "After Dark Cannabis is a York cannabis dispensary on Jane St with menu categories, local store details, and in-person shopping info for adults 19+. Open 24 Hours.",
   keywords: [
     "cannabis dispensary York",
     "weed store York",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     locale: "en_CA",
     url: "https://afterdarkcannabis.com",
     siteName: "After Dark Cannabis",
-    title: "After Dark Cannabis — Premium York Cannabis Dispensary",
+    title: "After Dark Cannabis | York Cannabis Dispensary",
     description:
-      "200+ strains from $3/g. Exotic to Budget. York's uplifting dispensary at 1664 Jane St. Open 24 Hours.",
+      "After Dark Cannabis is a York cannabis dispensary on Jane St with menu categories, local store details, and in-person shopping info for adults 19+. Open 24 Hours.",
     images: [
       {
         url: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/46Oi5.jpg",
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "After Dark Cannabis — York's Uplifting Dispensary",
-    description: "200+ strains from $3/g. Open 24 Hours at 1664 Jane St, York.",
+    title: "After Dark Cannabis | York Cannabis Dispensary",
+    description: "After Dark Cannabis is a York cannabis dispensary on Jane St with menu categories, local store details, and in-person shopping info for adults 19+. Open 24 Hours.",
     images: ["https://afterdarkcannabis.com/wp-content/uploads/2026/04/46Oi5.jpg"],
   },
   robots: {
