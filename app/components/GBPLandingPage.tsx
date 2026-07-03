@@ -113,6 +113,10 @@ export function GBPLandingPage() {
         <p className={styles.infoText}>
           If you are coming from {nearbyAreaList}, review the address and store hours shown below, then use the category links to understand the main types of pages available on this site before you visit.
         </p>
+        <p className={styles.infoText}>
+          For a fuller local overview, read the{" "}
+          <Link href="/blog/after-dark-jane-st-visit-guide">After Dark Jane St visit guide</Link>.
+        </p>
         <div className={styles.btnRow}>
           <Link href={gbpLocation.menuUrl} className={`${styles.btn} ${styles.btnPrimary}`}>
             Start With Menu Categories
