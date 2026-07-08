@@ -39,7 +39,7 @@ export const STATIC_POSTS: StaticBlogPost[] = [
     meta_description: "Adult 19+ guide to After Dark Cannabis around Jane St in York, with local store-page checks, menu-category context, and safe visit planning.",
     h1: "What Adults 19+ Should Know Before Visiting After Dark Cannabis on Jane St",
     excerpt: "After Dark Cannabis guide for adults 19+ reviewing store information around Jane St in York.",
-    author: "Athena SEO Team",
+    author: "The After Dark Cannabis Team",
     date: "2026-07-02",
     category: "Store Guide",
     readTime: "4 min",
