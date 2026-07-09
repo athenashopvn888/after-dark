@@ -230,19 +230,17 @@ Use the live menu for current store-specific selection, then use the store page 
     title: "After Dark Cannabis Local Visit Guide for Adults 19+",
     seoTitle: "After Dark Cannabis Local Visit Guide | York",
     seo_title: "After Dark Cannabis Local Visit Guide | York",
-    metaDescription: "Plan a visit to After Dark Cannabis around Jane St, Weston, and Mount Dennis with adult 19+ store-page checks, menu-category paths, and local directions context.",
-    meta_description: "Plan a visit to After Dark Cannabis around Jane St, Weston, and Mount Dennis with adult 19+ store-page checks, menu-category paths, and local directions context.",
+    metaDescription: "Plan a visit to After Dark Cannabis in York with adult 19+ store-page checks, menu-category paths, and local directions context.",
+    meta_description: "Plan a visit to After Dark Cannabis in York with adult 19+ store-page checks, menu-category paths, and local directions context.",
     h1: "After Dark Cannabis Local Visit Guide for Adults 19+",
     excerpt: "After Dark Cannabis local visit guide for adults 19+ around Jane St, Weston, and Mount Dennis.",
     author: "The After Dark Cannabis Team",
     date: "2026-07-09",
     category: "Local Guide",
     readTime: "4 min",
-    content: `## After Dark Cannabis Local Visit Guide For Adults 19+
+    content: `Use this guide to confirm the right After Dark Cannabis storefront around Jane St, Weston, and Mount Dennis, understand nearby street context, and choose the most useful store page or menu path before visiting.
 
-When adults 19+ search for a cannabis store around Jane St, Weston, and Mount Dennis, the most useful page should make three things easy: confirm the right storefront, understand the nearby street context, and move quickly to the store page or menu categories before visiting.
-
-This guide is for shoppers researching After Dark Cannabis in York. It does not replace current store details, current hours, or live menu information. Use the official store page or contact staff before leaving.
+For current details, start with the official store page or contact staff before leaving.
 
 ## Confirm The Right Storefront
 
@@ -250,7 +248,7 @@ After Dark Cannabis is tied to Jane St, Weston, Mount Dennis, and Black Creek Dr
 
 If you are checking directions, start with the official store page and confirm the destination there. That keeps the visit focused on the right storefront instead of relying on a copied listing or an old search result.
 
-## Browse The Useful Menu Paths
+## Use The Menu Before Visiting
 
 Start with the menu category that matches what you want to compare. Most shoppers move fastest when they check flower tiers, pre-rolls, vapes, edibles, concentrates, and accessories first, then ask staff if they need help choosing between options.
 
@@ -263,7 +261,7 @@ The live menu is the best place for current product details. This guide gives lo
 - Menu categories you want to compare before asking staff.
 - Valid adult 19+ identification for the visit.
 
-## Why Local Context Helps
+## Why The Local Context Matters
 
 Good local store pages should answer real visit-planning questions instead of repeating a city name. Clear store identity, nearby street context, and helpful internal links make it easier for adults 19+ to decide whether they are looking at the right store.
 
@@ -281,9 +279,9 @@ For After Dark Cannabis, that means keeping the page focused on Jane St, Weston,
 
 Yes. It is written for After Dark Cannabis and its York local context.
 
-### Does this page confirm current product availability?
+### How can shoppers check current product details?
 
-No. Use the live menu or contact staff for current store-specific details before visiting.
+Use the live menu or contact staff for current store-specific details before visiting.
 
 ### What should shoppers check first?
 
