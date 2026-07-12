@@ -67,6 +67,7 @@ export default function Footer() {
               <Link href="/info/weed-store-near-mississauga">Weed Store Near Mississauga</Link>
               <Link href="/weed-dispensary-york/">After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>
+                          <Link href="/resources">Resources</Link>
             </nav>
           </div>
         </div>
