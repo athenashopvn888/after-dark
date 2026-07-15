@@ -675,7 +675,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     ],
     sections: [
       {
-        heading: "Nearby Search Language",
+        heading: "Nearby Area Terms",
         body: [
           "The local language around this store includes Jane Street, York, Weston, Mount Dennis, Keelesdale, Eglinton West, Black Creek, and Trethewey Drive.",
         ],

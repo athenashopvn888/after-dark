@@ -51,7 +51,7 @@ const FAQ_CATEGORIES = [
       { q: "Can I order online?", a: "After Dark Cannabis is an in-store shopping experience. You can browse the online menu before visiting, but the site does not provide online checkout." },
       { q: "Do you offer delivery?", a: "Delivery is coming soon! Visit our delivery page to sign up for email notifications when we launch our delivery service." },
       { q: "What payment methods do you accept?", a: "We accept cash and debit. No credit cards at this time." },
-      { q: "Can your staff help me choose a strain?", a: "Absolutely! Our knowledgeable budtenders are here to help. Whether you're a first-time buyer or a seasoned connoisseur, we can recommend strains based on your preferences, desired effects, and budget." },
+      { q: "Can your staff help me compare menu items?", a: "Yes. Staff can help you compare the categories, formats, package details, and prices shown on the current menu." },
       { q: "Is there a minimum purchase?", a: "No minimum purchase required. You can buy as little as 1 gram." },
     ],
   },

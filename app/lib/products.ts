@@ -236,7 +236,7 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     banner: "/banners/06_Cigarettes.webp",
     name: "Cigarettes", slug: "cigarettes", color: "#78716c", icon: "🏷️",
     seoTitle: "Native Cigarettes York — Discount Tobacco at After Dark Cannabis",
-    seoIntro: "Discount native cigarettes at After Dark Cannabis, York. Premium and value brands at the best prices on York St.",
+    seoIntro: "Browse native cigarette brands and current menu details at After Dark Cannabis, York.",
     seoDescription: "After Dark Cannabis is your go-to source for affordable native cigarettes in York. We carry a wide selection of premium and value tobacco brands at competitive prices. Located at 1664 Jane St in the heart of ByWard Market, we're open daily 24 hours. Stop by for the best cigarette prices in the neighbourhood.",
     faqs: [
       { q: "Do you sell cigarettes at After Dark Cannabis?", a: "Yes! We carry a wide selection of native cigarette brands at competitive prices." },
