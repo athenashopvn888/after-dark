@@ -31,7 +31,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     intro: "A practical resource hub for late-night Jane Street and York shoppers. Use it to move from local search intent to the right menu shelf: flower, pre-rolls, edibles, THC vapes, concentrates, accessories, cigarettes, Native smokes, Backwoods, and grabba.",
     cards: [
       { title: "Local Visit Guide", href: "/resources/jane-street-york-visit-guide", text: "Plan the stop around Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive." },
-      { title: "Menu Guide", href: "/resources/menu-guide", text: "Choose the right category before jumping into product pages." },
+      { title: "Menu Guide", href: "/resources/menu-guide", text: "Choose the best category before jumping into product pages." },
       { title: "Flower Tier Guide", href: "/resources/flower-guide", text: "Compare Exotic, Premium, AAA+, AA, and Budget with 3g and 6g deal math." },
       { title: "Value Guide", href: "/resources/value-guide", text: "A cleaner path for cheap weed, budget weed, and affordable flower searches." },
       { title: "Native Smokes Prices", href: "/resources/native-smokes", text: "Brand and price notes for cigarettes, Backwoods, grabba, and pouch listings." }
@@ -39,12 +39,12 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     sections: [
       {
         heading: "Local Search, Useful Next Step",
-        body: "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. These resources support the protected GBP landing page, not replace it. Start with the local page for address and visit context, then use the resource guides for menu decisions.",
-        bullets: ["GBP landing page: /weed-dispensary-york", "Local areas: Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive", "Store hours shown in the site data: Open 24 Hours"]
+        body: "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. These resources support the protected store visit page, not replace it. Start with the local page for address and visit context, then use the resource guides for menu decisions.",
+        bullets: ["store visit page: /weed-dispensary-york", "Local areas: Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive", "Store hours shown in the site data: Open 24 Hours"]
       },
       {
-        heading: "Built Around Real Menu Paths",
-        body: "The pages are organized around high-intent keywords shoppers actually use: weed dispensary near Jane Street / York, cannabis store York, cheap weed, budget weed, pre-rolls, edibles, THC vapes, concentrates, Native cigarettes, Backwoods, and grabba."
+        heading: "Built Around Real Menu Sections",
+        body: "The pages are organized around common shopper questions shoppers actually use: weed dispensary near Jane Street / York, cannabis store York, cheap weed, budget weed, pre-rolls, edibles, THC vapes, concentrates, Native cigarettes, Backwoods, and grabba."
       }
     ],
   },
@@ -56,8 +56,8 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     eyebrow: "Visit Guide",
     intro: "Use this page when the search starts local: weed dispensary near Jane Street / York, cannabis store near 1664 Jane St, or a quick menu check before visiting from Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive.",
     cards: [
-      { title: "GBP Store Page", href: "/weed-dispensary-york", text: "Use the main local landing page for address, directions, hours, and NAP details." },
-      { title: "Menu Guide", href: "/resources/menu-guide", text: "Choose the product lane before opening deep menu pages." },
+      { title: "Store Visit Page", href: "/weed-dispensary-york", text: "Use the main store visit page for address, directions, hours, and store details." },
+      { title: "Menu Guide", href: "/resources/menu-guide", text: "Choose the product section before opening deep menu pages." },
       { title: "Value Guide", href: "/resources/value-guide", text: "Fast help for affordable flower and budget weed searches." }
     ],
     sections: [
@@ -66,9 +66,9 @@ export const RESOURCE_PAGES: ResourcePage[] = [
         body: "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. Keep that address as the local anchor, then use the resource pages to decide whether the trip is about flower, pre-rolls, edibles, THC vapes, concentrates, accessories, or cigarettes."
       },
       {
-        heading: "Neighborhood Search Paths",
+        heading: "Neighborhood Shopping Notes",
         body: "Jane Street moves a mix of Weston, Mount Dennis, Keelesdale, Eglinton West, and Black Creek shoppers, so the resource pages keep the path simple for quick stops and value searches.",
-        bullets: ["Jane Street cannabis store search path", "Weston cannabis store search path", "Mount Dennis cannabis store search path", "Keelesdale cannabis store search path", "Eglinton West cannabis store search path", "York cannabis store search path", "Black Creek cannabis store search path", "Trethewey Drive cannabis store search path"]
+        bullets: ["Jane Street cannabis store shopping note", "Weston cannabis store shopping note", "Mount Dennis cannabis store shopping note", "Keelesdale cannabis store shopping note", "Eglinton West cannabis store shopping note", "York cannabis store shopping note", "Black Creek cannabis store shopping note", "Trethewey Drive cannabis store shopping note"]
       },
       {
         heading: "Best First Click",
@@ -80,24 +80,24 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     slug: "menu-guide",
     title: "After Dark Cannabis Menu Guide",
     seoTitle: "After Dark Cannabis Menu Guide | Flower, Pre-Rolls, Edibles, Vapes And Cigarettes",
-    description: "A category-first menu guide for After Dark Cannabis, covering flower tiers, pre-rolls, edibles, THC vapes, concentrates, accessories, cigarettes, and Native smokes.",
+    description: "A category-guided menu guide for After Dark Cannabis, covering flower tiers, pre-rolls, edibles, THC vapes, concentrates, accessories, cigarettes, and Native smokes.",
     eyebrow: "Menu Guide",
-    intro: "The menu gets easier when you choose the lane first. Flower has tier math. Pre-rolls have format details. Edibles, THC vapes, concentrates, and accessories need category notes. Cigarettes need brand and price checks.",
+    intro: "The menu gets easier when you choose the section first. Flower has tier math. Pre-rolls have format details. Edibles, THC vapes, concentrates, and accessories need category notes. Cigarettes need brand and price checks.",
     cards: [
       { title: "Flower Tiers", href: "/resources/flower-guide", text: "Start here for Exotic, Premium, AAA+, AA, and Budget flower." },
       { title: "Pre-Rolls", href: "/resources/pre-roll-guide", text: "Use this for ready-to-smoke singles, packs, and quick-trip browsing." },
       { title: "Cigarettes", href: "/items/cigarettes", text: "Open the cigarette category for current Native smokes listings." },
-      { title: "GBP Store Page", href: "/weed-dispensary-york", text: "Return to the protected local store page." }
+      { title: "Store Visit Page", href: "/weed-dispensary-york", text: "Return to the store visit page." }
     ],
     sections: [
       {
         heading: "Pick The Shelf First",
-        body: "For late-night Jane Street and York shoppers, the best menu path is simple: flower shoppers compare tiers, pre-roll shoppers compare format, edible and vape shoppers read product notes, and cigarette shoppers compare brand, full/light/menthol style, and price.",
-        bullets: ["Flower, pre-rolls, edibles, THC vapes, concentrates, accessories, and cigarettes each need their own pass.", "Use current category pages for live product details.", "Use resources for shopping logic and local planning."]
+        body: "For late-night Jane Street and York shoppers, the best menu section is simple: flower shoppers compare tiers, pre-roll shoppers compare format, edible and vape shoppers read listing details, and cigarette shoppers compare brand, full/light/menthol style, and price.",
+        bullets: ["Flower, pre-rolls, edibles, THC vapes, concentrates, accessories, and cigarettes are easiest to compare separately.", "Use current category pages for live product details.", "Use resources for shopping details and local planning."]
       },
       {
-        heading: "Local Keywords Without The Mess",
-        body: "This page supports searches like weed dispensary near Jane Street / York, cannabis store York, cheap weed near me, Native cigarettes, and THC vape menu while keeping the actual shopper path clear."
+        heading: "Local Shopping Notes Without The Mess",
+        body: "This page helps shoppers like weed dispensary near Jane Street / York, cannabis store York, cheap weed near me, Native cigarettes, and THC vape menu while keeping the actual shopping trip clear."
       }
     ],
   },
@@ -131,7 +131,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     slug: "value-guide",
     title: "After Dark Cannabis Value Weed Guide",
     seoTitle: "After Dark Cannabis Value Weed Guide | Cheap Weed Near Jane Street / York",
-    description: "A value shopping guide for After Dark Cannabis, covering cheap weed, budget weed, AA flower, AAA+ deals, 6g tier math, and affordable menu paths.",
+    description: "A value shopping guide for After Dark Cannabis, covering cheap weed, budget weed, AA flower, AAA+ deals, 6g tier math, and affordable menu sections.",
     eyebrow: "Value Guide",
     intro: "For Jane Street value shopping, value shopping works best when the shelf is clear. Start with Budget, AA, and AAA+ before jumping into higher tiers or mixed categories.",
     cards: [
@@ -147,7 +147,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         heading: "Compare Inside The Category",
-        body: "Value means something different for flower, pre-rolls, edibles, THC vapes, concentrates, accessories, and cigarettes. Keep each comparison inside the right category so the decision does not get muddy."
+        body: "Value means something different for flower, pre-rolls, edibles, THC vapes, concentrates, accessories, and cigarettes. Keep each comparison inside the best category so the decision does not get muddy."
       }
     ],
   },
@@ -232,11 +232,11 @@ export const RESOURCE_PAGES: ResourcePage[] = [
   },
   {
     slug: "resource-centre-launch",
-    title: "After Dark Cannabis Resource Centre Update",
-    seoTitle: "After Dark Cannabis Resource Centre Update | Local Menu Guides",
-    description: "After Dark Cannabis resource centre update with local visit planning, menu guide pages, flower tier pricing, value shopping, pre-roll tips, and Native smokes prices.",
+    title: "After Dark Cannabis Resource Guide Refresh",
+    seoTitle: "After Dark Cannabis Resource Guide Refresh | Local Menu Guides",
+    description: "After Dark Cannabis resource guide refresh with local visit planning, menu guide pages, flower tier pricing, value shopping, pre-roll tips, and Native smokes prices.",
     eyebrow: "Resource Update",
-    intro: "The resource centre has been rebuilt around real shopper paths: local visit planning, category-first browsing, flower tier math, value shopping, pre-roll shortcuts, and cigarette price notes.",
+    intro: "The resource centre has been rebuilt around real shopping trips: local visit planning, category-guided browsing, flower tier math, value shopping, pre-roll shortcuts, and cigarette price notes.",
     cards: [
       { title: "Resource Home", href: "/resources", text: "Start at the main resource hub." },
       { title: "Local Visit Guide", href: "/resources/jane-street-york-visit-guide", text: "Plan around Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive." },
@@ -246,7 +246,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     sections: [
       {
         heading: "What Changed",
-        body: "The resources now sound like After Dark Cannabis and Jane Street / York, not a copied store template. Each page supports a specific shopper task and points back to the right category or local landing page."
+        body: "The resources now sound like After Dark Cannabis and Jane Street / York, not a copied store template. Each page supports a specific shopper task and points back to the best category or store visit page."
       },
       {
         heading: "What Stayed Protected",
