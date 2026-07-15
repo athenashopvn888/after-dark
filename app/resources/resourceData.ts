@@ -247,7 +247,7 @@ export const RESOURCE_PAGES: ResourcePage[] = [
       {
         heading: "Brand Terms Belong in the Site Vocabulary",
         body: [
-          "If a shopper searches the product name, the site should have a clean place to answer. These pages add that without pretending every product is flower content.",
+          "These pages give shoppers a clear place to learn about each product category beyond flower.",
         ],
       },
     ],
