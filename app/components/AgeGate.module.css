@@ -172,3 +172,52 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
+
+@media (max-width: 480px) {
+  .overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  .modal {
+    margin: auto;
+    padding: 28px 18px;
+    border-radius: 18px;
+  }
+
+  .logoWrap {
+    margin-bottom: 18px;
+  }
+
+  .logo {
+    width: 82px;
+    height: 82px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .text {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .btnRow {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .yesBtn,
+  .noBtn {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+  }
+
+  .disclaimer {
+    overflow-wrap: anywhere;
+  }
+}

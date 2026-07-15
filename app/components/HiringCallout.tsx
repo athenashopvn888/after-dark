@@ -1,8 +1,10 @@
 import Link from "next/link";
+import styles from "./HiringCallout.module.css";
 
 export default function HiringCallout() {
   return (
     <section
+      className={styles.section}
       aria-label="After Dark Cannabis hiring"
       style={{
         padding: "110px 20px 24px",
@@ -10,6 +12,7 @@ export default function HiringCallout() {
       }}
     >
       <div
+        className={styles.panel}
         style={{
           width: "min(100%, 1120px)",
           margin: "0 auto",
@@ -68,6 +71,7 @@ export default function HiringCallout() {
           </p>
         </div>
         <Link
+          className={styles.cta}
           href="/careers/budtender"
           style={{
             display: "inline-flex",

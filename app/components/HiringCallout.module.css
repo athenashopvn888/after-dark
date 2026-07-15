@@ -1,0 +1,17 @@
+@media (max-width: 600px) {
+  .section {
+    padding: 102px 12px 16px !important;
+  }
+
+  .panel {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 18px !important;
+  }
+
+  .cta {
+    width: 100%;
+    white-space: normal !important;
+    text-align: center;
+  }
+}
