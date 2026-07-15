@@ -883,9 +883,34 @@
 }
 
 @media (max-width: 480px) {
+  .welcomeBannerSection {
+    margin-top: 12px;
+  }
+
+  .welcomeBannerContainer {
+    padding: 12px 12px 0;
+  }
+
+  .welcomeBannerImg {
+    border-radius: 14px;
+  }
+
+  .hero {
+    padding: 36px 12px 52px;
+  }
+
+  .brandBlock {
+    margin-bottom: 28px;
+  }
+
+  .brandIcon {
+    font-size: 44px;
+  }
+
   .bentoGrid {
     grid-template-columns: 1fr;
     grid-auto-rows: 120px;
+    gap: 12px;
   }
   .bentoExotic {
     grid-column: span 1;
@@ -900,6 +925,42 @@
   
   .categoriesGrid {
     grid-template-columns: 1fr;
+  }
+
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .categoriesSection,
+  .featuredSection,
+  .seoSection,
+  .reviewsSection,
+  .faqSection,
+  .storeSection {
+    padding-block: 52px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 32px;
+  }
+
+  .seoPanel {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .faqContainer {
+    padding: 0 12px;
+  }
+
+  .faqQuestion {
+    gap: 12px;
+    padding: 18px;
+    font-size: 15px;
+  }
+
+  .faqAnswer {
+    padding-inline: 18px;
   }
   
   .featuredGrid {
