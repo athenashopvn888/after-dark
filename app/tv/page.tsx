@@ -672,7 +672,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
    ============================================================ */
 const TICKER_SLIDES = [
   "🔥 After Dark Cannabis — 1664 Jane St, York",
-  "200+ Strains In Stock",
+  "Flower Tiers and Menu Categories",
   "Open 24 Hours",
   "ALL SALES ARE FINAL",
   "🎮 Play Games at afterdarkcannabis.com/games",

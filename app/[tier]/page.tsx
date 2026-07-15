@@ -33,7 +33,7 @@ export async function generateMetadata({
     description: seo?.seoIntro || `Shop ${flowers.length} ${tierInfo.config.name.toLowerCase()} cannabis strains at After Dark Cannabis.`,
     openGraph: {
       title: `${tierInfo.config.name} Flower | After Dark Cannabis`,
-      description: `${flowers.length} curated ${tierInfo.config.name.toLowerCase()} strains in stock now. From $${tierInfo.config.unitPrice}/g.`,
+      description: `${flowers.length} ${tierInfo.config.name.toLowerCase()} flower menu listings. Browse names, weights, and posted details.`,
     },
   };
 }

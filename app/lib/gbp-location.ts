@@ -32,7 +32,7 @@ export const gbpLocation = {
   seoTitle: "After Dark Cannabis | Weed Dispensary in York",
   metaDescription: "After Dark Cannabis is a local weed dispensary in York offering flower, pre-rolls, edibles, vapes, concentrates, CBD, and service for adults 19+.",
   localLandmarks: ["Jane Street", "Weston", "Mount Dennis"],
-  introVariant: "Welcome to After Dark Cannabis, your premier weed dispensary in York situated right on 1664 Jane St. We are dedicated to providing adults 19+ with top-tier weed, premium cannabis flower, pre-rolls, edibles, THC vapes, concentrates, and CBD products. If you are looking for a trusted cannabis store near Jane Street / York or a weed shop near Weston, stop by today to consult with our knowledgeable staff.",
+  introVariant: "Welcome to After Dark Cannabis, a weed dispensary in York at 1664 Jane St. Adults 19+ can browse flower tiers, pre-rolls, edibles, THC vapes, concentrates, CBD products, and other menu categories. Use the store page for visit information and the menu for current item details.",
   neighborhoodDescription: "Located in the vibrant Jane Street / York district, our cannabis store fits right into this active and historic community, surrounded by local retail shops and convenient transit links.",
   parkingNote: "Convenient street parking is available along Jane Street and surrounding side streets",
   transitNote: "Accessible by local TTC routes around Jane Street and nearby York neighborhoods.",

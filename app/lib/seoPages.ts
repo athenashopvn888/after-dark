@@ -16,23 +16,23 @@ export const SEO_PAGES: SeoPageData[] = [
   {
     slug: "york-weed-dispensary",
     title: "York Weed Dispensary — After Dark Cannabis | 24 Hours | Jane St",
-    metaDescription: "After Dark Cannabis is York's #1 24-hour weed dispensary at 1664 Jane St near Weston. 200+ strains, THC up to 39%, edibles, vapes, concentrates & more. Walk in anytime.",
+    metaDescription: "After Dark Cannabis is a 24-hour weed dispensary at 1664 Jane St in York with flower tiers, edibles, vapes, concentrates, pre-rolls, and more.",
     h1: "York Weed Dispensary — After Dark Cannabis",
     icon: "✨",
     heroTagline: "Premium Cannabis on Jane St · Open 24 Hours · Walk-In Welcome",
     banner: "/banners/after_dark_welcome_banner.webp",
     sections: [
       {
-        heading: "York's Premier Cannabis Destination",
-        body: "After Dark Cannabis is a premium cannabis dispensary located at 1664 Jane St in the heart of York's vibrant Weston and Mount Dennis neighbourhoods. We carry over 200 hand-picked cannabis strains across five quality tiers — from ultra-rare Exotic genetics with THC up to 39% to affordable Budget flower starting at just $3/g. Whether you're a connoisseur seeking the rarest strains or a daily smoker looking for reliable value, After Dark Cannabis has the perfect flower for you. We're proud to be one of York's most trusted dispensaries, serving our community 24 hours a day, 7 days a week.",
+        heading: "A 24-Hour Cannabis Store on Jane Street",
+        body: "After Dark Cannabis is located at 1664 Jane St in York. The menu organizes flower into Exotic, Premium, AAA+, AA, and Budget sections alongside pre-rolls, edibles, vapes, concentrates, cigarettes, and accessories. Use the store page for visit information and the menu for current item details.",
       },
       {
         heading: "Five Tiers of Quality Cannabis — Transparent Pricing",
-        body: "Our unique tier system ensures transparent pricing and quality grading so you always know what you're getting. Exotic ($10-$12/g) features top-shelf, ultra-rare genetics with THC levels reaching 35-39% — these are the strains connoisseurs travel across York to find. Premium ($7-$10/g) offers connoisseur-grade strains at THC 32-34%, balancing quality and value. AAA+ ($5-$6/g) delivers heavy hitters at THC 30-32% — our most popular tier for experienced users. AA ($4/g) provides quality daily drivers at THC 27-29%, perfect for regular consumption. Budget ($3/g) offers value ounces from $40 without sacrificing reliability. Every tier is lab-tested, properly cured, and freshly rotated.",
+        body: "The flower menu is divided into Exotic, Premium, AAA+, AA, and Budget sections. Each section gives shoppers a focused place to compare product names, listed weights, posted prices, and item details without treating a tier label as a guarantee.",
       },
       {
         heading: "Beyond Flower — Edibles, Vapes, Concentrates & More",
-        body: "After Dark Cannabis is more than just a flower shop. We carry a comprehensive selection of cannabis edibles (gummies, chocolates, baked goods), vape pens and disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, rolling papers, and accessories. Our live digital menu at afterdarkcannabis.com updates in real time so you always know exactly what's in stock before you make the trip.",
+        body: "The menu includes category pages for edibles, vape pens, disposable vapes, concentrates, pre-rolls, cigarettes, rolling papers, and accessories. Browse the current category page for the item details shown online.",
       },
       {
         heading: "Open 24 Hours on Jane Street",
@@ -50,11 +50,11 @@ export const SEO_PAGES: SeoPageData[] = [
     faqs: [
       { q: "Where is After Dark Cannabis located?", a: "We are located at 1664 Jane St, York, ON M9N 2S1 — in the heart of Weston and Mount Dennis, one of York's most accessible neighbourhoods. We're near the Weston GO Station, Highway 401, and major bus routes." },
       { q: "What are the hours for After Dark Cannabis?", a: "We are open 24 hours a day, 7 days a week, 365 days a year. Walk in anytime — no appointment needed. Whether it's 2 PM or 2 AM, our staff is here to help." },
-      { q: "What cannabis products does After Dark Cannabis carry?", a: "We carry 200+ strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles, vapes, concentrates, pre-rolls, native cigarettes, and accessories. Our menu updates in real time online." },
+      { q: "What menu categories can I browse?", a: "The site includes flower tiers plus edibles, vapes, concentrates, pre-rolls, cigarettes, and accessories. Check the current menu for listed item details." },
       { q: "What is the cheapest weed at After Dark Cannabis?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. Every tier includes our 3g bundle pricing, making our prices even more competitive." },
-      { q: "Does After Dark Cannabis have a live menu?", a: "Yes! Our online menu at afterdarkcannabis.com updates in real time with current stock, prices, and availability. You can see exactly what we have before you visit." },
+      { q: "Does After Dark Cannabis have an online menu?", a: "Yes. The site organizes flower tiers and other product categories with their listed item details." },
       { q: "What makes After Dark Cannabis different from other York dispensaries?", a: "Three things set us apart: (1) We're open 24 hours, (2) our transparent 5-tier pricing system means no confusing markups, and (3) every purchase includes our 3g bundle pricing. Plus we carry one of York's largest selections with over 200 strains." },
-      { q: "Can I check stock before visiting?", a: "Absolutely. Visit afterdarkcannabis.com to see our live menu. All flower, edibles, vapes, and accessories are listed with real-time stock status, THC levels, and pricing." },
+      { q: "What can I check before visiting?", a: "Visit afterdarkcannabis.com to browse the listed flower tiers, edibles, vapes, concentrates, pre-rolls, cigarettes, and accessories." },
       { q: "Is there parking near After Dark Cannabis?", a: "Yes. Free street parking is available in the evenings on Jane St and surrounding residential streets. We're also easily accessible via TTC." },
     ],
   },
@@ -134,7 +134,7 @@ export const SEO_PAGES: SeoPageData[] = [
   {
     slug: "weed-store-near-mississauga",
     title: "Weed Store Near Mississauga — After Dark Cannabis | 5 Min From Highway 410 / 401",
-    metaDescription: "Looking for a weed store near Mississauga? After Dark Cannabis at 1664 Jane St, York is just minutes away via Highway 410/401. 200+ strains, open 24 hours.",
+    metaDescription: "Looking for a weed store near Mississauga? After Dark Cannabis at 1664 Jane St in York has flower tiers and other menu categories and is open 24 hours.",
     h1: "Weed Store Near Mississauga — After Dark Cannabis",
     icon: "🚗",
     heroTagline: "Just Minutes From Mississauga via Highway 410 & 401 · Open 24 Hours",
@@ -146,7 +146,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Why Make the Drive to After Dark Cannabis?",
-        body: "After Dark Cannabis offers a wider selection and more competitive pricing than most local Peel options. You'll find over 200 strains across five quality tiers — from ultra-rare Exotic genetics (THC 35-39%) to affordable Budget flower at just $3/g. Our 3g bundle pricing applies to every tier, and our top three tiers offer 6g bundle pricing. With prices starting at $3/g and ounces from $40, After Dark Cannabis delivers value that's worth the short drive from Mississauga.",
+        body: "After Dark Cannabis organizes flower into Exotic, Premium, AAA+, AA, and Budget sections, with separate categories for edibles, vapes, concentrates, pre-rolls, cigarettes, and accessories. Browse the listed weights, prices, and item details before travelling from Mississauga.",
       },
       {
         heading: "Open 24 Hours — Perfect for Late Night Visits",
@@ -158,12 +158,12 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Full Menu — Cannabis, Edibles, Vapes & More",
-        body: "When you make the trip up to York, make it count. After Dark Cannabis carries a full selection including 200+ flower strains, edibles, vape pens, disposable vapes, concentrates (shatter, wax, hash, live resin), pre-rolled joints, native cigarettes, and accessories. Check our live online menu at afterdarkcannabis.com before you visit to see exactly what's in stock.",
+        body: "Before travelling to York, use the site to browse flower tiers, edibles, vape pens, concentrates, pre-rolls, cigarettes, and accessories. Check the current category page when one listed item matters to the visit.",
       },
     ],
     faqs: [
       { q: "How far is After Dark Cannabis from Mississauga?", a: "We're located at 1664 Jane St in York — just a 15-20 minute drive from central Mississauga via Highway 401 East." },
-      { q: "Is it worth driving from Mississauga for cannabis?", a: "Absolutely. After Dark Cannabis offers 200+ strains, prices starting at $3/g, and bundle pricing options like 3g total that make the short drive incredibly worthwhile." },
+      { q: "Where can I check the menu before travelling?", a: "Browse the After Dark Cannabis flower tiers and product categories online, then use the store page for current visit information." },
       { q: "Is After Dark Cannabis open late?", a: "We're open 24 hours a day, 7 days a week. Whether you're driving up from Mississauga at noon or midnight, we're open and ready to serve you." },
       { q: "What's the cheapest weed near Mississauga?", a: "After Dark Cannabis has Budget flower from $3/g and value ounces from $40. With our 3g bundle pricing, these are some of the best prices in the Greater Toronto Area." },
       { q: "Is there parking at After Dark Cannabis?", a: "Yes. Free evening street parking is available near the store on Jane St and surrounding residential streets." },
@@ -175,10 +175,10 @@ export const SEO_PAGES: SeoPageData[] = [
   {
     slug: "dispensary-near-me-york",
     title: "Cannabis Dispensary Near Me York — After Dark Cannabis | Open 24 Hours",
-    metaDescription: "Find a cannabis dispensary near you in York. After Dark Cannabis at 1664 Jane St has 200+ strains from $3/g. Open 24 hours. Walk in anytime, no appointment needed.",
+    metaDescription: "Find After Dark Cannabis at 1664 Jane St in York. Browse flower tiers and product categories online. Open 24 hours with walk-in shopping.",
     h1: "Cannabis Dispensary Near Me — York",
     icon: "🗺️",
-    heroTagline: "Walk-In Welcome · Open 24 Hours · 200+ Strains In Stock",
+    heroTagline: "Walk-In Welcome · Open 24 Hours · Menu Categories Online",
     banner: "/banners/after_dark_welcome_banner.webp",
     sections: [
       {
@@ -187,7 +187,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Why Choose After Dark Cannabis Over Other Dispensaries?",
-        body: "What sets After Dark Cannabis apart from other York dispensaries is our combination of selection, pricing, and convenience. We carry 200+ strains across five clear quality tiers — no confusing markups, no inconsistent pricing. Our 3g bundle pricing applies to every tier, every purchase. And unlike most dispensaries that close at midnight, we're open 24 hours a day, 7 days a week. Whether you need flower, edibles, vapes, or concentrates at any hour, After Dark Cannabis is here.",
+        body: "After Dark Cannabis organizes flower into five clear tier pages and keeps edibles, vapes, concentrates, pre-rolls, cigarettes, and accessories in separate categories. The store is open 24 hours a day, 7 days a week; use the menu for current listed details.",
       },
       {
         heading: "Areas We Serve in Greater Toronto Area",
@@ -198,8 +198,8 @@ export const SEO_PAGES: SeoPageData[] = [
       { q: "Where is the closest dispensary in Weston/York?", a: "After Dark Cannabis at 1664 Jane St is conveniently located in the heart of York — easily accessible from Weston Rd and Lawrence Ave W." },
       { q: "Is After Dark Cannabis walk-in friendly?", a: "Absolutely! No appointment needed. Walk in anytime — we're open 24 hours a day, 7 days a week. Our friendly staff is always ready to help." },
       { q: "What neighbourhoods does After Dark Cannabis serve?", a: "We serve all of York and surrounding areas, including Weston, Mount Dennis, Etobicoke, North York, Mississauga, Brampton, and Toronto." },
-      { q: "How do I check what's in stock?", a: "Visit afterdarkcannabis.com for our live menu with real-time stock, pricing, and THC levels for all products." },
-      { q: "Do you sell edibles and vapes?", a: "Yes! In addition to 200+ flower strains, we carry edibles (gummies, chocolates), vape pens, disposable vapes, concentrates, pre-rolls, and accessories." },
+      { q: "How do I browse the menu?", a: "Visit afterdarkcannabis.com and choose a flower tier or product category to review the item details shown online." },
+      { q: "Where can I browse edibles and vapes?", a: "Use the edibles, THC vape, and disposable-vape category pages to review the listed products and package details." },
     ],
   },
 ];

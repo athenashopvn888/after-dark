@@ -27,9 +27,9 @@ const FAQ_CATEGORIES = [
     title: "🌿 Products & Menu",
     faqs: [
       { q: "What products do you carry?", a: "We carry over 200 strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles (gummies, chocolates, baked goods), vape pens, disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, and accessories." },
-      { q: "Do you have a live menu?", a: "Yes! Our online menu at afterdarkcannabis.com updates in real time with current stock, prices, THC levels, and availability. You can check what's in stock before you visit." },
-      { q: "What are your flower tiers?", a: "Exotic ($10-$12/g, THC 35-39%) — ultra-rare top-shelf genetics. Premium ($7-$10/g, THC 32-34%) — connoisseur-grade. AAA+ ($5-$6/g, THC 30-32%) — heavy hitters, our most popular tier. AA ($4/g, THC 27-29%) — quality daily drivers. Budget ($3/g, THC 24-27%) — reliable value flower." },
-      { q: "Do you sell edibles?", a: "Yes! We carry a variety of edibles including gummies, chocolates, baked goods, and more. THC content varies. Check our live menu for current availability." },
+      { q: "Do you have an online menu?", a: "Yes. The online menu organizes flower tiers and other product categories with their listed item details. Check the current page before visiting for one specific item." },
+      { q: "What are your flower tiers?", a: "The flower menu is organized into Exotic, Premium, AAA+, AA, and Budget sections. Open a tier to compare its listed product names, weights, prices, and item details." },
+      { q: "Can I browse edibles online?", a: "Yes. Open the edibles category to review the product names, package formats, and item details shown on the menu." },
       { q: "Do you sell vapes?", a: "Yes — both disposable vapes and refillable vape pens. We carry both nicotine vapes and THC vapes from top brands." },
       { q: "Do you sell native cigarettes?", a: "Yes! We carry one of the widest selections of native cigarettes in downtown York, including premium and value brands in multiple varieties." },
     ],
@@ -48,7 +48,7 @@ const FAQ_CATEGORIES = [
     title: "🛒 Shopping & Experience",
     faqs: [
       { q: "Do I need an appointment?", a: "No! After Dark Cannabis is walk-in only. Just show up anytime — we're open Open 24 Hours." },
-      { q: "Can I order online?", a: "Currently, After Dark Cannabis is an in-store shopping experience only. You can browse our live menu online to see what's in stock before visiting." },
+      { q: "Can I order online?", a: "After Dark Cannabis is an in-store shopping experience. You can browse the online menu before visiting, but the site does not provide online checkout." },
       { q: "Do you offer delivery?", a: "Delivery is coming soon! Visit our delivery page to sign up for email notifications when we launch our delivery service." },
       { q: "What payment methods do you accept?", a: "We accept cash and debit. No credit cards at this time." },
       { q: "Can your staff help me choose a strain?", a: "Absolutely! Our knowledgeable budtenders are here to help. Whether you're a first-time buyer or a seasoned connoisseur, we can recommend strains based on your preferences, desired effects, and budget." },

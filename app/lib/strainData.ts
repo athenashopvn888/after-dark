@@ -25,7 +25,7 @@ const HYBRID_EFFECTS = [
 ];
 
 const TIER_DESCRIPTIONS: Record<string, string> = {
-  EXOTIC: "ultra-rare, top-shelf exotic",
+  EXOTIC: "Exotic flower section",
   PREMIUM: "premium connoisseur-grade",
   "AAA+": "heavy-hitting AAA+",
   AA: "quality daily-driver AA",
@@ -68,7 +68,7 @@ export function getStrainData(
       : type === "sativa"
       ? "Uplifting cerebral buzz."
       : "Balanced hybrid effects."
-  } Walk-in welcome at After Dark Cannabis York. Real-time stock.`;
+  } Walk-in welcome at After Dark Cannabis York. Browse the menu for listed product details.`;
 
   return { effects, description, metaDescription };
 }

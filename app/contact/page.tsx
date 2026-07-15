@@ -95,16 +95,16 @@ export default function ContactPage() {
                 <br />
                 Just walk in and our staff will
                 <br />
-                help you find the perfect strain.
+                help you compare menu categories and item details.
               </p>
               <div className={styles.featureList}>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>{"\u2713"}</span>
-                  200+ strains in stock
+                  Flower tiers and menu categories
                 </div>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>{"\u2713"}</span>
-                  Lab-tested &amp; safe
+                  Clear product and category details
                 </div>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>{"\u2713"}</span>
@@ -129,4 +129,3 @@ export default function ContactPage() {
     </main>
   );
 }
-

@@ -97,7 +97,7 @@ export const TIER_CONFIG: Record<
     slug: "exotic",
     color: "#f59e0b",
     icon: "\uD83D\uDD25",
-    tagline: "Ultra-rare, top-shelf genetics \u00B7 THC 35-39%",
+    tagline: "Browse the Exotic flower section",
     banner: "/banners/after_dark_exotics_banner.webp",
     unitPrice: 20,
     deal3g: { label: "3g bundle", total: "3G", price: 40 },
@@ -217,7 +217,7 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     name: "Accessories", slug: "add-ons", color: "#34d399", icon: "➕",
     seoTitle: "Cannabis Accessories York — Grinders, Papers, Lighters & More",
     seoIntro: "Essential cannabis accessories at After Dark Cannabis, York. Grinders, rolling papers, lighters, trays, and more.",
-    seoDescription: "After Dark Cannabis carries all the accessories you need for the perfect smoke session. From premium grinders and rolling papers to lighters, trays, and storage containers, we have everything in stock. Visit us at 1664 Jane St, York.",
+    seoDescription: "Browse the After Dark Cannabis accessories category for grinders, rolling papers, lighters, trays, storage containers, and current menu details. Visit us at 1664 Jane St, York.",
     faqs: [
       { q: "What accessories do you sell?", a: "We carry grinders, rolling papers, filter tips, lighters, rolling trays, storage jars, and more." },
     ],
@@ -225,11 +225,11 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
   "MAGIC & OTHERS": {
     name: "Magic Stuff", slug: "magic", color: "#64748b", icon: "*",
     seoTitle: "Magic Stuff - Specialty Items",
-    seoIntro: "Browse current menu for available specialty products. Availability may vary by store.",
-    seoDescription: "Current specialty items are listed when they are carried on the menu. Product availability may vary by store and by day. Check the live menu for current selection.",
+    seoIntro: "Browse the specialty category for product names, formats, and listed details.",
+    seoDescription: "The specialty category organizes its menu entries by product name, format, package, and item details.",
     faqs: [
       { q: "What specialty items are available?", a: "Selection varies by store and by day. Check the current menu for available specialty products." },
-      { q: "Does availability vary by location?", a: "Yes. Specialty item availability may vary by store, so please check the current menu for this location." },
+      { q: "Where can I review specialty items?", a: "Open the specialty category to review the product names, formats, packages, and details shown for this location." },
     ],
   },
   CIGARETTES: {

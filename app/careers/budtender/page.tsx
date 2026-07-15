@@ -6,7 +6,7 @@ import BudtenderApplicationForm from "./BudtenderApplicationForm";
 import styles from "./budtender.module.css";
 
 export const metadata: Metadata = {
-  title: "Budtender Or Manager Application | After Dark Cannabis",
+  title: { absolute: "Budtender Or Manager Application | After Dark Cannabis" },
   description:
     "Apply online for budtender or manager opportunities at After Dark Cannabis in York. Submit availability, experience, motivation, determination, and customer-service answers.",
   alternates: {

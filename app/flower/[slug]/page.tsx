@@ -59,7 +59,6 @@ function getJsonLd(flower: FlowerProduct) {
     "@type": "Offer",
     url: `https://afterdarkcannabis.com/flower/${flower.slug}`,
     priceCurrency: "CAD",
-    availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
     seller: { "@type": "Organization", name: "After Dark Cannabis" },
     hasMerchantReturnPolicy: {

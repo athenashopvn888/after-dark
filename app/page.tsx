@@ -290,7 +290,7 @@ export default function HomePage() {
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Featured Strains</h2>
             <p className={styles.sectionSubtitle}>
-              Staff picks and top sellers dynamically updated from our real-time stock sheet.
+              Featured menu listings organized for quick browsing.
             </p>
           </div>
 
@@ -308,15 +308,15 @@ export default function HomePage() {
       <section className={styles.seoSection}>
         <div className={styles.container}>
           <div className={styles.seoPanel}>
-            <h2 className={styles.seoPanelTitle}>Jane Street's Premier After-Hours Dispensary</h2>
+            <h2 className={styles.seoPanelTitle}>After-Hours Cannabis on Jane Street</h2>
             <p className={styles.seoPanelText}>
-              Welcome to <strong>After Dark Cannabis</strong>, your premier after-hours cannabis destination on Jane Street in York. When the sun goes down, we come alive — offering an electrifying selection of top-shelf strains, from ultra-rare exotics to solid everyday budget picks.
+              Welcome to <strong>After Dark Cannabis</strong>, an after-hours cannabis store on Jane Street in York. Browse flower tiers alongside pre-rolls, edibles, vapes, concentrates, and everyday menu categories.
             </p>
             <p className={styles.seoPanelText}>
-              Open 24 hours, After Dark Cannabis is the night owl's paradise. Our live menu is constantly refreshed with the freshest drops, premium prerolls, artisan edibles, and everything in betweeen. Whether you're winding down after a late shift or kicking off a legendary night out, our knowledgeable staff is here to light your way. The night is young — that's the After Dark promise.
+              After Dark Cannabis is open 24 hours for walk-in shopping. Use the site to compare flower tiers, pre-rolls, edibles, vapes, concentrates, cigarettes, accessories, and the item details shown in each category.
             </p>
             <p className={styles.seoPanelText}>
-              Searching for a dispensary near Jane Street, Weston, or Mount Dennis that's open late? After Dark Cannabis is your 24-hour destination for premium flower, potent prerolls, and artisan edibles. Our six-tier pricing system means quality cannabis at every budget level.
+              Shoppers near Jane Street, Weston, and Mount Dennis can use the store page for visit information, then move into the menu category that matches the trip.
             </p>
           </div>
         </div>

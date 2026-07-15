@@ -56,7 +56,6 @@ function getJsonLd(item: ItemProduct) {
     "@type": "Offer",
     url: `https://afterdarkcannabis.com/item/${item.slug}`,
     priceCurrency: "CAD",
-    availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
     seller: { "@type": "Organization", name: "After Dark Cannabis" },
     hasMerchantReturnPolicy: {
