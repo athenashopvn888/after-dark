@@ -1,264 +1,737 @@
-export interface ResourceCard {
-  title: string;
+export type ResourceAuthorKey = "team" | "menu" | "local";
+
+export interface ResourceAuthor {
+  name: string;
+  handle: string;
+  role: string;
+}
+
+export interface ResourceLink {
+  label: string;
   href: string;
-  text: string;
+  description?: string;
 }
 
 export interface ResourceSection {
   heading: string;
-  body: string;
+  body: string[];
   bullets?: string[];
+  links?: ResourceLink[];
 }
 
 export interface ResourcePage {
-  slug: string;
+  path: string;
+  kind: "root" | "category" | "article";
+  parent?: string;
+  categoryLabel: string;
   title: string;
   seoTitle: string;
-  description: string;
-  eyebrow: string;
-  intro: string;
-  cards: ResourceCard[];
+  metaDescription: string;
+  h1: string;
+  excerpt: string;
+  primaryKeyword: string;
+  supportingKeywords: string[];
+  searchIntent: string;
+  author: ResourceAuthorKey;
+  datePublished: string;
+  dateModified: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  intro: string[];
   sections: ResourceSection[];
+  commercialLinks: ResourceLink[];
+  related: string[];
 }
+
+export const SITE = {
+  name: "After Dark Cannabis",
+  domain: "afterdarkcannabis.com",
+  baseUrl: "https://afterdarkcannabis.com",
+  storePage: "/weed-dispensary-york",
+  address: "1664 Jane St, York, ON M9N 2S1",
+  phone: "(647) 350-0420",
+  hours: "Open 24 hours",
+};
+
+export const AUTHORS: Record<ResourceAuthorKey, ResourceAuthor> = {
+  team: {
+    name: "After Dark Cannabis Team",
+    handle: "@AfterDarkCannabis",
+    role: "Store Team",
+  },
+  menu: {
+    name: "After Dark Menu Desk",
+    handle: "@AfterDarkMenu",
+    role: "Menu Guide",
+  },
+  local: {
+    name: "Jane Street Desk",
+    handle: "@JaneStreetAfterDark",
+    role: "Local Guide",
+  },
+};
+
+export const updated = "2026-07-15";
 
 export const RESOURCE_PAGES: ResourcePage[] = [
   {
-    slug: "",
-    title: "After Dark Cannabis Resources",
-    seoTitle: "After Dark Cannabis Resources | Jane Street / York Menu And Visit Guides",
-    description: "After Dark Cannabis resource pages for Jane Street / York shoppers, with local visit planning, menu shortcuts, flower tier pricing, value shopping, pre-roll tips, and Native smokes prices.",
-    eyebrow: "Jane Street Resource Hub",
-    intro: "A practical resource hub for late-night Jane Street and York shoppers. Use it to move from local search intent to the right menu shelf: flower, pre-rolls, edibles, THC vapes, concentrates, accessories, cigarettes, Native smokes, Backwoods, and grabba.",
-    cards: [
-      { title: "Local Visit Guide", href: "/resources/jane-street-york-visit-guide", text: "Plan the stop around Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive." },
-      { title: "Menu Guide", href: "/resources/menu-guide", text: "Choose the best category before jumping into product pages." },
-      { title: "Flower Tier Guide", href: "/resources/flower-guide", text: "Compare Exotic, Premium, AAA+, AA, and Budget with 3g and 6g deal math." },
-      { title: "Value Guide", href: "/resources/value-guide", text: "A cleaner path for cheap weed, budget weed, and affordable flower searches." },
-      { title: "Native Smokes Prices", href: "/resources/native-smokes", text: "Brand and price notes for cigarettes, Backwoods, grabba, and pouch listings." }
+    path: "/resources",
+    kind: "root",
+    categoryLabel: "Resource Centre",
+    title: "After Dark Cannabis Resource Centre",
+    seoTitle: "After Dark Cannabis Resources | Jane Street Cannabis Guides",
+    metaDescription:
+      "After Dark Cannabis resources for Jane Street and York shoppers, including Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, vapes, edibles, pre-rolls, flower, and local visit guides.",
+    h1: "After Dark Cannabis Resource Centre",
+    excerpt:
+      "Jane Street guides for the full shelf: Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, vapes, edibles, pre-rolls, flower, value buys, and local store planning.",
+    primaryKeyword: "After Dark Cannabis resources",
+    supportingKeywords: [
+      "Jane Street cannabis guide",
+      "Gas Gang vapes York",
+      "Drizzle Switch 3 in 1",
+      "nicotine pouches York",
+      "Backwoods and grabba York",
+    ],
+    searchIntent: "Find After Dark Cannabis shopping guides and product-brand pages.",
+    author: "team",
+    datePublished: updated,
+    dateModified: updated,
+    image: {
+      src: "/banners/after_dark_edibles_prerolls_more_banner.webp",
+      alt: "After Dark Cannabis resource guides for Jane Street shoppers",
+    },
+    intro: [
+      "After Dark is not just a flower menu. The current shelf gives shoppers brand names and add-on categories worth searching by name: Gas Gang disposable vapes, Drizzle Switch 3-in-1, ZYN, Velo, Pablo, Killa, Backwoods, grabba, edibles, concentrates, accessories, cigarettes, pre-rolls, and flower tiers.",
+      "This hub turns those real menu terms into cleaner shopping sections. Use it when the trip starts with a product type, a brand name, a smoke-shop add-on, or a Jane Street/York local search.",
     ],
     sections: [
       {
-        heading: "Local Search, Useful Next Step",
-        body: "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. These resources support the protected store visit page, not replace it. Start with the local page for address and visit context, then use the resource guides for menu decisions.",
-        bullets: ["store visit page: /weed-dispensary-york", "Local areas: Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive", "Store hours shown in the site data: Open 24 Hours"]
+        heading: "Non-Flower Keywords Get Their Own Shelf",
+        body: [
+          "Gas Gang, Drizzle, nicotine pouches, Backwoods, and grabba deserve clear space in the shopping guide. They are current product names shoppers recognize, so this resource centre keeps those terms easy to find.",
+        ],
       },
       {
-        heading: "Built Around Real Menu Sections",
-        body: "The pages are organized around common shopper questions shoppers actually use: weed dispensary near Jane Street / York, cannabis store York, cheap weed, budget weed, pre-rolls, edibles, THC vapes, concentrates, Native cigarettes, Backwoods, and grabba."
-      }
+        heading: "Monthly Menu Language Can Stay Fresh",
+        body: [
+          "This copy is written from the current product data. When a monthly menu pass removes or adds brands, the resource pages can move with it so the site keeps talking like the shelf shoppers actually see.",
+        ],
+      },
+    ],
+    commercialLinks: [
+      { label: "View the Jane Street store page", href: SITE.storePage },
+      { label: "Shop Gas Gang and Drizzle vapes", href: "/items/vape-disposables" },
+      { label: "Shop nicotine pouches and smokes", href: "/items/cigarettes" },
+      { label: "Browse edibles", href: "/items/edibles" },
+    ],
+    related: [
+      "/resources/brand-guides/gas-gang-drizzle-vapes",
+      "/resources/nicotine-pouches",
+      "/resources/native-smokes/backwoods-grabba-guide",
     ],
   },
   {
-    slug: "jane-street-york-visit-guide",
-    title: "Jane Street And York Weed Dispensary Visit Guide",
-    seoTitle: "Jane Street And York Weed Dispensary Visit Guide | After Dark Cannabis",
-    description: "Local visit planning for After Dark Cannabis at 1664 Jane St, with Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive context, menu shortcuts, hours, and category paths.",
-    eyebrow: "Visit Guide",
-    intro: "Use this page when the search starts local: weed dispensary near Jane Street / York, cannabis store near 1664 Jane St, or a quick menu check before visiting from Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive.",
-    cards: [
-      { title: "Store Visit Page", href: "/weed-dispensary-york", text: "Use the main store visit page for address, directions, hours, and store details." },
-      { title: "Menu Guide", href: "/resources/menu-guide", text: "Choose the product section before opening deep menu pages." },
-      { title: "Value Guide", href: "/resources/value-guide", text: "Fast help for affordable flower and budget weed searches." }
+    path: "/resources/cannabis-101",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Cannabis 101",
+    title: "Cannabis 101 Guides",
+    seoTitle: "Cannabis 101 Guides | After Dark Cannabis",
+    metaDescription:
+      "Cannabis 101 guides from After Dark Cannabis for reading flower, pre-roll, edible, vape, concentrate, cigarette, and accessory menu sections.",
+    h1: "Cannabis 101: Pick the Section Before the Product",
+    excerpt:
+      "Start with the shelf: flower, pre-rolls, edibles, vapes, concentrates, cigarettes, pouches, grabba, Backwoods, or accessories.",
+    primaryKeyword: "cannabis menu guide York",
+    supportingKeywords: ["cannabis 101 Jane Street", "After Dark Cannabis menu", "cannabis product categories"],
+    searchIntent: "Understand how to browse the current menu by product type.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/after_dark_welcome_banner.webp", alt: "After Dark Cannabis menu guide" },
+    intro: [
+      "A good menu read starts with format. A Gas Gang disposable vape, a Drizzle Switch, a Backwoods pack, a pouch tin, and a flower eighth do not belong in the same comparison.",
     ],
     sections: [
       {
-        heading: "Address Anchor",
-        body: "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. Keep that address as the local anchor, then use the resource pages to decide whether the trip is about flower, pre-rolls, edibles, THC vapes, concentrates, accessories, or cigarettes."
+        heading: "Use Format First",
+        body: [
+          "The fastest path is simple: choose flower, pre-rolls, edibles, vapes, concentrates, cigarettes, accessories, or magic/specialty items, then compare the product names inside that section.",
+        ],
+        links: [
+          { label: "Read the menu guide", href: "/resources/menu-guide" },
+          { label: "Open the store page", href: SITE.storePage },
+        ],
       },
-      {
-        heading: "Neighborhood Shopping Notes",
-        body: "Jane Street moves a mix of Weston, Mount Dennis, Keelesdale, Eglinton West, and Black Creek shoppers, so the resource pages keep the path simple for quick stops and value searches.",
-        bullets: ["Jane Street cannabis store shopping note", "Weston cannabis store shopping note", "Mount Dennis cannabis store shopping note", "Keelesdale cannabis store shopping note", "Eglinton West cannabis store shopping note", "York cannabis store shopping note", "Black Creek cannabis store shopping note", "Trethewey Drive cannabis store shopping note"]
-      },
-      {
-        heading: "Best First Click",
-        body: "If you need store details, start with /weed-dispensary-york. If you are comparing product types, start with the menu guide. If the trip is about Native smokes or cigarettes, start with the Native smokes page and then confirm the current category page."
-      }
     ],
+    commercialLinks: [
+      { label: "Browse flower tiers", href: "/resources/flower-guides" },
+      { label: "Browse non-flower guides", href: "/resources/brand-guides" },
+    ],
+    related: ["/resources/menu-guide", "/resources/value-guides", "/resources/vape-guides"],
   },
   {
-    slug: "menu-guide",
+    path: "/resources/menu-guide",
+    kind: "article",
+    parent: "/resources/cannabis-101",
+    categoryLabel: "Menu Guide",
     title: "After Dark Cannabis Menu Guide",
-    seoTitle: "After Dark Cannabis Menu Guide | Flower, Pre-Rolls, Edibles, Vapes And Cigarettes",
-    description: "A category-guided menu guide for After Dark Cannabis, covering flower tiers, pre-rolls, edibles, THC vapes, concentrates, accessories, cigarettes, and Native smokes.",
-    eyebrow: "Menu Guide",
-    intro: "The menu gets easier when you choose the section first. Flower has tier math. Pre-rolls have format details. Edibles, THC vapes, concentrates, and accessories need category notes. Cigarettes need brand and price checks.",
-    cards: [
-      { title: "Flower Tiers", href: "/resources/flower-guide", text: "Start here for Exotic, Premium, AAA+, AA, and Budget flower." },
-      { title: "Pre-Rolls", href: "/resources/pre-roll-guide", text: "Use this for ready-to-smoke singles, packs, and quick-trip browsing." },
-      { title: "Cigarettes", href: "/items/cigarettes", text: "Open the cigarette category for current Native smokes listings." },
-      { title: "Store Visit Page", href: "/weed-dispensary-york", text: "Return to the store visit page." }
+    seoTitle: "After Dark Cannabis Menu Guide | Vapes, Edibles, Smokes, Flower",
+    metaDescription:
+      "A practical After Dark Cannabis menu guide covering Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, edibles, vapes, pre-rolls, concentrates, flower, and cigarettes.",
+    h1: "After Dark Menu Guide: Flower Is Only One Section",
+    excerpt:
+      "Read the After Dark menu by shelf, then use brand names like Gas Gang, Drizzle, Velo, Pablo, Killa, Backwoods, and grabba to narrow the trip.",
+    primaryKeyword: "After Dark Cannabis menu guide",
+    supportingKeywords: ["Gas Gang menu", "Drizzle vape menu", "nicotine pouches menu", "Backwoods grabba menu"],
+    searchIntent: "Navigate the current After Dark Cannabis menu by category and brand.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/after_dark_edibles_prerolls_more_banner.webp", alt: "After Dark Cannabis menu shelves" },
+    intro: [
+      "The best menu move is to choose the shelf first. Flower has tier math. Pre-rolls are quick-trip products. Edibles and concentrates need package detail. Vapes carry recognizable product names like Gas Gang and Drizzle. Cigarettes and pouches have their own smoke-shop language.",
     ],
     sections: [
       {
-        heading: "Pick The Shelf First",
-        body: "For late-night Jane Street and York shoppers, the best menu section is simple: flower shoppers compare tiers, pre-roll shoppers compare format, edible and vape shoppers read listing details, and cigarette shoppers compare brand, full/light/menthol style, and price.",
-        bullets: ["Flower, pre-rolls, edibles, THC vapes, concentrates, accessories, and cigarettes are easiest to compare separately.", "Use current category pages for live product details.", "Use resources for shopping details and local planning."]
+        heading: "Current Non-Flower Names Worth Searching",
+        body: [
+          "The current menu data includes Gas Gang Dispo Vape 1G, 2g Gas Gang Vol.3 Hybrid, Drizzle Switch 3in1 / 2G, ZYN nicotine pouches, nicotine pouches with Velo, Pablo, and Killa, Backwoods assorted flavors, new Backwoods flavors, grabba, and grabba shaker.",
+        ],
       },
       {
-        heading: "Local Shopping Notes Without The Mess",
-        body: "This page helps shoppers like weed dispensary near Jane Street / York, cannabis store York, cheap weed near me, Native cigarettes, and THC vape menu while keeping the actual shopping trip clear."
-      }
+        heading: "Keep Each Shelf Clean",
+        body: [
+          "Do not compare a pouch price to an edible price or a disposable vape to a flower tier. The shopper wins when every category has a clean next click.",
+        ],
+      },
+    ],
+    commercialLinks: [
+      { label: "Vape disposables", href: "/items/vape-disposables" },
+      { label: "Cigarettes and pouches", href: "/items/cigarettes" },
+      { label: "Edibles", href: "/items/edibles" },
+      { label: "Pre-rolls", href: "/items/prerolls" },
+    ],
+    related: [
+      "/resources/brand-guides/gas-gang-drizzle-vapes",
+      "/resources/nicotine-pouches",
+      "/resources/pre-roll-guides",
     ],
   },
   {
-    slug: "flower-guide",
-    title: "After Dark Cannabis Flower Tier And 6g Price Guide",
-    seoTitle: "After Dark Cannabis Flower Tier Guide | Exotic, Premium, AAA+, AA And Budget",
-    description: "Compare After Dark Cannabis flower tiers with posted per-gram prices, 3g specials, 6g deal math, Budget flower, AA flower, AAA+, Premium, and Exotic.",
-    eyebrow: "Flower Tiers",
-    intro: "Here is the clean flower read: Exotic is posted at $20/g, Premium at $15/g, AAA+ at $10/g, AA at $4/g, and Budget at $3/g. Where the 6g tier deal applies, shoppers can compare Exotic around $60 for 6g, Premium around $45 for 6g, and AAA+ around $30 for 6g.",
-    cards: [
-      { title: "Exotic Flower", href: "/exotic", text: "$20/g, with 3g and 6g deal logic where listed." },
-      { title: "Premium Flower", href: "/premium", text: "$15/g, with 3g and 6g deal logic where listed." },
-      { title: "AAA+ Flower", href: "/aaa", text: "$10/g, with 3g and 6g deal logic where listed." },
-      { title: "AA Flower", href: "/aa", text: "$4/g for a direct value lane." },
-      { title: "Budget Flower", href: "/budget", text: "$3/g, with a $10 / 3g special where listed." }
+    path: "/resources/brand-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Brand Guides",
+    title: "Brand and Product Guides",
+    seoTitle: "Brand Guides | Gas Gang, Drizzle, Nicotine Pouches | After Dark Cannabis",
+    metaDescription:
+      "After Dark Cannabis brand guides for Gas Gang, Drizzle, nicotine pouches, Backwoods, grabba, and other non-flower products from the current menu.",
+    h1: "Brand Guides for the Non-Flower Shelf",
+    excerpt:
+      "Gas Gang, Drizzle, nicotine pouches, Backwoods, and grabba get treated like real shopper keywords.",
+    primaryKeyword: "After Dark Cannabis brand guides",
+    supportingKeywords: ["Gas Gang York", "Drizzle vape York", "Backwoods York", "grabba York"],
+    searchIntent: "Find current brand and product-name guides.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/02_Vape_Disposable.webp", alt: "After Dark vape and product brand guide" },
+    intro: [
+      "Some shoppers do not start with a category. They start with a name. This section is for the terms currently showing in the menu data, especially Gas Gang, Drizzle, pouches, Backwoods, and grabba.",
     ],
     sections: [
       {
-        heading: "Why The 6g Line Matters",
-        body: "A straight per-gram price does not always tell the whole shelf story. The top flower lanes can show 3g and 6g deal logic, so a shopper comparing Exotic, Premium, and AAA+ should read the bundle line before judging value.",
-        bullets: ["Exotic: $20/g, 3g for $40 or 6g around $60 where listed.", "Premium: $15/g, 3g for $30 or 6g around $45 where listed.", "AAA+: $10/g, 3g for $20 or 6g around $30 where listed."]
+        heading: "Brand Terms Belong in the Site Vocabulary",
+        body: [
+          "If a shopper searches the product name, the site should have a clean place to answer. These pages add that without pretending every product is flower content.",
+        ],
       },
-      {
-        heading: "Budget And AA Keep It Simple",
-        body: "For cheap weed and budget weed searches, Budget at $3/g and AA at $4/g are the simplest lanes to compare. The final product name, strain note, and availability should still be checked on the current tier page."
-      }
     ],
+    commercialLinks: [
+      { label: "Gas Gang and Drizzle guide", href: "/resources/brand-guides/gas-gang-drizzle-vapes" },
+      { label: "Backwoods and grabba guide", href: "/resources/native-smokes/backwoods-grabba-guide" },
+      { label: "Nicotine pouches guide", href: "/resources/nicotine-pouches" },
+    ],
+    related: ["/resources/vape-guides", "/resources/native-smokes", "/resources/menu-guide"],
   },
   {
-    slug: "value-guide",
-    title: "After Dark Cannabis Value Weed Guide",
-    seoTitle: "After Dark Cannabis Value Weed Guide | Cheap Weed Near Jane Street / York",
-    description: "A value shopping guide for After Dark Cannabis, covering cheap weed, budget weed, AA flower, AAA+ deals, 6g tier math, and affordable menu sections.",
-    eyebrow: "Value Guide",
-    intro: "For Jane Street value shopping, value shopping works best when the shelf is clear. Start with Budget, AA, and AAA+ before jumping into higher tiers or mixed categories.",
-    cards: [
-      { title: "Budget Flower", href: "/budget", text: "$3/g for the lowest posted flower lane." },
-      { title: "AA Flower", href: "/aa", text: "$4/g for a simple low-spend lane." },
-      { title: "AAA+ Flower", href: "/aaa", text: "$10/g, 3g for $20, or 6g around $30 where listed." },
-      { title: "Native Smokes Prices", href: "/resources/native-smokes", text: "Use this if cigarettes or Backwoods are part of the same stop." }
+    path: "/resources/brand-guides/gas-gang-drizzle-vapes",
+    kind: "article",
+    parent: "/resources/brand-guides",
+    categoryLabel: "Vape Brands",
+    title: "Gas Gang and Drizzle Vape Guide",
+    seoTitle: "Gas Gang and Drizzle Vapes | After Dark Cannabis Jane Street",
+    metaDescription:
+      "After Dark Cannabis guide for Gas Gang Dispo Vape 1G, 2g Gas Gang Vol.3 Hybrid, and Drizzle Switch 3in1 / 2G from the current vape disposable shelf.",
+    h1: "Gas Gang and Drizzle Vapes at After Dark",
+    excerpt:
+      "Gas Gang Dispo Vape 1G, 2g Gas Gang Vol.3 Hybrid, and Drizzle Switch 3in1 / 2G are current vape-name keywords worth a clear page.",
+    primaryKeyword: "Gas Gang vapes York",
+    supportingKeywords: ["Drizzle Switch 3in1 2G", "Gas Gang disposable vape", "After Dark vape disposables"],
+    searchIntent: "Compare named vape disposable products at After Dark Cannabis.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/02_Vape_Disposable.webp", alt: "Gas Gang and Drizzle vape guide" },
+    intro: [
+      "The current vape disposable shelf includes Gas Gang Dispo Vape 1G, 2g Gas Gang Vol.3 Hybrid, and Drizzle Switch 3in1 / 2G. That gives the site a strong non-flower keyword section for vape shoppers on Jane Street.",
     ],
     sections: [
       {
-        heading: "Start With Budget, Then Move Up",
-        body: "If the search is cheap weed, budget weed, or affordable cannabis near Jane Street / York, start with Budget and AA. If the trip can stretch a little, AAA+ gives shoppers another value lane with 3g and 6g deal logic."
+        heading: "Current Listed Vape Names",
+        body: [
+          "Gas Gang Dispo Vape 1G is listed at $45. 2g Gas Gang Vol.3 Hybrid is listed at $50. Drizzle Switch 3in1 / 2G is listed at $50.",
+        ],
+        bullets: [
+          "Gas Gang Dispo Vape 1G - $45",
+          "2g Gas Gang Vol.3 Hybrid - $50",
+          "Drizzle Switch 3in1 / 2G - $50",
+        ],
       },
       {
-        heading: "Compare Inside The Category",
-        body: "Value means something different for flower, pre-rolls, edibles, THC vapes, concentrates, accessories, and cigarettes. Keep each comparison inside the best category so the decision does not get muddy."
-      }
+        heading: "Why This Page Exists",
+        body: [
+          "These are product-name searches, not broad flower searches. A dedicated guide gives Gas Gang and Drizzle a stronger landing path while still pointing shoppers back to the current vape disposable category.",
+        ],
+      },
     ],
+    commercialLinks: [{ label: "Shop vape disposables", href: "/items/vape-disposables" }],
+    related: ["/resources/vape-guides", "/resources/menu-guide", "/resources/value-guides"],
   },
   {
-    slug: "pre-roll-guide",
-    title: "After Dark Cannabis Pre-Roll And Quick Trip Guide",
-    seoTitle: "After Dark Cannabis Pre-Roll Guide | Ready-To-Smoke Menu Tips",
-    description: "A pre-roll guide for After Dark Cannabis, with quick-trip tips for ready-to-smoke options, flower cross-shopping, edibles, vapes, concentrates, and accessories.",
-    eyebrow: "Pre-Roll Guide",
-    intro: "Pre-roll shoppers usually want a faster path than loose flower shoppers. Use this page when the goal is ready-to-smoke options, a quick stop, or a small add-on beside another category.",
-    cards: [
-      { title: "Pre-Rolls", href: "/items/prerolls", text: "Open the current pre-roll category." },
-      { title: "Flower Tiers", href: "/resources/flower-guide", text: "Switch here if the visit turns into loose flower." },
-      { title: "Menu Guide", href: "/resources/menu-guide", text: "Use this if the stop includes edibles, vapes, concentrates, or accessories." }
+    path: "/resources/vape-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Vape Guides",
+    title: "THC Vape and Disposable Guides",
+    seoTitle: "THC Vape Guides | Gas Gang and Drizzle | After Dark Cannabis",
+    metaDescription:
+      "After Dark Cannabis vape guides for THC vapes, disposable vapes, Gas Gang, Drizzle, vape pens, and current menu navigation.",
+    h1: "Vape Guides: Disposable Names Need Their Own Section",
+    excerpt:
+      "Use this section for THC vapes, vape disposables, Gas Gang, Drizzle, and format-first menu browsing.",
+    primaryKeyword: "THC vapes York",
+    supportingKeywords: ["vape disposables York", "Gas Gang vape", "Drizzle vape", "After Dark vapes"],
+    searchIntent: "Compare vape formats and named disposable products.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/01_Vape_Pens.webp", alt: "After Dark THC vape guide" },
+    intro: [
+      "Vape shoppers usually search by format or brand name. After Dark's resource section covers both: THC vape browsing plus named disposable products like Gas Gang and Drizzle.",
     ],
     sections: [
       {
-        heading: "Keep Pre-Rolls In Their Own Lane",
-        body: "Pre-rolls should be compared by format, pack size, posted notes, and current price. Do not force loose-flower tier logic onto pre-roll shopping unless the visit actually changes categories."
+        heading: "Vape Pen vs Disposable Search",
+        body: [
+          "Vape pens and disposable vapes are easier to shop when they are separated. Gas Gang and Drizzle shoppers get a faster read when those names sit close to the vape disposable shelf.",
+        ],
       },
-      {
-        heading: "Useful For Local Quick Stops",
-        body: "For late-night Jane Street and York shoppers, pre-rolls can be the fastest shelf to check before heading through Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive. Use the current category page for live details."
-      }
     ],
+    commercialLinks: [
+      { label: "Vape pens", href: "/items/vapes" },
+      { label: "Vape disposables", href: "/items/vape-disposables" },
+    ],
+    related: ["/resources/brand-guides/gas-gang-drizzle-vapes", "/resources/menu-guide"],
   },
   {
-    slug: "native-smokes",
-    title: "After Dark Cannabis Native Smokes Price Guide",
-    seoTitle: "After Dark Cannabis Native Smokes Prices | Cigarettes, Backwoods And Grabba",
-    description: "After Dark Cannabis Native smokes resource with cigarette brands and listed prices for Canadian, Putters, Canadian Goose, Nexus, Time, Backwoods, grabba, pouches, and mixed smoke items where shown.",
-    eyebrow: "Native Smokes",
-    intro: "This page gives cigarette shoppers a real starting point instead of a vague category page. Use it for Native cigarettes, Canadian brands, Backwoods, grabba, nicotine pouches, and mixed smoke item price checks at After Dark Cannabis.",
-    cards: [
-      { title: "$25 Cigarette Brands", href: "/items/cigarettes", text: "The cigarette category lists CANADIAN LIGHTS, CANADIAN FULL, PUTTERS, CANADIAN GOOSE FULL, CANADIAN GOOSE LIGHTS, CANADIAN MENTHOL, CANADIAN CLASSICS ORIGINAL, CANADIAN CLASSICS SILVER, ROLLED GOLD LIGHTS, NEXUS FULL, NEXUS LIGHTS, TIME FULL at $25 where shown." },
-      { title: "Backwoods And Grabba", href: "/items/cigarettes", text: "NICOTINE POUCHES , VELO, PABLO, KILLA at $20; GRABBA at $5; GRABBA SHAKER *RedRose / Red Herring* at $19; BACKWOODS ASSORTED FLAVORS $20-$25 at $20; NEW BACKWOODS FLAVORS at $25" },
-      { title: "Native Cigarettes Guide", href: "/resources/native-smokes/native-cigarettes-guide", text: "A fuller brand and price breakdown for cigarette shoppers." }
+    path: "/resources/nicotine-pouches",
+    kind: "article",
+    parent: "/resources/native-smokes",
+    categoryLabel: "Nicotine Pouches",
+    title: "Nicotine Pouches Guide",
+    seoTitle: "Nicotine Pouches, ZYN, Velo, Pablo, Killa | After Dark Cannabis",
+    metaDescription:
+      "After Dark Cannabis nicotine pouch guide for ZYN and nicotine pouches with Velo, Pablo, and Killa from the current cigarette category.",
+    h1: "Nicotine Pouches: ZYN, Velo, Pablo, Killa",
+    excerpt:
+      "A current smoke-shelf guide for ZYN nicotine pouches and nicotine pouches listed with Velo, Pablo, and Killa.",
+    primaryKeyword: "nicotine pouches York",
+    supportingKeywords: ["ZYN nicotine pouches", "Velo Pablo Killa pouches", "After Dark nicotine pouches"],
+    searchIntent: "Find current nicotine pouch product names and category links.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/06_Cigarettes.webp", alt: "After Dark nicotine pouches guide" },
+    intro: [
+      "After Dark's current cigarette category includes ZYN nicotine pouches and a nicotine pouch listing naming Velo, Pablo, and Killa. Those names deserve their own guide because pouch shoppers search differently than flower shoppers.",
     ],
     sections: [
       {
-        heading: "$25 Cigarette Brand List",
-        body: "The cigarette category lists CANADIAN LIGHTS, CANADIAN FULL, PUTTERS, CANADIAN GOOSE FULL, CANADIAN GOOSE LIGHTS, CANADIAN MENTHOL, CANADIAN CLASSICS ORIGINAL, CANADIAN CLASSICS SILVER, ROLLED GOLD LIGHTS, NEXUS FULL, NEXUS LIGHTS, TIME FULL at $25 where shown.",
-        bullets: ["CANADIAN LIGHTS - $25", "CANADIAN FULL - $25", "PUTTERS - $25", "CANADIAN GOOSE FULL - $25", "CANADIAN GOOSE LIGHTS - $25", "CANADIAN MENTHOL - $25", "CANADIAN CLASSICS ORIGINAL - $25", "CANADIAN CLASSICS SILVER - $25", "ROLLED GOLD LIGHTS - $25", "NEXUS FULL - $25", "NEXUS LIGHTS - $25", "TIME FULL - $25"]
+        heading: "Current Listed Pouch Names",
+        body: [
+          "The product data lists ZYN nicotine pouches and nicotine pouches with Velo, Pablo, and Killa at $20.",
+        ],
+        bullets: ["ZYN nicotine pouches", "Nicotine pouches, Velo, Pablo, Killa - $20"],
       },
       {
-        heading: "Backwoods, Grabba, Pouches, And Mix Items",
-        body: "NICOTINE POUCHES , VELO, PABLO, KILLA at $20; GRABBA at $5; GRABBA SHAKER *RedRose / Red Herring* at $19; BACKWOODS ASSORTED FLAVORS $20-$25 at $20; NEW BACKWOODS FLAVORS at $25"
+        heading: "Keep Pouches Out of the Cannabis Comparison",
+        body: [
+          "Pouches live on the smoke-shop side of the visit. They should link to the cigarette category, not get blended into flower, pre-roll, edible, or vape copy.",
+        ],
       },
-      {
-        heading: "Confirm The Current Shelf",
-        body: "Cigarette inventory, flavors, and brand mix can change. Use the cigarette category for the current public list, then confirm in store when one exact brand, full/light/menthol style, pouch, grabba, or Backwoods flavor matters."
-      }
     ],
+    commercialLinks: [{ label: "Shop cigarettes and pouches", href: "/items/cigarettes" }],
+    related: ["/resources/native-smokes", "/resources/native-smokes/backwoods-grabba-guide"],
   },
   {
-    slug: "native-smokes/native-cigarettes-guide",
-    title: "After Dark Cannabis Native Cigarettes Brand Guide",
-    seoTitle: "After Dark Cannabis Native Cigarettes Guide | Brand And Price List",
-    description: "A detailed Native cigarettes brand guide for After Dark Cannabis, including $25 cigarette listings and smoke add-on prices where shown.",
-    eyebrow: "Native Cigarettes",
-    intro: "If the trip includes cigarettes, start with brand and price first. This guide keeps Native cigarettes, Backwoods, grabba, pouches, and mixed smoke items separate from flower, pre-rolls, edibles, THC vapes, and concentrates.",
-    cards: [
-      { title: "Cigarette Category", href: "/items/cigarettes", text: "Open the current cigarette category." },
-      { title: "Native Smokes Overview", href: "/resources/native-smokes", text: "Return to the shorter price guide." },
-      { title: "Local Visit Guide", href: "/resources/jane-street-york-visit-guide", text: "Plan the store stop around the local area." }
+    path: "/resources/native-smokes",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Native Smokes",
+    title: "Native Smokes, Cigarettes, Pouches, Backwoods",
+    seoTitle: "Native Smokes, Cigarettes, Pouches, Backwoods | After Dark Cannabis",
+    metaDescription:
+      "After Dark Cannabis smoke-shelf guide for Native cigarettes, nicotine pouches, Backwoods, grabba, Canadian brands, Nexus, Time, Putters, and more.",
+    h1: "Native Smokes and Smoke-Shelf Guides",
+    excerpt:
+      "Cigarettes, pouches, Backwoods, grabba, and carton-brand searches get a cleaner section beside the cannabis menu.",
+    primaryKeyword: "native cigarettes York",
+    supportingKeywords: ["Backwoods York", "grabba York", "ZYN nicotine pouches", "Canadian cigarettes York"],
+    searchIntent: "Find smoke-shelf product names and category links.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/06_Cigarettes.webp", alt: "After Dark Native smokes and cigarettes guide" },
+    intro: [
+      "The smoke shelf is its own visit reason. After Dark's current data includes Canadian, Canadian Classics, Canadian Goose, Nexus, Putters, Time, Backwoods, grabba, ZYN, Velo, Pablo, and Killa terms.",
     ],
     sections: [
       {
-        heading: "Brand Names To Check",
-        body: "The cigarette category lists CANADIAN LIGHTS, CANADIAN FULL, PUTTERS, CANADIAN GOOSE FULL, CANADIAN GOOSE LIGHTS, CANADIAN MENTHOL, CANADIAN CLASSICS ORIGINAL, CANADIAN CLASSICS SILVER, ROLLED GOLD LIGHTS, NEXUS FULL, NEXUS LIGHTS, TIME FULL at $25 where shown.",
-        bullets: ["CANADIAN LIGHTS - $25", "CANADIAN FULL - $25", "PUTTERS - $25", "CANADIAN GOOSE FULL - $25", "CANADIAN GOOSE LIGHTS - $25", "CANADIAN MENTHOL - $25", "CANADIAN CLASSICS ORIGINAL - $25", "CANADIAN CLASSICS SILVER - $25", "ROLLED GOLD LIGHTS - $25", "NEXUS FULL - $25", "NEXUS LIGHTS - $25", "TIME FULL - $25"]
+        heading: "Current Cigarette and Smoke Terms",
+        body: [
+          "Cigarette shoppers may be looking for Canadian Lights, Canadian Full, Canadian Menthol, Canadian Classics, Canadian Goose, Nexus, Putters, Time, Backwoods, grabba, or nicotine pouches. This page keeps those terms visible and organized.",
+        ],
       },
-      {
-        heading: "Smoke Category Add-Ons",
-        body: "NICOTINE POUCHES , VELO, PABLO, KILLA at $20; GRABBA at $5; GRABBA SHAKER *RedRose / Red Herring* at $19; BACKWOODS ASSORTED FLAVORS $20-$25 at $20; NEW BACKWOODS FLAVORS at $25"
-      },
-      {
-        heading: "Separate The Smoke Shelf From Cannabis Shopping",
-        body: "When the same visit includes flower, pre-rolls, edibles, THC vapes, concentrates, or accessories, keep cigarettes as their own lane. It makes the category easier for both cannabis shoppers and Native smokes shoppers."
-      }
     ],
+    commercialLinks: [
+      { label: "Nicotine pouches guide", href: "/resources/nicotine-pouches" },
+      { label: "Backwoods and grabba guide", href: "/resources/native-smokes/backwoods-grabba-guide" },
+      { label: "Shop cigarettes and pouches", href: "/items/cigarettes" },
+    ],
+    related: ["/resources/nicotine-pouches", "/resources/native-smokes/backwoods-grabba-guide", "/resources/menu-guide"],
   },
   {
-    slug: "resource-centre-launch",
-    title: "After Dark Cannabis Resource Guide Refresh",
-    seoTitle: "After Dark Cannabis Resource Guide Refresh | Local Menu Guides",
-    description: "After Dark Cannabis resource guide refresh with local visit planning, menu guide pages, flower tier pricing, value shopping, pre-roll tips, and Native smokes prices.",
-    eyebrow: "Resource Update",
-    intro: "The resource centre has been rebuilt around real shopping trips: local visit planning, category-guided browsing, flower tier math, value shopping, pre-roll shortcuts, and cigarette price notes.",
-    cards: [
-      { title: "Resource Home", href: "/resources", text: "Start at the main resource hub." },
-      { title: "Local Visit Guide", href: "/resources/jane-street-york-visit-guide", text: "Plan around Jane Street, Weston, Mount Dennis, Keelesdale, Eglinton West, York, Black Creek, and Trethewey Drive." },
-      { title: "Flower Tier Guide", href: "/resources/flower-guide", text: "Review the 3g and 6g pricing logic." },
-      { title: "Native Smokes Prices", href: "/resources/native-smokes", text: "Check brand and price notes." }
+    path: "/resources/native-smokes/backwoods-grabba-guide",
+    kind: "article",
+    parent: "/resources/native-smokes",
+    categoryLabel: "Backwoods and Grabba",
+    title: "Backwoods and Grabba Guide",
+    seoTitle: "Backwoods and Grabba Guide | After Dark Cannabis Jane Street",
+    metaDescription:
+      "After Dark Cannabis guide for Backwoods assorted flavors, new Backwoods flavors, grabba, and grabba shaker from the current cigarette category.",
+    h1: "Backwoods and Grabba at After Dark",
+    excerpt:
+      "Backwoods assorted flavors, new Backwoods flavors, grabba, and grabba shaker get a direct smoke-shelf guide.",
+    primaryKeyword: "Backwoods and grabba York",
+    supportingKeywords: ["Backwoods Jane Street", "grabba York", "grabba shaker", "After Dark smoke shop"],
+    searchIntent: "Find current Backwoods and grabba names and prices.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/06_Cigarettes.webp", alt: "After Dark Backwoods and grabba guide" },
+    intro: [
+      "The current smoke shelf lists grabba at $5, grabba shaker at $19, Backwoods assorted flavors at $20, and new Backwoods flavors at $25.",
     ],
     sections: [
       {
-        heading: "What Changed",
-        body: "The resources now sound like After Dark Cannabis and Jane Street / York, not a copied store template. Each page supports a specific shopper task and points back to the best category or store visit page."
+        heading: "Current Listed Smoke Add-Ons",
+        body: [
+          "Backwoods and grabba shoppers usually search by product name. The cigarette category currently supports those names directly.",
+        ],
+        bullets: [
+          "Grabba - $5",
+          "Grabba Shaker RedRose / Red Herring - $19",
+          "Backwoods Assorted Flavors - $20",
+          "New Backwoods Flavors - $25",
+        ],
       },
-      {
-        heading: "What Stayed Protected",
-        body: "The important SEO paths stay intact: /weed-dispensary-york, /resources, /resources/menu-guide, /resources/flower-guide, /resources/value-guide, /resources/pre-roll-guide, /resources/native-smokes, and /resources/native-smokes/native-cigarettes-guide."
-      }
     ],
-  }
+    commercialLinks: [{ label: "Shop cigarettes and smoke add-ons", href: "/items/cigarettes" }],
+    related: ["/resources/native-smokes", "/resources/nicotine-pouches"],
+  },
+  {
+    path: "/resources/flower-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Flower Guides",
+    title: "Flower Tier Guides",
+    seoTitle: "After Dark Flower Guides | Exotic, Premium, AAA+, AA, Budget",
+    metaDescription:
+      "After Dark Cannabis flower guides for Exotic, Premium, AAA+, AA, Budget, value math, and Jane Street cannabis shoppers.",
+    h1: "Flower Guides: Keep the Tier Math Clean",
+    excerpt:
+      "Flower still matters. It just does not need to swallow the whole resource centre.",
+    primaryKeyword: "After Dark flower guide",
+    supportingKeywords: ["cheap weed Jane Street", "Budget flower York", "Exotic flower York"],
+    searchIntent: "Compare After Dark flower tiers and value sections.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/after_dark_exotics_banner.webp", alt: "After Dark flower guide" },
+    intro: [
+      "Flower shoppers can still start with Exotic, Premium, AAA+, AA, and Budget. This section keeps flower strong without burying vapes, edibles, pouches, Backwoods, or grabba.",
+    ],
+    sections: [
+      {
+        heading: "Tier First, Product Second",
+        body: [
+          "Start with the tier page that matches the spend, then compare product names and posted details inside the current menu.",
+        ],
+      },
+    ],
+    commercialLinks: [
+      { label: "Exotic flower", href: "/exotic" },
+      { label: "Premium flower", href: "/premium" },
+      { label: "AAA+ flower", href: "/aaa" },
+      { label: "AA flower", href: "/aa" },
+      { label: "Budget flower", href: "/budget" },
+    ],
+    related: ["/resources/value-guides", "/resources/menu-guide"],
+  },
+  {
+    path: "/resources/pre-roll-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Pre-Roll Guides",
+    title: "Pre-Roll Guides",
+    seoTitle: "After Dark Pre-Roll Guides | Jane Street Cannabis",
+    metaDescription:
+      "After Dark Cannabis pre-roll guides for quick-trip shoppers comparing pre-rolls, flower, vapes, edibles, and add-ons.",
+    h1: "Pre-Roll Guides for Quick Trips",
+    excerpt:
+      "Pre-rolls deserve their own quick-trip section beside flower, vapes, edibles, and smoke add-ons.",
+    primaryKeyword: "pre-rolls York",
+    supportingKeywords: ["After Dark pre-rolls", "Jane Street pre-rolls", "pre-roll menu guide"],
+    searchIntent: "Browse pre-roll shopping guidance.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/04_Pre_Rolls.webp", alt: "After Dark pre-roll guide" },
+    intro: ["Pre-roll shoppers usually want a fast path. Keep the pre-roll section separate from loose flower and from disposable vape searches."],
+    sections: [
+      {
+        heading: "Ready-To-Smoke Logic",
+        body: ["Compare pre-rolls by product name, format, pack count, and current category details before adding edibles, vapes, pouches, or cigarettes to the same visit."],
+      },
+    ],
+    commercialLinks: [{ label: "Shop pre-rolls", href: "/items/prerolls" }],
+    related: ["/resources/menu-guide", "/resources/flower-guides"],
+  },
+  {
+    path: "/resources/edibles-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Edibles Guides",
+    title: "Edibles Guides",
+    seoTitle: "After Dark Edibles Guides | Jane Street Cannabis",
+    metaDescription:
+      "After Dark Cannabis edibles guides for gummies, chocolates, drinks, package details, and current menu browsing.",
+    h1: "Edibles Guides: Read the Package Section",
+    excerpt:
+      "Edibles are their own shelf, with different product names and package details than flower or vapes.",
+    primaryKeyword: "edibles York",
+    supportingKeywords: ["After Dark edibles", "Jane Street edibles", "cannabis gummies York"],
+    searchIntent: "Browse edible product guidance.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/Edibles.webp", alt: "After Dark edibles guide" },
+    intro: ["The edibles section should talk about edible formats, package names, and current category browsing instead of borrowing flower language."],
+    sections: [
+      {
+        heading: "Format Beats Hype",
+        body: ["Gummies, chocolates, drinks, and other edibles ask shoppers to read package detail first. Keep that comparison separate from pre-rolls, vapes, concentrates, and cigarettes."],
+      },
+    ],
+    commercialLinks: [{ label: "Shop edibles", href: "/items/edibles" }],
+    related: ["/resources/menu-guide", "/resources/vape-guides"],
+  },
+  {
+    path: "/resources/concentrates-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Concentrates",
+    title: "Concentrates Guides",
+    seoTitle: "After Dark Concentrates Guides | Jane Street Cannabis",
+    metaDescription:
+      "After Dark Cannabis concentrates guides for browsing extracts, concentrate formats, and current menu categories.",
+    h1: "Concentrates Guides: Small Shelf, Sharp Details",
+    excerpt:
+      "Concentrates get their own read instead of being folded into flower or vape copy.",
+    primaryKeyword: "concentrates York",
+    supportingKeywords: ["After Dark concentrates", "Jane Street concentrates", "cannabis extracts York"],
+    searchIntent: "Browse concentrate shopping guidance.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/03_Concentrates.webp", alt: "After Dark concentrates guide" },
+    intro: ["Concentrate shoppers are usually looking for a specific format or product type. A dedicated section makes those searches cleaner."],
+    sections: [
+      {
+        heading: "Do Not Mix Concentrates With Flower Tiers",
+        body: ["Flower tier terms do not explain concentrate products well. Keep concentrates in their own category path and use current product details for the final choice."],
+      },
+    ],
+    commercialLinks: [{ label: "Shop concentrates", href: "/items/concentrates" }],
+    related: ["/resources/vape-guides", "/resources/menu-guide"],
+  },
+  {
+    path: "/resources/value-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Value Guides",
+    title: "Value Guides",
+    seoTitle: "After Dark Value Guides | Cheap Weed and Smart Menu Math",
+    metaDescription:
+      "After Dark Cannabis value guides for Budget flower, AA flower, vape disposables, pouches, cigarettes, Backwoods, grabba, and current menu comparisons.",
+    h1: "Value Guides: Compare Inside the Right Shelf",
+    excerpt:
+      "Cheap weed, pouches, Backwoods, grabba, and vape disposables all have different value math.",
+    primaryKeyword: "cheap weed York",
+    supportingKeywords: ["budget flower Jane Street", "cheap native cigarettes York", "vape disposable prices York"],
+    searchIntent: "Compare value categories at After Dark Cannabis.",
+    author: "menu",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/after_dark_budget_banner.webp", alt: "After Dark value guide" },
+    intro: [
+      "Value should be compared inside the right shelf. Budget flower, Gas Gang disposables, Drizzle Switch, nicotine pouches, Backwoods, and grabba all need different price logic.",
+    ],
+    sections: [
+      {
+        heading: "Value Is Not One Category",
+        body: [
+          "A $3/g Budget flower section, a $45 Gas Gang disposable, a $50 Drizzle Switch, a $20 pouch listing, and a $5 grabba listing should all be visible, but not mashed into one comparison.",
+        ],
+      },
+    ],
+    commercialLinks: [
+      { label: "Budget flower", href: "/budget" },
+      { label: "Vape disposables", href: "/items/vape-disposables" },
+      { label: "Cigarettes and pouches", href: "/items/cigarettes" },
+    ],
+    related: ["/resources/brand-guides/gas-gang-drizzle-vapes", "/resources/nicotine-pouches"],
+  },
+  {
+    path: "/resources/local-guides",
+    kind: "category",
+    parent: "/resources",
+    categoryLabel: "Local Guides",
+    title: "Jane Street and York Local Guides",
+    seoTitle: "Jane Street and York Cannabis Guides | After Dark Cannabis",
+    metaDescription:
+      "After Dark Cannabis local guides for Jane Street, York, Weston, Mount Dennis, Keelesdale, Eglinton West, Black Creek, and Trethewey Drive shoppers.",
+    h1: "Jane Street and York Local Guides",
+    excerpt:
+      "Local search pages for shoppers who start with the area, then need the right product section.",
+    primaryKeyword: "weed dispensary Jane Street",
+    supportingKeywords: ["weed dispensary York", "cannabis store Weston", "cannabis near Mount Dennis"],
+    searchIntent: "Find local After Dark Cannabis visit information.",
+    author: "local",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/after_dark_welcome_banner.webp", alt: "After Dark Cannabis Jane Street local guide" },
+    intro: [
+      "Jane Street, York, Weston, Mount Dennis, Keelesdale, Eglinton West, Black Creek, and Trethewey Drive searches need local context first, then product sections.",
+    ],
+    sections: [
+      {
+        heading: "Local First, Menu Second",
+        body: ["Use the store page for the local anchor, then jump into flower, pre-rolls, edibles, vapes, pouches, cigarettes, Backwoods, or grabba from the resource hub."],
+      },
+    ],
+    commercialLinks: [
+      { label: "Jane Street visit guide", href: "/resources/local-guides/jane-street-york-visit-guide" },
+      { label: "Store page", href: SITE.storePage },
+    ],
+    related: ["/resources/menu-guide", "/resources/value-guides"],
+  },
+  {
+    path: "/resources/local-guides/jane-street-york-visit-guide",
+    kind: "article",
+    parent: "/resources/local-guides",
+    categoryLabel: "Visit Guide",
+    title: "Jane Street and York Visit Guide",
+    seoTitle: "Jane Street and York Visit Guide | After Dark Cannabis",
+    metaDescription:
+      "Visit guide for After Dark Cannabis at 1664 Jane St in York, with local menu links for flower, vapes, edibles, pouches, cigarettes, Backwoods, and grabba.",
+    h1: "Jane Street and York Visit Guide",
+    excerpt:
+      "Use the local page for the address, then choose the product section that fits the trip.",
+    primaryKeyword: "weed dispensary near Jane Street",
+    supportingKeywords: ["After Dark Cannabis York", "Jane Street cannabis store", "1664 Jane St cannabis"],
+    searchIntent: "Plan a local visit to After Dark Cannabis.",
+    author: "local",
+    datePublished: updated,
+    dateModified: updated,
+    image: { src: "/banners/after_dark_welcome_banner.webp", alt: "After Dark Cannabis local visit guide" },
+    intro: [
+      "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. Once the local stop is clear, the resource hub helps shoppers choose the product section: flower, pre-rolls, edibles, vapes, pouches, cigarettes, Backwoods, grabba, concentrates, or accessories.",
+    ],
+    sections: [
+      {
+        heading: "Nearby Search Language",
+        body: [
+          "The local language around this store includes Jane Street, York, Weston, Mount Dennis, Keelesdale, Eglinton West, Black Creek, and Trethewey Drive.",
+        ],
+      },
+    ],
+    commercialLinks: [
+      { label: "Store page", href: SITE.storePage },
+      { label: "Menu guide", href: "/resources/menu-guide" },
+    ],
+    related: ["/resources/local-guides", "/resources/menu-guide"],
+  },
 ];
 
 export const RESOURCE_HOME = RESOURCE_PAGES[0];
 
-export function getResourcePage(slug: string) {
-  const cleanSlug = slug.replace(/^\/+|\/+$/g, "");
-  return RESOURCE_PAGES.find((page) => page.slug === cleanSlug);
+export function normalizeResourcePath(path: string) {
+  const clean = path.trim().replace(/^\/+|\/+$/g, "");
+  return clean ? `/resources/${clean.replace(/^resources\/?/, "")}` : "/resources";
+}
+
+export function slugFromPath(path: string) {
+  return path.replace(/^\/resources\/?/, "");
+}
+
+export function getResourcePageBySlug(slug?: string[] | string) {
+  const slugPath = Array.isArray(slug) ? slug.join("/") : slug || "";
+  const path = normalizeResourcePath(slugPath);
+  return RESOURCE_PAGES.find((page) => page.path === path);
+}
+
+export function getStaticResourceParams() {
+  return RESOURCE_PAGES.filter((page) => page.path !== "/resources").map((page) => ({
+    slug: slugFromPath(page.path).split("/"),
+  }));
+}
+
+export function getCategoryPages() {
+  return RESOURCE_PAGES.filter((page) => page.parent === "/resources");
+}
+
+export function getChildPages(parentPath: string) {
+  return RESOURCE_PAGES.filter((page) => page.parent === parentPath);
+}
+
+export function getFeaturedPages() {
+  const featured = [
+    "/resources/brand-guides/gas-gang-drizzle-vapes",
+    "/resources/nicotine-pouches",
+    "/resources/native-smokes/backwoods-grabba-guide",
+    "/resources/menu-guide",
+    "/resources/local-guides/jane-street-york-visit-guide",
+    "/resources/value-guides",
+  ];
+  return featured.map((path) => RESOURCE_PAGES.find((page) => page.path === path)).filter(Boolean) as ResourcePage[];
+}
+
+export function getRelatedPages(page: ResourcePage) {
+  return page.related.map((path) => RESOURCE_PAGES.find((item) => item.path === path)).filter(Boolean) as ResourcePage[];
 }
