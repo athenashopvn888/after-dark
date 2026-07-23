@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/"],
+      disallow: ["/api/", "/staff-photo", "/staff-photo/"],
     },
     sitemap: "https://afterdarkcannabis.com/sitemap.xml",
   };
