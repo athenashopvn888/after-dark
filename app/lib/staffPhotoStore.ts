@@ -7,7 +7,7 @@ import {
   head,
   put,
 } from "@vercel/blob";
-import { mutationRetryDelay } from "./staffPhotoMutation";
+import { mutationRetryDelay, normalizeBlobEtag } from "./staffPhotoMutation";
 
 export const STAFF_STATE_PATH = "staff-photo/state/v1.json";
 export const STAFF_MEDIA_PREFIX = "staff-photo/media/";
@@ -120,18 +120,18 @@ async function readStateVersion() {
         cacheControlMaxAge: 60,
         allowOverwrite: false,
       });
-      return { state, etag: created.etag };
+      return { state, etag: normalizeBlobEtag(created.etag) };
     } catch (error) {
       if (!(error instanceof BlobAccessError)) throw error;
       const raced = await get(STAFF_STATE_PATH, { access: "private", useCache: false });
       if (!raced || raced.statusCode !== 200 || !raced.stream) throw error;
       const text = await new Response(raced.stream).text();
-      return { state: parseState(JSON.parse(text)), etag: raced.blob.etag };
+      return { state: parseState(JSON.parse(text)), etag: normalizeBlobEtag(raced.blob.etag) };
     }
   }
   if (result.statusCode !== 200 || !result.stream) throw new Error("Staff photo state could not be read.");
   const text = await new Response(result.stream).text();
-  return { state: parseState(JSON.parse(text)), etag: result.blob.etag };
+  return { state: parseState(JSON.parse(text)), etag: normalizeBlobEtag(result.blob.etag) };
 }
 
 export async function readStaffState() {
@@ -146,7 +146,7 @@ export async function mutateStaffState<T>(mutator: (draft: StaffPhotoState) => T
     draft.updatedAt = new Date().toISOString();
     try {
       const current = await head(STAFF_STATE_PATH);
-      if (current.etag !== etag) {
+      if (normalizeBlobEtag(current.etag) !== etag) {
         await waitForMutationRetry(attempt);
         continue;
       }

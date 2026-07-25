@@ -18,7 +18,7 @@ import {
   signStaffMedia,
   verifyStaffMediaSignature,
 } from "../app/lib/staffPhotoSignedMedia.ts";
-import { mutationRetryDelay } from "../app/lib/staffPhotoMutation.ts";
+import { mutationRetryDelay, normalizeBlobEtag } from "../app/lib/staffPhotoMutation.ts";
 
 const secret = "test-secret-that-is-at-least-thirty-two-characters-long";
 
@@ -185,7 +185,7 @@ test("private Vercel Blob state uses fresh reads and optimistic concurrency", ()
   assert.match(store, /BlobPreconditionFailedError/);
   assert.match(store, /ifMatch: etag/);
   assert.match(store, /head\(STAFF_STATE_PATH\)/);
-  assert.match(store, /current\.etag !== etag/);
+  assert.match(store, /normalizeBlobEtag\(current\.etag\) !== etag/);
   assert.match(store, /waitForMutationRetry\(attempt\)/);
   assert.doesNotMatch(store, /NEXT_PUBLIC_/);
 });
@@ -198,6 +198,18 @@ test("state mutation retries use bounded exponential backoff with jitter", () =>
   assert.equal(mutationRetryDelay(9, 1), 1250);
   assert.equal(mutationRetryDelay(100, 1), 1250);
   assert.equal(mutationRetryDelay(-1, -1), 35);
+});
+
+test("Blob ETags use one canonical representation for get, head and ifMatch", () => {
+  assert.equal(normalizeBlobEtag('"abc123"'), "abc123");
+  assert.equal(normalizeBlobEtag("abc123"), "abc123");
+  assert.equal(normalizeBlobEtag('W/"abc123"'), "abc123");
+  assert.equal(normalizeBlobEtag('  "abc123"  '), "abc123");
+  assert.throws(() => normalizeBlobEtag("  "), /ETag is missing/);
+  const store = readFileSync(new URL("../app/lib/staffPhotoStore.ts", import.meta.url), "utf8");
+  assert.match(store, /etag: normalizeBlobEtag\(result\.blob\.etag\)/);
+  assert.match(store, /normalizeBlobEtag\(current\.etag\) !== etag/);
+  assert.match(store, /ifMatch: etag/);
 });
 
 test("successful staff login does not rewrite shared Blob state before upload", () => {
