@@ -66,6 +66,7 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
   const [preview, setPreview] = useState("");
   const [issueOpen, setIssueOpen] = useState(false);
   const [issueForCheck, setIssueForCheck] = useState(false);
+  const [staffName, setStaffName] = useState(previewMode === "dashboard" ? "Demo" : "");
   const cameraRef = useRef<HTMLInputElement>(null);
 
   async function loadStatus() {
@@ -90,9 +91,12 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
   async function login(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setBusy(true); setError("");
     if (isPreview) { setAuthenticated(true); setStatus(previewStatus()); setBusy(false); return; }
-    const pin = String(new FormData(event.currentTarget).get("pin") || "");
+    const loginData = new FormData(event.currentTarget);
+    const pin = String(loginData.get("pin") || "");
+    const enteredName = String(loginData.get("staffName") || "").trim();
     try {
-      await apiJson("/api/staff-photo/auth", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ pin }) });
+      await apiJson("/api/staff-photo/auth", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ pin, staffName: enteredName }) });
+      setStaffName(enteredName);
       event.currentTarget.reset(); await loadStatus();
     } catch (caught) { setError(caught instanceof Error ? caught.message : "Could not sign in."); }
     finally { setBusy(false); }
@@ -118,7 +122,7 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
   async function submitPhoto() {
     if (!photo || !promptKey) { setError("Choose a shot type and take a photo first."); return; }
     setBusy(true); setError(""); setMessage("Submitting today’s photo…");
-    const form = new FormData(); form.set("promptKey", promptKey); form.set("photo", photo);
+    const form = new FormData(); form.set("promptKey", promptKey); form.set("photo", photo); form.set("staffName", staffName);
     try {
       if (isPreview) {
         const nextSlot = (status?.submissions.length || 0) + 1;
@@ -144,6 +148,7 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
     event.preventDefault(); setBusy(true); setError("");
     try {
       const form = new FormData(event.currentTarget);
+      form.set("staffName", staffName);
       const attachment = form.get("attachment");
       if (attachment instanceof File && attachment.size > 0) form.set("attachment", await redrawImage(attachment));
       const result = isPreview ? { issueId: "preview-issue" } : await apiJson("/api/staff-photo/issues", { method: "POST", body: form });
@@ -155,19 +160,25 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
   }
 
   if (!authKnown) return <main className={styles.shell}><div className={styles.loading} role="status">Loading staff page…</div></main>;
-  if (!authenticated) return (
+  if (!authenticated || !staffName) return (
     <main className={styles.shell}>
       <section className={styles.loginCard} aria-labelledby="login-title">
         <div className={styles.brandMark}>AD</div>
-        <p className={styles.eyebrow}>MJ01 · Staff only</p>
-        <h1 id="login-title">Today’s store task</h1>
-        <p className={styles.intro}>Enter the After Dark staff PIN.</p>
+        <p className={styles.eyebrow}>After Dark Cannabis</p>
+        <h1 id="login-title">Ready for today&apos;s quick mission?</h1>
+        <p className={styles.intro}>One useful photo. About 60 seconds. That&apos;s it.</p>
+        <div className={styles.steps} aria-label="Three quick steps">
+          <span><b>1</b>Enter PIN</span><span><b>2</b>Snap photo</span><span><b>3</b>Done</span>
+        </div>
         <form onSubmit={login} className={styles.loginForm}>
-          <label htmlFor="staff-pin">Staff PIN</label>
-          <input id="staff-pin" name="pin" type="password" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{4}" required minLength={4} maxLength={4} />
-          <button className={styles.primaryButton} disabled={busy}>{busy ? "Checking…" : "Continue"}</button>
+          <label htmlFor="staff-name">Your name</label>
+          <input id="staff-name" name="staffName" type="text" autoComplete="name" placeholder="First name is okay" required minLength={2} maxLength={60} />
+          <label htmlFor="staff-pin">Today&apos;s 4-digit PIN</label>
+          <input id="staff-pin" name="pin" type="password" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{4}" placeholder="••••" required minLength={4} maxLength={4} />
+          <button className={styles.primaryButton} disabled={busy}>{busy ? "Checking…" : "Start today’s mission  →"}</button>
         </form>
         {error && <p className={styles.error} role="alert">{error}</p>}
+        <p className={styles.privacyNote}>🔒 Staff-only page. Photos stay private until reviewed.</p>
       </section>
     </main>
   );
@@ -177,8 +188,8 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
   return (
     <main className={styles.shell}>
       <header className={styles.header}>
-        <div><p className={styles.eyebrow}>MJ01 · Staff</p><h1>Today’s store task</h1><p>{status?.dayKey}</p></div>
-        <button className={styles.textButton} onClick={() => { if (isPreview) { setAuthenticated(false); setStatus(null); } else { void apiJson("/api/staff-photo/auth", { method: "DELETE" }).then(() => { setAuthenticated(false); setStatus(null); }); } }}>Sign out</button>
+        <div><p className={styles.eyebrow}>{status?.store.name}</p><h1>Hi {staffName || "there"} — today&apos;s mission</h1><p>{status?.dayKey}</p></div>
+        <button className={styles.textButton} onClick={() => { if (isPreview) { setAuthenticated(false); setStatus(null); setStaffName(""); } else { void apiJson("/api/staff-photo/auth", { method: "DELETE" }).then(() => { setAuthenticated(false); setStatus(null); setStaffName(""); }); } }}>Sign out</button>
       </header>
 
       {message && <div className={styles.success} role="status">✓ {message}</div>}

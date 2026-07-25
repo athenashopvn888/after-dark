@@ -11,6 +11,8 @@ export async function POST(request: Request) {
   try {
     const form = await request.formData();
     const promptKey = String(form.get("promptKey") || "");
+    const staffName = String(form.get("staffName") || "").trim().slice(0, 60);
+    if (staffName.length < 2) return Response.json({ ok: false, error: "Enter your name before submitting." }, { status: 400 });
     if (!SHOT_PROMPTS.some((prompt) => prompt.key === promptKey)) return Response.json({ ok: false, error: "Choose a valid shot type." }, { status: 400 });
     const image = await inspectImage(form.get("photo"), "daily");
     if ("error" in image) return Response.json({ ok: false, error: image.error }, { status: 400 });
@@ -30,7 +32,7 @@ export async function POST(request: Request) {
         const nextSlot = today.some((row) => row.slot === 1) ? 2 : 1;
         const now = new Date().toISOString();
         state.submissions.push({
-          id: image.id, day_key: dayKey, week_key: weekKey, slot: nextSlot, prompt_key: promptKey,
+          id: image.id, staff_name: staffName, day_key: dayKey, week_key: weekKey, slot: nextSlot, prompt_key: promptKey,
           object_path: objectPath, original_name: image.originalName, mime_type: image.mime,
           byte_size: image.size, status: "pending", created_at: now, expires_at: expiryFor().toISOString(),
           retrieved_at: null, posted_at: null, validation_note: null,

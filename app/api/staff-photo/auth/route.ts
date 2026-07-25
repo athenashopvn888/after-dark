@@ -19,6 +19,10 @@ export async function POST(request: Request) {
     const key = clientKey(request);
     const parsed = await request.json().catch(() => ({}));
     const pin = typeof parsed.pin === "string" ? parsed.pin.trim() : "";
+    const staffName = typeof parsed.staffName === "string" ? parsed.staffName.trim().slice(0, 60) : "";
+    if (staffName.length < 2) {
+      return Response.json({ ok: false, error: "Enter your name before starting." }, { status: 400 });
+    }
     const snapshot = await readStaffState();
     const now = new Date();
     const since = now.getTime() - LOGIN_WINDOW_MINUTES * 60_000;

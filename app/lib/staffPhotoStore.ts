@@ -17,6 +17,7 @@ export type IssueState = "open" | "retrieved";
 
 export interface StaffSubmission {
   id: string;
+  staff_name?: string;
   day_key: string;
   week_key: string;
   slot: number;
@@ -35,6 +36,7 @@ export interface StaffSubmission {
 
 export interface StaffIssue {
   id: string;
+  staff_name?: string;
   day_key: string;
   category: string;
   note: string | null;
