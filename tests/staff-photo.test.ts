@@ -220,6 +220,8 @@ test("client source does not contain server secret names or PIN formula", () => 
   assert.equal(client.includes("MJ_STAFF_"), false);
   assert.equal(client.includes("createHmac"), false);
   assert.equal(client.includes("DAILY_PIN_SECRET"), false);
+  assert.equal(client.includes("Quick store check"), false);
+  assert.equal(client.includes("/api/staff-photo/random-check"), false);
 });
 
 test("deployment cleanup is scheduled and keeps separate cron authorization", () => {

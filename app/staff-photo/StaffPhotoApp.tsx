@@ -12,7 +12,6 @@ type StaffStatus = {
   requiredComplete: boolean;
   optionalComplete: boolean;
   availablePrompts: Prompt[];
-  randomCheck: null | { key: string; question: string; completed: boolean; result: string | null };
 };
 type PageTab = "photo" | "boss";
 type IdentityChoice = "named" | "anonymous";
@@ -41,12 +40,6 @@ function previewStatus(): StaffStatus {
       { key: "interior-wide", label: "Wide interior view" },
       { key: "counter-clean", label: "Clean checkout area" },
     ],
-    randomCheck: {
-      key: "sign-visible",
-      question: "Is the exterior sign clean and clearly visible?",
-      completed: false,
-      result: null,
-    },
   };
 }
 
@@ -87,7 +80,6 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
   const [promptKey, setPromptKey] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
-  const [issueForCheck, setIssueForCheck] = useState(false);
   const [bossCategory, setBossCategory] = useState("");
   const [identityChoice, setIdentityChoice] = useState<IdentityChoice>("named");
   const [staffName, setStaffName] = useState(previewMode === "dashboard" || previewMode === "boss" ? "Demo" : "");
@@ -229,36 +221,6 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
     }
   }
 
-  async function completeCheckOk() {
-    setBusy(true);
-    setError("");
-    try {
-      if (!isPreview) {
-        await apiJson("/api/staff-photo/random-check", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ result: "ok" }),
-        });
-      }
-      setStatus((current) => current?.randomCheck ? {
-        ...current,
-        randomCheck: { ...current.randomCheck, completed: true, result: "ok" },
-      } : current);
-      setMessage("Store check complete. Thank you!");
-      if (!isPreview) await loadStatus();
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not complete the check.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  function reportRandomCheck() {
-    setIssueForCheck(true);
-    setBossCategory("Concern");
-    showTab("boss");
-  }
-
   async function submitIssue(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true);
@@ -274,25 +236,9 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
       if (attachment instanceof File && attachment.size > 0) {
         form.set("attachment", await redrawImage(attachment));
       }
-      const result = isPreview
-        ? { issueId: "preview-issue" }
-        : await apiJson("/api/staff-photo/issues", { method: "POST", body: form });
-      if (issueForCheck && !isPreview) {
-        await apiJson("/api/staff-photo/random-check", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ result: "issue", issueId: result.issueId }),
-        });
-      }
-      if (issueForCheck) {
-        setStatus((current) => current?.randomCheck ? {
-          ...current,
-          randomCheck: { ...current.randomCheck, completed: true, result: "issue" },
-        } : current);
-      }
+      if (!isPreview) await apiJson("/api/staff-photo/issues", { method: "POST", body: form });
       formElement.reset();
       setBossCategory("");
-      setIssueForCheck(false);
       setMessage(identityChoice === "anonymous"
         ? "Sent privately without your name on the report."
         : "Sent privately to the boss. Thank you for speaking up.");
@@ -421,18 +367,6 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
             ) : <p className={styles.completeText}>✓ Today&apos;s photos are complete.</p>}
           </section>
 
-          {status?.randomCheck && (
-            <section className={styles.card} aria-labelledby="check-title">
-              <p className={styles.eyebrow}>Quick store check</p>
-              <h2 id="check-title">{status.randomCheck.question}</h2>
-              {status.randomCheck.completed ? <p className={styles.completeText}>✓ Check complete</p> : (
-                <div className={styles.stack}>
-                  <button className={styles.primaryButton} disabled={busy} onClick={() => void completeCheckOk()}>Yes — looks good</button>
-                  <button className={styles.issueButton} disabled={busy} onClick={reportRandomCheck}>No — tell the boss</button>
-                </div>
-              )}
-            </section>
-          )}
         </>
       ) : (
         <>
