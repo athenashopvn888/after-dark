@@ -23,17 +23,40 @@ export const SHOT_PROMPTS = [
 ] as const;
 
 export const ISSUE_CATEGORIES = [
-  "Storefront or signage",
-  "Hours appear incorrect",
-  "Address or phone appears incorrect",
-  "Website problem",
-  "Menu problem",
-  "Google or Maps problem",
-  "Entrance, parking or access",
-  "Equipment or display",
-  "Cleanliness or maintenance",
+  "Concern",
+  "Improvement idea",
+  "Promotion or marketing idea",
+  "Customer feedback",
+  "Workplace or team concern",
+  "Need help",
+  "Good news or shout-out",
+  "I miss the boss",
   "Other",
 ] as const;
+
+export function normalizeBossMessage(input: {
+  anonymous: boolean;
+  staffName: string;
+  category: string;
+  note: string;
+}) {
+  const staffName = input.staffName.trim().slice(0, 60);
+  const note = input.note.trim().slice(0, 1000);
+  if (!ISSUE_CATEGORIES.includes(input.category as (typeof ISSUE_CATEGORIES)[number])) {
+    return { ok: false as const, error: "Choose a message category." };
+  }
+  if (!note) return { ok: false as const, error: "Write a message before sending." };
+  if (!input.anonymous && staffName.length < 2) {
+    return { ok: false as const, error: "Choose anonymous or include your first name." };
+  }
+  return {
+    ok: true as const,
+    anonymous: input.anonymous,
+    staffName: input.anonymous ? undefined : staffName,
+    category: input.category as (typeof ISSUE_CATEGORIES)[number],
+    note,
+  };
+}
 
 export const RANDOM_CHECKS = [
   { key: "sign-visible", question: "Is the exterior sign clean and clearly visible?" },

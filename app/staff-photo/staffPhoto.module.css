@@ -1,4 +1,5 @@
 .shell { min-height: 100svh; max-width: 540px; margin: 0 auto; padding: max(30px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom)); background: radial-gradient(circle at top left, #eefbdc 0, transparent 38%), linear-gradient(180deg, #f4fbf7 0%, #f6f7f2 100%); color: #13241c; }
+.shell, .shell * { box-sizing: border-box; }
 .header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
 .header h1, .loginCard h1 { font-size: 1.75rem; line-height: 1.1; margin: 3px 0 5px; }
 .header p:last-child { color: #526158; font-size: .9rem; }
@@ -42,5 +43,20 @@
 .completeText { color: #0c6338; background: #e7f7ed; padding: 12px; border-radius: 12px; font-weight: 750; }
 .loading { min-height: 70svh; display: grid; place-items: center; color: #456052; font-weight: 700; }
 .privacyNote { margin: 20px 0 0; color: #6a756e; font-size: .75rem; }
+.tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; margin: 0 0 16px; border: 1px solid #d5e2da; border-radius: 16px; background: #eaf2ed; position: sticky; top: max(8px, env(safe-area-inset-top)); z-index: 3; box-shadow: 0 8px 20px rgba(20, 48, 34, .08); }
+.tab { min-width: 0; min-height: 48px; border: 0; border-radius: 12px; padding: 10px 6px; background: transparent; color: #466055; font: inherit; font-size: .9rem; font-weight: 800; white-space: nowrap; }
+.activeTab { background: #fff; color: #115b38; box-shadow: 0 3px 10px rgba(20, 48, 34, .1); }
+.bossHero { background: linear-gradient(145deg, #123f2b, #176b42); color: #fff; }
+.bossHero .eyebrow { color: #b9f0cd; }
+.bossHero h2 { font-size: 1.55rem; }
+.bossHero p:last-child { line-height: 1.55; color: #e7f6ed; }
+.promise { margin: 12px 0 0; padding: 12px; border-radius: 12px; background: #edf8f1; color: #194d32; font-size: .88rem; line-height: 1.5; }
+.identityChoice { display: grid; gap: 9px; margin: 16px 0; padding: 0; border: 0; }
+.identityChoice legend { margin-bottom: 8px; font-weight: 800; }
+.identityOption { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 2px solid #d2ddd6; border-radius: 12px; cursor: pointer; }
+.identityOption input { width: 20px; height: 20px; margin-top: 1px; accent-color: #146c43; flex: 0 0 auto; }
+.identityOption span { line-height: 1.35; }
+.identityOption small { display: block; color: #637068; margin-top: 3px; }
+.bossFootnote { margin: 12px 0 0; color: #637068; font-size: .78rem; line-height: 1.45; }
 @media (min-width: 600px) { .shell { padding-inline: 24px; } }
 @media (prefers-reduced-motion: reduce) { .shell * { scroll-behavior: auto !important; transition: none !important; } }

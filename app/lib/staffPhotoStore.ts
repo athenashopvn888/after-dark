@@ -36,7 +36,7 @@ export interface StaffSubmission {
 
 export interface StaffIssue {
   id: string;
-  staff_name?: string;
+  staff_name?: string | null;
   day_key: string;
   category: string;
   note: string | null;

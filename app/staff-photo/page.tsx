@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 
 export default async function StaffPhotoPage({ searchParams }: { searchParams: Promise<{ preview?: string }> }) {
   const requested = (await searchParams).preview;
-  const previewMode = process.env.NODE_ENV === "development" && (requested === "login" || requested === "dashboard") ? requested : null;
+  const previewMode = process.env.NODE_ENV === "development" && (requested === "login" || requested === "dashboard" || requested === "boss") ? requested : null;
   return <StaffPhotoApp previewMode={previewMode} />;
 }

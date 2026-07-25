@@ -9,6 +9,8 @@ import {
   mimeMatchesKind,
   operationalDayContext,
   MEDIA_RETRY_WINDOW_MS,
+  ISSUE_CATEGORIES,
+  normalizeBossMessage,
   SHOT_PROMPTS,
 } from "../app/lib/staffPhotoCore.ts";
 import { dailyPin, verifyDailyPin } from "../app/lib/staffPhotoPin.ts";
@@ -102,6 +104,62 @@ test("used prompts are removed and reset by the caller's weekly set", () => {
   assert.equal(available.length, SHOT_PROMPTS.length - 2);
   assert.equal(available.some((item) => item.key === SHOT_PROMPTS[0].key), false);
   assert.equal(availablePrompts([]).length, SHOT_PROMPTS.length);
+});
+
+test("boss inbox categories cover feedback, help, recognition and the playful option", () => {
+  assert.deepEqual(ISSUE_CATEGORIES, [
+    "Concern",
+    "Improvement idea",
+    "Promotion or marketing idea",
+    "Customer feedback",
+    "Workplace or team concern",
+    "Need help",
+    "Good news or shout-out",
+    "I miss the boss",
+    "Other",
+  ]);
+});
+
+test("boss inbox accepts named and anonymous messages with the intended identity record", () => {
+  const named = normalizeBossMessage({
+    anonymous: false,
+    staffName: "  Dora  ",
+    category: "Improvement idea",
+    note: "  Add a small customer suggestion card.  ",
+  });
+  assert.deepEqual(named, {
+    ok: true,
+    anonymous: false,
+    staffName: "Dora",
+    category: "Improvement idea",
+    note: "Add a small customer suggestion card.",
+  });
+
+  const anonymous = normalizeBossMessage({
+    anonymous: true,
+    staffName: "Dora",
+    category: "Workplace or team concern",
+    note: "Please check the closing handoff.",
+  });
+  assert.equal(anonymous.ok, true);
+  if (anonymous.ok) assert.equal(anonymous.staffName, undefined);
+});
+
+test("boss inbox rejects missing notes, invalid categories and missing named identity", () => {
+  assert.deepEqual(
+    normalizeBossMessage({ anonymous: true, staffName: "", category: "Concern", note: "  " }),
+    { ok: false, error: "Write a message before sending." },
+  );
+  assert.deepEqual(
+    normalizeBossMessage({ anonymous: true, staffName: "", category: "Not a real category", note: "A note" }),
+    { ok: false, error: "Choose a message category." },
+  );
+  assert.deepEqual(
+    normalizeBossMessage({ anonymous: false, staffName: "A", category: "Concern", note: "A note" }),
+    { ok: false, error: "Choose anonymous or include your first name." },
+  );
+  const route = readFileSync(new URL("../app/api/staff-photo/issues/route.ts", import.meta.url), "utf8");
+  assert.match(route, /staff_name: message\.anonymous \? null : message\.staffName/);
 });
 
 test("magic bytes must agree with MIME", () => {
