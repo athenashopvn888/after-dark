@@ -120,18 +120,18 @@ async function readStateVersion() {
         cacheControlMaxAge: 60,
         allowOverwrite: false,
       });
-      return { state, etag: normalizeBlobEtag(created.etag) };
+      return { state, etag: created.etag };
     } catch (error) {
       if (!(error instanceof BlobAccessError)) throw error;
       const raced = await get(STAFF_STATE_PATH, { access: "private", useCache: false });
       if (!raced || raced.statusCode !== 200 || !raced.stream) throw error;
       const text = await new Response(raced.stream).text();
-      return { state: parseState(JSON.parse(text)), etag: normalizeBlobEtag(raced.blob.etag) };
+      return { state: parseState(JSON.parse(text)), etag: raced.blob.etag };
     }
   }
   if (result.statusCode !== 200 || !result.stream) throw new Error("Staff photo state could not be read.");
   const text = await new Response(result.stream).text();
-  return { state: parseState(JSON.parse(text)), etag: normalizeBlobEtag(result.blob.etag) };
+  return { state: parseState(JSON.parse(text)), etag: result.blob.etag };
 }
 
 export async function readStaffState() {
@@ -146,7 +146,7 @@ export async function mutateStaffState<T>(mutator: (draft: StaffPhotoState) => T
     draft.updatedAt = new Date().toISOString();
     try {
       const current = await head(STAFF_STATE_PATH);
-      if (normalizeBlobEtag(current.etag) !== etag) {
+      if (normalizeBlobEtag(current.etag) !== normalizeBlobEtag(etag)) {
         await waitForMutationRetry(attempt);
         continue;
       }
@@ -154,8 +154,8 @@ export async function mutateStaffState<T>(mutator: (draft: StaffPhotoState) => T
         access: "private",
         contentType: "application/json",
         cacheControlMaxAge: 60,
-        allowOverwrite: etag !== null,
-        ...(etag ? { ifMatch: etag } : {}),
+        allowOverwrite: true,
+        ifMatch: current.etag,
       });
       return result;
     } catch (error) {

@@ -183,9 +183,9 @@ test("private Vercel Blob state uses fresh reads and optimistic concurrency", ()
   assert.match(store, /access: "private"/);
   assert.match(store, /useCache: false/);
   assert.match(store, /BlobPreconditionFailedError/);
-  assert.match(store, /ifMatch: etag/);
+  assert.match(store, /ifMatch: current\.etag/);
   assert.match(store, /head\(STAFF_STATE_PATH\)/);
-  assert.match(store, /normalizeBlobEtag\(current\.etag\) !== etag/);
+  assert.match(store, /normalizeBlobEtag\(current\.etag\) !== normalizeBlobEtag\(etag\)/);
   assert.match(store, /waitForMutationRetry\(attempt\)/);
   assert.doesNotMatch(store, /NEXT_PUBLIC_/);
 });
@@ -207,9 +207,9 @@ test("Blob ETags use one canonical representation for get, head and ifMatch", ()
   assert.equal(normalizeBlobEtag('  "abc123"  '), "abc123");
   assert.throws(() => normalizeBlobEtag("  "), /ETag is missing/);
   const store = readFileSync(new URL("../app/lib/staffPhotoStore.ts", import.meta.url), "utf8");
-  assert.match(store, /etag: normalizeBlobEtag\(result\.blob\.etag\)/);
-  assert.match(store, /normalizeBlobEtag\(current\.etag\) !== etag/);
-  assert.match(store, /ifMatch: etag/);
+  assert.match(store, /etag: result\.blob\.etag/);
+  assert.match(store, /normalizeBlobEtag\(current\.etag\) !== normalizeBlobEtag\(etag\)/);
+  assert.match(store, /ifMatch: current\.etag/);
 });
 
 test("successful staff login does not rewrite shared Blob state before upload", () => {
