@@ -4,6 +4,7 @@ import {
   BlobPreconditionFailedError,
   del,
   get,
+  head,
   put,
 } from "@vercel/blob";
 import { mutationRetryDelay } from "./staffPhotoMutation";
@@ -144,6 +145,11 @@ export async function mutateStaffState<T>(mutator: (draft: StaffPhotoState) => T
     const result = await mutator(draft);
     draft.updatedAt = new Date().toISOString();
     try {
+      const current = await head(STAFF_STATE_PATH);
+      if (current.etag !== etag) {
+        await waitForMutationRetry(attempt);
+        continue;
+      }
       await put(STAFF_STATE_PATH, JSON.stringify(draft), {
         access: "private",
         contentType: "application/json",

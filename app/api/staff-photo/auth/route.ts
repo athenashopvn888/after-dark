@@ -1,5 +1,5 @@
 import { clearStaffSession, isSameOrigin, setStaffSession } from "@/app/lib/staffPhotoAuth";
-import { mutateStaffState, publicError } from "@/app/lib/staffPhotoStore";
+import { mutateStaffState, publicError, readStaffState } from "@/app/lib/staffPhotoStore";
 import { verifyDailyPin } from "@/app/lib/staffPhotoPin";
 import { LOGIN_WINDOW_MINUTES, loginAllowed } from "@/app/lib/staffPhotoCore";
 import { createHmac } from "node:crypto";
@@ -19,25 +19,39 @@ export async function POST(request: Request) {
     const key = clientKey(request);
     const parsed = await request.json().catch(() => ({}));
     const pin = typeof parsed.pin === "string" ? parsed.pin.trim() : "";
+    const snapshot = await readStaffState();
+    const now = new Date();
+    const since = now.getTime() - LOGIN_WINDOW_MINUTES * 60_000;
+    const recentFailures = snapshot.loginAttempts.filter((attempt) =>
+      attempt.client_key === key &&
+      !attempt.succeeded &&
+      Date.parse(attempt.created_at) >= since
+    ).length;
+    if (!loginAllowed(recentFailures)) {
+      return Response.json({ ok: false, error: "Too many attempts. Try again in 15 minutes." }, { status: 429 });
+    }
+    let valid = false;
+    try { valid = verifyDailyPin(pin, snapshot.pinVersion); } catch { valid = false; }
+    if (valid) {
+      await setStaffSession(snapshot.pinVersion);
+      return Response.json({ ok: true });
+    }
+
     const outcome = await mutateStaffState((state) => {
-      const now = new Date();
-      const since = now.getTime() - LOGIN_WINDOW_MINUTES * 60_000;
-      state.loginAttempts = state.loginAttempts.filter((attempt) => Date.parse(attempt.created_at) >= now.getTime() - 24 * 60 * 60_000);
+      const mutationNow = new Date();
+      const mutationSince = mutationNow.getTime() - LOGIN_WINDOW_MINUTES * 60_000;
+      state.loginAttempts = state.loginAttempts.filter((attempt) => Date.parse(attempt.created_at) >= mutationNow.getTime() - 24 * 60 * 60_000);
       const failures = state.loginAttempts.filter((attempt) =>
         attempt.client_key === key &&
         !attempt.succeeded &&
-        Date.parse(attempt.created_at) >= since
+        Date.parse(attempt.created_at) >= mutationSince
       ).length;
-      if (!loginAllowed(failures)) return { limited: true, valid: false, pinVersion: state.pinVersion };
-      let valid = false;
-      try { valid = verifyDailyPin(pin, state.pinVersion); } catch { valid = false; }
-      state.loginAttempts.push({ client_key: key, succeeded: valid, created_at: now.toISOString() });
-      return { limited: false, valid, pinVersion: state.pinVersion };
+      if (!loginAllowed(failures)) return { limited: true };
+      state.loginAttempts.push({ client_key: key, succeeded: false, created_at: mutationNow.toISOString() });
+      return { limited: false };
     });
     if (outcome.limited) return Response.json({ ok: false, error: "Too many attempts. Try again in 15 minutes." }, { status: 429 });
-    if (!outcome.valid) return Response.json({ ok: false, error: "That staff PIN is not correct." }, { status: 401 });
-    await setStaffSession(outcome.pinVersion);
-    return Response.json({ ok: true });
+    return Response.json({ ok: false, error: "That staff PIN is not correct." }, { status: 401 });
   } catch (error) { return publicError(error); }
 }
 

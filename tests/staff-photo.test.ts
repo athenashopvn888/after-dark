@@ -184,6 +184,8 @@ test("private Vercel Blob state uses fresh reads and optimistic concurrency", ()
   assert.match(store, /useCache: false/);
   assert.match(store, /BlobPreconditionFailedError/);
   assert.match(store, /ifMatch: etag/);
+  assert.match(store, /head\(STAFF_STATE_PATH\)/);
+  assert.match(store, /current\.etag !== etag/);
   assert.match(store, /waitForMutationRetry\(attempt\)/);
   assert.doesNotMatch(store, /NEXT_PUBLIC_/);
 });
@@ -196,6 +198,14 @@ test("state mutation retries use bounded exponential backoff with jitter", () =>
   assert.equal(mutationRetryDelay(9, 1), 1250);
   assert.equal(mutationRetryDelay(100, 1), 1250);
   assert.equal(mutationRetryDelay(-1, -1), 35);
+});
+
+test("successful staff login does not rewrite shared Blob state before upload", () => {
+  const route = readFileSync(new URL("../app/api/staff-photo/auth/route.ts", import.meta.url), "utf8");
+  assert.match(route, /const snapshot = await readStaffState\(\)/);
+  assert.match(route, /if \(valid\) \{[\s\S]*setStaffSession\(snapshot\.pinVersion\)/);
+  assert.match(route, /succeeded: false/);
+  assert.doesNotMatch(route, /succeeded: valid/);
 });
 
 test("staff-photo runtime and package have no Supabase dependency", () => {
