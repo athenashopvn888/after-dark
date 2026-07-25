@@ -130,7 +130,8 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
       setBusy(false);
       return;
     }
-    const loginData = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const loginData = new FormData(formElement);
     const pin = String(loginData.get("pin") || "");
     const enteredName = String(loginData.get("staffName") || "").trim();
     try {
@@ -140,7 +141,7 @@ export default function StaffPhotoApp({ previewMode = null }: { previewMode?: "l
         body: JSON.stringify({ pin, staffName: enteredName }),
       });
       setStaffName(enteredName);
-      event.currentTarget.reset();
+      formElement.reset();
       await loadStatus();
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Could not sign in.");

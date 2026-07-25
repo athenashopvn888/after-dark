@@ -220,6 +220,9 @@ test("client source does not contain server secret names or PIN formula", () => 
   assert.equal(client.includes("MJ_STAFF_"), false);
   assert.equal(client.includes("createHmac"), false);
   assert.equal(client.includes("DAILY_PIN_SECRET"), false);
+  assert.match(client, /const formElement = event\.currentTarget/);
+  assert.match(client, /formElement\.reset\(\)/);
+  assert.doesNotMatch(client, /await apiJson\("\/api\/staff-photo\/auth"[\s\S]{0,400}event\.currentTarget\.reset\(\)/);
   assert.equal(client.includes("Quick store check"), false);
   assert.equal(client.includes("/api/staff-photo/random-check"), false);
 });
