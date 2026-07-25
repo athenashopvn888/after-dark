@@ -6,6 +6,7 @@ import {
   get,
   put,
 } from "@vercel/blob";
+import { mutationRetryDelay } from "./staffPhotoMutation";
 
 export const STAFF_STATE_PATH = "staff-photo/state/v1.json";
 export const STAFF_MEDIA_PREFIX = "staff-photo/media/";
@@ -71,6 +72,10 @@ function ensureBlobConfigured() {
   if (!hasToken && !hasOidc) throw new Error("Private staff photo Blob storage is not configured.");
 }
 
+async function waitForMutationRetry(attempt: number) {
+  await new Promise((resolve) => setTimeout(resolve, mutationRetryDelay(attempt)));
+}
+
 export function defaultStaffState(now = new Date()): StaffPhotoState {
   return {
     schemaVersion: 1,
@@ -133,7 +138,7 @@ export async function readStaffState() {
 }
 
 export async function mutateStaffState<T>(mutator: (draft: StaffPhotoState) => T | Promise<T>) {
-  for (let attempt = 0; attempt < 8; attempt += 1) {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
     const { state, etag } = await readStateVersion();
     const draft = structuredClone(state);
     const result = await mutator(draft);
@@ -148,7 +153,10 @@ export async function mutateStaffState<T>(mutator: (draft: StaffPhotoState) => T
       });
       return result;
     } catch (error) {
-      if (error instanceof BlobPreconditionFailedError) continue;
+      if (error instanceof BlobPreconditionFailedError) {
+        await waitForMutationRetry(attempt);
+        continue;
+      }
       throw error;
     }
   }

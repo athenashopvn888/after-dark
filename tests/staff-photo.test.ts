@@ -18,6 +18,7 @@ import {
   signStaffMedia,
   verifyStaffMediaSignature,
 } from "../app/lib/staffPhotoSignedMedia.ts";
+import { mutationRetryDelay } from "../app/lib/staffPhotoMutation.ts";
 
 const secret = "test-secret-that-is-at-least-thirty-two-characters-long";
 
@@ -183,7 +184,18 @@ test("private Vercel Blob state uses fresh reads and optimistic concurrency", ()
   assert.match(store, /useCache: false/);
   assert.match(store, /BlobPreconditionFailedError/);
   assert.match(store, /ifMatch: etag/);
+  assert.match(store, /waitForMutationRetry\(attempt\)/);
   assert.doesNotMatch(store, /NEXT_PUBLIC_/);
+});
+
+test("state mutation retries use bounded exponential backoff with jitter", () => {
+  assert.equal(mutationRetryDelay(0, 0), 35);
+  assert.equal(mutationRetryDelay(1, 0), 70);
+  assert.equal(mutationRetryDelay(4, 0), 560);
+  assert.equal(mutationRetryDelay(5, 0), 1000);
+  assert.equal(mutationRetryDelay(9, 1), 1250);
+  assert.equal(mutationRetryDelay(100, 1), 1250);
+  assert.equal(mutationRetryDelay(-1, -1), 35);
 });
 
 test("staff-photo runtime and package have no Supabase dependency", () => {
