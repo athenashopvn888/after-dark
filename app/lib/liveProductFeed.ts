@@ -5,6 +5,7 @@ export type ProductSource = "live" | "static-fallback";
 export type ProductIdentity = {
   sku: string;
   name: string;
+  tier?: string;
 };
 
 export type FetchWithNextCache = (
@@ -45,6 +46,25 @@ function isValidProductCollection(
   });
 }
 
+function productDisplayIdentity(product: ProductIdentity): string {
+  const sku = String(product.sku || "").trim();
+  const tier = String(product.tier || "").trim().toUpperCase();
+  return tier ? `${sku}\u0000${tier}` : sku;
+}
+
+export function mergeProductDisplayOverrides<
+  Product extends ProductIdentity,
+>(products: Product[], overrides: Product[] = []): Product[] {
+  if (overrides.length === 0) return products;
+  const approvedKeys = new Set(overrides.map(productDisplayIdentity));
+  return [
+    ...products.filter(
+      (product) => !approvedKeys.has(productDisplayIdentity(product)),
+    ),
+    ...overrides,
+  ];
+}
+
 export async function fetchProductFeed<
   Flower extends ProductIdentity,
   Item extends ProductIdentity,
@@ -54,6 +74,7 @@ export async function fetchProductFeed<
   snapshotAsOf: string;
   fallbackFlowers: Flower[];
   fallbackItems: Item[];
+  flowerDisplayOverrides?: Flower[];
 }): Promise<{
   flowers: Flower[];
   items: Item[];
@@ -62,8 +83,12 @@ export async function fetchProductFeed<
   stockDate: string | null;
   sourceAsOf: string;
 }> {
+  const fallbackFlowers = mergeProductDisplayOverrides(
+    options.fallbackFlowers,
+    options.flowerDisplayOverrides,
+  );
   const fallback = {
-    flowers: options.fallbackFlowers,
+    flowers: fallbackFlowers,
     items: options.fallbackItems,
     isLive: false,
     sources: {
@@ -103,8 +128,11 @@ export async function fetchProductFeed<
 
     return {
       flowers: flowersLive
-        ? (data.flowers as Flower[])
-        : options.fallbackFlowers,
+        ? mergeProductDisplayOverrides(
+            data.flowers as Flower[],
+            options.flowerDisplayOverrides,
+          )
+        : fallbackFlowers,
       items: itemsLive ? (data.items as Item[]) : options.fallbackItems,
       isLive: flowersLive && itemsLive,
       sources: {

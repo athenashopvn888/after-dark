@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   fetchProductFeed,
   LIVE_PRODUCT_REVALIDATE_SECONDS,
+  mergeProductDisplayOverrides,
 } from "../app/lib/liveProductFeed.ts";
 
 const freshStockDate = "2030-01-01T00:00:00.000Z";
@@ -151,6 +152,43 @@ test("flower feed rejects a true duplicate with the same SKU and tier", async ()
   });
   assert.equal(result.flowers, fallbackFlowers);
   assert.equal(result.sources.flowers, "static-fallback");
+});
+
+test("approved MJ01 display rows survive a fresh POS feed omission", async () => {
+  const approved = [
+    { sku: "105", name: "SPACE COOKIES (SHREDS)", tier: "BUDGET" },
+  ];
+  const result = await fetchProductFeed({
+    endpoint: "https://example.test/feed",
+    snapshotAsOf,
+    fallbackItems,
+    fallbackFlowers,
+    flowerDisplayOverrides: approved,
+    fetcher: async () =>
+      responseJson({
+        items: [{ sku: "live-item", name: "Live item" }],
+        flowers: [{ sku: "live-flower", name: "Live flower", tier: "AA" }],
+        stockDate: freshStockDate,
+      }),
+  });
+  assert.deepEqual(result.flowers, [
+    { sku: "live-flower", name: "Live flower", tier: "AA" },
+    ...approved,
+  ]);
+  assert.equal(result.sources.flowers, "live");
+});
+
+test("approved display row replaces an incoming row with the same SKU and tier", () => {
+  const approved = [
+    { sku: "172", name: "LAVENDER KUSH", tier: "BUDGET" },
+  ];
+  assert.deepEqual(
+    mergeProductDisplayOverrides(
+      [{ sku: "172", name: "stale name", tier: "budget" }],
+      approved,
+    ),
+    approved,
+  );
 });
 
 test("network failure preserves both static snapshots", async () => {

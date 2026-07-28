@@ -13,6 +13,13 @@ const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || '';
 const FLOWERS_PATH = path.join(__dirname, '..', 'app', 'lib', 'flowers.json');
 const ITEMS_PATH = path.join(__dirname, '..', 'app', 'lib', 'items.json');
 const SNAPSHOT_META_PATH = path.join(__dirname, '..', 'app', 'lib', 'productSnapshotMeta.json');
+const APPROVED_FLOWER_OVERRIDES_PATH = path.join(
+  __dirname,
+  '..',
+  'app',
+  'lib',
+  'approvedFlowerDisplayOverrides.json',
+);
 
 function isValidCollection(products, allowTierVariants = false) {
   if (!Array.isArray(products) || products.length === 0) return false;
@@ -28,6 +35,29 @@ function isValidCollection(products, allowTierVariants = false) {
     seen.add(displayIdentity);
     return true;
   });
+}
+
+function productDisplayIdentity(product) {
+  const sku = String(product && product.sku || '').trim();
+  const tier = String(product && product.tier || '').trim().toUpperCase();
+  return tier ? `${sku}\u0000${tier}` : sku;
+}
+
+function mergeApprovedFlowerDisplayRows(products) {
+  const approved = JSON.parse(
+    fs.readFileSync(APPROVED_FLOWER_OVERRIDES_PATH, 'utf-8'),
+  );
+  if (approved.storeCode !== 'MJ01' || !isValidCollection(approved.flowers, true)) {
+    throw new Error('Invalid MJ01 approved flower display overrides');
+  }
+  const approvedKeys = new Set(approved.flowers.map(productDisplayIdentity));
+  return {
+    flowers: [
+      ...products.filter((product) => !approvedKeys.has(productDisplayIdentity(product))),
+      ...approved.flowers,
+    ],
+    approvedCount: approved.flowers.length,
+  };
 }
 
 function assertNewerThanSnapshot(stockDate) {
@@ -99,13 +129,20 @@ async function main() {
     }
     if (saleFixed > 0) console.log(`[prebuild] Fixed ${saleFixed} sale flags from names`);
 
+    const sourceFlowerRowCount = data.flowers.length;
+    const approvedFlowerDisplay = mergeApprovedFlowerDisplayRows(data.flowers);
+    const flowers = approvedFlowerDisplay.flowers;
+    if (!isValidCollection(flowers, true)) {
+      throw new Error('Approved MJ01 flower display merge produced invalid rows');
+    }
+
     // Write flowers.json
-    fs.writeFileSync(FLOWERS_PATH, JSON.stringify(data.flowers, null, 2), 'utf-8');
-    console.log(`[prebuild] flowers.json updated: ${data.flowers.length} products`);
+    fs.writeFileSync(FLOWERS_PATH, JSON.stringify(flowers, null, 2), 'utf-8');
+    console.log(`[prebuild] flowers.json updated: ${flowers.length} display rows`);
 
     // Tier breakdown
     const tiers = {};
-    data.flowers.forEach(f => { tiers[f.tier] = (tiers[f.tier] || 0) + 1; });
+    flowers.forEach(f => { tiers[f.tier] = (tiers[f.tier] || 0) + 1; });
     Object.entries(tiers).forEach(([t, c]) => console.log(`  ${t}: ${c}`));
 
     // ── Post-process items: fix '$[object Object]' prices ──
@@ -128,7 +165,10 @@ async function main() {
       storeCode: 'MJ01',
       sourceAsOf: data.stockDate,
       itemCount: data.items.length,
-      flowerCount: data.flowers.length,
+      flowerCount: flowers.length,
+      flowerSkuCount: new Set(flowers.map(f => String(f.sku))).size,
+      flowerSourceRowCount: sourceFlowerRowCount,
+      flowerDisplayOverrideCount: approvedFlowerDisplay.approvedCount,
     }, null, 2) + '\n', 'utf-8');
 
     // Category breakdown
