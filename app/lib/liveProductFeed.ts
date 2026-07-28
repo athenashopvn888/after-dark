@@ -27,6 +27,7 @@ export function isLiveStockNewerThanSnapshot(
 
 function isValidProductCollection(
   value: unknown,
+  allowTierVariants = false,
 ): value is ProductIdentity[] {
   if (!Array.isArray(value) || value.length === 0) return false;
   const seen = new Set<string>();
@@ -34,8 +35,12 @@ function isValidProductCollection(
     if (!entry || typeof entry !== "object") return false;
     const sku = String((entry as { sku?: unknown }).sku || "").trim();
     const name = String((entry as { name?: unknown }).name || "").trim();
-    if (!sku || !name || seen.has(sku)) return false;
-    seen.add(sku);
+    const tier = allowTierVariants
+      ? String((entry as { tier?: unknown }).tier || "").trim().toUpperCase()
+      : "";
+    const displayIdentity = tier ? `${sku}\u0000${tier}` : sku;
+    if (!sku || !name || seen.has(displayIdentity)) return false;
+    seen.add(displayIdentity);
     return true;
   });
 }
@@ -90,7 +95,7 @@ export async function fetchProductFeed<
       throw new Error("live stock is not newer than the POS snapshot");
     }
 
-    const flowersLive = isValidProductCollection(data.flowers);
+    const flowersLive = isValidProductCollection(data.flowers, true);
     const itemsLive = isValidProductCollection(data.items);
     if (!flowersLive && !itemsLive) {
       throw new Error("live stock collections failed validation");
