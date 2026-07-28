@@ -37,15 +37,23 @@ export interface ItemProduct {
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
 import snapshotMetaJson from "./productSnapshotMeta.json";
+import approvedFlowerDisplayOverridesJson from "./approvedFlowerDisplayOverrides.json";
 import {
   fetchProductFeed,
+  mergeProductDisplayOverrides,
   type FetchWithNextCache,
   type ProductSource,
 } from "./liveProductFeed";
 
 export { LIVE_PRODUCT_REVALIDATE_SECONDS } from "./liveProductFeed";
 
-export const allFlowers: FlowerProduct[] = flowersJson as FlowerProduct[];
+const approvedFlowerDisplayOverrides =
+  approvedFlowerDisplayOverridesJson.flowers as FlowerProduct[];
+
+export const allFlowers: FlowerProduct[] = mergeProductDisplayOverrides(
+  flowersJson as FlowerProduct[],
+  approvedFlowerDisplayOverrides,
+);
 export const allItems: ItemProduct[] = itemsJson as ItemProduct[];
 
 /* ── Live stock fetch from Apps Script ── */
@@ -54,6 +62,9 @@ export const productSnapshotMeta = snapshotMetaJson as {
   sourceAsOf: string;
   itemCount: number;
   flowerCount: number;
+  flowerSkuCount: number;
+  flowerSourceRowCount: number;
+  flowerDisplayOverrideCount: number;
 };
 
 /**
@@ -83,6 +94,7 @@ export async function fetchLiveProducts(options: {
     snapshotAsOf,
     fallbackFlowers: allFlowers,
     fallbackItems: allItems,
+    flowerDisplayOverrides: approvedFlowerDisplayOverrides,
   });
 }
 

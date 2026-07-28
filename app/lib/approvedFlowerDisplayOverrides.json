@@ -1,0 +1,163 @@
+{
+  "storeCode": "MJ01",
+  "approvedAsOf": "2026-07-29",
+  "source": "ADC owner-approved TV Budget display recovery from last known-good production payload",
+  "flowers": [
+    {
+      "sku": "105",
+      "name": "SPACE COOKIES (SHREDS)",
+      "slug": "space-cookies-shreds",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "24%",
+      "price3g": null,
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 40,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/105_SPACE_COOKIES_(SHREDS).webp"
+    },
+    {
+      "sku": "106",
+      "name": "GRANDADDY PURPLE (SHREDS)",
+      "slug": "grandaddy-purple-shreds",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "24%",
+      "price3g": null,
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 40,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/106_GRANDADDY_PURPLE_(SHREDS).webp"
+    },
+    {
+      "sku": "107",
+      "name": "NORTHERN LIGHTS (SHREDS)",
+      "slug": "northern-lights-shreds",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "24%",
+      "price3g": null,
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 40,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/107_NORTHERN_LIGHTS_(SHREDS).webp"
+    },
+    {
+      "sku": "172",
+      "name": "LAVENDER KUSH",
+      "slug": "lavender-kush",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "26%",
+      "price3g": null,
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 50,
+        "sale": null
+      },
+      "image": ""
+    },
+    {
+      "sku": "184",
+      "name": "APPLE KUSH",
+      "slug": "apple-kush",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "26%",
+      "price3g": {
+        "regular": 10,
+        "sale": null
+      },
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 50,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/184_APPLE_KUSH_showcase_600x600.webp"
+    },
+    {
+      "sku": "185",
+      "name": "HALIE BERRY (S)",
+      "slug": "halie-berry-s",
+      "tier": "BUDGET",
+      "type": "sativa",
+      "isHot": false,
+      "isSale": false,
+      "thc": "26%",
+      "price3g": {
+        "regular": 10,
+        "sale": null
+      },
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 50,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/185_HALIE_BERRY_S_showcase_600x600.webp"
+    },
+    {
+      "sku": "186",
+      "name": "HOLLYWOOD KUSH",
+      "slug": "hollywood-kush",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "26%",
+      "price3g": {
+        "regular": 10,
+        "sale": null
+      },
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 50,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/186_HOLLYWOOD_KUSH_showcase_600x600.webp"
+    },
+    {
+      "sku": "187",
+      "name": "CHOCOLATE KUSH",
+      "slug": "chocolate-kush",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "26%",
+      "price3g": {
+        "regular": 10,
+        "sale": null
+      },
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 50,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/187_CHOCOLATE_KUSH.webp"
+    }
+  ]
+}
