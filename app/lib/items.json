@@ -12,18 +12,6 @@
     "promoImage": null
   },
   {
-    "sku": "1006",
-    "name": "CANADIAN FULL",
-    "slug": "canadian-full",
-    "category": "CIGARETTES",
-    "type": "",
-    "thc": "",
-    "mg": "",
-    "price": "$25",
-    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1006-CANADIAN-FULL.webp",
-    "promoImage": null
-  },
-  {
     "sku": "1008",
     "name": "PUTTERS",
     "slug": "putters",
@@ -158,7 +146,7 @@
   {
     "sku": "1055",
     "name": "ZPods / ZPODS – Mango Pineapple (3×2 mL pods, 5% synthetic nic)",
-    "slug": "zpods-zpods-mango-pineapple-32-ml-pods-5-synthetic-nic",
+    "slug": "zpods-zpods-mango-pineapple-3-2-ml-pods-5-synthetic-nic",
     "category": "CONCENTRATES",
     "type": "",
     "thc": "",
@@ -192,6 +180,18 @@
     "promoImage": null
   },
   {
+    "sku": "1080",
+    "name": "OVNS 2500 – 5% | 2.5K PUFFS",
+    "slug": "ovns-2500-5-2-5k-puffs",
+    "category": "VAPE PENS",
+    "type": "",
+    "thc": "",
+    "mg": "",
+    "price": "$20",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1080-ovns2500.jpg",
+    "promoImage": null
+  },
+  {
     "sku": "1081",
     "name": "OVNS 10000 – 5% | 10K PUFFS",
     "slug": "ovns-10000-5-10k-puffs",
@@ -201,6 +201,18 @@
     "mg": "",
     "price": "$35",
     "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/1081OVNS10000.jpg",
+    "promoImage": null
+  },
+  {
+    "sku": "1082",
+    "name": "OVNS PIONEER – 5% | 22K PUFFS",
+    "slug": "ovns-pioneer-5-22k-puffs",
+    "category": "VAPE PENS",
+    "type": "",
+    "thc": "",
+    "mg": "",
+    "price": "$30",
+    "image": "",
     "promoImage": null
   },
   {
@@ -643,7 +655,7 @@
     "type": "i/h/s",
     "thc": "98%+",
     "mg": "",
-    "price": "$45",
+    "price": "$40",
     "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/GasGang.jpg",
     "promoImage": null
   },
@@ -713,7 +725,7 @@
     "slug": "deadly-moonrock-preroll",
     "category": "PREROLLS",
     "type": "i/h/s",
-    "thc": "50%+",
+    "thc": "",
     "mg": "",
     "price": "$20",
     "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/920-DEADLY-PREROLL.png",
@@ -729,18 +741,6 @@
     "mg": "",
     "price": "$25",
     "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/e42b5a7c-28f1-4378-b89a-107df2ee4e12.png",
-    "promoImage": null
-  },
-  {
-    "sku": "945, 946, 947",
-    "name": "MOONROCKETS HYB, IND, SAT",
-    "slug": "moonrockets-hyb-ind-sat",
-    "category": "PREROLLS",
-    "type": "",
-    "thc": "90%+",
-    "mg": "",
-    "price": "$20",
-    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/moonrockets_showcase_600x600.webp",
     "promoImage": null
   },
   {
@@ -777,6 +777,18 @@
     "mg": "1000MG",
     "price": "$30",
     "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/966-GOOBER-THC-CHOCOLOATE-1000MG.webp",
+    "promoImage": null
+  },
+  {
+    "sku": "999",
+    "name": "10 X PREMIUM MIX CIGARETTES",
+    "slug": "10-x-premium-mix-cigarettes",
+    "category": "CIGARETTES",
+    "type": "",
+    "thc": "",
+    "mg": "",
+    "price": "$3",
+    "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/999Cigs.webp",
     "promoImage": null
   }
 ]

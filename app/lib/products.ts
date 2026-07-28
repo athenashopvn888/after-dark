@@ -36,51 +36,54 @@ export interface ItemProduct {
 /* ── Data imports (static fallback) ── */
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
+import snapshotMetaJson from "./productSnapshotMeta.json";
+import {
+  fetchProductFeed,
+  type FetchWithNextCache,
+  type ProductSource,
+} from "./liveProductFeed";
+
+export { LIVE_PRODUCT_REVALIDATE_SECONDS } from "./liveProductFeed";
 
 export const allFlowers: FlowerProduct[] = flowersJson as FlowerProduct[];
 export const allItems: ItemProduct[] = itemsJson as ItemProduct[];
 
 /* ── Live stock fetch from Apps Script ── */
-const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || "";
-
-interface LiveStockResponse {
-  flowers: FlowerProduct[];
-  items: ItemProduct[];
-  storeCode?: string;
-  stockDate?: string;
-}
+export const productSnapshotMeta = snapshotMetaJson as {
+  storeCode: string;
+  sourceAsOf: string;
+  itemCount: number;
+  flowerCount: number;
+};
 
 /**
  * Fetch live stock-filtered products from Apps Script endpoint.
- * Used at build time (getStaticProps / generateStaticParams).
- * Falls back to static JSON if endpoint not configured.
+ * The server fetch is cached for four hours. A payload is accepted only when
+ * its stock timestamp is newer than the checked-in POS snapshot and the
+ * selected collection contains unique, usable products.
  */
-export async function fetchLiveProducts(): Promise<{
+export async function fetchLiveProducts(options: {
+  endpoint?: string;
+  fetcher?: FetchWithNextCache;
+  snapshotAsOf?: string;
+} = {}): Promise<{
   flowers: FlowerProduct[];
   items: ItemProduct[];
   isLive: boolean;
+  sources: { flowers: ProductSource; items: ProductSource };
   stockDate: string | null;
+  sourceAsOf: string;
 }> {
-  if (!APPS_SCRIPT_URL) {
-    return { flowers: allFlowers, items: allItems, isLive: false, stockDate: null };
-  }
-
-  try {
-    const res = await fetch(`${APPS_SCRIPT_URL}?store=MJ01`, {
-      next: { revalidate: 300 }, // Cache for 5 min during build
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data: LiveStockResponse = await res.json();
-    return {
-      flowers: data.flowers || allFlowers,
-      items: data.items || allItems,
-      isLive: true,
-      stockDate: data.stockDate || null,
-    };
-  } catch (err) {
-    console.warn("[products] Live fetch failed, using static data:", err);
-    return { flowers: allFlowers, items: allItems, isLive: false, stockDate: null };
-  }
+  const endpoint = options.endpoint ?? process.env.APPS_SCRIPT_URL ?? "";
+  const fetcher = options.fetcher ?? fetch;
+  const snapshotAsOf = options.snapshotAsOf ?? productSnapshotMeta.sourceAsOf;
+  return fetchProductFeed<FlowerProduct, ItemProduct>({
+    endpoint,
+    fetcher,
+    snapshotAsOf,
+    fallbackFlowers: allFlowers,
+    fallbackItems: allItems,
+  });
 }
 
 export const TIER_CONFIG: Record<
