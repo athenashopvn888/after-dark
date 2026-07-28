@@ -112,6 +112,47 @@ test("invalid collection falls back independently from a fresh valid one", async
   });
 });
 
+test("flower feed accepts one active SKU displayed in multiple tiers", async () => {
+  const liveFlowers = [
+    { sku: "392", name: "RAINBOW KUSH", tier: "AAA+" },
+    { sku: "392", name: "RAINBOW KUSH", tier: "BUDGET" },
+  ];
+  const result = await fetchProductFeed({
+    endpoint: "https://example.test/feed",
+    snapshotAsOf,
+    fallbackItems,
+    fallbackFlowers,
+    fetcher: async () =>
+      responseJson({
+        items: [{ sku: "live-item", name: "Live item" }],
+        flowers: liveFlowers,
+        stockDate: freshStockDate,
+      }),
+  });
+  assert.deepEqual(result.flowers, liveFlowers);
+  assert.equal(result.sources.flowers, "live");
+});
+
+test("flower feed rejects a true duplicate with the same SKU and tier", async () => {
+  const result = await fetchProductFeed({
+    endpoint: "https://example.test/feed",
+    snapshotAsOf,
+    fallbackItems,
+    fallbackFlowers,
+    fetcher: async () =>
+      responseJson({
+        items: [{ sku: "live-item", name: "Live item" }],
+        flowers: [
+          { sku: "392", name: "RAINBOW KUSH", tier: "BUDGET" },
+          { sku: "392", name: "RAINBOW KUSH", tier: "budget" },
+        ],
+        stockDate: freshStockDate,
+      }),
+  });
+  assert.equal(result.flowers, fallbackFlowers);
+  assert.equal(result.sources.flowers, "static-fallback");
+});
+
 test("network failure preserves both static snapshots", async () => {
   const result = await fetchProductFeed({
     endpoint: "https://example.test/feed",

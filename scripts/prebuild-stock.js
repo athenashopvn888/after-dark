@@ -14,14 +14,18 @@ const FLOWERS_PATH = path.join(__dirname, '..', 'app', 'lib', 'flowers.json');
 const ITEMS_PATH = path.join(__dirname, '..', 'app', 'lib', 'items.json');
 const SNAPSHOT_META_PATH = path.join(__dirname, '..', 'app', 'lib', 'productSnapshotMeta.json');
 
-function isValidCollection(products) {
+function isValidCollection(products, allowTierVariants = false) {
   if (!Array.isArray(products) || products.length === 0) return false;
   const seen = new Set();
   return products.every((product) => {
     const sku = String(product && product.sku || '').trim();
     const name = String(product && product.name || '').trim();
-    if (!sku || !name || seen.has(sku)) return false;
-    seen.add(sku);
+    const tier = allowTierVariants
+      ? String(product && product.tier || '').trim().toUpperCase()
+      : '';
+    const displayIdentity = tier ? `${sku}\u0000${tier}` : sku;
+    if (!sku || !name || seen.has(displayIdentity)) return false;
+    seen.add(displayIdentity);
     return true;
   });
 }
@@ -57,7 +61,7 @@ async function main() {
 
     const data = await res.json();
 
-    if (!isValidCollection(data.flowers) || !isValidCollection(data.items)) {
+    if (!isValidCollection(data.flowers, true) || !isValidCollection(data.items)) {
       throw new Error('Invalid response: product collections failed validation');
     }
     assertNewerThanSnapshot(data.stockDate);
