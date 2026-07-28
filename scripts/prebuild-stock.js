@@ -12,6 +12,32 @@ const path = require('path');
 const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || '';
 const FLOWERS_PATH = path.join(__dirname, '..', 'app', 'lib', 'flowers.json');
 const ITEMS_PATH = path.join(__dirname, '..', 'app', 'lib', 'items.json');
+const SNAPSHOT_META_PATH = path.join(__dirname, '..', 'app', 'lib', 'productSnapshotMeta.json');
+
+function isValidCollection(products) {
+  if (!Array.isArray(products) || products.length === 0) return false;
+  const seen = new Set();
+  return products.every((product) => {
+    const sku = String(product && product.sku || '').trim();
+    const name = String(product && product.name || '').trim();
+    if (!sku || !name || seen.has(sku)) return false;
+    seen.add(sku);
+    return true;
+  });
+}
+
+function assertNewerThanSnapshot(stockDate) {
+  const snapshot = JSON.parse(fs.readFileSync(SNAPSHOT_META_PATH, 'utf-8'));
+  const liveTime = Date.parse(stockDate || '');
+  const snapshotTime = Date.parse(snapshot.sourceAsOf || '');
+  if (
+    !Number.isFinite(liveTime) ||
+    !Number.isFinite(snapshotTime) ||
+    liveTime <= snapshotTime
+  ) {
+    throw new Error('Live stock is not newer than the checked-in POS snapshot');
+  }
+}
 
 async function main() {
   if (!APPS_SCRIPT_URL) {
@@ -31,9 +57,10 @@ async function main() {
 
     const data = await res.json();
 
-    if (!data.flowers || !data.items) {
-      throw new Error('Invalid response: missing flowers or items');
+    if (!isValidCollection(data.flowers) || !isValidCollection(data.items)) {
+      throw new Error('Invalid response: product collections failed validation');
     }
+    assertNewerThanSnapshot(data.stockDate);
 
     // ── Post-process flowers: derive sale flags + clean names ──
     const SALE_RE = /\bSALE\b/i;
@@ -92,6 +119,13 @@ async function main() {
     // Write items.json
     fs.writeFileSync(ITEMS_PATH, JSON.stringify(data.items, null, 2), 'utf-8');
     console.log(`[prebuild] items.json updated: ${data.items.length} products`);
+
+    fs.writeFileSync(SNAPSHOT_META_PATH, JSON.stringify({
+      storeCode: 'MJ01',
+      sourceAsOf: data.stockDate,
+      itemCount: data.items.length,
+      flowerCount: data.flowers.length,
+    }, null, 2) + '\n', 'utf-8');
 
     // Category breakdown
     const cats = {};
