@@ -54,8 +54,21 @@ function productDisplayIdentity(product: ProductIdentity): string {
 
 export function mergeProductDisplayOverrides<
   Product extends ProductIdentity,
->(products: Product[], overrides: Product[] = []): Product[] {
+>(
+  products: Product[],
+  overrides: Product[] = [],
+  options: { preferProducts?: boolean } = {},
+): Product[] {
   if (overrides.length === 0) return products;
+  if (options.preferProducts) {
+    const productKeys = new Set(products.map(productDisplayIdentity));
+    return [
+      ...products,
+      ...overrides.filter(
+        (product) => !productKeys.has(productDisplayIdentity(product)),
+      ),
+    ];
+  }
   const approvedKeys = new Set(overrides.map(productDisplayIdentity));
   return [
     ...products.filter(
@@ -131,6 +144,7 @@ export async function fetchProductFeed<
         ? mergeProductDisplayOverrides(
             data.flowers as Flower[],
             options.flowerDisplayOverrides,
+            { preferProducts: true },
           )
         : fallbackFlowers,
       items: itemsLive ? (data.items as Item[]) : options.fallbackItems,

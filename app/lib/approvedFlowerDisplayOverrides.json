@@ -58,6 +58,42 @@
       "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/107_NORTHERN_LIGHTS_(SHREDS).webp"
     },
     {
+      "sku": "112",
+      "name": "PINK BISCUITS SHREDS",
+      "slug": "pink-biscuits-shreds",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "24%",
+      "price3g": null,
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 40,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/112-Pink-Biscuits-Shake.jpg"
+    },
+    {
+      "sku": "115",
+      "name": "BLACK JACK SHREDS",
+      "slug": "black-jack-shreds",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": false,
+      "thc": "24%",
+      "price3g": null,
+      "price5g": null,
+      "price14g": null,
+      "price28g": {
+        "regular": 40,
+        "sale": null
+      },
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/119-Pink-Hindu-shake.jpg"
+    },
+    {
       "sku": "172",
       "name": "LAVENDER KUSH",
       "slug": "lavender-kush",
@@ -158,6 +194,96 @@
         "sale": null
       },
       "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/187_CHOCOLATE_KUSH.webp"
+    },
+    {
+      "sku": "392",
+      "name": "RAINBOW KUSH",
+      "slug": "rainbow-kush",
+      "tier": "AAA+",
+      "type": "indica",
+      "isHot": false,
+      "isSale": true,
+      "thc": "30%",
+      "price3g": {
+        "regular": 20,
+        "sale": 10
+      },
+      "price5g": {
+        "regular": 30,
+        "sale": 20
+      },
+      "price14g": {
+        "regular": 70,
+        "sale": 40
+      },
+      "price28g": null,
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/393-PINK-KUSH-99212.webp"
+    },
+    {
+      "sku": "392",
+      "name": "RAINBOW KUSH",
+      "slug": "rainbow-kush",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": true,
+      "thc": "30%",
+      "price3g": {
+        "regular": 20,
+        "sale": 10
+      },
+      "price5g": {
+        "regular": 30,
+        "sale": 20
+      },
+      "price14g": null,
+      "price28g": null,
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/393-PINK-KUSH-99212.webp"
+    },
+    {
+      "sku": "396",
+      "name": "KHALIFA KUSH",
+      "slug": "khalifa-kush",
+      "tier": "AAA+",
+      "type": "indica",
+      "isHot": false,
+      "isSale": true,
+      "thc": "31%",
+      "price3g": {
+        "regular": 20,
+        "sale": 10
+      },
+      "price5g": {
+        "regular": 30,
+        "sale": 20
+      },
+      "price14g": {
+        "regular": 70,
+        "sale": 40
+      },
+      "price28g": null,
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/396-DURIAN-99219.webp"
+    },
+    {
+      "sku": "396",
+      "name": "KHALIFA KUSH",
+      "slug": "khalifa-kush",
+      "tier": "BUDGET",
+      "type": "indica",
+      "isHot": false,
+      "isSale": true,
+      "thc": "31%",
+      "price3g": {
+        "regular": 20,
+        "sale": 10
+      },
+      "price5g": {
+        "regular": 30,
+        "sale": 20
+      },
+      "price14g": null,
+      "price28g": null,
+      "image": "https://pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev/products/396-DURIAN-99219.webp"
     }
   ]
 }

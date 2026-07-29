@@ -50,11 +50,13 @@ function mergeApprovedFlowerDisplayRows(products) {
   if (approved.storeCode !== 'MJ01' || !isValidCollection(approved.flowers, true)) {
     throw new Error('Invalid MJ01 approved flower display overrides');
   }
-  const approvedKeys = new Set(approved.flowers.map(productDisplayIdentity));
+  const productKeys = new Set(products.map(productDisplayIdentity));
   return {
     flowers: [
-      ...products.filter((product) => !approvedKeys.has(productDisplayIdentity(product))),
-      ...approved.flowers,
+      ...products,
+      ...approved.flowers.filter(
+        (product) => !productKeys.has(productDisplayIdentity(product)),
+      ),
     ],
     approvedCount: approved.flowers.length,
   };
