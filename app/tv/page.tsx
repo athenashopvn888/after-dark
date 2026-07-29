@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./tv.module.css";
+import { TOP_TIER_BUNDLE_LABELS } from "./bundleLabels";
 
 /* -- Types -- */
 interface PricePoint { regular: number; sale: number | null; }
@@ -47,7 +48,7 @@ function PriceCell({ pp, color }: { pp: PricePoint|null; color?: string }) {
   if (pp.sale !== null && pp.sale !== pp.regular) {
     return (
       <span>
-        <span className={styles.oldPrice}>${pp.regular}</span>
+        <del className={styles.oldPrice}>${pp.regular}</del>
         <b className={`${styles.salePrice} ${color || ''}`}>${pp.sale}</b>
       </span>
     );
@@ -386,13 +387,13 @@ function FlowerCard({
                   <div className={`${styles.mc} ${styles.mcPrice} ${styles.mcPriceDeal}`}>
                     {p3 && (
                       <div className={styles.pLine}>
-                        <span className={styles.pLab}>{f.isSale ? "3G=" : "2G-3G"}</span>
+                        <span className={styles.pLab}>{TOP_TIER_BUNDLE_LABELS.price3g}</span>
                         <PriceCell pp={p3} color={styles.priceGreen} />
                       </div>
                     )}
                     {p5 && (
                       <div className={styles.pLine}>
-                        <span className={styles.pLab}>{f.isSale ? "6G=" : "3G-6G"}</span>
+                        <span className={styles.pLab}>{TOP_TIER_BUNDLE_LABELS.price5g}</span>
                         <PriceCell pp={p5} color={styles.priceBlue} />
                       </div>
                     )}
