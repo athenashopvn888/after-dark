@@ -9,8 +9,8 @@ export const gbpLocation = {
   address: "1664 Jane St, York, ON M9N 2S1",
   streetAddress: "1664 Jane St",
   postalCode: "M9N 2S1",
-  phone: "(416) 302-8127",
-  phoneIntl: "+14163028127",
+  phone: "+1 (437) 524-9344",
+  phoneIntl: "+14375249344",
   neighborhood: "Jane Street / York",
   nearbyAreas: ["Jane Street", "Weston", "Mount Dennis", "Keelesdale", "Eglinton West", "York", "Black Creek", "Trethewey Drive"],
   products: [

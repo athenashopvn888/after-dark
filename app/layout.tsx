@@ -77,7 +77,7 @@ const jsonLd = {
   name: "After Dark Cannabis",
   description: "Cannabis dispensary at 1664 Jane St in York, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
   url: "https://afterdarkcannabis.com",
-  telephone: "+14163028127",
+  telephone: "+14375249344",
   image: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/7Clmh.jpg",
   priceRange: "$3 - $12/g",
   address: {

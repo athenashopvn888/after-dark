@@ -51,7 +51,7 @@ export const SITE = {
   baseUrl: "https://afterdarkcannabis.com",
   storePage: "/weed-dispensary-york",
   address: "1664 Jane St, York, ON M9N 2S1",
-  phone: "(647) 350-0420",
+  phone: "+1 (437) 524-9344",
   hours: "Open 24 hours",
 };
 
