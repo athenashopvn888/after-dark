@@ -80,7 +80,7 @@ const LOCAL_FAQS = [
   },
   {
     q: "Where is After Dark Cannabis located?",
-    a: "We are located at 1664 Jane St, York, ON M9N 2S1. Visit us in person or call us at (416) 302-8127. Free evening street parking is available.",
+    a: "We are located at 1664 Jane St, York, ON M9N 2S1. Visit us in person or call us at +1 (437) 524-9344. Free evening street parking is available.",
   },
   {
     q: "What is the cheapest weed at After Dark Cannabis?",
