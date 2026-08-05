@@ -1,6 +1,18 @@
 "use client";
-import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useSyncExternalStore,
+} from "react";
 import styles from "./tv2.module.css";
+import {
+  TV2_HIRING_INTERVAL_MS,
+  TV2_HIRING_REDUCED_MOTION_MESSAGE,
+  TV2_HIRING_SLIDES,
+  getNextTv2HiringSlide,
+} from "./tv2Hiring";
 import {
   getTv2DaytimePromo,
   isCigaretteOfferVisible,
@@ -178,6 +190,61 @@ function VerticalTicker() {
   );
 }
 
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeToReducedMotion(onChange: () => void) {
+  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
+  mediaQuery.addEventListener("change", onChange);
+  return () => mediaQuery.removeEventListener("change", onChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function HiringRibbon() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const reducedMotion = useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    () => false,
+  );
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const interval = window.setInterval(() => {
+      setActiveSlide((current) => getNextTv2HiringSlide(current));
+    }, TV2_HIRING_INTERVAL_MS);
+    return () => window.clearInterval(interval);
+  }, [reducedMotion]);
+
+  return (
+    <div
+      className={styles.hiringRibbon}
+      data-testid="tv2-hiring-ribbon"
+      aria-label="After Dark Cannabis hiring notice"
+    >
+      {reducedMotion ? (
+        <span className={styles.hiringStatic}>
+          {TV2_HIRING_REDUCED_MOTION_MESSAGE}
+        </span>
+      ) : (
+        TV2_HIRING_SLIDES.map((message, index) => (
+          <span
+            key={message}
+            className={`${styles.hiringMessage} ${
+              index === activeSlide ? styles.hiringMessageActive : ""
+            }`}
+            aria-hidden={index !== activeSlide}
+          >
+            {message}
+          </span>
+        ))
+      )}
+    </div>
+  );
+}
+
 /* -- MAIN TV2 PAGE -- */
 export default function TV2Page() {
   const [items, setItems] = useState<Item[]>([]);
@@ -225,10 +292,15 @@ export default function TV2Page() {
   }, []);
 
   useEffect(() => {
-    loadData(); fitToScreen();
+    fitToScreen();
+    const initialLoad = window.setTimeout(loadData, 0);
     window.addEventListener("resize", fitToScreen);
     const refresh = setInterval(loadData, 5*60*1000);
-    return () => { window.removeEventListener("resize", fitToScreen); clearInterval(refresh); };
+    return () => {
+      window.clearTimeout(initialLoad);
+      window.removeEventListener("resize", fitToScreen);
+      clearInterval(refresh);
+    };
   }, [loadData, fitToScreen]);
 
   useEffect(() => {
@@ -253,6 +325,7 @@ export default function TV2Page() {
         <div style={{margin:"-40px -40px 30px -40px", width:"calc(100% + 80px)"}}>
           <img src="/banners/ItemTv.webp" alt="After Dark Cannabis Items TV Menu" style={{width:"100%",display:"block"}} />
         </div>
+        <HiringRibbon />
         {/* GRID */}
         <div className={styles.stage}>
           <div className={styles.grid}>
