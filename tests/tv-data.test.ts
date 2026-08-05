@@ -21,16 +21,13 @@ const approvedBudgetFlowers = [
   "185",
   "186",
   "187",
-  "392",
-  "396",
 ].map((sku) => ({
   sku,
   name: `Approved Budget ${sku}`,
   tier: "BUDGET",
 }));
 const approvedPairedTierFlowers = [
-  { sku: "392", name: "Approved AAA+ 392", tier: "AAA+" },
-  { sku: "396", name: "Approved AAA+ 396", tier: "AAA+" },
+  { sku: "172", name: "Approved AAA+ 172", tier: "AAA+" },
 ];
 const approvedFlowerDisplayRows = [
   ...approvedBudgetFlowers,
@@ -180,13 +177,17 @@ test("flower feed rejects a true duplicate with the same SKU and tier", async ()
   assert.equal(result.sources.flowers, "static-fallback");
 });
 
-test("all approved MJ01 Budget rows survive a newer live feed omission", async () => {
+test("display overrides cannot resurrect SKUs omitted by the live email feed", async () => {
   const result = await fetchProductFeed({
     endpoint: "https://example.test/feed",
     snapshotAsOf,
     fallbackItems,
     fallbackFlowers,
-    flowerDisplayOverrides: approvedFlowerDisplayRows,
+    flowerDisplayOverrides: [
+      ...approvedFlowerDisplayRows,
+      { sku: "392", name: "RAINBOW KUSH", tier: "BUDGET" },
+      { sku: "396", name: "KHALIFA KUSH", tier: "AAA+" },
+    ],
     fetcher: async () =>
       responseJson({
         items: [{ sku: "live-item", name: "Live item" }],
@@ -196,23 +197,10 @@ test("all approved MJ01 Budget rows survive a newer live feed omission", async (
   });
   assert.deepEqual(result.flowers, [
     { sku: "live-flower", name: "Live flower", tier: "AA" },
-    ...approvedFlowerDisplayRows,
   ]);
-  assert.deepEqual(
-    result.flowers
-      .filter((flower) => flower.tier === "BUDGET")
-      .map((flower) => flower.sku),
-    approvedBudgetFlowers.map((flower) => flower.sku),
-  );
   assert.equal(result.sources.flowers, "live");
   for (const sku of ["392", "396"]) {
-    assert.deepEqual(
-      result.flowers
-        .filter((flower) => flower.sku === sku)
-        .map((flower) => flower.tier)
-        .sort(),
-      ["AAA+", "BUDGET"],
-    );
+    assert.equal(result.flowers.some((flower) => flower.sku === sku), false);
   }
 });
 
@@ -229,15 +217,9 @@ test("approved display row replaces an incoming row with the same SKU and tier",
   );
 });
 
-test("newer live rows update matching approved identities without duplicates", async () => {
-  const liveBudget = approvedBudgetFlowers.map((flower) => ({
-    ...flower,
-    name: `Newer ${flower.sku}`,
-  }));
+test("an active live SKU can receive an approved additional tier", async () => {
   const liveFlowers = [
-    { sku: "392", name: "RAINBOW KUSH", tier: "AAA+" },
-    { sku: "396", name: "KHALIFA KUSH", tier: "AAA+" },
-    ...liveBudget,
+    { sku: "172", name: "Newer 172", tier: "BUDGET" },
   ];
   const result = await fetchProductFeed({
     endpoint: "https://example.test/feed",
@@ -252,16 +234,19 @@ test("newer live rows update matching approved identities without duplicates", a
         stockDate: freshStockDate,
       }),
   });
-  assert.deepEqual(result.flowers, liveFlowers);
+  assert.deepEqual(result.flowers, [
+    ...liveFlowers,
+    { sku: "172", name: "Approved AAA+ 172", tier: "AAA+" },
+  ]);
   assert.equal(
     result.flowers.filter(
-      (flower) => flower.sku === "392" && flower.tier === "BUDGET",
+      (flower) => flower.sku === "172" && flower.tier === "BUDGET",
     ).length,
     1,
   );
   assert.equal(
     result.flowers.filter(
-      (flower) => flower.sku === "392" && flower.tier === "AAA+",
+      (flower) => flower.sku === "172" && flower.tier === "AAA+",
     ).length,
     1,
   );
