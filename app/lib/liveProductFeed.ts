@@ -52,6 +52,10 @@ function productDisplayIdentity(product: ProductIdentity): string {
   return tier ? `${sku}\u0000${tier}` : sku;
 }
 
+function productSku(product: ProductIdentity): string {
+  return String(product.sku || "").trim();
+}
+
 export function mergeProductDisplayOverrides<
   Product extends ProductIdentity,
 >(
@@ -60,21 +64,25 @@ export function mergeProductDisplayOverrides<
   options: { preferProducts?: boolean } = {},
 ): Product[] {
   if (overrides.length === 0) return products;
+  const activeSkus = new Set(products.map(productSku));
+  const eligibleOverrides = overrides.filter((override) =>
+    activeSkus.has(productSku(override)),
+  );
   if (options.preferProducts) {
     const productKeys = new Set(products.map(productDisplayIdentity));
     return [
       ...products,
-      ...overrides.filter(
+      ...eligibleOverrides.filter(
         (product) => !productKeys.has(productDisplayIdentity(product)),
       ),
     ];
   }
-  const approvedKeys = new Set(overrides.map(productDisplayIdentity));
+  const approvedKeys = new Set(eligibleOverrides.map(productDisplayIdentity));
   return [
     ...products.filter(
       (product) => !approvedKeys.has(productDisplayIdentity(product)),
     ),
-    ...overrides,
+    ...eligibleOverrides,
   ];
 }
 

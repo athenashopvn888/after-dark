@@ -50,15 +50,19 @@ function mergeApprovedFlowerDisplayRows(products) {
   if (approved.storeCode !== 'MJ01' || !isValidCollection(approved.flowers, true)) {
     throw new Error('Invalid MJ01 approved flower display overrides');
   }
+  const activeSkus = new Set(products.map((product) => String(product.sku).trim()));
+  const eligibleOverrides = approved.flowers.filter((product) =>
+    activeSkus.has(String(product.sku).trim()),
+  );
   const productKeys = new Set(products.map(productDisplayIdentity));
   return {
     flowers: [
       ...products,
-      ...approved.flowers.filter(
+      ...eligibleOverrides.filter(
         (product) => !productKeys.has(productDisplayIdentity(product)),
       ),
     ],
-    approvedCount: approved.flowers.length,
+    approvedCount: eligibleOverrides.length,
   };
 }
 
