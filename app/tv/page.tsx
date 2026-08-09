@@ -671,7 +671,7 @@ const TICKER_SLIDES = [
   "Flower Tiers and Menu Categories",
   "Open 24 Hours",
   "ALL SALES ARE FINAL",
-  "🎮 Play Games at afterdarkcannabis.com/games",
+  "DELIVERY MENU at afterdarkcannabis.com/delivery",
 ];
 
 function VerticalTicker() {
