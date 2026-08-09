@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
 import FlowerCard from "./components/FlowerCard";
-import { allFlowers } from "./lib/products";
+import type { FlowerProduct } from "./lib/products";
 import Papa from "papaparse";
 
 /* ── Bento Mosaic Config ── */
@@ -100,7 +100,7 @@ interface ReviewStats {
 }
 
 export default function HomePage() {
-  const [featuredStrains, setFeaturedStrains] = useState<any[]>([]);
+  const [featuredStrains, setFeaturedStrains] = useState<FlowerProduct[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsStats, setReviewsStats] = useState<ReviewStats | null>(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
@@ -162,26 +162,26 @@ export default function HomePage() {
 
   /* ── 2. Build Featured Strains ── */
   useEffect(() => {
-    const pool = [...allFlowers].filter((f) => f.image);
-    // Shuffle pool securely
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
-    }
-
-    const picked: typeof pool = [];
-    const tierCounts: Record<string, number> = {};
-
-    for (const f of pool) {
-      if (picked.length >= 8) break;
-      const tc = tierCounts[f.tier] || 0;
-      if (tc >= 2) continue; // max 2 per tier
-      if (picked.some((p) => p.name === f.name)) continue; // avoid exact duplicates
-      picked.push(f);
-      tierCounts[f.tier] = tc + 1;
-    }
-
-    setFeaturedStrains(picked);
+    fetch("/api/tv-data?type=flowers")
+      .then((response) => response.ok ? response.json() as Promise<FlowerProduct[]> : Promise.reject(new Error(`Inventory returned ${response.status}`)))
+      .then((flowers) => {
+        const pool = flowers.filter((flower) => flower.image);
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+        const picked: FlowerProduct[] = [];
+        const tierCounts: Record<string, number> = {};
+        for (const flower of pool) {
+          if (picked.length >= 8) break;
+          const tierCount = tierCounts[flower.tier] || 0;
+          if (tierCount >= 2 || picked.some((pickedFlower) => pickedFlower.name === flower.name)) continue;
+          picked.push(flower);
+          tierCounts[flower.tier] = tierCount + 1;
+        }
+        setFeaturedStrains(picked);
+      })
+      .catch((error) => console.warn("Featured inventory fetch failed:", error));
   }, []);
 
   return (

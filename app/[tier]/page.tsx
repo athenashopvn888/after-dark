@@ -4,12 +4,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FlowerCard from "../components/FlowerCard";
 import {
-  getFlowersByTier,
   getTierFromSlug,
   TIER_CONFIG,
 } from "../lib/products";
+import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_SEO } from "../lib/tierSeoContent";
 import styles from "./tier.module.css";
+
+export const dynamic = "force-dynamic";
 
 /* -- Generate all tier pages at build -- */
 export function generateStaticParams() {
@@ -25,7 +27,8 @@ export async function generateMetadata({
   const { tier: tierSlug } = await params;
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) return {};
-  const flowers = getFlowersByTier(tierInfo.key);
+  const { snapshot } = await getAdcInventory();
+  const flowers = snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
   const seo = TIER_SEO[tierInfo.key];
 
   return {
@@ -48,7 +51,8 @@ export default async function TierPage({
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) notFound();
 
-  const flowers = getFlowersByTier(tierInfo.key);
+  const inventory = await getAdcInventory();
+  const flowers = inventory.snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
   const { config } = tierInfo;
   const seo = TIER_SEO[tierInfo.key];
 
@@ -57,7 +61,7 @@ export default async function TierPage({
   const hotFlowers = flowers.filter((f) => f.isHot);
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
 
       {/* ── Banner Image (standalone, no overlay text) ── */}
