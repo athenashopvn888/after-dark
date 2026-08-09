@@ -5,11 +5,11 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SafeImage from "../../components/SafeImage";
 import {
-  getItemsByCategory,
   getCategoryFromSlug,
   CATEGORY_CONFIG,
   type ItemProduct,
 } from "../../lib/products";
+import { getAdcInventory } from "../../lib/adcInventoryService";
 import styles from "./items.module.css";
 
 /* ── Generate all category pages ── */
@@ -26,7 +26,8 @@ export async function generateMetadata({
   const { category: catSlug } = await params;
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) return {};
-  const items = getItemsByCategory(catInfo.key);
+  const { snapshot } = await getAdcInventory();
+  const items = snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase());
 
   return {
     title: catInfo.config.seoTitle || `${catInfo.config.name} — ${items.length} Products`,
@@ -47,17 +48,18 @@ export default async function ItemsCategoryPage({
   if (!catInfo) notFound();
 
   /* Pre-Rolls also shows accessories (ADD ONS) */
-  let items = getItemsByCategory(catInfo.key);
+  const inventory = await getAdcInventory();
+  let items = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase());
   if (catInfo.key === "PREROLLS") {
-    const accessories = getItemsByCategory("ADD ONS");
-    const existingIds = new Set(items.map(i => i.sku));
-    const uniqueAccessories = accessories.filter(a => !existingIds.has(a.sku));
+    const accessories = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === "ADD ONS");
+    const existingIds = new Set(items.map(i => `${i.sku}\u0000${i.category}\u0000${i.name}`));
+    const uniqueAccessories = accessories.filter(a => !existingIds.has(`${a.sku}\u0000${a.category}\u0000${a.name}`));
     items = [...items, ...uniqueAccessories];
   }
   const { config } = catInfo;
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
 
       {/* Hero Banner */}
@@ -85,7 +87,7 @@ export default async function ItemsCategoryPage({
           {items.length > 0 ? (
             <div className={styles.grid}>
               {items.map((item) => (
-                <ItemCard key={item.sku} item={item} catColor={config.color} />
+                <ItemCard key={`${item.sku}-${item.category}-${item.name}`} item={item} catColor={config.color} />
               ))}
             </div>
           ) : (
@@ -134,7 +136,14 @@ export default async function ItemsCategoryPage({
 
 function ItemCard({ item, catColor }: { item: ItemProduct; catColor: string }) {
   return (
-    <Link href={`/item/${item.slug}`} className={styles.card} style={{ "--cat-color": catColor } as React.CSSProperties}>
+    <Link
+      href={`/item/${item.slug}`}
+      className={styles.card}
+      style={{ "--cat-color": catColor } as React.CSSProperties}
+      data-product-sku={item.sku}
+      data-product-name={item.name}
+      data-product-category={item.category}
+    >
       <div className={styles.cardMedia}>
         {item.image ? (
           <SafeImage src={item.image} alt={item.name} loading="lazy" className={styles.cardImg} />

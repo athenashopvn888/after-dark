@@ -38,14 +38,7 @@ import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
 import snapshotMetaJson from "./productSnapshotMeta.json";
 import approvedFlowerDisplayOverridesJson from "./approvedFlowerDisplayOverrides.json";
-import {
-  fetchProductFeed,
-  mergeProductDisplayOverrides,
-  type FetchWithNextCache,
-  type ProductSource,
-} from "./liveProductFeed";
-
-export { LIVE_PRODUCT_REVALIDATE_SECONDS } from "./liveProductFeed";
+import { mergeProductDisplayOverrides } from "./liveProductFeed";
 
 const approvedFlowerDisplayOverrides =
   approvedFlowerDisplayOverridesJson.flowers as FlowerProduct[];
@@ -66,37 +59,6 @@ export const productSnapshotMeta = snapshotMetaJson as {
   flowerSourceRowCount: number;
   flowerDisplayOverrideCount: number;
 };
-
-/**
- * Fetch live stock-filtered products from Apps Script endpoint.
- * The server fetch is cached for four hours. A payload is accepted only when
- * its stock timestamp is newer than the checked-in POS snapshot and the
- * selected collection contains unique, usable products.
- */
-export async function fetchLiveProducts(options: {
-  endpoint?: string;
-  fetcher?: FetchWithNextCache;
-  snapshotAsOf?: string;
-} = {}): Promise<{
-  flowers: FlowerProduct[];
-  items: ItemProduct[];
-  isLive: boolean;
-  sources: { flowers: ProductSource; items: ProductSource };
-  stockDate: string | null;
-  sourceAsOf: string;
-}> {
-  const endpoint = options.endpoint ?? process.env.APPS_SCRIPT_URL ?? "";
-  const fetcher = options.fetcher ?? fetch;
-  const snapshotAsOf = options.snapshotAsOf ?? productSnapshotMeta.sourceAsOf;
-  return fetchProductFeed<FlowerProduct, ItemProduct>({
-    endpoint,
-    fetcher,
-    snapshotAsOf,
-    fallbackFlowers: allFlowers,
-    fallbackItems: allItems,
-    flowerDisplayOverrides: approvedFlowerDisplayOverrides,
-  });
-}
 
 export const TIER_CONFIG: Record<
   string,
