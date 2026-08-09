@@ -11,6 +11,8 @@ import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_SEO } from "../lib/tierSeoContent";
 import styles from "./tier.module.css";
 
+export const dynamic = "force-dynamic";
+
 /* -- Generate all tier pages at build -- */
 export function generateStaticParams() {
   return Object.values(TIER_CONFIG).map((t) => ({ tier: t.slug }));

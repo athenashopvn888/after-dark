@@ -12,6 +12,8 @@ import {
 import { getAdcInventory } from "../../lib/adcInventoryService";
 import styles from "./items.module.css";
 
+export const dynamic = "force-dynamic";
+
 /* ── Generate all category pages ── */
 export function generateStaticParams() {
   return Object.values(CATEGORY_CONFIG).map((c) => ({ category: c.slug }));
