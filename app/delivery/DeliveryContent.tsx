@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AfterDarkWebChat from "./AfterDarkWebChat";
 import menu from "./delivery-menu.json";
 import styles from "./delivery.module.css";
 
@@ -104,10 +105,14 @@ export default function DeliveryContent() {
     <section className={`${styles.hero} ${styles.heroPlain}`}>
       <div><p>After Dark Cannabis</p><h1>Delivery Menu</h1><span>Browse the shared product catalog. The store confirms current availability and delivery details before an order is accepted.</span></div>
     </section>
+    <section className={styles.deliveryDetails} aria-label="After Dark delivery details"><strong>$60 PRODUCT MINIMUM</strong></section>
     <section className={styles.loyalty} aria-labelledby="loyalty-title">
-      <div><p>MEMBER PRICING</p><h2 id="loyalty-title">Compare every price clearly</h2></div>
-      <p>Eligible member offers are shown automatically. Standard and member prices appear together when available.</p>
+      <div><p>SAVE ON A LATER ORDER</p><h2 id="loyalty-title">Member Loyalty Savings</h2></div>
+      <p>Qualify with an eligible regular-price 28g purchase in BC Premium, Crafts, or Exotics, or with a selected 2 × 28g tier offer. Rewards and coupons apply to a later order—not the qualifying purchase.</p>
+      <ol><li><strong>Qualify</strong><span>Purchase an eligible regular-price ounce or selected two-ounce tier offer.</span></li><li><strong>Return</strong><span>On your next visit, save $30 on an eligible regular-price 28g item in the selected tier.</span></li><li><strong>Use your coupon later</strong><span>A 3g Craft coupon earned with a qualifying $120+ purchase is redeemed on your next order.</span></li><li><strong>Keep access active</strong><span>Make a $50+ purchase within 14 days, or requalify with an eligible full-price purchase.</span></li></ol>
+      <aside><strong>Important conditions</strong><p>Complimentary items apply only to regular-price Craft or Exotic ounces—not BC Premium. Loyalty prices are firm and cannot be reduced with points. Loyalty-price orders do not include extra complimentary items. The dispatcher confirms current eligibility and any included item before checkout.</p></aside>
     </section>
+    <section className={styles.howToOrder} aria-labelledby="how-to-order-title"><div><p>HOW TO ORDER</p><h2 id="how-to-order-title">Order with the After Dark dispatcher</h2><span>LIVE ORDER connects you with the After Dark dispatcher.</span></div><ol><li><strong>Browse the delivery menu</strong><span>Note the product names and weights you want.</span></li><li><strong>Select LIVE ORDER</strong><span>Open Web Chat at the bottom-right and send your choices.</span></li><li><strong>Verify privately if you are new</strong><span>New customers complete the private selfie-with-ID step in Web Chat.</span></li><li><strong>Confirm with the dispatcher</strong><span>The dispatcher confirms availability, delivery details, and next steps.</span></li></ol></section>
     <section className={styles.catalogShell}>
       <aside className={styles.filters}><h2>Flower tiers</h2>{filters.map((tier) => <button type="button" key={tier} className={filter === tier ? styles.active : ""} onClick={() => setFilter(tier)}>{tier}<span>{tier === "ALL" ? products.length : products.filter((product) => product.tier === tier).length}</span></button>)}</aside>
       <div className={styles.catalog}>
@@ -128,6 +133,7 @@ export default function DeliveryContent() {
     </section>
     <div className={styles.ctaSection}><p>Visit us in-store at <strong>1664 Jane St, York</strong>. We are <strong>Open 24 Hours</strong>. Call <strong>+1 (437) 524-9344</strong>.</p></div>
     {selected && <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) setSelected(null); }}><section className={styles.drawer} role="dialog" aria-modal="true" aria-labelledby="product-title"><header><strong>Product details</strong><button type="button" onClick={() => setSelected(null)} aria-label="Close product details">×</button></header><div className={styles.drawerContent}>{selected.images.map((src, index) => <div className={styles.drawerImage} key={src}><Image src={src} alt={`${selected.name}${index ? ` alternate ${index + 1}` : ""}`} fill sizes="(max-width: 720px) 100vw, 420px" unoptimized /></div>)}<h2 id="product-title">{selected.name}</h2><p>{selected.description || "Ask the store for current product details."}</p>{selected.effects.length > 0 && <div className={styles.effects}>{selected.effects.map((effect) => <span key={effect}>{effect}</span>)}</div>}<ProductPricing product={selected} /></div></section></div>}
+    <AfterDarkWebChat />
     <Footer />
   </main>;
 }

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "verify:delivery-images": "node scripts/verify-athena-delivery-images.mjs",
+    "verify:web-chat": "node scripts/verify-consent-webchat.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
