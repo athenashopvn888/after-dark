@@ -14,8 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default async function NativeCigarettesYorkPage() {
-  const inventory = await getAdcInventory();
-  const items = inventory.snapshot.items.filter((item) => item.category === "CIGARETTES");
+  const inventory = await getAdcInventory().catch(() => {
+    console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product cards");
+    return null;
+  });
+  const items = inventory?.snapshot.items.filter((item) => item.category === "CIGARETTES") ?? [];
 
   return (
     <>
@@ -70,8 +73,8 @@ export default async function NativeCigarettesYorkPage() {
         address="1664 Jane St, York"
         hours="Open 24 Hours"
         theme="cigarettes"
-        inventoryVersion={inventory.snapshot.version}
-        inventoryAsOf={inventory.snapshot.sourceTimestamp}
+        inventoryVersion={inventory?.snapshot.version}
+        inventoryAsOf={inventory?.snapshot.sourceTimestamp}
       />
       <Footer />
     </>
