@@ -9,7 +9,13 @@ import styles from "./seo.module.css";
 
 /* ── Generate all SEO pages ── */
 export function generateStaticParams() {
-  return SEO_PAGES.map((p) => ({ seoPage: p.slug }));
+  const dedicatedPilotRoutes = new Set([
+    "native-cigarettes-york",
+    "nicotine-vapes-york",
+  ]);
+  return SEO_PAGES
+    .filter((page) => !dedicatedPilotRoutes.has(page.slug))
+    .map((page) => ({ seoPage: page.slug }));
 }
 
 /* ── Metadata ── */
