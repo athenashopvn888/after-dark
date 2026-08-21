@@ -120,7 +120,7 @@ export function SmokePilotLanding({
             <p>{intro}</p>
             <div className={styles.heroActions}>
               <Link href={menuHref} className={styles.primaryButton}>{menuLabel}</Link>
-              <a href="#menu-highlights" className={styles.secondaryButton}>See highlights</a>
+              <a href="#menu-highlights" className={styles.secondaryButton}>See the selection</a>
             </div>
             <div className={styles.storeLine}>
               <span>{storeName}</span><i /> <span>{address}</span><i /> <span>{hours}</span>
@@ -141,7 +141,7 @@ export function SmokePilotLanding({
             )) : (
               <div className={styles.stageEmpty}>
                 <span>{theme === "cigarettes" ? "CG" : "NV"}</span>
-                <strong>Open the current menu</strong>
+                <strong>Ask about today&apos;s selection</strong>
               </div>
             )}
           </div>
@@ -152,7 +152,7 @@ export function SmokePilotLanding({
         <div className={styles.contentWidth}>
           <div className={styles.sectionHeader}>
             <div>
-              <span className={styles.kicker}>From the menu</span>
+              <span className={styles.kicker}>Current selection</span>
               <h2>{menuHeading}</h2>
             </div>
             <p>{menuIntro}</p>
@@ -174,7 +174,7 @@ export function SmokePilotLanding({
               ))}
             </div>
           ) : (
-            <div className={styles.noItems}>Open the full menu to review the latest listed products.</div>
+            <div className={styles.noItems}>Selection can change. Ask the store about today&apos;s options.</div>
           )}
 
           <div className={styles.centerAction}>

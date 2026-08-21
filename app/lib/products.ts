@@ -217,7 +217,7 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     seoDescription: "The cigarette menu at After Dark Cannabis shows the brands, styles, and prices listed for the York store at 1664 Jane St. The store lists open 24 hours.",
     faqs: [
       { q: "Does After Dark Cannabis list cigarettes?", a: "Yes. This category shows the cigarette products and menu prices currently listed for the York store." },
-      { q: "What cigarette brands are listed?", a: "Use the product cards on this page to compare the brand and style names currently shown." },
+      { q: "What cigarette brands are listed?", a: "The selection may include Canadian, Canadian Goose, Canadian Classics, Nexus, Time, Putters and other Native cigarette brands in full, light and menthol styles." },
       { q: "Where is the store?", a: "After Dark Cannabis is at 1664 Jane St, York, ON M9N 2S1." },
     ],
   },
