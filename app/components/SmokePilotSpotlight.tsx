@@ -21,8 +21,8 @@ export default function SmokePilotSpotlight({
           <span className={styles.kicker}>Smoke Shop Spotlight</span>
           <h2 id="smoke-spotlight-title">Cigarettes &amp; Nicotine Vapes</h2>
           <p>
-            Two dedicated menu guides for {storeName} shoppers in {locationLabel}.
-            Start with the product type you want, then jump straight into its menu.
+            Find Native cigarette brands, nicotine vape devices, flavours and listed
+            prices at {storeName} in {locationLabel}.
           </p>
         </div>
         <div className={styles.spotlightCards}>

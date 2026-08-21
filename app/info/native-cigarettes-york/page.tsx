@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function NativeCigarettesYorkPage() {
   const inventory = await getAdcInventory().catch(() => {
-    console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product cards");
+    console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product listings");
     return null;
   });
   const items = inventory?.snapshot.items.filter((item) => item.category === "CIGARETTES") ?? [];
@@ -27,43 +27,43 @@ export default async function NativeCigarettesYorkPage() {
         canonicalUrl="https://afterdarkcannabis.com/info/native-cigarettes-york"
         storeName="After Dark Cannabis"
         locationLabel="York"
-        eyebrow="Jane Street Cigarette Guide"
+        eyebrow="Native Cigarettes · Jane Street"
         title="Native Cigarettes in York"
-        intro="Put the cigarette menu first. Browse Native cigarette brands, full, lights and menthol styles, plus the pack prices currently listed at After Dark Cannabis on Jane Street."
+        intro="Shop Native cigarette brands, full, light and menthol styles, plus Backwoods, grabba and other smoke-shop essentials at After Dark Cannabis on Jane Street."
         items={items}
         menuHref="/items/cigarettes"
         menuLabel="Shop the cigarette menu"
-        menuHeading="Cigarette Menu Highlights"
-        menuIntro="See the cigarette-category products currently listed for After Dark Cannabis, then open the full menu for the complete lineup."
+        menuHeading="Native Cigarette Brands & Prices"
+        menuIntro="Compare the cigarette brands, styles and listed prices available from After Dark Cannabis in York."
         crossLink={{
           href: "/info/nicotine-vapes-york",
           eyebrow: "Also at After Dark",
-          title: "Looking for nicotine vapes?",
-          body: "Nicotine vapes have their own York guide, with a direct path to devices, flavours and listed menu prices.",
-          label: "Explore nicotine vapes",
+          title: "Prefer a nicotine vape?",
+          body: "Shop disposable and pod-style nicotine vapes with device, flavour, puff-count and listed price details from After Dark Cannabis.",
+          label: "Shop nicotine vapes",
         }}
         sections={[
           {
-            heading: "A Dedicated Cigarette Stop on Jane Street",
-            body: "After Dark Cannabis is at 1664 Jane St in York. This guide keeps cigarette shoppers out of the larger cannabis menu and puts the cigarette lineup one tap away.",
+            heading: "Native Cigarettes on Jane Street",
+            body: "After Dark Cannabis brings Native cigarettes and smoke-shop essentials together at 1664 Jane St in York, with 24-hour shopping every day of the week.",
           },
           {
-            heading: "Start With Brand and Style",
-            body: "Use the product cards to compare the brand and style names shown on the menu. Full, lights, menthol and other options appear when they are part of the current listing.",
+            heading: "Full, Light and Menthol Styles",
+            body: "Look for familiar names across Canadian, Canadian Goose, Canadian Classics, Nexus, Time and Putters, with full, light and menthol choices represented when available.",
           },
           {
-            heading: "See Packs, Prices and Smoke-Shop Extras",
-            body: "The full cigarette category carries the clearest listed price for each item and may also include pouches, grabba or Backwoods products that sit in the same smoke-shop section.",
+            heading: "Backwoods, Grabba and Smoke-Shop Extras",
+            body: "Round out the stop with Backwoods, grabba, grabba shakers and nicotine pouch options when they are part of the current selection."
           },
         ]}
         faqs={[
           {
             q: "Does After Dark Cannabis sell Native cigarettes in York?",
-            a: "After Dark Cannabis has a dedicated cigarette category. This page highlights the cigarette products currently listed for the Jane Street store.",
+            a: "Yes. After Dark Cannabis carries Native cigarette brands and related smoke-shop products at 1664 Jane St in York.",
           },
           {
             q: "Can I see cigarette prices online?",
-            a: "Yes. Product cards show a menu price when one is listed. Open the full cigarette menu for the complete current lineup.",
+            a: "Yes. Current listed prices appear with the cigarette selection, and staff can confirm the latest shelf details when you visit.",
           },
           {
             q: "Where is After Dark Cannabis?",

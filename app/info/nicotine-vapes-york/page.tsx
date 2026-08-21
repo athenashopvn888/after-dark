@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function NicotineVapesYorkPage() {
   const inventory = await getAdcInventory().catch(() => {
-    console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product cards");
+    console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product listings");
     return null;
   });
   const items = inventory?.snapshot.items.filter((item) => item.category === "VAPE PENS") ?? [];
@@ -27,43 +27,43 @@ export default async function NicotineVapesYorkPage() {
         canonicalUrl="https://afterdarkcannabis.com/info/nicotine-vapes-york"
         storeName="After Dark Cannabis"
         locationLabel="York"
-        eyebrow="Jane Street Nicotine Vape Guide"
+        eyebrow="Nicotine Vapes · Jane Street"
         title="Nicotine Vapes in York"
-        intro="Browse the nicotine vape lineup without mixing it into the THC vape menu. Compare the devices, formats, flavour notes and menu prices listed at After Dark Cannabis on Jane Street."
+        intro="Shop nicotine vape devices from names such as Geek, NEXA, OVNS, STLTH, Uwell and Vice at After Dark Cannabis on Jane Street. Compare formats, flavours, puff counts and listed prices."
         items={items}
         menuHref="/items/vapes"
         menuLabel="Shop the nicotine vape menu"
-        menuHeading="Nicotine Vape Menu Highlights"
-        menuIntro="These highlights come from the nicotine vape category for After Dark Cannabis. Open the full menu to see every device currently listed."
+        menuHeading="Nicotine Vape Devices & Prices"
+        menuIntro="Compare disposable and pod-style nicotine vape options listed by After Dark Cannabis in York."
         crossLink={{
           href: "/info/native-cigarettes-york",
           eyebrow: "Also at After Dark",
-          title: "Shopping for Native cigarettes?",
-          body: "Jump to the dedicated York cigarette guide for brands, pack styles and listed menu prices.",
-          label: "Explore Native cigarettes",
+          title: "Need Native cigarettes instead?",
+          body: "Shop full, light and menthol cigarette styles alongside Backwoods, grabba and other smoke-shop essentials at After Dark Cannabis.",
+          label: "Shop Native cigarettes",
         }}
         sections={[
           {
-            heading: "Nicotine Vapes, Clearly Separated",
-            body: "This guide points to the nicotine vape category at After Dark Cannabis. Shoppers looking for THC vapes can use the separate THC vape menu instead.",
+            heading: "Nicotine Vapes on Jane Street",
+            body: "After Dark Cannabis carries nicotine vape options at 1664 Jane St in York, with a changing mix of disposable devices, pods and listed flavour choices.",
           },
           {
-            heading: "Compare Device Formats Faster",
-            body: "Product names show the device or format details supplied on the menu. Use the cards to compare what is listed, then open an item for a closer look.",
+            heading: "Disposable, Pod and Device Options",
+            body: "Compare disposable puff counts, pod formats, device types and flavour details from brands listed in the current selection.",
           },
           {
-            heading: "A 24-Hour Jane Street Stop",
-            body: "After Dark Cannabis is at 1664 Jane St in York and lists open 24 hours, so the nicotine vape guide stays connected to the exact store shoppers will visit.",
+            heading: "Open 24 Hours in York",
+            body: "Visit After Dark Cannabis at 1664 Jane St any time of day or night for nicotine vapes, cigarettes and other smoke-shop essentials.",
           },
         ]}
         faqs={[
           {
-            q: "Does After Dark Cannabis list nicotine vapes?",
-            a: "Yes. The nicotine vape category lists devices and menu prices currently shown for the Jane Street store.",
+            q: "Does After Dark Cannabis sell nicotine vapes?",
+            a: "Yes. After Dark Cannabis carries nicotine vape devices with formats, flavours, puff counts and listed prices for the Jane Street store.",
           },
           {
-            q: "Are nicotine vapes and THC vapes on the same page?",
-            a: "No. This guide links to the nicotine vape category. THC vapes have a separate category on the site.",
+            q: "Are nicotine vapes different from THC vapes?",
+            a: "Yes. Nicotine devices and THC vapes are different product groups at After Dark Cannabis, with separate selections for each.",
           },
           {
             q: "Where is After Dark Cannabis?",
