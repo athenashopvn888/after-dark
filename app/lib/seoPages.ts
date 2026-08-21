@@ -51,8 +51,8 @@ export const SEO_PAGES: SeoPageData[] = [
   },
   {
     slug: "native-cigarettes-york",
-    title: "Native Cigarettes York — Current Menu | After Dark Cannabis",
-    metaDescription: "Browse the current native cigarette category at After Dark Cannabis, 1664 Jane St in York. Open 24/7.",
+    title: "Native Cigarettes York | After Dark Cannabis",
+    metaDescription: "Explore Native cigarette brands, pack styles, and listed menu prices at After Dark Cannabis, 1664 Jane St in York. Open 24 hours.",
     h1: "Native Cigarettes York",
     icon: "🏷️",
     heroTagline: "Current Brands and Prices · Open 24 Hours",
@@ -66,6 +66,24 @@ export const SEO_PAGES: SeoPageData[] = [
       { q: "Where can I browse cigarette brands?", a: "Check the current cigarette category page for the brands and prices listed online." },
       { q: "Where is After Dark Cannabis?", a: "The store is at 1664 Jane St, York, ON M9N 2S1." },
       { q: "Is the store open late?", a: "Yes. After Dark Cannabis is open 24 hours a day." },
+    ],
+  },
+  {
+    slug: "nicotine-vapes-york",
+    title: "Nicotine Vapes York | After Dark Cannabis",
+    metaDescription: "Browse nicotine vape devices, flavours, formats, and listed menu prices at After Dark Cannabis, 1664 Jane St in York. Open 24 hours.",
+    h1: "Nicotine Vapes York",
+    icon: "NV",
+    heroTagline: "Nicotine vapes on Jane Street in York.",
+    sections: [
+      { heading: "Nicotine Vape Menu", body: "Browse nicotine vape devices, formats, and listed prices at After Dark Cannabis." },
+      { heading: "Separate From THC Vapes", body: "Nicotine vapes and THC vapes have separate menu categories, making each lineup easier to browse." },
+      { heading: "Open 24 Hours on Jane Street", body: "After Dark Cannabis is at 1664 Jane St in York and lists open 24 hours." },
+    ],
+    faqs: [
+      { q: "Does After Dark Cannabis list nicotine vapes?", a: "Yes. Use the nicotine vape menu for the devices and prices currently listed." },
+      { q: "Where are THC vapes?", a: "THC vapes have a separate menu category on the site." },
+      { q: "Where is After Dark Cannabis?", a: "The store is at 1664 Jane St, York, ON M9N 2S1." },
     ],
   },
   {

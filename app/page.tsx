@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
 import FlowerCard from "./components/FlowerCard";
+import SmokePilotSpotlight from "./components/SmokePilotSpotlight";
 import type { FlowerProduct } from "./lib/products";
 import Papa from "papaparse";
 
@@ -58,12 +59,11 @@ const BENTO_TIERS = [
 
 /* ── Explore Categories Config (New Banners) ── */
 const EXPLORE_CATEGORIES = [
-  { name: "Vape Pens", slug: "items/vapes", banner: "/banners/01_Vape_Pens.webp", icon: "💨" },
-  { name: "Nic Vape", slug: "items/vape-disposables", banner: "/banners/02_Vape_Disposable.webp", icon: "💨" },
+  { name: "Nic Vape", slug: "items/vapes", banner: "/banners/01_Vape_Pens.webp", icon: "💨" },
+  { name: "THC Vape", slug: "items/vape-disposables", banner: "/banners/02_Vape_Disposable.webp", icon: "💨" },
   { name: "Concentrates", slug: "items/concentrates", banner: "/banners/03_Concentrates.webp", icon: "💎" },
   { name: "Pre-Rolls", slug: "items/prerolls", banner: "/banners/04_Pre_Rolls.webp", icon: "🚬" },
   { name: "Accessories", slug: "items/add-ons", banner: "/banners/05_Accessories.webp", icon: "➕" },
-  { name: "Cigarettes", slug: "items/cigarettes", banner: "/banners/06_Cigarettes.webp", icon: "🏷️" },
   { name: "Magic Stuff", slug: "items/magic", banner: "/banners/09_Magic_Stuff.webp", icon: "🍄" },
 ];
 
@@ -270,6 +270,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <SmokePilotSpotlight
+        storeName="After Dark Cannabis"
+        locationLabel="York"
+        cigaretteHref="/info/native-cigarettes-york"
+        nicotineHref="/info/nicotine-vapes-york"
+      />
 
       {/* ── FEATURED PRODUCTS ── */}
       <section className={styles.featuredSection}>

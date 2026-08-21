@@ -57,12 +57,14 @@ export default function Footer() {
               <Link href="/budget">Budget Flower</Link>
               <Link href="/items/edibles">Edibles</Link>
               <Link href="/items/cigarettes">Cigarettes</Link>
-              <Link href="/items/vapes">Vape Pens</Link>
+              <Link href="/items/vapes">Nicotine Vape Menu</Link>
+              <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
               <Link href="/delivery">DELIVERY MENU</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
-              <Link href="/info/native-cigarettes-york">Native Cigarettes</Link>
+              <Link href="/info/native-cigarettes-york">Native Cigarettes York</Link>
+              <Link href="/info/nicotine-vapes-york">Nicotine Vapes York</Link>
               <Link href="/info/weed-store-near-mississauga">Weed Store Near Mississauga</Link>
               <Link href="/weed-dispensary-york/">After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>
