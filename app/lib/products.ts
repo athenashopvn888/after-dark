@@ -210,7 +210,7 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     ],
   },
   CIGARETTES: {
-    banner: "",
+    banner: "/banners/native-cigarette-offer-20260822.webp",
     name: "Cigarettes", slug: "cigarettes", color: "#78716c", icon: "🏷️",
     seoTitle: "Cigarette Menu York | After Dark Cannabis",
     seoIntro: "Browse cigarette brands, pack styles, and listed menu prices at After Dark Cannabis on Jane Street in York.",
