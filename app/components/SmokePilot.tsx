@@ -14,6 +14,12 @@ interface LandingFaq {
   a: string;
 }
 
+interface HeroItem {
+  name: string;
+  image: string;
+  href: string;
+}
+
 interface SmokePilotLandingProps {
   canonicalUrl: string;
   storeName: string;
@@ -38,6 +44,7 @@ interface SmokePilotLandingProps {
   address: string;
   hours: string;
   theme: "cigarettes" | "nicotine";
+  heroItems?: HeroItem[];
   inventoryVersion?: string;
   inventoryAsOf?: string;
 }
@@ -69,10 +76,18 @@ export function SmokePilotLanding({
   address,
   hours,
   theme,
+  heroItems,
   inventoryVersion,
   inventoryAsOf,
 }: SmokePilotLandingProps) {
-  const featuredItems = items.filter((item) => item.image).slice(0, 4);
+  const featuredItems = heroItems ?? items
+    .filter((item) => item.image)
+    .slice(0, 4)
+    .map((item) => ({
+      name: item.name,
+      image: item.image,
+      href: `/item/${item.slug}`,
+    }));
   const menuItems = items.slice(0, 12);
   const themeStyle = {
     "--pilot-accent": theme === "cigarettes" ? "#e7b85b" : "#9a78ff",
@@ -127,11 +142,14 @@ export function SmokePilotLanding({
             </div>
           </div>
 
-          <div className={styles.productStage} aria-label={`${title} menu preview`}>
+          <div
+            className={`${styles.productStage} ${heroItems ? styles.curatedProductStage : ""}`}
+            aria-label={`${title} menu preview`}
+          >
             {featuredItems.length > 0 ? featuredItems.map((item, index) => (
               <Link
-                key={`${item.sku}-${item.name}`}
-                href={`/item/${item.slug}`}
+                key={`${item.name}-${index}`}
+                href={item.href}
                 className={styles.stageProduct}
                 style={{ "--stage-index": index } as CSSProperties}
               >
