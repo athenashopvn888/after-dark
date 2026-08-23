@@ -166,6 +166,15 @@
   transform: translateY(calc((var(--stage-index) - 1.5) * 6px));
 }
 
+.curatedProductStage .stageProduct {
+  height: 158px;
+  transform: none;
+}
+
+.curatedProductStage .stageProduct img {
+  height: 56%;
+}
+
 .stageProduct::after {
   content: "";
   position: absolute;
@@ -412,6 +421,7 @@
   .heroCopy h1 { font-size: clamp(2.8rem, 14vw, 4.3rem); }
   .productStage { min-height: 0; gap: 10px; }
   .stageProduct { height: 165px; border-radius: 18px; }
+  .curatedProductStage .stageProduct { height: 150px; }
   .menuSection, .guideSection, .visitSection, .faqSection { padding-left: 18px; padding-right: 18px; }
   .sectionHeader { grid-template-columns: 1fr; gap: 16px; }
   .productGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

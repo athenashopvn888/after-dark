@@ -73,6 +73,38 @@ export default async function NativeCigarettesYorkPage() {
         address="1664 Jane St, York"
         hours="Open 24 Hours"
         theme="cigarettes"
+        heroItems={[
+          {
+            name: "BB Lights",
+            image: "/products/1001-BB-LIGHTS-CARTONS.webp",
+            href: "/items/cigarettes",
+          },
+          {
+            name: "BB Full",
+            image: "/products/1003-BB-FULL-CARTON.webp",
+            href: "/items/cigarettes",
+          },
+          {
+            name: "Canadian Lights",
+            image: "/products/1005-CANADIAN-LIGHTS.webp",
+            href: "/items/cigarettes",
+          },
+          {
+            name: "Canadian Full",
+            image: "/products/1006-CANADIAN-FULL.webp",
+            href: "/items/cigarettes",
+          },
+          {
+            name: "Canadian Classics Silver",
+            image: "/products/1015-CANADIAN-CLASSICS-SILVER.webp",
+            href: "/items/cigarettes",
+          },
+          {
+            name: "Canadian Menthol",
+            image: "/products/1013-CANADIAN-MENTHOL.webp",
+            href: "/items/cigarettes",
+          },
+        ]}
         inventoryVersion={inventory?.snapshot.version}
         inventoryAsOf={inventory?.snapshot.sourceTimestamp}
       />
