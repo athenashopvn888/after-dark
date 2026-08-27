@@ -225,6 +225,25 @@
   white-space: nowrap;
 }
 
+.stageDisclosure {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #aaa6b2;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.nicotineWarning {
+  position: relative;
+  width: min(1180px, calc(100% - 48px));
+  margin: 28px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  color: #f2eef8;
+  font-size: .88rem;
+  font-weight: 800;
+}
+
 .stageEmpty {
   grid-column: 1 / -1;
   min-height: 360px;

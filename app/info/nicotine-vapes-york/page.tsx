@@ -2,24 +2,16 @@ import type { Metadata } from "next";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SmokePilotLanding } from "../../components/SmokePilot";
-import { getAdcInventory } from "../../lib/adcInventoryService";
-
-export const dynamic = "force-dynamic";
+import { NICOTINE_VAPES_YORK_CARDS } from "../../lib/nicotineVapesYork";
 
 export const metadata: Metadata = {
   title: { absolute: "Nicotine Vapes York | After Dark Cannabis" },
   description:
-    "Browse nicotine vape devices, flavours, formats, and listed menu prices at After Dark Cannabis, 1664 Jane St in York. Open 24 hours.",
+    "Adults 19+: review four live-checked nicotine vape product pages from After Dark Cannabis in York, then use /items/vapes for current category information. Nicotine is addictive.",
   alternates: { canonical: "https://afterdarkcannabis.com/info/nicotine-vapes-york" },
 };
 
 export default async function NicotineVapesYorkPage() {
-  const inventory = await getAdcInventory().catch(() => {
-    console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product listings");
-    return null;
-  });
-  const items = inventory?.snapshot.items.filter((item) => item.category === "VAPE PENS") ?? [];
-
   return (
     <>
       <Navbar />
@@ -27,54 +19,58 @@ export default async function NicotineVapesYorkPage() {
         canonicalUrl="https://afterdarkcannabis.com/info/nicotine-vapes-york"
         storeName="After Dark Cannabis"
         locationLabel="York"
-        eyebrow="Nicotine Vapes · Jane Street"
+        eyebrow="AFTER DARK CANNABIS • JANE STREET • YORK • ADULTS 19+"
         title="Nicotine Vapes in York"
-        intro="Shop nicotine vape devices from names such as Geek, NEXA, OVNS, STLTH, Uwell and Vice at After Dark Cannabis on Jane Street. Compare formats, flavours, puff counts and listed prices."
-        items={items}
+        intro="This After Dark Cannabis guide highlights four live-checked product pages from the VAPE PENS category. The cards are a limited evidence set, not a complete selection. Use /items/vapes for current category information. Nicotine is addictive."
+        items={[]}
         menuHref="/items/vapes"
-        menuLabel="Shop the nicotine vape menu"
-        menuHeading="Nicotine Vape Devices & Prices"
-        menuIntro="Compare disposable and pod-style nicotine vape options listed by After Dark Cannabis in York."
+        menuLabel="Browse Nicotine Vapes"
+        menuHeading="Four Live-Checked Product Pages"
+        menuIntro="Use the four cards for their supported names and images, then use /items/vapes for current category information."
+        secondaryHref="/items/vapes"
+        secondaryLabel="Review the Nicotine Category"
+        heroItems={NICOTINE_VAPES_YORK_CARDS}
+        heroDisclosure="Four live-checked product pages are shown. They are not a complete statement of the current nicotine category."
+        warning="Adults 19+. Nicotine is addictive."
+        showMenuSection={false}
         crossLink={{
           href: "/info/native-cigarettes-york",
-          eyebrow: "Also at After Dark",
-          title: "Need Native cigarettes instead?",
-          body: "Shop full, light and menthol cigarette styles alongside Backwoods, grabba and other smoke-shop essentials at After Dark Cannabis.",
-          label: "Shop Native cigarettes",
+          eyebrow: "Related After Dark Guide",
+          title: "Looking for the Native cigarette guide?",
+          body: "Open the dedicated After Dark Cannabis cigarette page for its separate adult-only category guide.",
+          label: "Read the Native cigarette guide",
         }}
         sections={[
           {
-            heading: "Nicotine Vapes on Jane Street",
-            body: "After Dark Cannabis carries nicotine vape options at 1664 Jane St in York, with a changing mix of disposable devices, pods and listed flavour choices.",
+            heading: "Four Live-Checked Product Pages",
+            body: "Each featured card uses the supported name and image from its own live VAPE PENS product page. This four-card set is deliberately limited and does not claim to show every nicotine listing.",
           },
           {
-            heading: "Disposable, Pod and Device Options",
-            body: "Compare disposable puff counts, pod formats, device types and flavour details from brands listed in the current selection.",
+            heading: "Keep Each Format Attached to Its Product",
+            body: "The Uwell page identifies a pod, while one OVNS page identifies a disposable. Puff counts and format words distinguish the named pages; they are not promises of lifespan, performance or superiority.",
           },
           {
-            heading: "Open 24 Hours in York",
-            body: "Visit After Dark Cannabis at 1664 Jane St any time of day or night for nicotine vapes, cigarettes and other smoke-shop essentials.",
+            heading: "Keep Nicotine and THC Vape Routes Separate",
+            body: "This guide uses the nicotine VAPE PENS route at /items/vapes. THC and cannabis vape products under /items/vape-disposables are excluded from this page.",
           },
         ]}
         faqs={[
           {
-            q: "Does After Dark Cannabis sell nicotine vapes?",
-            a: "Yes. After Dark Cannabis carries nicotine vape devices with formats, flavours, puff counts and listed prices for the Jane Street store.",
+            q: "Where should I check After Dark Cannabis’s current nicotine category?",
+            a: "Use /items/vapes. The four featured cards are live-checked product pages, not a complete category listing.",
           },
           {
-            q: "Are nicotine vapes different from THC vapes?",
-            a: "Yes. Nicotine devices and THC vapes are different product groups at After Dark Cannabis, with separate selections for each.",
+            q: "Does this page include every nicotine vape listing?",
+            a: "No. It shows four product pages that passed the page-and-image audit. Use /items/vapes for current category information.",
           },
           {
-            q: "Where is After Dark Cannabis?",
-            a: "After Dark Cannabis is at 1664 Jane St, York, ON M9N 2S1 and lists open 24 hours.",
+            q: "Does this page include THC or cannabis vapes?",
+            a: "No. Products under /items/vape-disposables are excluded from this nicotine guide.",
           },
         ]}
         address="1664 Jane St, York"
         hours="Open 24 Hours"
         theme="nicotine"
-        inventoryVersion={inventory?.snapshot.version}
-        inventoryAsOf={inventory?.snapshot.sourceTimestamp}
       />
       <Footer />
     </>

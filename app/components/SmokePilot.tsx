@@ -15,6 +15,7 @@ interface LandingFaq {
 }
 
 interface HeroItem {
+  slug?: string;
   name: string;
   image: string;
   href: string;
@@ -44,7 +45,12 @@ interface SmokePilotLandingProps {
   address: string;
   hours: string;
   theme: "cigarettes" | "nicotine";
-  heroItems?: HeroItem[];
+  heroItems?: readonly HeroItem[];
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  heroDisclosure?: string;
+  warning?: string;
+  showMenuSection?: boolean;
   inventoryVersion?: string;
   inventoryAsOf?: string;
 }
@@ -77,6 +83,11 @@ export function SmokePilotLanding({
   hours,
   theme,
   heroItems,
+  secondaryHref = "#menu-highlights",
+  secondaryLabel = "See the selection",
+  heroDisclosure,
+  warning,
+  showMenuSection = true,
   inventoryVersion,
   inventoryAsOf,
 }: SmokePilotLandingProps) {
@@ -84,6 +95,7 @@ export function SmokePilotLanding({
     .filter((item) => item.image)
     .slice(0, 4)
     .map((item) => ({
+      slug: item.slug,
       name: item.name,
       image: item.image,
       href: `/item/${item.slug}`,
@@ -135,7 +147,7 @@ export function SmokePilotLanding({
             <p>{intro}</p>
             <div className={styles.heroActions}>
               <Link href={menuHref} className={styles.primaryButton}>{menuLabel}</Link>
-              <a href="#menu-highlights" className={styles.secondaryButton}>See the selection</a>
+              <Link href={secondaryHref} className={styles.secondaryButton}>{secondaryLabel}</Link>
             </div>
             <div className={styles.storeLine}>
               <span>{storeName}</span><i /> <span>{address}</span><i /> <span>{hours}</span>
@@ -150,6 +162,7 @@ export function SmokePilotLanding({
               <Link
                 key={`${item.name}-${index}`}
                 href={item.href}
+                data-product-slug={item.slug}
                 className={styles.stageProduct}
                 style={{ "--stage-index": index } as CSSProperties}
               >
@@ -162,11 +175,13 @@ export function SmokePilotLanding({
                 <strong>Ask about today&apos;s selection</strong>
               </div>
             )}
+            {heroDisclosure && <p className={styles.stageDisclosure}>{heroDisclosure}</p>}
           </div>
         </div>
+        {warning && <p className={styles.nicotineWarning}>{warning}</p>}
       </section>
 
-      <section className={styles.menuSection} id="menu-highlights">
+      {showMenuSection && <section className={styles.menuSection} id="menu-highlights">
         <div className={styles.contentWidth}>
           <div className={styles.sectionHeader}>
             <div>
@@ -199,7 +214,7 @@ export function SmokePilotLanding({
             <Link href={menuHref} className={styles.primaryButton}>{menuLabel}</Link>
           </div>
         </div>
-      </section>
+      </section>}
 
       <section className={styles.guideSection}>
         <div className={styles.contentWidth}>
