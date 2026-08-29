@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PreferredSourceButton from "./PreferredSourceButton";
 import styles from "./resources.module.css";
 import {
   AUTHORS,
@@ -87,6 +88,8 @@ export default function ResourceView({ page }: ResourceViewProps) {
           )}
 
           {related.length > 0 && <ResourceCards title="Related Resources" pages={related} compact />}
+
+          {page.kind === "article" && <PreferredSourceButton />}
         </article>
 
         <aside className={styles.sideRail}>
