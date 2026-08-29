@@ -652,6 +652,93 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     related: ["/resources/menu-guide", "/resources/value-guides"],
   },
   {
+    path: "/resources/local-guides/cannabis-near-york-comparison-guide",
+    kind: "article",
+    parent: "/resources/local-guides",
+    categoryLabel: "York Shopping Guide",
+    title: "Cannabis Near York: How to Compare Local Dispensary Information",
+    seoTitle: "Cannabis Near York: Compare Local Dispensary Information",
+    metaDescription:
+      "Searching cannabis near me or weed near me in York? Compare current menus, clear store details, useful guides, and the right page before planning a visit.",
+    h1: "Looking for Cannabis Near York? What to Check Before You Visit",
+    excerpt:
+      "A practical way to compare York dispensary information without relying on an old price, an unclear listing, or a product page that no longer answers the question.",
+    primaryKeyword: "cannabis near York",
+    supportingKeywords: ["cannabis near me York", "weed near me York", "York dispensary information"],
+    searchIntent: "Compare local York dispensary information before choosing a store or planning a visit.",
+    author: "local",
+    datePublished: "2026-08-29",
+    dateModified: "2026-08-29",
+    image: {
+      src: "/banners/after_dark_welcome_banner.webp",
+      alt: "After Dark Cannabis guide for comparing dispensary information near York",
+    },
+    intro: [
+      "A search for cannabis near me or weed near me can surface a map, a store page, a menu, a category page, and older articles at the same time. Those results do not all answer the same question.",
+      "For a York visit, start by deciding what you need to confirm: the store identity, the trip details, the type of product you want to browse, or whether one exact listing is current. Then use the page built for that job.",
+    ],
+    sections: [
+      {
+        heading: "Confirm the Store Before Comparing Products",
+        body: [
+          "A useful local result should make the store name, location details, and visit information easy to verify. Check the store page and the current Google listing before travelling, especially when a search result shows an older snippet or a third-party directory.",
+          "After Dark keeps its York store information separate from product guides so shoppers can verify the trip first and browse second.",
+        ],
+        links: [{ label: "Open the York store page", href: SITE.storePage }],
+      },
+      {
+        heading: "Use a Current Menu for Current Product Questions",
+        body: [
+          "A resource article can explain how categories work, but it should not be treated as a promise that one exact item is available today. When the decision depends on a product name, format, or price, move from the guide to the current menu and confirm the listing there.",
+          "This distinction matters because a helpful article can stay useful longer than a fast-changing product list.",
+        ],
+        links: [{ label: "Read the After Dark menu guide", href: "/resources/menu-guide" }],
+      },
+      {
+        heading: "Compare the Right Product Category",
+        body: [
+          "Flower, pre-rolls, edibles, vapes, concentrates, and accessories use different details. A broad near-me search becomes easier when you choose the category first, then compare options inside that section instead of mixing unrelated formats.",
+        ],
+        bullets: [
+          "Choose a category before comparing individual listings.",
+          "Use a flower guide when tier language is the main question.",
+          "Use the current product page when package details affect the choice.",
+        ],
+        links: [{ label: "Browse the flower guides", href: "/resources/flower-guides" }],
+      },
+      {
+        heading: "Look for Useful Information, Not Repeated City Copy",
+        body: [
+          "A strong York guide should help with a real decision. Clear store verification, category navigation, current-menu handoffs, and honest limits are more useful than a page that repeats the same city phrase without helping the shopper choose a next step.",
+          "That is the standard for this resource: every section should point to the page that can answer the next question.",
+        ],
+      },
+      {
+        heading: "A Simple York Search Checklist",
+        body: [
+          "Before choosing from a cannabis near York search, use this short check. It keeps the visit plan separate from the product decision and reduces the chance of relying on stale information.",
+        ],
+        bullets: [
+          "Verify the store and visit details on the store page or current Google listing.",
+          "Choose the product category that matches the trip.",
+          "Check the current menu for any exact item, format, or price question.",
+          "Use resource guides for comparison help, not as live inventory promises.",
+          "Ask the store when a detail needs today's answer.",
+        ],
+      },
+    ],
+    commercialLinks: [
+      { label: "View the York store page", href: SITE.storePage },
+      { label: "Use the menu guide", href: "/resources/menu-guide" },
+      { label: "Browse value guides", href: "/resources/value-guides" },
+    ],
+    related: [
+      "/resources/local-guides",
+      "/resources/local-guides/jane-street-york-visit-guide",
+      "/resources/menu-guide",
+    ],
+  },
+  {
     path: "/resources/local-guides/jane-street-york-visit-guide",
     kind: "article",
     parent: "/resources/local-guides",
@@ -722,6 +809,7 @@ export function getChildPages(parentPath: string) {
 
 export function getFeaturedPages() {
   const featured = [
+    "/resources/local-guides/cannabis-near-york-comparison-guide",
     "/resources/brand-guides/gas-gang-drizzle-vapes",
     "/resources/nicotine-pouches",
     "/resources/native-smokes/backwoods-grabba-guide",
