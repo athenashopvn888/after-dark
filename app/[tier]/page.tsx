@@ -11,6 +11,8 @@ import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_SEO } from "../lib/tierSeoContent";
 import styles from "./tier.module.css";
 
+const SITE_ORIGIN = "https://afterdarkcannabis.com";
+
 export const dynamic = "force-dynamic";
 
 /* -- Generate all tier pages at build -- */
@@ -34,9 +36,13 @@ export async function generateMetadata({
   return {
     title: seo?.seoTitle || `${tierInfo.config.name} Cannabis Flower — ${flowers.length} Strains`,
     description: seo?.seoIntro || `Shop ${flowers.length} ${tierInfo.config.name.toLowerCase()} cannabis strains at After Dark Cannabis.`,
+    alternates: {
+      canonical: `${SITE_ORIGIN}/${tierSlug}`,
+    },
     openGraph: {
       title: `${tierInfo.config.name} Flower | After Dark Cannabis`,
       description: `${flowers.length} ${tierInfo.config.name.toLowerCase()} flower menu listings. Browse names, weights, and posted details.`,
+      url: `${SITE_ORIGIN}/${tierSlug}`,
     },
   };
 }
@@ -205,3 +211,4 @@ export default async function TierPage({
     </main>
   );
 }
+
