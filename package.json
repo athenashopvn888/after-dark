@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:staff-photo": "node --experimental-strip-types --experimental-specifier-resolution=node --test tests/staff-photo.test.ts",
-    "test:nicotine-vapes": "node --experimental-strip-types --experimental-specifier-resolution=node --test tests/nicotine-vapes-york.test.ts"
+    "test:nicotine-vapes": "node --experimental-strip-types --experimental-specifier-resolution=node --test tests/nicotine-vapes-york.test.ts",
+    "test:weed-seo": "node --experimental-strip-types --experimental-specifier-resolution=node --test tests/weed-seo-pilot.test.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.6.1",
