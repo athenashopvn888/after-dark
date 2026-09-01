@@ -231,3 +231,42 @@
   color: var(--text-secondary);
   line-height: 1.6;
 }
+
+.main { min-height: 100vh; padding: 132px 20px 72px; color: #f5f3ff; background: radial-gradient(circle at 13% 5%, rgba(124, 58, 237, .26), transparent 27%), radial-gradient(circle at 88% 22%, rgba(30, 64, 175, .2), transparent 30%), #02030b; }
+.main a { color: inherit; }
+.main .hero, .main .section, .visitSection { width: min(1180px, 100%); margin: 0 auto 28px; border: 1px solid rgba(192, 132, 252, .2); border-radius: 24px; background: linear-gradient(145deg, rgba(10, 15, 31, .98), rgba(20, 12, 36, .98)); box-shadow: 0 24px 58px rgba(0, 0, 0, .42); }
+.main .hero { padding: clamp(42px, 8vw, 88px) clamp(22px, 6vw, 72px); text-align: center; background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, .34), transparent 44%), linear-gradient(145deg, rgba(5, 9, 22, .99), rgba(30, 16, 48, .98)); }
+.eyebrow, .kicker { margin: 0 0 12px; color: #c4b5fd; font-size: .82rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.main .hero h1 { max-width: 900px; margin: 0 auto 16px; color: #fff; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.04; letter-spacing: -.04em; }
+.heroAddress { margin: 0; color: #d8d9e7; font-size: clamp(1rem, 2vw, 1.2rem); }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+.primaryAction, .secondaryAction { min-width: 210px; padding: 14px 20px; border-radius: 999px; font-weight: 850; text-align: center; text-decoration: none; }
+.primaryAction { color: #0c0820 !important; background: linear-gradient(135deg, #ddd6fe, #a78bfa); }
+.secondaryAction { border: 1px solid rgba(165, 180, 252, .56); color: #eef2ff !important; background: rgba(79, 70, 229, .18); }
+.main .section, .visitSection { padding: clamp(26px, 5vw, 48px); }
+.main .section h2, .visitSection h2 { margin: 0 0 18px; color: #fff; font-size: clamp(1.65rem, 3vw, 2.35rem); line-height: 1.15; }
+.main .section > p, .visitSection > p { max-width: 900px; color: #d8d9e7; font-size: 1.03rem; line-height: 1.75; }
+.main .section p + p { margin-top: 14px; }
+.cardGrid, .termGrid, .guideGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.card { min-height: 132px; padding: 20px; border: 1px solid rgba(192, 132, 252, .2); border-radius: 16px; text-decoration: none; background: rgba(15, 23, 42, .8); }
+.card span { display: block; margin-bottom: 10px; color: #fff; font-weight: 900; }
+.card small { color: #c4c8d8; font-size: .9rem; line-height: 1.45; }
+.inlineGuide { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 38px; padding: 16px 18px; border-radius: 14px; background: rgba(99, 102, 241, .15); }
+.inlineGuide a, .guideCard a, .main .section > p a { color: #c4b5fd; font-weight: 800; text-underline-offset: 4px; }
+.subheading { margin: 0 0 18px; color: #fff; font-size: 1.35rem; }
+.note { margin-top: 18px; padding: 14px 16px; border-left: 3px solid #a78bfa; background: rgba(139, 92, 246, .1); }
+.termGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 24px 0; }
+.termGrid article, .guideCard { padding: 20px; border-radius: 16px; background: rgba(15, 23, 42, .76); }
+.termGrid h3, .guideCard h3, .main .faqItem h3 { margin: 0 0 10px; color: #c4b5fd; }
+.termGrid p, .guideCard p, .main .faqItem p { margin: 0; color: #d1d5e3; line-height: 1.65; }
+.visitSection { display: grid; grid-template-columns: 1.15fr .85fr; gap: 26px 42px; border-color: rgba(165, 180, 252, .28); background: radial-gradient(circle at 90% 10%, rgba(67, 56, 202, .24), transparent 42%), linear-gradient(145deg, rgba(12, 18, 38, .98), rgba(28, 14, 42, .98)); }
+.visitSection address { color: #d8d9e7; font-size: 1.05rem; font-style: normal; line-height: 1.6; }
+.visitFacts { display: flex; flex-direction: column; gap: 10px; align-self: center; padding: 20px; border-radius: 16px; background: rgba(3, 7, 18, .62); }
+.visitFacts strong { color: #c4b5fd; }
+.visitSection > p { grid-column: 1 / -1; margin: 0; }
+.guideGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.guideCard p { margin-bottom: 14px; }
+.main .faqList { display: grid; gap: 2px; }
+.main .faqItem { padding: 20px 0; border-bottom: 1px solid rgba(148, 163, 184, .16); }
+@media (max-width: 900px) { .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .termGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .main { padding: 112px 14px 56px; } .main .hero, .main .section, .visitSection { border-radius: 18px; } .actions, .cardGrid, .termGrid, .guideGrid, .visitSection { grid-template-columns: 1fr; } .actions { display: grid; } .visitSection > p { grid-column: auto; } }

@@ -3,7 +3,7 @@ import { GBPLandingPage } from "@/app/components/GBPLandingPage";
 import { gbpLocation } from "@/app/lib/gbp-location";
 
 export const metadata: Metadata = {
-  title: gbpLocation.seoTitle,
+  title: { absolute: gbpLocation.seoTitle },
   description: gbpLocation.metaDescription,
   alternates: {
     canonical: `https://${gbpLocation.domain}/${gbpLocation.slug}/`,
