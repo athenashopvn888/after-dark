@@ -35,3 +35,17 @@ test("MJ01 shopper copy avoids workflow and unsupported claims", () => {
     assert.ok(!sources.includes(blocked), `Blocked shopper-copy phrase: ${blocked}`);
   }
 });
+
+test("MJ01 tier pages use approved Weed, Cannabis and Flower copy", () => {
+  const content = read("app/lib/tierSeoContent.ts");
+  const page = read("app/[tier]/page.tsx");
+  for (const tier of ["Exotic", "Premium", "AAA+", "AA", "Budget"]) {
+    assert.ok(content.includes(`${tier} Weed & Cannabis Flower in York`), `Missing approved title for ${tier}`);
+  }
+  assert.match(content, /Compare After Dark Weed & Flower Tiers/);
+  assert.match(content, /ownerHref: "\/weed-dispensary-york\/"/);
+  assert.match(page, /TIER_COMPARISON\.ownerHref/);
+  assert.match(page, /seo\?\.h1/);
+  assert.match(page, /seo\?\.imageAlt/);
+  assert.match(page, /seo\?\.strainHeading/);
+});

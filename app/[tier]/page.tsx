@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FlowerCard from "../components/FlowerCard";
@@ -8,7 +9,7 @@ import {
   TIER_CONFIG,
 } from "../lib/products";
 import { getAdcInventory } from "../lib/adcInventoryService";
-import { TIER_SEO } from "../lib/tierSeoContent";
+import { TIER_COMPARISON, TIER_SEO } from "../lib/tierSeoContent";
 import styles from "./tier.module.css";
 
 const SITE_ORIGIN = "https://afterdarkcannabis.com";
@@ -35,13 +36,13 @@ export async function generateMetadata({
 
   return {
     title: seo?.seoTitle || `${tierInfo.config.name} Cannabis Flower — ${flowers.length} Strains`,
-    description: seo?.seoIntro || `Shop ${flowers.length} ${tierInfo.config.name.toLowerCase()} cannabis strains at After Dark Cannabis.`,
+    description: seo?.metaDescription || `Shop ${flowers.length} ${tierInfo.config.name.toLowerCase()} cannabis strains at After Dark Cannabis.`,
     alternates: {
       canonical: `${SITE_ORIGIN}/${tierSlug}`,
     },
     openGraph: {
-      title: `${tierInfo.config.name} Flower | After Dark Cannabis`,
-      description: `${flowers.length} ${tierInfo.config.name.toLowerCase()} flower menu listings. Browse names, weights, and posted details.`,
+      title: seo?.socialTitle || `${tierInfo.config.name} Flower | After Dark Cannabis`,
+      description: seo?.socialDescription || `${flowers.length} ${tierInfo.config.name.toLowerCase()} flower menu listings. Browse names, weights, and posted details.`,
       url: `${SITE_ORIGIN}/${tierSlug}`,
     },
   };
@@ -74,7 +75,7 @@ export default async function TierPage({
       <section className={styles.bannerSection}>
         <img
           src={config.banner}
-          alt={`${config.name} Cannabis Flower — ${config.tagline}`}
+          alt={seo?.imageAlt || `${config.name} Cannabis Flower — ${config.tagline}`}
           className={styles.bannerImg}
         />
       </section>
@@ -89,7 +90,7 @@ export default async function TierPage({
             <div className={styles.heroTitleRow}>
               <span className={styles.heroIcon}>{config.icon}</span>
               <h1 className={styles.heroTitle}>
-                <span style={{ color: config.color }}>{config.name}</span>
+                <span style={{ color: config.color }}>{seo?.h1 || config.name}</span>
               </h1>
             </div>
             <p className={styles.heroTagline}>{config.tagline}</p>
@@ -161,9 +162,7 @@ export default async function TierPage({
           )}
 
           <h2 className={styles.sectionTitle}>
-            All{" "}
-            <span style={{ color: config.color }}>{config.name}</span>{" "}
-            Strains
+            <span style={{ color: config.color }}>{seo?.strainHeading || `All ${config.name} Strains`}</span>
           </h2>
           <div className={styles.grid}>
             {regularFlowers.map((f) => (
@@ -191,6 +190,15 @@ export default async function TierPage({
               </div>
             ))}
 
+            <div className={styles.seoBlock}>
+              <h3 className={styles.seoHeading}>{TIER_COMPARISON.heading}</h3>
+              <p className={styles.seoBody}>{TIER_COMPARISON.body}</p>
+              <p className={styles.seoBody}>
+                {TIER_COMPARISON.ownerSentence}{" "}
+                <Link href={TIER_COMPARISON.ownerHref}>{TIER_COMPARISON.ownerAnchor}</Link> page.
+              </p>
+            </div>
+
             {/* FAQ Accordion */}
             {seo.faqs.length > 0 && (
               <div className={styles.faqSection}>
@@ -211,4 +219,3 @@ export default async function TierPage({
     </main>
   );
 }
-
