@@ -671,7 +671,7 @@ const TICKER_SLIDES = [
   "Flower Tiers and Menu Categories",
   "Open 24 Hours",
   "ALL SALES ARE FINAL",
-  "DELIVERY MENU at afterdarkcannabis.com/delivery",
+  "WEED DELIVERY at afterdarkcannabis.com/weed-delivery-york",
 ];
 
 function VerticalTicker() {

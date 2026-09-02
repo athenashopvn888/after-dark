@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/delivery", destination: "/weed-delivery-york", permanent: true },
       { source: "/blog", destination: "/", permanent: true },
       { source: "/blog/:path*", destination: "/", permanent: true },
       { source: "/product-category/edibles", destination: "/items/edibles", permanent: true },
