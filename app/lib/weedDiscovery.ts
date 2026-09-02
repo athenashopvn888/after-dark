@@ -11,11 +11,11 @@ export const afterDarkWeedOwner = {
   phoneIntl: "+14375249344",
   ownerPath: "/weed-dispensary-york/",
   flowerTiers: [
-    { label: "Budget Flower", description: "Explore the Budget flower tier.", href: "/budget" },
-    { label: "AA Flower", description: "Explore the AA flower tier.", href: "/aa" },
-    { label: "AAA+ Flower", description: "Explore the AAA+ flower tier.", href: "/aaa" },
-    { label: "Premium Flower", description: "Explore the Premium flower tier.", href: "/premium" },
-    { label: "Exotic Flower", description: "Explore the Exotic flower tier.", href: "/exotic" },
+    { label: "Budget Weed", description: "Explore the Budget weed and flower tier.", href: "/budget-weed" },
+    { label: "AA Weed", description: "Explore the AA weed and flower tier.", href: "/aa-weed" },
+    { label: "AAA+ Weed", description: "Explore the AAA+ weed and flower tier.", href: "/aaa-weed" },
+    { label: "Premium Weed", description: "Explore the Premium weed and flower tier.", href: "/premium-weed" },
+    { label: "Exotic Weed", description: "Explore the Exotic weed and flower tier.", href: "/exotic-weed" },
   ] satisfies WeedDiscoveryLink[],
   categories: [
     { label: "Pre-Rolls", description: "Explore cannabis in pre-roll format.", href: "/items/prerolls" },

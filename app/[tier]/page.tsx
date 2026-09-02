@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
@@ -13,6 +13,13 @@ import { TIER_COMPARISON, TIER_SEO } from "../lib/tierSeoContent";
 import styles from "./tier.module.css";
 
 const SITE_ORIGIN = "https://afterdarkcannabis.com";
+const LEGACY_TIER_REDIRECTS: Record<string, string> = {
+  exotic: "exotic-weed",
+  premium: "premium-weed",
+  aaa: "aaa-weed",
+  aa: "aa-weed",
+  budget: "budget-weed",
+};
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +62,8 @@ export default async function TierPage({
   params: Promise<{ tier: string }>;
 }) {
   const { tier: tierSlug } = await params;
+  const canonicalTierSlug = LEGACY_TIER_REDIRECTS[tierSlug];
+  if (canonicalTierSlug) permanentRedirect(`/${canonicalTierSlug}`);
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) notFound();
 

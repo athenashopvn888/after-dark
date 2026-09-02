@@ -17,7 +17,7 @@ test("MJ01 keeps the protected owner and exact metadata", () => {
 
 test("MJ01 static discovery uses only approved destinations", () => {
   const sources = [read("app/lib/weedDiscovery.ts"), read("app/components/WeedDiscoveryModule.tsx")].join("\n");
-  for (const href of ["/budget", "/aa", "/aaa", "/premium", "/exotic", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide"]) {
+  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide"]) {
     assert.ok(sources.includes(href), `Missing approved link: ${href}`);
   }
 });
@@ -39,9 +39,24 @@ test("MJ01 shopper copy avoids workflow and unsupported claims", () => {
 test("MJ01 tier pages use approved Weed, Cannabis and Flower copy", () => {
   const content = read("app/lib/tierSeoContent.ts");
   const page = read("app/[tier]/page.tsx");
+  const products = read("app/lib/products.ts");
+  const sitemap = read("app/sitemap.ts");
+  const links = [read("app/components/Navbar.tsx"), read("app/components/Footer.tsx"), read("app/lib/weedDiscovery.ts"), read("app/resources/resourceData.ts")].join("\n");
   for (const tier of ["Exotic", "Premium", "AAA+", "AA", "Budget"]) {
     assert.ok(content.includes(`${tier} Weed & Cannabis Flower in York`), `Missing approved title for ${tier}`);
   }
+  for (const [legacy, canonical] of [["exotic", "exotic-weed"], ["premium", "premium-weed"], ["aaa", "aaa-weed"], ["aa", "aa-weed"], ["budget", "budget-weed"]]) {
+    assert.match(page, new RegExp(`${legacy}: "${canonical}"`), `Missing one-hop redirect map for ${legacy}`);
+    assert.ok(links.includes(`/${canonical}`), `Missing canonical internal link: ${canonical}`);
+    assert.ok(!links.includes(`href=\"/${legacy}\"`) && !links.includes(`href: \"/${legacy}\"`), `Legacy internal link remains: ${legacy}`);
+  }
+  assert.match(page, /permanentRedirect\(`\/\$\{canonicalTierSlug\}`\)/);
+  assert.match(products, /name: "Exotic Weed",\s+slug: "exotic-weed"/);
+  assert.match(products, /name: "Premium Weed",\s+slug: "premium-weed"/);
+  assert.match(products, /name: "AAA\+ Weed",\s+slug: "aaa-weed"/);
+  assert.match(products, /name: "AA Weed",\s+slug: "aa-weed"/);
+  assert.match(products, /name: "Budget Weed",\s+slug: "budget-weed"/);
+  assert.match(sitemap, /Object\.values\(TIER_CONFIG\)/);
   assert.match(content, /Compare After Dark Weed & Flower Tiers/);
   assert.match(content, /ownerHref: "\/weed-dispensary-york\/"/);
   assert.match(page, /TIER_COMPARISON\.ownerHref/);
