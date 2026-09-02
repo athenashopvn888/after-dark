@@ -41,7 +41,8 @@ test("MJ01 tier pages use approved Weed, Cannabis and Flower copy", () => {
   const page = read("app/[tier]/page.tsx");
   const products = read("app/lib/products.ts");
   const sitemap = read("app/sitemap.ts");
-  const links = [read("app/components/Navbar.tsx"), read("app/components/Footer.tsx"), read("app/lib/weedDiscovery.ts"), read("app/resources/resourceData.ts")].join("\n");
+  const home = read("app/page.tsx");
+  const links = [home, read("app/components/Navbar.tsx"), read("app/components/Footer.tsx"), read("app/lib/weedDiscovery.ts"), read("app/resources/resourceData.ts")].join("\n");
   for (const tier of ["Exotic", "Premium", "AAA+", "AA", "Budget"]) {
     assert.ok(content.includes(`${tier} Weed & Cannabis Flower in York`), `Missing approved title for ${tier}`);
   }
@@ -56,6 +57,9 @@ test("MJ01 tier pages use approved Weed, Cannabis and Flower copy", () => {
   assert.match(products, /name: "AAA\+ Weed",\s+slug: "aaa-weed"/);
   assert.match(products, /name: "AA Weed",\s+slug: "aa-weed"/);
   assert.match(products, /name: "Budget Weed",\s+slug: "budget-weed"/);
+  for (const [name, slug] of [["Exotic Weed", "exotic-weed"], ["Premium Weed", "premium-weed"], ["AAA+ Weed", "aaa-weed"], ["AA Weed", "aa-weed"], ["Budget Weed", "budget-weed"]]) {
+    assert.ok(home.includes(`name: "${name}"`) && home.includes(`slug: "${slug}"`), `Homepage card is not V2.1 compliant: ${name}`);
+  }
   assert.match(sitemap, /Object\.values\(TIER_CONFIG\)/);
   assert.match(content, /Compare After Dark Weed & Flower Tiers/);
   assert.match(content, /ownerHref: "\/weed-dispensary-york\/"/);
