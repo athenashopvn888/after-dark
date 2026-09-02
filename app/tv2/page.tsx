@@ -162,7 +162,7 @@ const TICKER_SLIDES = [
   "Open 24 Hours",
   "Pre-Rolls · Edibles · Vapes · Concentrates",
   "ALL SALES ARE FINAL",
-  "DELIVERY MENU at afterdarkcannabis.com/delivery",
+  "WEED DELIVERY at afterdarkcannabis.com/weed-delivery-york",
 ];
 
 function VerticalTicker() {
