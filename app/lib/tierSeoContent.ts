@@ -13,7 +13,7 @@ export interface TierSeoData {
 
 export const TIER_SEO: Record<string, TierSeoData> = {
   EXOTIC: {
-    seoTitle: "Exotic Weed & Cannabis Flower in York | After Dark Cannabis",
+    seoTitle: "Exotic Weed & Cannabis Flower in York",
     metaDescription: "Explore the Exotic weed and cannabis flower tier at After Dark Cannabis in York, with a focused flower category for adults 19+.",
     socialTitle: "Exotic Weed & Flower | After Dark Cannabis",
     socialDescription: "Explore the Exotic cannabis flower tier at After Dark Cannabis.",
@@ -32,7 +32,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     ],
   },
   PREMIUM: {
-    seoTitle: "Premium Weed & Cannabis Flower in York | After Dark Cannabis",
+    seoTitle: "Premium Weed & Cannabis Flower in York",
     metaDescription: "Explore the Premium weed and cannabis flower tier at After Dark Cannabis in York through its dedicated Premium flower category.",
     socialTitle: "Premium Weed & Flower | After Dark Cannabis",
     socialDescription: "Browse the Premium cannabis flower tier at After Dark Cannabis.",
@@ -51,7 +51,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     ],
   },
   "AAA+": {
-    seoTitle: "AAA+ Weed & Cannabis Flower in York | After Dark Cannabis",
+    seoTitle: "AAA+ Weed & Cannabis Flower in York",
     metaDescription: "Explore AAA+ weed and cannabis flower at After Dark Cannabis in York through a distinct AAA+ flower tier for adults 19+.",
     socialTitle: "AAA+ Weed & Flower | After Dark Cannabis",
     socialDescription: "Explore the AAA+ cannabis flower tier at After Dark Cannabis.",
@@ -70,7 +70,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     ],
   },
   AA: {
-    seoTitle: "AA Weed & Cannabis Flower in York | After Dark Cannabis",
+    seoTitle: "AA Weed & Cannabis Flower in York",
     metaDescription: "Explore the AA weed and cannabis flower tier at After Dark Cannabis in York through its own dedicated flower category.",
     socialTitle: "AA Weed & Flower | After Dark Cannabis",
     socialDescription: "Browse the AA cannabis flower tier at After Dark Cannabis.",
@@ -89,7 +89,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     ],
   },
   BUDGET: {
-    seoTitle: "Budget Weed & Cannabis Flower in York | After Dark Cannabis",
+    seoTitle: "Budget Weed & Cannabis Flower in York",
     metaDescription: "Explore the Budget weed and cannabis flower tier at After Dark Cannabis in York without relying on current price, deal or availability claims.",
     socialTitle: "Budget Weed & Flower | After Dark Cannabis",
     socialDescription: "Explore the Budget cannabis flower tier at After Dark Cannabis.",

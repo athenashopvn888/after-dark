@@ -46,6 +46,7 @@ test("MJ01 tier pages use approved Weed, Cannabis and Flower copy", () => {
   for (const tier of ["Exotic", "Premium", "AAA+", "AA", "Budget"]) {
     assert.ok(content.includes(`${tier} Weed & Cannabis Flower in York`), `Missing approved title for ${tier}`);
   }
+  assert.doesNotMatch(content, /seoTitle: ".*\| After Dark Cannabis"/);
   for (const [legacy, canonical] of [["exotic", "exotic-weed"], ["premium", "premium-weed"], ["aaa", "aaa-weed"], ["aa", "aa-weed"], ["budget", "budget-weed"]]) {
     assert.match(page, new RegExp(`${legacy}: "${canonical}"`), `Missing one-hop redirect map for ${legacy}`);
     assert.ok(links.includes(`/${canonical}`), `Missing canonical internal link: ${canonical}`);
