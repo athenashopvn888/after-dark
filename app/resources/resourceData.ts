@@ -134,6 +134,93 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     ],
   },
   {
+    path: "/resources/cannabis-dispensary-vs-weed-dispensary",
+    kind: "article",
+    parent: "/resources",
+    categoryLabel: "Dispensary Search Terminology",
+    title: "Cannabis Dispensary vs. Weed Dispensary: What's the Difference?",
+    seoTitle: "Cannabis Dispensary vs Weed Dispensary | After Dark York",
+    metaDescription:
+      "Cannabis dispensary or weed dispensary? Learn what the terms mean, how “dispensary near me” fits in, and find After Dark Cannabis in York.",
+    h1: "Cannabis Dispensary vs. Weed Dispensary: What's the Difference?",
+    excerpt:
+      "Learn how cannabis dispensary, weed dispensary, cannabis store and dispensary near me searches connect to local store information in York.",
+    primaryKeyword: "dispensary near me",
+    supportingKeywords: [
+      "cannabis dispensary near me",
+      "weed dispensary near me",
+      "cannabis store near me",
+      "cannabis near me",
+      "weed near me",
+    ],
+    searchIntent: "Understand dispensary search terminology and find accurate local store information in York.",
+    author: "local",
+    datePublished: "2026-09-04",
+    dateModified: "2026-09-04",
+    image: {
+      src: "/banners/after_dark_edibles_prerolls_more_banner.webp",
+      alt: "After Dark Cannabis guide to cannabis and weed dispensary terminology",
+    },
+    intro: [
+      "People searching for a nearby cannabis business do not always describe it the same way.",
+      "One person may search “cannabis dispensary near me.” Another may type “weed dispensary near me.” Others search “cannabis store near me,” “weed near me,” or simply “dispensary near me.”",
+    ],
+    sections: [
+      {
+        heading: "Cannabis Dispensary vs. Weed Dispensary",
+        body: [
+          "Cannabis dispensary uses the more formal word cannabis. Weed dispensary uses the common conversational term weed.",
+          "In local searching, both can describe essentially the same type of destination. The wording changes, but the customer is frequently trying to accomplish the same thing: identify an appropriate nearby cannabis business.",
+        ],
+      },
+      {
+        heading: "Where Does “Dispensary Near Me” Fit?",
+        body: [
+          "“Dispensary near me” removes the weed or cannabis modifier. It is shorter, but still carries strong local intent.",
+          "That is why a cannabis website should clearly establish the relationship between dispensary, cannabis dispensary, weed dispensary and cannabis store without unnaturally repeating exact-match phrases.",
+        ],
+        bullets: ["dispensary", "cannabis dispensary", "weed dispensary", "cannabis store"],
+      },
+      {
+        heading: "After Dark Cannabis in York",
+        body: [
+          "After Dark Cannabis is located at 1664 Jane St in York.",
+          "For people actually planning a visit, the existing York dispensary page remains the primary local-intent resource.",
+        ],
+        links: [
+          { label: "Cannabis Dispensary Near Me in York", href: "/info/dispensary-near-me-york" },
+        ],
+      },
+      {
+        heading: "Search Language vs. Store Identity",
+        body: [
+          "The customer's vocabulary may change from one search to another. The business identity should not.",
+          "A useful local website clearly explains what the store is, where it is located and where customers can find current visit information.",
+        ],
+      },
+      {
+        heading: "Is weed dispensary just another phrase for cannabis dispensary?",
+        body: ["In ordinary consumer language, the terms often describe the same type of business."],
+      },
+      {
+        heading: "Does “dispensary near me” have broader wording?",
+        body: ["Yes. It removes cannabis or weed from the phrase while retaining strong local-business intent."],
+      },
+      {
+        heading: "Should a website repeatedly use “near me”?",
+        body: ["No. The business and location should be established naturally rather than stuffing exact-match wording throughout the page."],
+      },
+      {
+        heading: "Where is After Dark Cannabis?",
+        body: ["After Dark Cannabis is located at 1664 Jane St in York, Ontario."],
+      },
+    ],
+    commercialLinks: [
+      { label: "Cannabis Dispensary Near Me in York", href: "/info/dispensary-near-me-york" },
+    ],
+    related: ["/resources/local-guides", "/resources/local-guides/jane-street-york-visit-guide"],
+  },
+  {
     path: "/resources/cannabis-101",
     kind: "category",
     parent: "/resources",
