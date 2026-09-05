@@ -17,7 +17,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
     "supportingKeywords": [],
     "searchIntent": "Learn the approved After Dark cannabis terminology and education topic.",
     "author": "team",
-    "datePublished": "2026-09-05",
+    "datePublished": "2026-09-04",
     "dateModified": "2026-09-05",
     "image": {
       "src": "/banners/after_dark_welcome_banner.webp",
@@ -25,7 +25,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
     },
     "intro": [
       "People looking for a cannabis store do not always use the same words. One person searches for a cannabis dispensary. Another types weed dispensary, weed store, cannabis store, or simply dispensary near me. The phrases sound different, but in everyday search language they often point toward the same basic goal: finding a nearby place and understanding what it offers before making the trip.",
-      "The useful question is not which phrase is “correct.” It is what each phrase tells us about the searcher's intent."
+      "The useful question is not which phrase is “correct.” It is what the person is trying to find or understand."
     ],
     "sections": [
       {
@@ -33,15 +33,15 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "In ordinary consumer language, weed is an informal word for cannabis. Cannabis is the broader and more formal term used in legislation, product labelling, health information and many business descriptions.",
           "That means “cannabis dispensary” and “weed dispensary” are often two ways people describe the same kind of destination. The wording can change from person to person without implying that the business itself has changed.",
-          "A website should therefore explain the language naturally rather than creating a separate thin page for every possible phrase."
+          "The terms can be explained together naturally."
         ]
       },
       {
         "heading": "What Does “Dispensary” Mean in a Local Search?",
         "body": [
-          "When someone searches only for dispensary, the word is broad. When it is combined with terms such as cannabis, weed, York or “near me,” the local intent becomes much clearer.",
+          "When someone searches only for dispensary, the word is broad. Combining it with terms such as cannabis, weed, York or “near me” makes the request more specific to a nearby cannabis business.",
           "A search like dispensary near me usually means the person wants practical information quickly. Useful answers include:",
-          "For After Dark Cannabis, the main York store page remains the correct destination for those visit details."
+          "For current After Dark Cannabis visit details, use the York store information."
         ],
         "bullets": [
           "the exact business name",
@@ -67,7 +67,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "Adding near me changes an informational phrase into a stronger location-based query.",
           "Someone asking “what is a cannabis dispensary?” may be learning terminology. Someone searching “cannabis dispensary near me” is much more likely to be trying to locate a place nearby.",
-          "For that reason, a good local page should not simply repeat “near me” over and over. It should give Google and the user concrete location information: a real store identity, a real address, useful visit details and clear links to the relevant menu or resource pages."
+          "Useful local information includes the real store name, location, current visit details and clear paths to the information a visitor may need."
         ]
       },
       {
@@ -118,7 +118,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       {
         "heading": "After Dark Cannabis in York",
         "body": [
-          "After Dark Cannabis is located at 1664 Jane St, York, Ontario. The primary local store page should remain the source for current visit information.",
+          "After Dark Cannabis is located at 1664 Jane St, York, Ontario. For current visit information, use the York store page.",
           "This article exists for a different reason: to explain why people use phrases such as cannabis dispensary, weed dispensary, weed store, cannabis store and dispensary near me for closely related local searches."
         ]
       }
@@ -130,11 +130,11 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Why do people search “dispensary near me”?",
-        "a": "The phrase signals local intent. The person is generally trying to identify a nearby business and confirm practical details such as location, hours and what sections are available to browse."
+        "a": "The phrase usually means someone is trying to identify a nearby business and confirm practical details such as location, hours and what sections are available to browse."
       },
       {
         "q": "Is “weed store” different from “cannabis store”?",
-        "a": "The wording differs, but the terms often overlap in normal search behaviour. A business should keep its true identity consistent rather than changing its name to match every keyword variation."
+        "a": "The wording differs, but the terms often overlap in normal search behaviour. A business should keep its true identity consistent even when people use different search wording."
       },
       {
         "q": "Does “dispensary” mean only cannabis flower?",
@@ -142,7 +142,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Where can I learn about After Dark's flower tiers?",
-        "a": "Use the Cannabis Flower Quality & Tiers guide for the educational explanation, then use the live tier/menu pages for current listings. ---"
+        "a": "Use the Cannabis Flower Quality & Tiers guide for the educational explanation, then use the live tier/menu pages for current listings."
       }
     ],
     "commercialLinks": [
@@ -367,7 +367,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Where should current prices and availability be checked?",
-        "a": "Use the current After Dark flower tier/menu pages. Educational guides explain the categories; the live menu should answer current product questions. ---"
+        "a": "Use the current After Dark flower tier/menu pages. Educational guides explain the categories; the live menu should answer current product questions."
       }
     ],
     "commercialLinks": [],
@@ -544,7 +544,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Does the growing method determine THC percentage?",
-        "a": "Cultivation conditions can influence plant expression, but genetics, harvest timing and many other factors also matter. Growing method alone does not predict one exact cannabinoid result. ---"
+        "a": "Cultivation conditions can influence plant expression, but genetics, harvest timing and many other factors also matter. Growing method alone does not predict one exact cannabinoid result."
       }
     ],
     "commercialLinks": [],
@@ -700,7 +700,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Should I look only at THC percentage?",
-        "a": "No. THC is one important measurement, but product format, CBD, terpenes, batch information and personal sensitivity also matter. ---"
+        "a": "No. THC is one important measurement, but product format, CBD, terpenes, batch information and personal sensitivity also matter."
       }
     ],
     "commercialLinks": [
@@ -735,7 +735,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
     "datePublished": "2026-09-05",
     "dateModified": "2026-09-05",
     "image": {
-      "src": "/banners/06_Cigarette.webp",
+      "src": "/banners/06_Cigarettes.webp",
       "alt": "Native Cigarettes in Ontario guide from After Dark Cannabis"
     },
     "intro": [
@@ -887,7 +887,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
     "supportingKeywords": [],
     "searchIntent": "Learn the approved After Dark cannabis terminology and education topic.",
     "author": "team",
-    "datePublished": "2026-09-05",
+    "datePublished": "2026-07-15",
     "dateModified": "2026-09-05",
     "image": {
       "src": "/banners/after_dark_welcome_banner.webp",
@@ -998,7 +998,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Where do I check today's products?",
-        "a": "Use the current menu/category pages for current listings. Resource articles should not be treated as inventory promises. ---"
+        "a": "Use the current menu/category pages for current listings. Resource articles should not be treated as inventory promises."
       }
     ],
     "commercialLinks": [
@@ -1050,7 +1050,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
     "supportingKeywords": [],
     "searchIntent": "Learn the approved After Dark cannabis terminology and education topic.",
     "author": "team",
-    "datePublished": "2026-09-05",
+    "datePublished": "2026-07-15",
     "dateModified": "2026-09-05",
     "image": {
       "src": "/banners/after_dark_welcome_banner.webp",
@@ -1167,7 +1167,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Where can I see the current flower lineup?",
-        "a": "Use the current Budget, AA, AAA+, Premium and Exotic menu pages. ---"
+        "a": "Use the current Budget, AA, AAA+, Premium and Exotic menu pages."
       }
     ],
     "commercialLinks": [
@@ -1411,7 +1411,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "What is the best way to compare After Dark flower tiers?",
-        "a": "Use the Flower Quality & Tiers guide for the framework, then use the live menu for the current batch and tier information. ---"
+        "a": "Use the Flower Quality & Tiers guide for the framework, then use the live menu for the current batch and tier information."
       }
     ],
     "commercialLinks": [
@@ -1503,7 +1503,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "“Fire” is simple hype-language for something considered very good.",
           "“This is fire” can refer to flower, a cultivar, an aroma, a concentrate or even a completely unrelated thing.",
-          "Because it is subjective, a serious educational page should translate the compliment into specifics.",
+          "Because it is subjective, the compliment is more useful when translated into specifics.",
           "What makes it fire? Genetics? Freshness? Cure? Aroma? Bag appeal? Trichome coverage?",
           "That is more useful than the adjective alone."
         ]
@@ -1587,7 +1587,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Is “weed” okay to use instead of “cannabis”?",
-        "a": "In everyday adult conversation, yes. Cannabis is the formal term; weed is common slang. ---"
+        "a": "In everyday adult conversation, yes. Cannabis is the formal term; weed is common slang."
       }
     ],
     "commercialLinks": [],
@@ -1695,7 +1695,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
           "Exotic is another quality and rarity word that has moved through cannabis culture.",
           "Sometimes it means unusual genetics. Sometimes it implies premium appearance or aroma. Sometimes it is simply a retailer's top category.",
           "“Exotic” should not be used as a substitute for an official laboratory grade because it is not one.",
-          "At After Dark, Exotic is a named menu tier. The page should explain how that tier is positioned within the store rather than claim the word has one universal meaning."
+          "At After Dark, Exotic is a named menu tier, so its meaning comes from how the store positions that tier rather than a universal definition."
         ]
       },
       {
@@ -1727,7 +1727,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Can a high-THC product still be mids?",
-        "a": "Yes. THC is only one part of the quality picture. ---"
+        "a": "Yes. THC is only one part of the quality picture."
       }
     ],
     "commercialLinks": [],
@@ -1886,7 +1886,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "What should a beginner do with THC information?",
-        "a": "Read the legal label, understand that higher THC can increase risk of unwanted effects, and avoid treating maximum potency as the default goal. ---"
+        "a": "Read the legal label, understand that higher THC can increase risk of unwanted effects, and avoid treating maximum potency as the default goal."
       }
     ],
     "commercialLinks": [],
@@ -2037,7 +2037,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
           "None of those myths means appearance is useless.",
           "Humans evaluate food, clothing, cars and cannabis visually. A careful grower and processor often leaves clues in the finished presentation: intact buds, reasonable trim, preserved trichomes and a consistent batch.",
           "The mistake is treating the clue as proof of everything else.",
-          "For SEO and education, that distinction is powerful because it lets After Dark answer the exact natural question — “what makes weed look good?” — without turning the answer into empty sales hype."
+          "That distinction helps answer a more useful question: what can make cannabis flower look appealing without treating appearance as proof of overall quality?"
         ]
       }
     ],
@@ -2060,7 +2060,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Is trim part of quality?",
-        "a": "Trim and handling affect presentation, but they are only part of the overall quality picture. ---"
+        "a": "Trim and handling affect presentation, but they are only part of the overall quality picture."
       }
     ],
     "commercialLinks": [
@@ -2190,10 +2190,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "heading": "Why “Frosty” Became a Quality Word",
         "body": [
           "The word is visual and intuitive. A heavily resinous flower can literally look snow-dusted.",
-          "That made “frosty” a natural cannabis keyword long before most consumers knew the word trichome.",
-          "A strong educational page should connect the two:",
-          "Frosty is the slang. Trichomes are the plant structures creating the look.",
-          "That pattern — translate slang into useful science — is exactly how this Resource Centre should work."
+          "That made “frosty” a common cannabis slang term long before most consumers knew the word trichome.",
+          "Frosty is the slang. Trichomes are the plant structures creating the look."
         ]
       }
     ],
@@ -2216,7 +2214,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Why do people call weed “frosty”?",
-        "a": "Because dense visible trichomes can make the flower look dusted with frost or sugar. ---"
+        "a": "Because dense visible trichomes can make the flower look dusted with frost or sugar."
       }
     ],
     "commercialLinks": [
@@ -2356,10 +2354,10 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         ]
       },
       {
-        "heading": "Aroma Is a Better Search Topic Than “Best Smell”",
+        "heading": "Aroma Gives More Detail Than “Best Smell”",
         "body": [
           "People search for gassy weed, fruity weed, skunky weed, loud weed and similar terms because aroma is one of the easiest characteristics to describe.",
-          "The website should explain aroma families without turning them into universal product promises.",
+          "Aroma-family terms are most useful as descriptions, not universal product promises.",
           "For example:",
           "Those descriptions help adults understand vocabulary. They do not claim that one aroma produces one guaranteed effect."
         ],
@@ -2399,7 +2397,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Can the same strain smell different from batch to batch?",
-        "a": "Yes. Genetics, cultivation, harvest, cure and storage can all influence the final expression. ---"
+        "a": "Yes. Genetics, cultivation, harvest, cure and storage can all influence the final expression."
       }
     ],
     "commercialLinks": [],
@@ -2454,8 +2452,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "Curing is a controlled post-drying stage.",
           "In cannabis culture, good curing is associated with smoother handling characteristics, preserved aroma and a more finished smell compared with grassy or “green” post-harvest material.",
-          "The important SEO/content point is that curing is part of production quality.",
-          "A page that talks about Premium or Exotic flower without ever mentioning post-harvest handling is missing a major part of the story."
+          "Curing is part of production quality.",
+          "Post-harvest handling is a major part of how Premium or Exotic flower is understood."
         ]
       },
       {
@@ -2480,7 +2478,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
           "No.",
           "Good storage is mainly about preservation.",
           "It cannot restore trichomes that were knocked off, reverse a rushed cure, recreate lost aroma or turn weak genetics into premium genetics.",
-          "That is a useful Street-Smart rule:",
+          "The practical rule is simple:",
           "Storage protects quality; it does not manufacture quality after the fact."
         ]
       },
@@ -2542,10 +2540,10 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         ]
       },
       {
-        "heading": "Why Curing Deserves Its Own SEO Topic",
+        "heading": "Why Curing Matters When Comparing Flower",
         "body": [
-          "People use words such as smooth, harsh, fresh, dry, grassy, cured and sticky when talking about flower. Those are natural search terms tied to post-harvest quality.",
-          "Explaining drying and curing gives After Dark a better answer than simply calling a product “premium.” It shows why post-harvest work matters."
+          "People use words such as smooth, harsh, fresh, dry, grassy, cured and sticky when talking about flower because they describe post-harvest condition.",
+          "Drying and curing help explain why post-harvest work matters beyond a simple “premium” label."
         ]
       }
     ],
@@ -2567,8 +2565,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "a": "Consumers use different methods, but adding uncontrolled moisture can introduce problems. Follow product and safety guidance rather than improvised methods."
       },
       {
-        "q": "Why link this article from Premium and Exotic pages?",
-        "a": "Because post-harvest handling is part of understanding flower quality at every tier. ---"
+        "q": "Why does post-harvest handling matter across flower tiers?",
+        "a": "Because post-harvest handling is part of understanding flower quality at every tier."
       }
     ],
     "commercialLinks": [
@@ -2741,8 +2739,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "a": "No."
       },
       {
-        "q": "Should a tier page mention bud size?",
-        "a": "Only when the current batch information actually supports it. Do not hard-code a size claim across every product in a tier. ---"
+        "q": "Does bud size define an entire flower tier?",
+        "a": "Only when current batch information supports it. Bud size can vary, so it should not be treated as a fixed claim for every product in a tier."
       }
     ],
     "commercialLinks": [],
@@ -2884,7 +2882,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "Any attractive marketing word can become overused.",
           "If every product is called craft, the term stops teaching anything.",
-          "That is why After Dark should avoid automatically applying “craft” to inventory just because it sounds premium. Use the word only when source truth supports it or when discussing the category generically."
+          "The term is most useful when it is supported by reliable product information or discussed as a general production category."
         ]
       },
       {
@@ -2893,7 +2891,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
           "A flower can be craft-produced outside British Columbia.",
           "A BC-grown flower can be produced at large commercial scale.",
           "One term is about production positioning; the other is geographic origin.",
-          "Keeping those ideas separate prevents another common keyword mash-up."
+          "Production scale and geographic origin are different concepts."
         ]
       }
     ],
@@ -2916,7 +2914,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Why does craft cannabis often cost more?",
-        "a": "Small scale, labour, genetics, handling and limited supply can all affect cost, but price alone does not prove quality. ---"
+        "a": "Small scale, labour, genetics, handling and limited supply can all affect cost, but price alone does not prove quality."
       }
     ],
     "commercialLinks": [],
@@ -3009,13 +3007,12 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         ]
       },
       {
-        "heading": "Why This Matters for SEO and Shoppers",
+        "heading": "Why Both Words Still Appear",
         "body": [
-          "Searchers still type:",
-          "So the website should not erase the word.",
-          "Instead, the article can naturally connect:",
+          "Both terms still appear in everyday conversations and product information:",
+          "The terms can be understood together:",
           "strain → cultivar → genetics → phenotype → cut",
-          "That builds a stronger cannabis entity vocabulary without keyword stuffing."
+          "Knowing the relationship makes menus and product descriptions easier to understand."
         ],
         "bullets": [
           "weed strains",
@@ -3031,8 +3028,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "Cannabis names can travel through breeder communities, clone networks, retailers and consumers.",
           "Sometimes a name has a well-documented breeder and lineage. Sometimes multiple products use the same or similar name with less certainty.",
-          "That means a website should avoid inventing lineage when it is not supplied by an authoritative product source.",
-          "If the source truth says only “Gelato,” for example, do not automatically add a specific parent cross unless the product/producer actually confirms it."
+          "Lineage should not be assumed when it is not supplied by an authoritative product source.",
+          "If product information says only “Gelato,” for example, do not assume a specific parent cross unless the product or producer confirms it."
         ]
       },
       {
@@ -3044,10 +3041,10 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         ]
       },
       {
-        "heading": "Search Language vs Technical Language",
+        "heading": "Everyday Language vs. Technical Language",
         "body": [
-          "For SEO, both terms are useful because they capture different audiences.",
-          "Strain is the high-frequency consumer term.",
+          "Both terms appear because they are used by different audiences.",
+          "Strain is the more familiar consumer term.",
           "Cultivar appears more in technical, grower and educational contexts.",
           "A natural article can use both without awkward repetition."
         ]
@@ -3071,8 +3068,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "a": "A plant propagated genetically from another plant rather than grown as a new seed individual."
       },
       {
-        "q": "Should After Dark product pages say strain or cultivar?",
-        "a": "Use the terminology supplied by the product/source truth, and educational pages can explain both terms. ---"
+        "q": "Why do menus use both strain and cultivar?",
+        "a": "Strain is familiar consumer language, while cultivar is the more precise horticultural term. Product information may use either."
       }
     ],
     "commercialLinks": [
@@ -3236,8 +3233,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "a": "No."
       },
       {
-        "q": "Why does this topic matter for a dispensary Resource Centre?",
-        "a": "It explains the genetics language that appears throughout modern flower menus and breeder descriptions. ---"
+        "q": "Why does this terminology matter when reading a flower menu?",
+        "a": "It explains the genetics language that appears throughout modern flower menus and breeder descriptions."
       }
     ],
     "commercialLinks": [
@@ -3401,9 +3398,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       {
         "heading": "Plan the Visit Separately From Product Education",
         "body": [
-          "After Dark's local page should remain the place for:",
-          "The Resource Centre should remain the place for:",
-          "That separation keeps local SEO cleaner."
+          "Use the After Dark York store page to confirm the address, current hours, phone and visit information.",
+          "Use the Resource Centre to explore terminology, flower quality, genetics, cultivation and product education."
         ],
         "bullets": [
           "address",
@@ -3434,20 +3430,18 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         ]
       },
       {
-        "heading": "Why “Near Me” Searchers Need a Different Page",
+        "heading": "Using the York Store Page and Resource Centre",
         "body": [
-          "Someone searching “weed dispensary near me” is usually solving a location problem, not asking for a 1,500-word genetics lesson.",
-          "That is why the first-visit article should link to the York store page for exact visit facts while keeping the education here.",
-          "This separation protects both intents:",
-          "local page = where/when/how to visit",
-          "resource page = what the terminology means"
+          "Someone searching “weed dispensary near me” is usually looking for practical local information.",
+          "Use the York store page for current visit details and the Resource Centre for cannabis terminology and product education.",
+          "These two paths keep practical trip information separate from longer educational guides."
         ]
       },
       {
         "heading": "A Note on Driving and Impairment",
         "body": [
           "Cannabis can impair reaction time, attention and coordination. Do not drive or operate machinery while impaired.",
-          "A visit-planning guide should never accidentally imply that cannabis consumption and driving belong together."
+          "Plan transportation that does not involve driving while impaired."
         ]
       }
     ],
@@ -3470,7 +3464,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       },
       {
         "q": "Where is After Dark Cannabis?",
-        "a": "Use the current After Dark local/store page for exact address and hours rather than hard-coding mutable visit facts across every educational article. ---"
+        "a": "Use the current After Dark store page for the latest address and hours."
       }
     ],
     "commercialLinks": [],
