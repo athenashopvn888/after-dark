@@ -79,6 +79,12 @@ export function GBPLandingPage() {
         <section className={styles.section}>
           <h2>Explore After Dark Cannabis Guides</h2>
           <div className={styles.guideGrid}>{store.guides.map((guide) => <article className={styles.guideCard} key={guide.href}><h3>{guide.label}</h3><p>{guide.description}</p><Link href={guide.href}>Explore {guide.label}</Link></article>)}</div>
+          <div className={styles.inlineGuide}>
+            <span>New to the terminology or planning your first visit?</span>
+            <Link href="/resources/cannabis-dispensary-vs-weed-dispensary">Cannabis dispensary vs. weed dispensary</Link>
+            <Link href="/resources/cannabis-101">Cannabis 101</Link>
+            <Link href="/resources/first-cannabis-dispensary-visit">First dispensary visit guide</Link>
+          </div>
         </section>
 
         <section className={styles.section} id="faq"><h2>Frequently Asked Questions</h2><div className={styles.faqList}>{faqItems.map((item) => <article className={styles.faqItem} key={item.question}><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div></section>

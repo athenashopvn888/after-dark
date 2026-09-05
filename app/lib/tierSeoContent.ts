@@ -8,6 +8,7 @@ export interface TierSeoData {
   strainHeading: string;
   seoIntro: string;
   sections: { heading: string; body: string }[];
+  educationLinks: { label: string; href: string }[];
   faqs: { q: string; a: string }[];
 }
 
@@ -24,6 +25,12 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     sections: [
       { heading: "Exotic as a Dedicated Flower Tier", body: "Keeping Exotic separate from Premium, AAA+, AA and Budget gives shoppers a clearer way to move through the After Dark flower categories." },
       { heading: "Compare the After Dark Flower Tiers", body: "If Exotic is not the category you want, the other flower tiers give you separate places to continue browsing without mixing every tier together." },
+      { heading: "Exotic, Zaza and Top-Shelf Language", body: "“Exotic” is often used in cannabis culture for flower considered rare, visually distinctive or premium. “Zaza” or “za” is slang that can overlap with that idea. Neither word is an official Canadian grade. At After Dark, Exotic is a store tier. Use the current batch information for the product itself, and use the Flower Quality guide to understand the broader factors — genetics, aroma, trichomes, structure, cure and freshness — that people associate with premium flower." },
+    ],
+    educationLinks: [
+      { label: "Learn what makes good weed", href: "/resources/what-is-good-weed" },
+      { label: "Weed slang explained", href: "/resources/weed-quality-slang" },
+      { label: "Cannabis flower quality guide", href: "/resources/cannabis-flower-quality-tiers" },
     ],
     faqs: [
       { q: "What is Exotic weed at After Dark Cannabis?", a: "Exotic is one of After Dark Cannabis's separate cannabis flower tiers." },
@@ -43,6 +50,11 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     sections: [
       { heading: "A Separate Premium Flower Category", body: "Premium is kept distinct from Exotic, AAA+, AA and Budget so shoppers can stay within one flower tier at a time." },
       { heading: "Move Through the Flower Lineup", body: "The other After Dark flower tiers remain separate options when you want to compare another category." },
+      { heading: "Premium Is More Than a THC Number", body: "Premium is a tier label, not a promise that every product has the highest THC on the menu. A premium-quality discussion can include aroma, cure, trichome preservation, genetics, freshness and overall consistency." },
+    ],
+    educationLinks: [
+      { label: "Does higher THC mean better weed?", href: "/resources/thc-vs-weed-quality" },
+      { label: "Cannabis flower quality guide", href: "/resources/cannabis-flower-quality-tiers" },
     ],
     faqs: [
       { q: "What is Premium weed at After Dark Cannabis?", a: "Premium is one of After Dark Cannabis's dedicated cannabis flower tiers." },
@@ -62,6 +74,11 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     sections: [
       { heading: "AAA+ in the After Dark Flower Lineup", body: "A dedicated AAA+ category keeps this tier distinct from Premium and AA without relying on product-level claims." },
       { heading: "Choose Another Tier When Needed", body: "Exotic, Premium, AA and Budget remain separate flower categories when you want to continue comparing the lineup." },
+      { heading: "Where AAA+ Fits", body: "AAA+ sits in After Dark's own flower ladder between AA and the upper Premium/Exotic tiers. Letter grades are common cannabis-market language, but they are not one universal Canadian government standard." },
+    ],
+    educationLinks: [
+      { label: "Top shelf, mids and quads explained", href: "/resources/top-shelf-mids-quads-aaaa-aaa-aa" },
+      { label: "Cannabis flower quality guide", href: "/resources/cannabis-flower-quality-tiers" },
     ],
     faqs: [
       { q: "What is the AAA+ weed tier at After Dark Cannabis?", a: "AAA+ is one of After Dark Cannabis's separate cannabis flower tiers." },
@@ -81,6 +98,11 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     sections: [
       { heading: "AA as Its Own Flower Tier", body: "The dedicated AA section keeps the After Dark flower lineup organized around clear category choices." },
       { heading: "Compare AA With the Other Tiers", body: "Move to Budget, AAA+, Premium or Exotic when another flower category is the better place for you to continue browsing." },
+      { heading: "Everyday Flower and the Meaning of AA", body: "AA is often used as a value/everyday quality designation in cannabis culture. That does not mean every AA batch everywhere is identical. After Dark should describe the current batch truth rather than treating “AA” as a national specification." },
+    ],
+    educationLinks: [
+      { label: "Top shelf, mids and quads explained", href: "/resources/top-shelf-mids-quads-aaaa-aaa-aa" },
+      { label: "Cannabis flower quality guide", href: "/resources/cannabis-flower-quality-tiers" },
     ],
     faqs: [
       { q: "What does AA weed mean at After Dark Cannabis?", a: "AA is one of After Dark Cannabis's separate cannabis flower tiers." },
@@ -100,6 +122,12 @@ export const TIER_SEO: Record<string, TierSeoData> = {
     sections: [
       { heading: "A Value-Oriented Flower Category", body: "Budget is separated from AA, AAA+, Premium and Exotic to give shoppers a clear value-oriented flower starting point." },
       { heading: "Budget Is the Tier Name", body: "The Budget label describes the category only and does not establish a current discount, price, promotion or availability claim." },
+      { heading: "Budget Describes Price Position — Not “Bad Weed”", body: "A Budget tier organizes lower-cost flower. It should not be described as automatically stale, weak or poor. Quality and value are different ideas. A fresh, properly handled Budget batch can still fit its role well." },
+    ],
+    educationLinks: [
+      { label: "Learn what makes good weed", href: "/resources/what-is-good-weed" },
+      { label: "Smalls vs big buds", href: "/resources/smalls-vs-big-buds" },
+      { label: "Cannabis flower quality guide", href: "/resources/cannabis-flower-quality-tiers" },
     ],
     faqs: [
       { q: "What is Budget weed at After Dark Cannabis?", a: "Budget is After Dark Cannabis's value-oriented cannabis flower tier." },

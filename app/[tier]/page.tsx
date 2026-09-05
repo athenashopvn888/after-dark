@@ -200,6 +200,18 @@ export default async function TierPage({
             ))}
 
             <div className={styles.seoBlock}>
+              <h3 className={styles.seoHeading}>Learn More About Weed and Flower Quality</h3>
+              <p className={styles.seoBody}>
+                {seo.educationLinks.map((item, index) => (
+                  <span key={item.href}>
+                    {index > 0 ? " · " : ""}
+                    <Link href={item.href}>{item.label}</Link>
+                  </span>
+                ))}
+              </p>
+            </div>
+
+            <div className={styles.seoBlock}>
               <h3 className={styles.seoHeading}>{TIER_COMPARISON.heading}</h3>
               <p className={styles.seoBody}>{TIER_COMPARISON.body}</p>
               <p className={styles.seoBody}>

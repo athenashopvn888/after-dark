@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SmokePilotLanding } from "../../components/SmokePilot";
@@ -108,6 +109,12 @@ export default async function NativeCigarettesYorkPage() {
         inventoryVersion={inventory?.snapshot.version}
         inventoryAsOf={inventory?.snapshot.sourceTimestamp}
       />
+      <section style={{ maxWidth: 1120, margin: "0 auto", padding: "24px 20px 48px" }}>
+        <p>
+          For Ontario history, manufacturing and cigarette-stamp context, read the{" "}
+          <Link href="/resources/native-cigarettes-ontario">Native Cigarettes in Ontario educational guide</Link>.
+        </p>
+      </section>
       <Footer />
     </>
   );
