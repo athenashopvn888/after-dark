@@ -109,7 +109,7 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
     searchIntent: "Find After Dark Cannabis shopping guides and product-brand pages.",
     author: "team",
     datePublished: updated,
-    dateModified: updated,
+    dateModified: "2026-09-05",
     image: {
       src: "/banners/after_dark_edibles_prerolls_more_banner.webp",
       alt: "After Dark Cannabis resource guides for Jane Street shoppers",

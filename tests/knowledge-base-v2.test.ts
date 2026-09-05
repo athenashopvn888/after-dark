@@ -61,8 +61,50 @@ test("keeps the Ontario cigarette authority page informational", () => {
 
 test("does not expose internal workflow language in generated public copy", () => {
   const publicCopy = JSON.stringify(AUTHORITY_RESOURCE_PAGES).toLowerCase();
-  for (const blocked of ["pinky", "cody", "approved body copy", "required page guardrails", "seo keyword"])
+  for (const blocked of [
+    "pinky",
+    "cody",
+    "approved body copy",
+    "required page guardrails",
+    "seo keyword",
+    "for seo",
+    "seo/content",
+    "keyword mash-up",
+    "keyword stuffing",
+    "search volume",
+    "source truth",
+    "hard-code",
+    "hard-coding",
+    "website should",
+    "page should remain",
+    "educational page should",
+    "the page should explain",
+    "resource centre should remain",
+    "local seo",
+    "keyword variation",
+    "search topic",
+    "street-smart rule",
+  ])
     assert.ok(!publicCopy.includes(blocked), `internal phrase leaked: ${blocked}`);
+});
+
+test("does not leak Markdown separators into body, FAQ, or schema-facing copy", () => {
+  const publicCopy = JSON.stringify(AUTHORITY_RESOURCE_PAGES);
+  assert.doesNotMatch(publicCopy, /(?:^|\s)(?:-{3,}|\*{3,}|_{3,})(?:\s|$)/);
+});
+
+test("preserves original publication dates for expanded resources", () => {
+  const expected = new Map([
+    ["/resources/cannabis-dispensary-vs-weed-dispensary", "2026-09-04"],
+    ["/resources/cannabis-101", "2026-07-15"],
+    ["/resources/flower-guides", "2026-07-15"],
+  ]);
+  for (const [route, datePublished] of expected) {
+    const page = AUTHORITY_RESOURCE_PAGES.find((item) => item.path === route);
+    assert.ok(page, `missing expanded resource: ${route}`);
+    assert.equal(page.datePublished, datePublished);
+    assert.equal(page.dateModified, "2026-09-05");
+  }
 });
 
 test("renders FAQ schema and contextual navigation", () => {
