@@ -209,6 +209,48 @@
   margin-top: 6px;
 }
 
+.subsection {
+  margin-top: 24px;
+}
+
+.subsection h3 {
+  margin: 0 0 10px;
+  color: #f8fafc;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 25px);
+}
+
+.faqSection {
+  margin-top: 28px;
+  padding: 30px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+}
+
+.faqSection h2 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-family: var(--font-display);
+}
+
+.faqItem {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 16px 0;
+}
+
+.faqItem summary {
+  cursor: pointer;
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+.faqItem p {
+  margin: 10px 0 0;
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
 .cardGrid,
 .cardGridCompact {
   display: grid;

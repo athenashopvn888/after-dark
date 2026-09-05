@@ -76,9 +76,36 @@ export default function ResourceView({ page }: ResourceViewProps) {
                   ))}
                 </ul>
               )}
+              {section.subsections?.map((subsection) => (
+                <div key={subsection.heading} className={styles.subsection}>
+                  <h3>{subsection.heading}</h3>
+                  {subsection.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  {subsection.bullets && (
+                    <ul>
+                      {subsection.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
               {section.links && <LinkList links={section.links} />}
             </section>
           ))}
+
+          {page.faqs && page.faqs.length > 0 && (
+            <section className={styles.faqSection}>
+              <h2>Frequently Asked Questions</h2>
+              {page.faqs.map((faq) => (
+                <details key={faq.q} className={styles.faqItem}>
+                  <summary>{faq.q}</summary>
+                  <p>{faq.a}</p>
+                </details>
+              ))}
+            </section>
+          )}
 
           {page.commercialLinks.length > 0 && (
             <section className={styles.linkPanel}>

@@ -17,9 +17,8 @@ const FAQ_CATEGORIES = [
     title: "📍 Location & Hours",
     faqs: [
       { q: "Where is After Dark Cannabis located?", a: "We are located at 1664 Jane St, York, ON M9N 2S1. We're easily accessible by TTC bus routes and close to major highways like the 401." },
-      { q: "What are your hours?", a: "We are open Open 24 Hours a day, 7 days a week, 365 days a year. Walk in anytime — no appointment needed." },
+      { q: "What are your hours?", a: "We are open 24 hours a day, 7 days a week, 365 days a year. Walk in anytime — no appointment needed." },
       { q: "Is there parking nearby?", a: "Yes. Free street parking is available nearby on Jane St and surrounding streets in the evenings. We're also easily accessible by TTC buses." },
-      { q: "How far are you from Mississauga?", a: "We're just 5 minutes from the Gardiner Expressway and 7 minutes from the Don Valley Parkway. We're one of the closest dispensaries to the Ontario border." },
       { q: "What's the best way to get to After Dark Cannabis?", a: "We're easily accessible by car, bus, or foot. By TTC bus, the 35 Jane bus stops right near our store. Free parking is available on surrounding streets." },
     ],
   },
@@ -47,7 +46,7 @@ const FAQ_CATEGORIES = [
   {
     title: "🛒 Shopping & Experience",
     faqs: [
-      { q: "Do I need an appointment?", a: "No! After Dark Cannabis is walk-in only. Just show up anytime — we're open Open 24 Hours." },
+      { q: "Do I need an appointment?", a: "No! After Dark Cannabis is walk-in only. Just show up anytime — we're open 24 hours." },
       { q: "Can I order online?", a: "After Dark Cannabis is an in-store shopping experience. You can browse the online menu before visiting, but the site does not provide online checkout." },
       { q: "Do you offer delivery?", a: "Delivery is coming soon! Visit our delivery page to sign up for email notifications when we launch our delivery service." },
       { q: "What payment methods do you accept?", a: "We accept cash and debit. No credit cards at this time." },

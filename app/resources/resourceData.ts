@@ -16,7 +16,17 @@ export interface ResourceSection {
   heading: string;
   body: string[];
   bullets?: string[];
+  subsections?: {
+    heading: string;
+    body: string[];
+    bullets?: string[];
+  }[];
   links?: ResourceLink[];
+}
+
+export interface ResourceFaq {
+  q: string;
+  a: string;
 }
 
 export interface ResourcePage {
@@ -41,6 +51,7 @@ export interface ResourcePage {
   };
   intro: string[];
   sections: ResourceSection[];
+  faqs?: ResourceFaq[];
   commercialLinks: ResourceLink[];
   related: string[];
 }
@@ -75,7 +86,7 @@ export const AUTHORS: Record<ResourceAuthorKey, ResourceAuthor> = {
 
 export const updated = "2026-07-15";
 
-export const RESOURCE_PAGES: ResourcePage[] = [
+const BASE_RESOURCE_PAGES: ResourcePage[] = [
   {
     path: "/resources",
     kind: "root",
@@ -104,21 +115,27 @@ export const RESOURCE_PAGES: ResourcePage[] = [
       alt: "After Dark Cannabis resource guides for Jane Street shoppers",
     },
     intro: [
-      "After Dark is not just a flower menu. The current shelf gives shoppers brand names and add-on categories worth searching by name: Gas Gang disposable vapes, Drizzle Switch 3-in-1, ZYN, Velo, Pablo, Killa, Backwoods, grabba, edibles, concentrates, accessories, cigarettes, pre-rolls, and flower tiers.",
-      "This hub turns those real menu terms into cleaner shopping sections. Use it when the trip starts with a product type, a brand name, a smoke-shop add-on, or a Jane Street/York local search.",
+      "Choose the topic you want to understand. Learn how cannabis formats differ, compare flower quality, growing methods and common cannabis labels, or use the York visit guides for local store information.",
+      "Use each guide for background and the live menu for current listings. The Resource Centre keeps Cannabis Basics, Flower Knowledge, product formats, Ontario tobacco information and York visit guides in clear sections.",
     ],
     sections: [
       {
-        heading: "Non-Flower Keywords Get Their Own Shelf",
+        heading: "Cannabis Basics and Flower Knowledge",
         body: [
-          "Gas Gang, Drizzle, nicotine pouches, Backwoods, and grabba deserve clear space in the shopping guide. They are current product names shoppers recognize, so this resource centre keeps those terms easy to find.",
+          "Start with Cannabis 101, the cannabis dispensary and weed dispensary terminology guide, or the Flower Guides hub. These guides explain common language and connect it to deeper quality, cultivation and genetics topics.",
+        ],
+        links: [
+          { label: "Cannabis 101", href: "/resources/cannabis-101" },
+          { label: "Cannabis Dispensary vs. Weed Dispensary", href: "/resources/cannabis-dispensary-vs-weed-dispensary" },
+          { label: "Flower Guides", href: "/resources/flower-guides" },
         ],
       },
       {
-        heading: "Monthly Menu Language Can Stay Fresh",
+        heading: "Ontario Tobacco Information",
         body: [
-          "This copy is written from the current product data. When a monthly menu pass removes or adds brands, the resource pages can move with it so the site keeps talking like the shelf shoppers actually see.",
+          "The Native Cigarettes in Ontario guide is a separate educational resource covering history, manufacturing and cigarette-stamp context. Local product and store information remains on the separate York page.",
         ],
+        links: [{ label: "Native Cigarettes in Ontario", href: "/resources/native-cigarettes-ontario" }],
       },
     ],
     commercialLinks: [
@@ -861,6 +878,15 @@ export const RESOURCE_PAGES: ResourcePage[] = [
     ],
     related: ["/resources/local-guides", "/resources/menu-guide"],
   },
+];
+
+import { AUTHORITY_RESOURCE_PAGES } from "./authorityResourceData";
+
+const authorityPaths = new Set(AUTHORITY_RESOURCE_PAGES.map((page) => page.path));
+
+export const RESOURCE_PAGES: ResourcePage[] = [
+  ...BASE_RESOURCE_PAGES.filter((page) => !authorityPaths.has(page.path)),
+  ...AUTHORITY_RESOURCE_PAGES,
 ];
 
 export const RESOURCE_HOME = RESOURCE_PAGES[0];
