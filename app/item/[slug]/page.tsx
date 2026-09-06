@@ -1,17 +1,25 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cache } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { allItems, CATEGORY_CONFIG, type ItemProduct } from "../../lib/products";
+import { getAdcInventory } from "../../lib/adcInventoryService";
+import { resolveLiveProduct } from "../../lib/liveProductResolver";
 import { getItemData } from "../../lib/itemData";
 import Magnifier from "../../components/Magnifier";
 import styles from "../../flower/[slug]/flower.module.css";
 
-/* -- Pre-generate all item pages -- */
-export function generateStaticParams() {
-  return allItems.map((i) => ({ slug: i.slug }));
-}
+export const dynamic = "force-dynamic";
+
+const resolveItem = cache(async (slug: string) => {
+  return resolveLiveProduct({
+    slug,
+    loadLive: async () => (await getAdcInventory()).snapshot.items,
+    fallback: allItems,
+  });
+});
 
 /* -- SEO metadata per item -- */
 export async function generateMetadata({
@@ -20,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const item = allItems.find((i) => i.slug === slug);
+  const item = await resolveItem(slug);
   if (!item) return {};
 
   const itemData = getItemData(item.category, item.name);
@@ -52,7 +60,7 @@ function getJsonLd(item: ItemProduct) {
   const itemData = getItemData(item.category, item.name);
   const priceNum = item.price ? parseFloat(item.price.replace('$', '')) : 0;
 
-  const offers: any = {
+  const offers: Record<string, unknown> = {
     "@type": "Offer",
     url: `https://afterdarkcannabis.com/item/${item.slug}`,
     priceCurrency: "CAD",
@@ -117,7 +125,7 @@ export default async function ItemPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = allItems.find((i) => i.slug === slug);
+  const item = await resolveItem(slug);
   if (!item) notFound();
 
   const catInfo = Object.values(CATEGORY_CONFIG).find(c => c.name.toUpperCase() === item.category.toUpperCase() || c.name === item.category);

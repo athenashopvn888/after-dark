@@ -1,18 +1,26 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cache } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { allFlowers, TIER_CONFIG, type FlowerProduct, type PricePoint } from "../../lib/products";
+import { getAdcInventory } from "../../lib/adcInventoryService";
+import { resolveLiveProduct } from "../../lib/liveProductResolver";
 import { getStrainData } from "../../lib/strainData";
 import RelatedScroll from "./RelatedScroll";
 import Magnifier from "../../components/Magnifier";
 import styles from "./flower.module.css";
 
-/* -- Pre-generate all flower pages -- */
-export function generateStaticParams() {
-  return allFlowers.map((f) => ({ slug: f.slug }));
-}
+export const dynamic = "force-dynamic";
+
+const resolveFlower = cache(async (slug: string) => {
+  return resolveLiveProduct({
+    slug,
+    loadLive: async () => (await getAdcInventory()).snapshot.flowers,
+    fallback: allFlowers,
+  });
+});
 
 /* -- SEO metadata per strain -- */
 export async function generateMetadata({
@@ -21,7 +29,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const flower = allFlowers.find((f) => f.slug === slug);
+  const flower = await resolveFlower(slug);
   if (!flower) return {};
 
   const tierName = TIER_CONFIG[flower.tier]?.name || flower.tier;
@@ -55,7 +63,7 @@ function getJsonLd(flower: FlowerProduct) {
 
   const strainData = getStrainData(flower.name, flower.type, flower.tier, flower.thc);
 
-  const offers: any = {
+  const offers: Record<string, unknown> = {
     "@type": "Offer",
     url: `https://afterdarkcannabis.com/flower/${flower.slug}`,
     priceCurrency: "CAD",
@@ -125,7 +133,7 @@ export default async function FlowerPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const flower = allFlowers.find((f) => f.slug === slug);
+  const flower = await resolveFlower(slug);
   if (!flower) notFound();
 
   const tierConfig = TIER_CONFIG[flower.tier];
