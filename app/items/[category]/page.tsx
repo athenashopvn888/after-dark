@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SafeImage from "../../components/SafeImage";
+import { getItemPriceDisplay } from "../../lib/itemPricing";
 import {
   getCategoryFromSlug,
   CATEGORY_CONFIG,
@@ -137,6 +138,8 @@ export default async function ItemsCategoryPage({
 }
 
 function ItemCard({ item, catColor }: { item: ItemProduct; catColor: string }) {
+  const itemPrice = getItemPriceDisplay(item.price);
+
   return (
     <Link
       href={`/item/${item.slug}`}
@@ -164,8 +167,8 @@ function ItemCard({ item, catColor }: { item: ItemProduct; catColor: string }) {
         <h3 className={styles.cardName}>{item.name}</h3>
         {item.price && (
           <div className={styles.cardPrice}>
-            <span className={styles.priceVal}>{item.price.startsWith('$') ? item.price : `$${item.price}`}</span>
-            <span className={styles.priceUnit}>each</span>
+            <span className={styles.priceVal}>{itemPrice.display}</span>
+            <span className={styles.priceUnit}>{itemPrice.isMultiple ? "price options" : "each"}</span>
           </div>
         )}
         <span className={styles.skuTag}>SKU {item.sku}</span>
