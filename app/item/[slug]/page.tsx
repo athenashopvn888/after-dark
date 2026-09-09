@@ -134,7 +134,7 @@ export default async function ItemPage({
   const catIcon = catInfo?.icon || "🏷️";
   
   const itemData = getItemData(item.category, item.name);
-  const itemPrice = getItemPriceDisplay(item.price);
+  const itemPrice = getItemPriceDisplay(item.price, item.sku);
 
   return (
     <>
