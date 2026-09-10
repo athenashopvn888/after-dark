@@ -24,6 +24,11 @@ test("ADC top-three TV rows always use explicit equals-sign bundle labels", () =
   assert.doesNotMatch(tvPage, /2G-3G|3G-6G/);
 });
 
+test("ADC TV highlight labels the backend five-gram slot as 6g only for top tiers", () => {
+  assert.match(tvPage, /\{isTop3 \? "6g" : "5g"\}/);
+  assert.match(tvPage, /isAA \? <span className=\{styles\.headerDeal\}>\$20 5g AA<\/span>/);
+});
+
 test("ADC TV renders sale prices as old struck-through then new", () => {
   assert.match(
     tvPage,

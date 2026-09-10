@@ -303,7 +303,7 @@ function FlowerCard({
             <div className={styles.detailMeta}>
               {hi?.thc && <span className={styles.detailThc}>{fmtTHC(hi.thc)}</span>}
               {hi?.price3g && <><span className={styles.detailSep}>·</span><span>3g <b>${hi.price3g.sale ?? hi.price3g.regular}</b></span></>}
-              {hi?.price5g && <><span className={styles.detailSep}>·</span><span>5g <b>${hi.price5g.sale ?? hi.price5g.regular}</b></span></>}
+              {hi?.price5g && <><span className={styles.detailSep}>·</span><span>{isTop3 ? "6g" : "5g"} <b>${hi.price5g.sale ?? hi.price5g.regular}</b></span></>}
               {hi?.price14g && <><span className={styles.detailSep}>·</span><span>14g <b>${hi.price14g.sale ?? hi.price14g.regular}</b></span></>}
             </div>
           </div>
