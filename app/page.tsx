@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
+import FleetAnnouncementBanner from "./components/FleetAnnouncementBanner";
 import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
@@ -186,6 +187,7 @@ export default function HomePage() {
 
   return (
     <main className={styles.main}>
+      <FleetAnnouncementBanner />
       {/* ── NAVBAR ── */}
       <Navbar />
       <HiringCallout />
