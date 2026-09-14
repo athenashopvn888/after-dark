@@ -10,6 +10,7 @@ import {
 } from "../lib/products";
 import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_COMPARISON, TIER_SEO } from "../lib/tierSeoContent";
+import { buildTierCollectionJsonLd } from "../lib/tierStructuredData";
 import styles from "./tier.module.css";
 
 const SITE_ORIGIN = "https://afterdarkcannabis.com";
@@ -42,7 +43,9 @@ export async function generateMetadata({
   const seo = TIER_SEO[tierInfo.key];
 
   return {
-    title: seo?.seoTitle || `${tierInfo.config.name} Cannabis Flower — ${flowers.length} Strains`,
+    title: tierInfo.key === "EXOTIC" && seo
+      ? { absolute: seo.seoTitle }
+      : seo?.seoTitle || `${tierInfo.config.name} Cannabis Flower — ${flowers.length} Strains`,
     description: seo?.metaDescription || `Shop ${flowers.length} ${tierInfo.config.name.toLowerCase()} cannabis strains at After Dark Cannabis.`,
     alternates: {
       canonical: `${SITE_ORIGIN}/${tierSlug}`,
@@ -74,9 +77,21 @@ export default async function TierPage({
 
   const saleFlowers = flowers.filter((f) => f.isSale);
   const regularFlowers = flowers.filter((f) => !f.isSale);
+  const displayFlowers = [...saleFlowers, ...regularFlowers];
   const hotFlowers = flowers.filter((f) => f.isHot);
+  const tierJsonLd = buildTierCollectionJsonLd({
+    canonicalPath: `/${tierSlug}`,
+    name: seo?.h1 || config.name,
+    description: seo?.metaDescription || `${config.name} cannabis flower at After Dark Cannabis.`,
+    flowers: displayFlowers,
+  });
 
   return (
+    <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(tierJsonLd) }}
+    />
     <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
 
@@ -189,13 +204,19 @@ export default async function TierPage({
       {seo && (
         <section className={styles.seoSection}>
           <div className={styles.container}>
-            <h2 className={styles.seoMainTitle}>{seo.seoTitle}</h2>
+            {tierInfo.key !== "EXOTIC" && (
+              <h2 className={styles.seoMainTitle}>{seo.seoTitle}</h2>
+            )}
             <p className={styles.seoIntro}>{seo.seoIntro}</p>
 
             {seo.sections.map((s, i) => (
               <div key={i} className={styles.seoBlock}>
                 <h3 className={styles.seoHeading}>{s.heading}</h3>
-                <p className={styles.seoBody}>{s.body}</p>
+                {s.bodyHtml ? (
+                  <p className={styles.seoBody} dangerouslySetInnerHTML={{ __html: s.bodyHtml }} />
+                ) : (
+                  <p className={styles.seoBody}>{s.body}</p>
+                )}
               </div>
             ))}
 
@@ -216,7 +237,7 @@ export default async function TierPage({
               <p className={styles.seoBody}>{TIER_COMPARISON.body}</p>
               <p className={styles.seoBody}>
                 {TIER_COMPARISON.ownerSentence}{" "}
-                <Link href={TIER_COMPARISON.ownerHref}>{TIER_COMPARISON.ownerAnchor}</Link> page.
+                <Link href={TIER_COMPARISON.ownerHref}>{TIER_COMPARISON.ownerAnchor}</Link>.
               </p>
             </div>
 
@@ -227,7 +248,11 @@ export default async function TierPage({
                 {seo.faqs.map((faq, i) => (
                   <details key={i} className={styles.faqItem}>
                     <summary className={styles.faqQuestion}>{faq.q}</summary>
-                    <p className={styles.faqAnswer}>{faq.a}</p>
+                    {faq.answerHtml ? (
+                      <p className={styles.faqAnswer} dangerouslySetInnerHTML={{ __html: faq.answerHtml }} />
+                    ) : (
+                      <p className={styles.faqAnswer}>{faq.a}</p>
+                    )}
                   </details>
                 ))}
               </div>
@@ -238,5 +263,6 @@ export default async function TierPage({
 
       <Footer />
     </main>
+    </>
   );
 }
