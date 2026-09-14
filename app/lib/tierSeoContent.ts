@@ -149,8 +149,8 @@ export const TIER_SEO: Record<string, TierSeoData> = {
 
 export const TIER_COMPARISON = {
   heading: "Compare After Dark Weed & Flower Tiers",
-  body: "Explore Exotic, Premium, AAA+, AA and Budget as separate cannabis flower categories. Each tier has its own browsing space while the broader Weed and Cannabis store experience remains on the main After Dark Cannabis owner page.",
-  ownerSentence: "For the broader After Dark Cannabis store and Weed overview, visit the",
-  ownerAnchor: "Weed Dispensary in York",
-  ownerHref: "/weed-dispensary-york/",
+  body: "Compare Exotic, Premium, AAA+, AA and Budget flower at After Dark Cannabis. Each tier offers a useful starting point for considering strains and the documented product details that matter to you.",
+  ownerSentence: "For store details, directions and visit information, see",
+  ownerAnchor: "After Dark Cannabis — Weed Dispensary in York",
+  ownerHref: "/weed-dispensary-york",
 } as const;

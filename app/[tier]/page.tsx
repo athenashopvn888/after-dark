@@ -237,7 +237,7 @@ export default async function TierPage({
               <p className={styles.seoBody}>{TIER_COMPARISON.body}</p>
               <p className={styles.seoBody}>
                 {TIER_COMPARISON.ownerSentence}{" "}
-                <Link href={TIER_COMPARISON.ownerHref}>{TIER_COMPARISON.ownerAnchor}</Link> page.
+                <Link href={TIER_COMPARISON.ownerHref}>{TIER_COMPARISON.ownerAnchor}</Link>.
               </p>
             </div>
 
