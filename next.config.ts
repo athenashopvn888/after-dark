@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "afterdarkcannabis.ca" }],
+        destination: "https://afterdarkcannabis.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.afterdarkcannabis.ca" }],
+        destination: "https://afterdarkcannabis.com/:path*",
+        permanent: true,
+      },
       { source: "/delivery", destination: "/weed-delivery-york", permanent: true },
       { source: "/blog", destination: "/", permanent: true },
       { source: "/blog/:path*", destination: "/", permanent: true },

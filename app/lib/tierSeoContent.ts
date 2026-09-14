@@ -7,25 +7,29 @@ export interface TierSeoData {
   imageAlt: string;
   strainHeading: string;
   seoIntro: string;
-  sections: { heading: string; body: string }[];
+  sections: { heading: string; body: string; bodyHtml?: string }[];
   educationLinks: { label: string; href: string }[];
-  faqs: { q: string; a: string }[];
+  faqs: { q: string; a: string; answerHtml?: string }[];
 }
 
 export const TIER_SEO: Record<string, TierSeoData> = {
   EXOTIC: {
-    seoTitle: "Exotic Weed & Cannabis Flower in York",
-    metaDescription: "Explore the Exotic weed and cannabis flower tier at After Dark Cannabis in York, with a focused flower category for adults 19+.",
-    socialTitle: "Exotic Weed & Flower | After Dark Cannabis",
-    socialDescription: "Explore the Exotic cannabis flower tier at After Dark Cannabis.",
+    seoTitle: "Exotic Weed & Cannabis Flower in York | After Dark",
+    metaDescription: "Explore Exotic weed at After Dark Cannabis in York. Compare flower using documented genetics, aroma, trichomes, structure and cure details.",
+    socialTitle: "Exotic Weed & Cannabis Flower in York",
+    socialDescription: "Explore After Dark Cannabis’s Exotic flower tier in York with helpful context on genetics, aroma, trichomes, flower structure and cure.",
     h1: "Exotic Weed & Cannabis Flower in York",
-    imageAlt: "Exotic weed and cannabis flower at After Dark Cannabis",
+    imageAlt: "Exotic cannabis flower at After Dark Cannabis in York",
     strainHeading: "Explore Exotic Weed & Flower",
-    seoIntro: "Exotic has its own place in the After Dark Cannabis flower lineup. Adults 19+ can focus on this tier when Exotic weed and cannabis flower is the category they want to explore.",
+    seoIntro: "Exotic is a distinct flower tier at After Dark Cannabis in York. In cannabis culture, the term is often associated with flower described as rare, visually distinctive or premium. Adults 19+ can compare individual strains using documented details such as genetics, aroma descriptions, trichome coverage, flower structure and cure.",
     sections: [
-      { heading: "Exotic as a Dedicated Flower Tier", body: "Keeping Exotic separate from Premium, AAA+, AA and Budget gives shoppers a clearer way to move through the After Dark flower categories." },
-      { heading: "Compare the After Dark Flower Tiers", body: "If Exotic is not the category you want, the other flower tiers give you separate places to continue browsing without mixing every tier together." },
-      { heading: "Exotic, Zaza and Top-Shelf Language", body: "“Exotic” is often used in cannabis culture for flower considered rare, visually distinctive or premium. “Zaza” or “za” is slang that can overlap with that idea. Neither word is an official Canadian grade. At After Dark, Exotic is a store tier. Use the current batch information for the product itself, and use the Flower Quality guide to understand the broader factors — genetics, aroma, trichomes, structure, cure and freshness — that people associate with premium flower." },
+      { heading: "What Exotic Means at After Dark Cannabis", body: "Exotic is its own flower tier alongside Premium, AAA+, AA and Budget. These retailer categories give buyers familiar starting points when comparing strains, while the documented details for each flower provide more useful context than the tier name alone." },
+      { heading: "What to Compare in Exotic Flower", body: "Useful comparison points can include documented genetics, aroma descriptions, visible trichome coverage, bud structure, trim and cure. Buyers can consider these details together because no single characteristic defines every strain carrying the Exotic label." },
+      {
+        heading: "Learn More About Cannabis Flower",
+        body: "For more information about flower tiers, genetics, growing methods, aroma, trichomes, structure, cure and evaluating freshness, read the Cannabis Flower Guides. For the store address and visit information, see After Dark Cannabis — Weed Dispensary in York.",
+        bodyHtml: "For more information about flower tiers, genetics, growing methods, aroma, trichomes, structure, cure and evaluating freshness, read the <a href=\"/resources/flower-guides\">Cannabis Flower Guides</a>. For the store address and visit information, see <a href=\"/weed-dispensary-york\">After Dark Cannabis — Weed Dispensary in York</a>.",
+      },
     ],
     educationLinks: [
       { label: "Learn what makes good weed", href: "/resources/what-is-good-weed" },
@@ -33,9 +37,15 @@ export const TIER_SEO: Record<string, TierSeoData> = {
       { label: "Cannabis flower quality guide", href: "/resources/cannabis-flower-quality-tiers" },
     ],
     faqs: [
-      { q: "What is Exotic weed at After Dark Cannabis?", a: "Exotic is one of After Dark Cannabis's separate cannabis flower tiers." },
-      { q: "Is Exotic separate from Premium flower?", a: "Yes. Exotic and Premium are separate flower categories." },
-      { q: "Does the Exotic tier confirm current availability?", a: "No. The tier identifies a flower category and does not confirm current stock or availability." },
+      { q: "What does Exotic weed mean at After Dark Cannabis?", a: "Exotic is a distinct After Dark Cannabis flower tier. In cannabis culture, the term is often associated with flower described as rare, visually distinctive or premium, but it is not a universal cannabis grade." },
+      { q: "Is Exotic different from Premium flower?", a: "Yes. Exotic and Premium are separate flower tiers at After Dark Cannabis. Buyers can compare the documented details for individual strains to understand the differences that matter to them." },
+      { q: "What should I compare when choosing Exotic flower?", a: "Useful comparison points can include documented genetics, aroma descriptions, trichome coverage, flower structure, trim and cure. The information provided can differ between strains and batches." },
+      { q: "Is Exotic an official cannabis grade?", a: "No. Exotic is a retailer flower category and a familiar term in cannabis culture, not a standardized government grade." },
+      {
+        q: "Where can I learn more about cannabis flower tiers?",
+        a: "Read the Cannabis Flower Guides for educational information about flower tiers, genetics, aroma, trichomes, structure, cure and freshness.",
+        answerHtml: "Read the <a href=\"/resources/flower-guides\">Cannabis Flower Guides</a> for educational information about flower tiers, genetics, aroma, trichomes, structure, cure and freshness.",
+      },
     ],
   },
   PREMIUM: {

@@ -72,40 +72,50 @@ export const metadata: Metadata = {
 /* ── JSON-LD Structured Data ── */
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Store",
-  additionalType: "https://schema.org/Store",
-  "@id": "https://afterdarkcannabis.com",
-  name: "After Dark Cannabis",
-  description: "Cannabis dispensary at 1664 Jane St in York, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
-  url: "https://afterdarkcannabis.com",
-  telephone: "+14375249344",
-  image: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/7Clmh.jpg",
-  priceRange: "$3 - $12/g",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "1664 Jane St",
-    addressLocality: "York",
-    addressRegion: "ON",
-    postalCode: "M9N 2S1",
-    addressCountry: "CA",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 43.7020642,
-    longitude: -79.5038822,
-  },
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
+      "@type": "WebSite",
+      "@id": "https://afterdarkcannabis.com/#website",
+      url: "https://afterdarkcannabis.com/",
+      name: "After Dark Cannabis",
+    },
+    {
+      "@type": "Store",
+      additionalType: "https://schema.org/Store",
+      "@id": "https://afterdarkcannabis.com/#store",
+      name: "After Dark Cannabis",
+      description: "Cannabis dispensary at 1664 Jane St in York, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
+      url: "https://afterdarkcannabis.com",
+      telephone: "+14375249344",
+      image: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/7Clmh.jpg",
+      priceRange: "$3 - $12/g",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1664 Jane St",
+        addressLocality: "York",
+        addressRegion: "ON",
+        postalCode: "M9N 2S1",
+        addressCountry: "CA",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 43.7020642,
+        longitude: -79.5038822,
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          opens: "00:00",
+          closes: "23:59",
+        },
+      ],
+      areaServed: {
+        "@type": "City",
+        name: "York",
+      },
     },
   ],
-  areaServed: {
-    "@type": "City",
-    name: "York",
-  },
 };
 
 export default function RootLayout({
