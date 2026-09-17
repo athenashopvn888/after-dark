@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { AreaIntentPage } from "../components/AreaIntentPage";
 
 export const metadata: Metadata = {
-  title: { absolute: "Weston Weed Delivery | After Dark Cannabis" },
-  description: "Plan Weston weed delivery dispatched from After Dark Cannabis on Jane Street. Coverage and arrival windows are confirmed after ordering. Adults 19+.",
-  alternates: { canonical: "https://afterdarkcannabis.com/weed-delivery-weston/" },
+  title: { absolute: "Weston Is Not a Second Store | After Dark Cannabis Jane Street" },
+  description: "After Dark Cannabis is the Jane Street York walk-in at 1664 Jane Street. Weston shoppers come to Jane Street. This URL is not a Weston storefront. Adults 19+.",
+  alternates: { canonical: "https://afterdarkcannabis.com/weed-delivery-york" },
+  robots: { index: false, follow: true },
 };
 
 export default function Page() {
-  return <AreaIntentPage eyebrow="Delivery planning · Adults 19+" h1="Weston Weed Delivery from Jane Street" addressLine="Dispatched from 1664 Jane St, York" storeHref="/weed-dispensary-york/" storeLabel="Jane Street Walk-In Store" intro={[
-    "After Dark Cannabis coordinates Weston weed delivery from the Jane Street store in York. The Weston delivery area is not a second storefront.",
-    "The dispatcher confirms the address, availability, arrival window, and any minimum after an order is sent. Check the current menu first because products and posted prices can change.",
-    "For an in-person visit, use the York dispensary page for the 24-hour counter at 1664 Jane St.",
-  ]} sections={[{ heading: "Ordering From Weston", paragraphs: ["Choose the delivery route when you want a drop-off. Choose the York store route when you plan to travel to the counter. Keeping those choices separate makes the correct address and service expectation clear."] }]} />;
+  return <AreaIntentPage eyebrow="Not a storefront · Jane Street York only" h1="Jane Street York Walk-In — Weston Is Not a Second Store" addressLine="Walk-in: 1664 Jane Street, York, ON M9N 2S1" storeHref="/visit" storeLabel="How to Reach Jane Street" intro={[
+    "Weston sits on the same Jane Street / York / Weston / Mount Dennis corridor, but After Dark Cannabis is not a Weston Road storefront. The counter is 1664 Jane Street in York.",
+    "A Weston drop-off, if the dispatcher can take the address, still leaves from Jane Street. Coverage is confirmed after an order — this page does not promise every Weston pin.",
+    "For bus, parking, and the Lawrence West intersection, use the how-to-reach page. The homepage remains the NAP hub.",
+  ]} sections={[{ heading: "Walk in on Jane Street", paragraphs: ["Plan the 24-hour visit at 1664 Jane Street. York-radius drop-off stays on the York delivery page. This Weston URL is retained so old links resolve, not so it ranks as a second shop."] }]} />;
 }

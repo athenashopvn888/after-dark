@@ -6,7 +6,7 @@ test("ADC live snapshot is the only menu-listing source", async () => {
   const route = await readFile("app/api/tv-data/route.ts", "utf8");
   const tier = await readFile("app/[tier]/page.tsx", "utf8");
   const category = await readFile("app/items/[category]/page.tsx", "utf8");
-  const home = await readFile("app/page.tsx", "utf8");
+  const home = [await readFile("app/page.tsx", "utf8"), await readFile("app/HomePageClient.tsx", "utf8")].join("\n");
   const packageJson = JSON.parse(await readFile("package.json", "utf8")) as { scripts: Record<string, string> };
   assert.match(route, /getAdcInventory/);
   assert.match(route, /runtime = "nodejs"/);

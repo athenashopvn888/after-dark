@@ -38,11 +38,13 @@ export default function ContactPage() {
               <div className={styles.infoIcon}>PIN</div>
               <h2 className={styles.infoTitle}>Location</h2>
               <p className={styles.infoText}>
-                1664 Jane St
+                1664 Jane Street
                 <br />
                 York, ON M9N 2S1
                 <br />
-                <span className={styles.infoMuted}>Jane St &amp; Lawrence Ave W</span>
+                <span className={styles.infoMuted}>Jane Street &amp; Lawrence Ave W</span>
+                <br />
+                <a href="tel:+14375249344">+1 (437) 524-9344</a>
               </p>
             </div>
 

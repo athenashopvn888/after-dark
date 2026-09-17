@@ -33,5 +33,6 @@ export const afterDarkWeedOwner = {
     { label: "Concentrates Guides", description: "Explore format-specific concentrates information.", href: "/resources/concentrates-guides" },
     { label: "Value Guides", description: "Read value-oriented context without relying on a current promotion.", href: "/resources/value-guides" },
     { label: "Jane Street York Visit Guide", description: "Find additional store-specific visit information.", href: "/resources/local-guides/jane-street-york-visit-guide" },
+    { label: "How to Reach Jane Street", description: "Bus, parking, and the Lawrence West intersection.", href: "/visit" },
   ] satisfies WeedDiscoveryLink[],
 };

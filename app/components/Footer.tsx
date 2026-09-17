@@ -12,9 +12,8 @@ export default function Footer() {
               AFTER DARK
             </div>
             <p className={styles.desc}>
-              Your Local Cannabis Dispensary At 1664 Jane St, York. Visit
-              After Dark Cannabis For Premium Flower, Edibles, Vapes &amp; More.
-              Open 24 Hours.
+              Jane Street York walk-in at 1664 Jane Street. After Dark Cannabis
+              for flower, edibles, vapes and more. Open 24 Hours. Call +1 (437) 524-9344.
             </p>
             <div className={styles.buttons}>
               <a
@@ -31,7 +30,7 @@ export default function Footer() {
             <h3 className={styles.colTitle}>Contact Info</h3>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Address:</span>
-              <span>1664 Jane St</span>
+              <span>1664 Jane Street</span>
               <span>York, ON M9N 2S1</span>
               <span>Canada</span>
             </div>
@@ -60,12 +59,12 @@ export default function Footer() {
               <Link href="/items/vapes">Nicotine Vape Menu</Link>
               <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
+              <Link href="/visit">How to Reach Jane Street</Link>
               <Link href="/weed-delivery-york">WEED DELIVERY</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
               <Link href="/info/native-cigarettes-york">Native Cigarettes York</Link>
               <Link href="/info/nicotine-vapes-york">Nicotine Vapes York</Link>
-              <Link href="/resources/local-guides/how-to-reach-after-dark-from-mississauga">From Mississauga to York</Link>
               <Link href="/weed-dispensary-york/">After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>
                           <Link href="/resources">Resources</Link>

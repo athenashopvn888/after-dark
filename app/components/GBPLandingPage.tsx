@@ -37,7 +37,7 @@ export function GBPLandingPage() {
           <p className={styles.eyebrow}>Open 24 Hours · Adults 19+</p>
           <h1>York Weed Dispensary on Jane Street — Open 24 Hours</h1>
           <p className={styles.heroAddress}>{store.address}</p>
-          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="#visit" className={styles.secondaryAction}>Plan Your Visit</Link></div>
+          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link></div>
         </section>
 
         <section className={styles.section}>

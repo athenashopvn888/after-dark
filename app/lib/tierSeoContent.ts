@@ -152,5 +152,5 @@ export const TIER_COMPARISON = {
   body: "Compare Exotic, Premium, AAA+, AA and Budget flower at After Dark Cannabis. Each tier offers a useful starting point for considering strains and the documented product details that matter to you.",
   ownerSentence: "For store details, directions and visit information, see",
   ownerAnchor: "After Dark Cannabis — Weed Dispensary in York",
-  ownerHref: "/weed-dispensary-york",
+  ownerHref: "/weed-dispensary-york/",
 } as const;

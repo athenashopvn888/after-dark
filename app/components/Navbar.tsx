@@ -21,6 +21,7 @@ const ALL_LINKS = [
   { href: "/items/cigarettes", label: "Cigarettes" },
   { href: "/items/add-ons", label: "Accessories" },
   { href: "/weed-delivery-york", label: "WEED DELIVERY" },
+  { href: "/visit", label: "Visit" },
   { href: "/faq", label: "FAQ" },
   { href: "/resources", label: "Resources" },
 ];
