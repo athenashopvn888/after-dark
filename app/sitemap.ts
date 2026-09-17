@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/careers/budtender`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/weed-delivery-york`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/weed-delivery-etobicoke`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/weed-delivery-weston`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/resources/local-guides/how-to-reach-after-dark-from-mississauga`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
 
   /* Tier pages */

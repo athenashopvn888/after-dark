@@ -11,6 +11,8 @@ import {
   type ItemProduct,
 } from "../../lib/products";
 import { getAdcInventory } from "../../lib/adcInventoryService";
+import { buildCategoryCollectionJsonLd } from "../../lib/categoryStructuredData";
+import seoContent from "../../lib/seoContent.generated.json";
 import styles from "./items.module.css";
 
 export const dynamic = "force-dynamic";
@@ -60,8 +62,14 @@ export default async function ItemsCategoryPage({
     items = [...items, ...uniqueAccessories];
   }
   const { config } = catInfo;
+  const seoKey = config.name.toLowerCase().includes("thc") ? "vape-disposables" : config.name.toLowerCase().includes("nic") ? "vapes" : catSlug;
+  const seoCopy = seoContent.categories[seoKey as keyof typeof seoContent.categories];
+  const categoryLinkHrefs = [`/items/${catSlug}`, "/weed-dispensary-york", "/exotic-weed", "/premium-weed"];
+  const categoryJsonLd = buildCategoryCollectionJsonLd({ canonicalPath: `/items/${catSlug}`, name: config.seoTitle || config.name, description: seoCopy?.paragraphs.join(" ") || config.seoDescription || config.seoIntro, items });
 
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryJsonLd) }} />
     <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
 
@@ -106,8 +114,17 @@ export default async function ItemsCategoryPage({
       {/* SEO Content */}
       <section className={styles.seoSection}>
         <div className={styles.container}>
-          <h2 className={styles.seoTitle}>{config.seoTitle}</h2>
-          <p className={styles.seoBody}>{config.seoDescription}</p>
+          <h2 className={styles.seoTitle}>{seoCopy?.heading || config.seoTitle}</h2>
+          {seoCopy ? seoCopy.paragraphs.map((paragraph) => (
+            <p key={paragraph} className={styles.seoBody}>{paragraph}</p>
+          )) : <p className={styles.seoBody}>{config.seoDescription}</p>}
+          {seoCopy?.links.length ? (
+            <p className={styles.seoBody}>
+              {seoCopy.links.map((label, index) => (
+                <span key={label}>{index ? " · " : ""}<Link href={categoryLinkHrefs[index] || "/weed-dispensary-york"}>{label}</Link></span>
+              ))}
+            </p>
+          ) : null}
 
           {/* FAQ */}
           {config.faqs.length > 0 && (
@@ -134,6 +151,7 @@ export default async function ItemsCategoryPage({
 
       <Footer />
     </main>
+    </>
   );
 }
 

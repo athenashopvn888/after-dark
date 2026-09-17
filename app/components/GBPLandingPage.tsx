@@ -35,17 +35,17 @@ export function GBPLandingPage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(storeSchema) }} />
         <section className={styles.hero}>
           <p className={styles.eyebrow}>Open 24 Hours · Adults 19+</p>
-          <h1>After Dark Cannabis — Weed Dispensary in York</h1>
+          <h1>York Weed Dispensary on Jane Street — Open 24 Hours</h1>
           <p className={styles.heroAddress}>{store.address}</p>
           <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="#visit" className={styles.secondaryAction}>Plan Your Visit</Link></div>
         </section>
 
         <section className={styles.section}>
-          <h2>Weed and Cannabis in York — Day or Night</h2>
-          <p>After Dark Cannabis is located at <strong>{store.streetAddress}</strong> in York and is open <strong>24 hours a day, seven days a week</strong>.</p>
-          <p>At After Dark Cannabis, adults 19+ can choose between flower tiers or focus on a cannabis format such as pre-rolls, edibles, vapes, concentrates or accessories. With the store open 24 hours on Jane Street, shoppers can decide what they want to explore before making the trip.</p>
-          <p>Whether you usually call it weed, cannabis, bud or flower, the useful starting point is the type of cannabis you are interested in.</p>
-          <p>If you are making a special trip for something specific, call <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> first.</p>
+          <h2>Walk-In Cannabis Store at 1664 Jane St, York</h2>
+          <p>After Dark Cannabis is the walk-in York weed dispensary at <strong>{store.streetAddress}</strong>, just south of Lawrence Avenue West. The counter is open 24 hours a day, seven days a week, so Jane Street, Weston, Mount Dennis, Keelesdale, Trethewey, and Black Creek shoppers can visit around their own schedule.</p>
+          <p>This page is for people who want the physical store. If you are arranging a drop-off instead, use the separate <Link href="/weed-delivery-york/">York delivery page</Link>. The walk-in and delivery routes stay separate so each page gives the correct address and service expectation.</p>
+          <p>Bring government photo ID. You must be 19 or older. Staff can walk you through the five posted flower tiers — Budget from $3/g, AA at $4/g, AAA+ at $5–$6/g, Premium at $7–$10/g, and Exotic at $10–$12/g — plus pre-rolls, edibles, vapes, concentrates, native cigarettes, and accessories. Posted menu prices can change.</p>
+          <p>The 35 Jane TTC bus serves the Jane Street corridor. Check current transit, traffic, and parking conditions before travelling. Call <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> if one specific item is the reason for the trip.</p>
         </section>
 
         <section className={styles.section} id="find-your-weed">

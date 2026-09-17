@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "vapes",
     "pre-rolls",
     "native cigarettes York",
-    "weed store Mississauga",
+    "weed delivery Etobicoke",
   ],
   openGraph: {
     type: "website",
@@ -78,10 +78,10 @@ const jsonLd = {
       "@id": "https://afterdarkcannabis.com/#website",
       url: "https://afterdarkcannabis.com/",
       name: "After Dark Cannabis",
+      publisher: { "@id": "https://afterdarkcannabis.com/#store" },
     },
     {
-      "@type": "Store",
-      additionalType: "https://schema.org/Store",
+      "@type": "CannabisStore",
       "@id": "https://afterdarkcannabis.com/#store",
       name: "After Dark Cannabis",
       description: "Cannabis dispensary at 1664 Jane St in York, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
