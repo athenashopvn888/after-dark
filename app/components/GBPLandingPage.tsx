@@ -32,7 +32,7 @@ const pageSchema = {
     webpageGraphNode({
       id: `${STORE.baseUrl}${STORE.storePagePath}`,
       name: "York Weed Dispensary on Jane Street — Open 24 Hours",
-      description: "Walk-in York dispensary page for After Dark Cannabis at 1664 Jane Street. Homepage remains the website URL.",
+      description: "Walk-in York dispensary page for After Dark Cannabis at 1664 Jane Street. The homepage is the website URL.",
     }),
     breadcrumbGraphNode([
       { name: "Home", item: STORE.homepageUrl },

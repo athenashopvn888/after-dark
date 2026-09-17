@@ -35,7 +35,7 @@ const pageSchema = {
     webpageGraphNode({
       id: canonical,
       name: "Contact After Dark Cannabis",
-      description: "Phone, address, and 24-hour hours for the Jane Street York walk-in. Homepage remains the NAP hub.",
+      description: "Phone, address, and 24-hour hours for the Jane Street York walk-in. The homepage is the NAP hub.",
     }),
     breadcrumbGraphNode([
       { name: "Home", item: STORE.homepageUrl },

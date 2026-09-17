@@ -38,7 +38,7 @@ const pageSchema = {
       id: canonical,
       name: "24-Hour Dispensary in York on Jane Street",
       description:
-        "Door-test page for the 24-hour After Dark Cannabis walk-in at 1664 Jane Street, York. Homepage remains the NAP hub.",
+        "Door-test page for the 24-hour After Dark Cannabis walk-in at 1664 Jane Street, York. The homepage is the NAP hub.",
     }),
     breadcrumbGraphNode([
       { name: "Home", item: STORE.homepageUrl },
