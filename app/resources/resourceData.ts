@@ -853,7 +853,7 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
       "Visit guide for After Dark Cannabis at 1664 Jane St in York, with local menu links for flower, vapes, edibles, pouches, cigarettes, Backwoods, and grabba.",
     h1: "Jane Street and York Visit Guide",
     excerpt:
-      "Use the local page for the address, then choose the product section that fits the trip.",
+      "Address, 35 Jane bus, street parking, and the Lawrence West intersection for the 24-hour After Dark counter.",
     primaryKeyword: "weed dispensary near Jane Street",
     supportingKeywords: ["After Dark Cannabis York", "Jane Street cannabis store", "1664 Jane St cannabis"],
     searchIntent: "Plan a local visit to After Dark Cannabis.",
@@ -862,17 +862,31 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
     dateModified: updated,
     image: { src: "/banners/after_dark_welcome_banner.webp", alt: "After Dark Cannabis local visit guide" },
     intro: [
-      "After Dark Cannabis is listed at 1664 Jane St, York, ON M9N 2S1. Once the local stop is clear, the resource hub helps shoppers choose the product section: flower, pre-rolls, edibles, vapes, pouches, cigarettes, Backwoods, grabba, concentrates, or accessories.",
+      "After Dark Cannabis is the 24-hour walk-in at 1664 Jane Street, York, ON M9N 2S1, just south of Lawrence Avenue West. Call +1 (437) 524-9344. The homepage is the NAP hub; the dedicated how-to-reach page is /visit.",
     ],
     sections: [
       {
-        heading: "Nearby Area Terms",
+        heading: "Corridor language",
         body: [
-          "The local language around this store includes Jane Street, York, Weston, Mount Dennis, Keelesdale, Eglinton West, Black Creek, and Trethewey Drive.",
+          "Shoppers describe this stop as Jane Street, York, Weston, or Mount Dennis. Those names all resolve to one counter. There is no After Dark storefront on Weston Road, in Mississauga, or in Etobicoke.",
+        ],
+      },
+      {
+        heading: "Bus, parking, and ID",
+        body: [
+          "TTC 35 Jane serves the spine. Get off near Jane and Lawrence and walk south to 1664. Evening street parking is typical on Jane and the side streets; read the signs. Adults 19+ need government photo ID, including after midnight.",
+        ],
+        links: [{ label: "Open the how-to-reach page", href: "/visit" }],
+      },
+      {
+        heading: "Then choose a menu section",
+        body: [
+          "Once the local stop is clear, pick flower, pre-rolls, edibles, vapes, pouches, cigarettes, Backwoods, grabba, concentrates, or accessories from the live menu. Posted names and prices can change.",
         ],
       },
     ],
     commercialLinks: [
+      { label: "How to reach Jane Street", href: "/visit" },
       { label: "Store page", href: SITE.storePage },
       { label: "Menu guide", href: "/resources/menu-guide" },
     ],

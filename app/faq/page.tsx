@@ -48,7 +48,7 @@ const FAQ_CATEGORIES = [
     faqs: [
       { q: "Do I need an appointment?", a: "No! After Dark Cannabis is walk-in only. Just show up anytime — we're open 24 hours." },
       { q: "Can I order online?", a: "After Dark Cannabis is an in-store shopping experience. You can browse the online menu before visiting, but the site does not provide online checkout." },
-      { q: "Do you offer delivery?", a: "Delivery is coming soon! Visit our delivery page to sign up for email notifications when we launch our delivery service." },
+      { q: "Do you offer delivery?", a: "York-radius drop-off is coordinated from the Jane Street store when the dispatcher can take the address. Use the York delivery page. Walk-in remains at 1664 Jane Street, York. There is no Mississauga or Etobicoke After Dark storefront." },
       { q: "What payment methods do you accept?", a: "We accept cash and debit. No credit cards at this time." },
       { q: "Can your staff help me compare menu items?", a: "Yes. Staff can help you compare the categories, formats, package details, and prices shown on the current menu." },
       { q: "Is there a minimum purchase?", a: "No minimum purchase required. You can buy as little as 1 gram." },
