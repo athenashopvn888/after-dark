@@ -37,7 +37,7 @@ export async function generateMetadata({
 
   const demoted = slug === "weed-store-near-mississauga";
   return {
-    title: page.title,
+    title: { absolute: page.title },
     description: page.metaDescription,
     alternates: {
       canonical: demoted ? STORE.homepageUrl : `https://afterdarkcannabis.com/info/${slug}`,

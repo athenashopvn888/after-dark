@@ -123,6 +123,7 @@ test("MJ01 info York landings keep NAP + map and demote the Mississauga city far
   assert.match(info, /mapsEmbedUrl/);
   assert.match(info, /STORE\.addressLine/);
   assert.match(info, /faqPageJsonLd\(page\.faqs\)/);
+  assert.match(info, /title: \{ absolute: page\.title \}/);
   assert.match(info, /slug === "weed-store-near-mississauga"/);
   assert.match(info, /index: false/);
   assert.match(seo, /York Weed Dispensary on Jane Street/);
