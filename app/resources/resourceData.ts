@@ -1,3 +1,5 @@
+import { STORE } from "../lib/storeIdentity";
+
 export type ResourceAuthorKey = "team" | "menu" | "local";
 
 export interface ResourceAuthor {
@@ -57,13 +59,13 @@ export interface ResourcePage {
 }
 
 export const SITE = {
-  name: "After Dark Cannabis",
-  domain: "afterdarkcannabis.com",
-  baseUrl: "https://afterdarkcannabis.com",
-  storePage: "/weed-dispensary-york",
-  address: "1664 Jane St, York, ON M9N 2S1",
-  phone: "+1 (437) 524-9344",
-  hours: "Open 24 hours",
+  name: STORE.name,
+  domain: STORE.domain,
+  baseUrl: STORE.baseUrl,
+  storePage: STORE.storePagePath.replace(/\/$/, ""),
+  address: STORE.addressLine,
+  phone: STORE.phoneDisplay,
+  hours: STORE.hoursLabel,
 };
 
 export const AUTHORS: Record<ResourceAuthorKey, ResourceAuthor> = {
@@ -848,9 +850,9 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
     parent: "/resources/local-guides",
     categoryLabel: "Visit Guide",
     title: "Jane Street and York Visit Guide",
-    seoTitle: "Jane Street and York Visit Guide | After Dark Cannabis",
+    seoTitle: "Jane Street York 24-Hour Visit Guide | After Dark Cannabis",
     metaDescription:
-      "Visit guide for After Dark Cannabis at 1664 Jane St in York, with local menu links for flower, vapes, edibles, pouches, cigarettes, Backwoods, and grabba.",
+      "24-hour visit guide for After Dark Cannabis at 1664 Jane Street, York: 35 Jane, parking, Lawrence West, and the live menu. Call +1 (437) 524-9344.",
     h1: "Jane Street and York Visit Guide",
     excerpt:
       "Address, 35 Jane bus, street parking, and the Lawrence West intersection for the 24-hour After Dark counter.",

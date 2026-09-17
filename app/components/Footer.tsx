@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { STORE } from "../lib/storeIdentity";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -12,12 +13,12 @@ export default function Footer() {
               AFTER DARK
             </div>
             <p className={styles.desc}>
-              Jane Street York walk-in at 1664 Jane Street. After Dark Cannabis
-              for flower, edibles, vapes and more. Open 24 Hours. Call +1 (437) 524-9344.
+              Jane Street York walk-in at {STORE.streetAddress}. {STORE.name}
+              for flower, edibles, vapes and more. {STORE.hoursLabel}. Call {STORE.phoneDisplay}.
             </p>
             <div className={styles.buttons}>
               <a
-                href="tel:+14375249344"
+                href={STORE.phoneTel}
                 className={styles.btnPrimary}
               >
                 Call Now
@@ -30,17 +31,21 @@ export default function Footer() {
             <h3 className={styles.colTitle}>Contact Info</h3>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Address:</span>
-              <span>1664 Jane Street</span>
-              <span>York, ON M9N 2S1</span>
+              <span>{STORE.streetAddress}</span>
+              <span>{STORE.addressLocality}, {STORE.addressRegion} {STORE.postalCode}</span>
               <span>Canada</span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Phone:</span>
-              <span><a href="tel:+14375249344" style={{color: "inherit"}}>+1 (437) 524-9344</a></span>
+              <span><a href={STORE.phoneTel} style={{color: "inherit"}}>{STORE.phoneDisplay}</a></span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
-              <span className={styles.highlight}>Open 24 Hours</span>
+              <span className={styles.highlight}>{STORE.hoursLabel}</span>
+            </div>
+            <div className={styles.infoBlock}>
+              <span className={styles.infoLabel}>Website:</span>
+              <span><a href={STORE.homepageUrl} style={{color: "inherit"}}>{STORE.homepageUrl}</a></span>
             </div>
           </div>
 
@@ -60,6 +65,7 @@ export default function Footer() {
               <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
               <Link href="/visit">How to Reach Jane Street</Link>
+              <Link href="/24-hour-dispensary-york">24-Hour York Dispensary</Link>
               <Link href="/weed-delivery-york">WEED DELIVERY</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>

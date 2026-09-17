@@ -15,11 +15,16 @@ import styles from "./visit.module.css";
 const canonical = `${STORE.baseUrl}${STORE.visitPath}`;
 
 export const metadata: Metadata = {
-  title: { absolute: "How to Reach After Dark Cannabis | Jane Street York" },
+  title: { absolute: "How to Reach the 24-Hour Jane Street York Dispensary | After Dark Cannabis" },
   description:
-    "How to reach After Dark Cannabis at 1664 Jane Street, York: 35 Jane bus, street parking, Jane & Lawrence, Weston and Mount Dennis. Call +1 (437) 524-9344. Adults 19+.",
+    "How to reach After Dark Cannabis at 1664 Jane Street, York: 35 Jane bus, street parking, Jane & Lawrence. Open 24 hours. Call +1 (437) 524-9344. Adults 19+.",
   alternates: { canonical },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "How to Reach the 24-Hour Jane Street York Dispensary",
+    description: "35 Jane, street parking, and Jane & Lawrence directions to 1664 Jane Street, York. Open 24 hours.",
+    url: canonical,
+  },
 };
 
 const pageSchema = {
@@ -148,6 +153,8 @@ export default function VisitPage() {
             <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link>.
             The York store page is{" "}
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
+            Confirm late-night hours on the{" "}
+            <Link href={STORE.hoursPath}>24-hour York dispensary page</Link>.
             Neither replaces the homepage as the NAP hub.
           </p>
         </section>

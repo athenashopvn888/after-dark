@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/careers/budtender`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/visit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/24-hour-dispensary-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE}/weed-delivery-york`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
 
@@ -50,8 +51,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  /* SEO landing pages */
-  const seoPages: MetadataRoute.Sitemap = SEO_PAGES.map((p) => ({
+  /* SEO landing pages — skip demoted city-farm URLs */
+  const seoPages: MetadataRoute.Sitemap = SEO_PAGES.filter((p) => p.slug !== "weed-store-near-mississauga").map((p) => ({
     url: `${BASE}/info/${p.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,

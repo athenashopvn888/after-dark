@@ -17,16 +17,17 @@ test("MJ01 keeps the protected owner and exact metadata", () => {
 
 test("MJ01 static discovery uses only approved destinations", () => {
   const sources = [read("app/lib/weedDiscovery.ts"), read("app/components/WeedDiscoveryModule.tsx")].join("\n");
-  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide", "/visit"]) {
+  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide", "/visit", "/24-hour-dispensary-york"]) {
     assert.ok(sources.includes(href), `Missing approved link: ${href}`);
   }
 });
 
 test("MJ01 exact FMD identity is consistent", () => {
-  const sources = [read("app/lib/weedDiscovery.ts"), read("app/lib/gbp-location.ts"), read("app/components/GBPLandingPage.tsx")].join("\n");
+  const sources = [read("app/lib/storeIdentity.ts"), read("app/lib/weedDiscovery.ts"), read("app/lib/gbp-location.ts"), read("app/components/GBPLandingPage.tsx")].join("\n");
   assert.match(sources, /1664 Jane Street/);
   assert.match(sources, /\+14375249344/);
   assert.match(sources, /\+1 \(437\) 524-9344/);
+  assert.match(sources, /homepageUrl: "https:\/\/afterdarkcannabis\.com\/"/);
 });
 
 test("MJ01 shopper copy avoids workflow and unsupported claims", () => {

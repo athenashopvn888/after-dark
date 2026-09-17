@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { STORE } from "../lib/storeIdentity";
 import styles from "./faq.module.css";
 
 export const metadata: Metadata = {
-  title: "FAQ — After Dark Cannabis | York Dispensary Questions",
+  title: { absolute: "FAQ | 24-Hour York Dispensary on Jane Street | After Dark Cannabis" },
   description:
-    "Frequently asked questions about After Dark Cannabis in York. Hours, location, products, pricing, bundle offers, and everything you need to know before visiting.",
+    "FAQ for After Dark Cannabis at 1664 Jane Street, York. Open 24 hours, parking, 35 Jane, menu tiers, and ID. Call +1 (437) 524-9344.",
   alternates: {
-    canonical: "https://afterdarkcannabis.com/faq",
+    canonical: `${STORE.baseUrl}/faq`,
   },
 };
 
@@ -16,10 +17,11 @@ const FAQ_CATEGORIES = [
   {
     title: "📍 Location & Hours",
     faqs: [
-      { q: "Where is After Dark Cannabis located?", a: "We are located at 1664 Jane St, York, ON M9N 2S1. We're easily accessible by TTC bus routes and close to major highways like the 401." },
+      { q: "Where is After Dark Cannabis located?", a: `We are located at ${STORE.addressLine}, just south of Lawrence Avenue West. The 35 Jane bus serves the corridor.` },
       { q: "What are your hours?", a: "We are open 24 hours a day, 7 days a week, 365 days a year. Walk in anytime — no appointment needed." },
-      { q: "Is there parking nearby?", a: "Yes. Free street parking is available nearby on Jane St and surrounding streets in the evenings. We're also easily accessible by TTC buses." },
-      { q: "What's the best way to get to After Dark Cannabis?", a: "We're easily accessible by car, bus, or foot. By TTC bus, the 35 Jane bus stops right near our store. Free parking is available on surrounding streets." },
+      { q: "Is After Dark Cannabis open now?", a: `Yes. The Jane Street counter at ${STORE.streetAddress} stays open overnight. Call ${STORE.phoneDisplay} if one listed item is the reason for the trip.` },
+      { q: "Is there parking nearby?", a: "Yes. Street parking is typically available on Jane Street and surrounding streets in the evenings. Read posted signs. The 35 Jane bus also serves the block." },
+      { q: "What's the best way to get to After Dark Cannabis?", a: "By TTC, ride the 35 Jane bus to the Jane and Lawrence area and walk south to 1664 Jane Street. By car, use evening street parking on Jane Street and the side streets." },
     ],
   },
   {
@@ -94,7 +96,7 @@ export default function FAQPage() {
         <div className={styles.content}>
           <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
           <p className={styles.pageSubtitle}>
-            Everything you need to know about After Dark Cannabis — York&apos;s premium dispensary at 1664 Jane St in York.
+            Hours, Jane Street directions, and menu questions for After Dark Cannabis at {STORE.addressLine}.
           </p>
 
           {FAQ_CATEGORIES.map((cat) => (
@@ -112,7 +114,7 @@ export default function FAQPage() {
           <div className={styles.ctaSection}>
             <h2 className={styles.ctaTitle}>Still have questions?</h2>
             <p className={styles.ctaText}>
-              Call us at <strong>+1 (437) 524-9344</strong> or visit us at 1664 Jane St, York.
+              Call us at <strong>{STORE.phoneDisplay}</strong> or visit us at {STORE.addressLine}. The homepage is the NAP hub.
             </p>
           </div>
         </div>
