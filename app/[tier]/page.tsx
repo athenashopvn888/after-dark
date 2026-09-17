@@ -11,6 +11,7 @@ import {
 import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_COMPARISON, TIER_SEO } from "../lib/tierSeoContent";
 import { buildTierCollectionJsonLd } from "../lib/tierStructuredData";
+import seoContent from "../lib/seoContent.generated.json";
 import styles from "./tier.module.css";
 
 const SITE_ORIGIN = "https://afterdarkcannabis.com";
@@ -74,6 +75,8 @@ export default async function TierPage({
   const flowers = inventory.snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
   const { config } = tierInfo;
   const seo = TIER_SEO[tierInfo.key];
+  const flowerCopy = seoContent.flowerTiers;
+  const tierLinks = Object.values(TIER_CONFIG);
 
   const saleFlowers = flowers.filter((f) => f.isSale);
   const regularFlowers = flowers.filter((f) => !f.isSale);
@@ -219,6 +222,15 @@ export default async function TierPage({
                 )}
               </div>
             ))}
+
+            <div className={styles.seoBlock}>
+              <h3 className={styles.seoHeading}>{config.name} at After Dark Cannabis</h3>
+              {flowerCopy.paragraphs.map((paragraph) => <p key={paragraph} className={styles.seoBody}>{paragraph}</p>)}
+              <p className={styles.seoBody}>{flowerCopy.links.map((label, index) => {
+                const destination = tierLinks[index]?.slug || tierSlug;
+                return <span key={label}>{index ? " · " : ""}<Link href={`/${destination}`}>{label}</Link></span>;
+              })}</p>
+            </div>
 
             <div className={styles.seoBlock}>
               <h3 className={styles.seoHeading}>Learn More About Weed and Flower Quality</h3>

@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       { source: "/delivery", destination: "/weed-delivery-york", permanent: true },
+      { source: "/info/weed-store-near-mississauga", destination: "/resources/local-guides/how-to-reach-after-dark-from-mississauga", permanent: true },
       { source: "/blog", destination: "/", permanent: true },
       { source: "/blog/:path*", destination: "/", permanent: true },
       { source: "/product-category/edibles", destination: "/items/edibles", permanent: true },
