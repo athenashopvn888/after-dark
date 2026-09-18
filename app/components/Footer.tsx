@@ -72,7 +72,7 @@ export default function Footer() {
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
               <Link href="/info/native-cigarettes-york">Native Cigarettes York</Link>
               <Link href="/info/nicotine-vapes-york">Nicotine Vapes York</Link>
-              <Link href="/weed-dispensary-york/">After Dark Cannabis Weed Dispensary in York</Link>
+              <Link href={STORE.storePagePath}>After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>
                           <Link href="/resources">Resources</Link>
             </nav>

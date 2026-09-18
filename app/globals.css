@@ -486,6 +486,6 @@ button { cursor: pointer; font-family: inherit; }
   box-sizing: border-box;
 }
 
-main:has(> [data-fleet-homepage-announcement]) > #main-nav {
+main:has(> [data-fleet-homepage-announcement]:first-child) > #main-nav {
   top: calc(var(--delivery-announcement-height, 0px) + var(--fleet-homepage-announcement-height)) !important;
 }

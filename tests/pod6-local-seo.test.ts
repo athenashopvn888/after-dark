@@ -31,8 +31,8 @@ test("MJ01 homepage schema keeps CannabisStore, adds FAQPage, and uses the FMD p
   assert.doesNotMatch(layout, /7Clmh\.jpg/);
   assert.match(identity, /46Oi5\.jpg/);
   assert.match(layout, /canonical: STORE\.homepageUrl/);
-  assert.match(identity, /Jane Street York Dispensary/);
-  assert.match(identity, /24-Hour Jane Street York Dispensary/);
+  assert.match(identity, /Dispensary Near Me in York \| After Dark Cannabis Jane Street/);
+  assert.match(identity, /Cannabis store near me in York/);
 });
 
 test("MJ01 /visit is a real how-to-reach page with NAP, transit, and parking", () => {
@@ -78,13 +78,14 @@ test("MJ01 public source never reprints the citation 416 phone", () => {
 
 test("MJ01 homepage neighbourhood copy stays Jane / York, not GTA delivery", () => {
   const home = read("app/HomePageClient.tsx");
-  assert.match(home, /Jane Street York Dispensary/);
+  assert.match(home, /York Dispensary Near Me on Jane Street/);
   assert.match(home, /24-Hour Jane Street York Dispensary/);
   assert.match(home, /1664 Jane Street/);
   assert.doesNotMatch(home, /weed delivery Mississauga/i);
   assert.match(home, /href=\{STORE\.hoursPath\} className=\{styles\.brandBadge\}/);
   assert.match(home, /Open now on Jane Street/);
   assert.match(home, /STORE\.hoursPath/);
+  assert.match(home, /STORE\.storePagePath/);
 });
 
 test("MJ01 locks NAP to STORE on footer, contact, and the 24-hour landing", () => {
@@ -229,4 +230,56 @@ test("MJ01 B08 Jane & Lawrence corridor guide keeps unique titles, NAP, and door
   assert.doesNotMatch(visit, /Jane and Lawrence Dispensary — Weston \/ Mount Dennis Walk-In/);
   assert.doesNotMatch(corridor, /GBP Name|google business profile name/i);
   assert.doesNotMatch(corridor, /(?:\+?1[\s.-]*)?\(?416\)?[\s.-]*302[\s.-]*8127/);
+});
+
+test("MJ01 B14 homepage door-test CTR pack for dispensary near me", () => {
+  const homePage = read("app/page.tsx");
+  const home = read("app/HomePageClient.tsx");
+  const identity = read("app/lib/storeIdentity.ts");
+  const layout = read("app/layout.tsx");
+  const hours = read("app/24-hour-dispensary-york/page.tsx");
+  const yorkLp = read("app/weed-dispensary-york/page.tsx");
+  const sitemap = read("app/sitemap.ts");
+  const nextConfig = read("next.config.ts");
+  const footer = read("app/components/Footer.tsx");
+
+  assert.match(identity, /seoTitleDefault: "Dispensary Near Me in York \| After Dark Cannabis Jane Street"/);
+  assert.match(identity, /Cannabis store near me in York/);
+  assert.match(homePage, /title: \{ absolute: STORE\.seoTitleDefault \}/);
+  assert.match(homePage, /dispensary near me/);
+  assert.match(layout, /dispensary near me/);
+  assert.doesNotMatch(identity, /24-Hour Dispensary Near Me in York — Open Now/);
+  assert.match(hours, /24-Hour Dispensary Near Me in York — Open Now \| After Dark Cannabis/);
+
+  assert.match(home, /<h1 className=\{styles\.brandTitle\}>York Dispensary Near Me on Jane Street<\/h1>/);
+  const doorTestAt = home.indexOf("doorTest");
+  const bentoAt = home.indexOf("bentoGrid");
+  const faqAt = home.indexOf("FAQ: dispensary near me in York");
+  assert.ok(doorTestAt > -1 && bentoAt > doorTestAt, "NAP door-test must sit above the bento mosaic");
+  assert.ok(home.indexOf("welcomeBannerSection") > doorTestAt, "Welcome banner must sit below the door-test NAP");
+  assert.ok(home.indexOf("<FleetAnnouncementBanner") > doorTestAt, "Promo banners must sit below the door-test NAP");
+  assert.ok(home.indexOf("<HiringCallout") > doorTestAt, "Hiring callout must sit below the door-test NAP");
+  assert.match(home, /aria-label="Store name, address, hours, and map"/);
+  assert.match(home, /Address, hours, and map/);
+  assert.match(home, /STORE\.addressLine/);
+  assert.match(home, /STORE\.hoursNote/);
+  assert.match(home, /mapsEmbedUrl/);
+  assert.match(home, /href=\{STORE\.storePagePath\}/);
+  assert.match(home, /href=\{STORE\.hoursPath\}/);
+  assert.match(home, /York dispensary and 24-hour open-now/);
+  assert.ok(faqAt > -1, "Homepage FAQ heading must target near-me intent");
+
+  assert.match(identity, /Is there a dispensary near me in York\?/);
+  assert.match(identity, /Is After Dark Cannabis a cannabis store near me on Jane Street\?/);
+  assert.match(identity, /Where can I find cannabis near me in York\?/);
+  assert.match(identity, /storePagePath: "\/weed-dispensary-york"/);
+  assert.doesNotMatch(identity, /storePagePath: "\/weed-dispensary-york\/"/);
+  assert.match(sitemap, /\$\{BASE\}\/weed-dispensary-york`/);
+  assert.doesNotMatch(sitemap, /weed-dispensary-york\//);
+  assert.match(yorkLp, /canonical: `https:\/\/\$\{gbpLocation\.domain\}\/\$\{gbpLocation\.slug\}`/);
+  assert.doesNotMatch(yorkLp, /gbpLocation\.slug\}\//);
+  assert.match(nextConfig, /do not add a second York LP page/);
+  assert.doesNotMatch(nextConfig, /destination: "\/weed-dispensary-york\/"/);
+  assert.match(footer, /STORE\.storePagePath/);
+  assert.doesNotMatch(home, /GBP Name|google business profile name/i);
 });

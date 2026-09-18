@@ -38,6 +38,9 @@ const nextConfig: NextConfig = {
       { source: "/add-ons", destination: "/items/add-ons", permanent: true },
       { source: "/cigarettes", destination: "/items/cigarettes", permanent: true },
       { source: "/magic", destination: "/items/magic", permanent: true },
+      // B14 slash-dupe: do not add a second York LP page.
+      // Next trailingSlash:false already 308s `/weed-dispensary-york/` → `/weed-dispensary-york`.
+      // Canonical, sitemap, and STORE.storePagePath use the no-slash URL.
     ];
   },
 };

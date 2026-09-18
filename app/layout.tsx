@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   },
   description: STORE.seoDescription,
   keywords: [
+    "dispensary near me",
+    "cannabis store near me",
+    "after dark cannabis",
+    "cannabis near me",
     "Jane Street dispensary",
     "York cannabis dispensary",
     "weed store York",

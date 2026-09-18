@@ -26,10 +26,15 @@
   animation: heroPulse 6s ease-in-out infinite;
 }
 
+.heroDoor {
+  margin-top: 110px;
+  padding: 16px 24px 28px;
+}
+
 .welcomeBannerSection {
   width: 100%;
   overflow: hidden;
-  margin-top: 92px;
+  margin-top: 8px;
   background-color: #020617;
 }
 
@@ -93,15 +98,24 @@
 /* Branding block */
 .brandBlock {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   animation: fadeDown 0.8s ease;
 }
 
 .brandIcon {
-  font-size: 54px;
-  margin-bottom: 12px;
+  font-size: 36px;
+  margin-bottom: 6px;
   display: inline-block;
   animation: float 3s ease-in-out infinite;
+}
+
+.brandKicker {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c084fc;
+  margin: 0 0 10px;
 }
 
 .brandTitle {
@@ -112,6 +126,41 @@
   margin: 0 0 8px;
   letter-spacing: -0.03em;
   text-shadow: 0 4px 30px rgba(168,85,247,0.35);
+}
+
+.doorTest {
+  width: 100%;
+  max-width: 960px;
+  margin: 0;
+  text-align: center;
+}
+
+.doorTestTitle {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 14px;
+}
+
+.doorTestNap {
+  font-size: 16px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+
+.doorTestNap a {
+  color: #c084fc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.doorTestNap a:hover {
+  color: #fbbf24;
+}
+
+.doorTest .mapWrap iframe {
+  height: 200px;
 }
 
 .brandSub {
@@ -935,12 +984,16 @@
     padding: 36px 12px 52px;
   }
 
+  .heroDoor {
+    padding: 20px 12px 24px;
+  }
+
   .brandBlock {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
   }
 
   .brandIcon {
-    font-size: 44px;
+    font-size: 32px;
   }
 
   .bentoGrid {

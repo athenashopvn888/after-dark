@@ -1,13 +1,13 @@
 import Link from "next/link";
 import styles from "./HiringCallout.module.css";
 
-export default function HiringCallout() {
+export default function HiringCallout({ compact = false }: { compact?: boolean }) {
   return (
     <section
       className={styles.section}
       aria-label="After Dark Cannabis hiring"
       style={{
-        padding: "110px 20px 24px",
+        padding: compact ? "24px 20px" : "110px 20px 24px",
         background: "#020617",
       }}
     >

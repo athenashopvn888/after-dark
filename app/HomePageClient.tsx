@@ -168,10 +168,60 @@ export default function HomePageClient() {
 
   return (
     <main className={styles.main}>
-      <FleetAnnouncementBanner />
       {/* ── NAVBAR ── */}
       <Navbar />
-      <HiringCallout />
+
+      {/* ── DOOR-TEST HERO ── */}
+      <section className={`${styles.hero} ${styles.heroDoor}`}>
+        <div className={styles.heroBg} />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroStars} />
+
+        <div className={styles.heroContent}>
+          {/* Brand branding */}
+          <div className={styles.brandBlock}>
+            <span className={styles.brandIcon}>🌙</span>
+            <p className={styles.brandKicker}>After Dark Cannabis</p>
+            <h1 className={styles.brandTitle}>York Dispensary Near Me on Jane Street</h1>
+            <p className={styles.brandSub}>24-Hour Jane Street York Dispensary · Walk-in at 1664 Jane Street</p>
+            <Link href={STORE.hoursPath} className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</Link>
+          </div>
+
+          <section className={`${styles.doorTest} nap`} id="contact" aria-label="Store name, address, hours, and map">
+            <h2 className={styles.doorTestTitle}>Address, hours, and map</h2>
+            <p className={styles.doorTestNap}>
+              <strong>{STORE.name}</strong>
+              <br />
+              {STORE.addressLine}
+              <br />
+              <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>
+              <br />
+              {STORE.hoursNote}
+            </p>
+            <div className={styles.napActions}>
+              <a href={STORE.phoneTel} className={styles.napAction}>Call {STORE.phoneDisplay}</a>
+              <a href={mapsDirectionsUrl} className={styles.napAction} target="_blank" rel="noopener noreferrer">Directions</a>
+              <Link href={STORE.storePagePath} className={styles.napAction}>York dispensary</Link>
+              <Link href={STORE.hoursPath} className={styles.napAction}>Open now on Jane Street</Link>
+              <Link href="/visit" className={styles.napAction}>How to reach Jane Street</Link>
+              <Link href={STORE.corridorPath} className={styles.napAction}>Jane &amp; Lawrence corridor</Link>
+            </div>
+            <div className={styles.mapWrap}>
+              <iframe
+                title="Map of After Dark Cannabis at 1664 Jane Street, York"
+                src={mapsEmbedUrl}
+                width="100%"
+                height="200"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <FleetAnnouncementBanner />
+      <HiringCallout compact />
 
       {/* ── WELCOME BANNER ── */}
       <section className={styles.welcomeBannerSection}>
@@ -184,22 +234,12 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ── BENTO MOSAIC HERO ── */}
-      <section className={styles.hero}>
+      {/* ── BENTO MOSAIC ── */}
+      <section className={styles.hero} aria-label="Shop flower tiers">
         <div className={styles.heroBg} />
         <div className={styles.heroOverlay} />
         <div className={styles.heroStars} />
-
         <div className={styles.heroContent}>
-          {/* Brand branding */}
-          <div className={styles.brandBlock}>
-            <span className={styles.brandIcon}>🌙</span>
-            <h1 className={styles.brandTitle}>AFTER DARK CANNABIS</h1>
-            <p className={styles.brandSub}>24-Hour Jane Street York Dispensary</p>
-            <Link href={STORE.hoursPath} className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</Link>
-          </div>
-
-          {/* Bento Grid */}
           <div className={styles.bentoGrid}>
             {BENTO_TIERS.map((tier) => (
               <Link
@@ -288,15 +328,15 @@ export default function HomePageClient() {
       <section className={styles.seoSection}>
         <div className={styles.container}>
           <div className={styles.seoPanel}>
-            <h2 className={styles.seoPanelTitle}>24-Hour Walk-In on Jane Street in York</h2>
+            <h2 className={styles.seoPanelTitle}>York dispensary and 24-hour open-now</h2>
             <p className={styles.seoPanelText}>
               <strong>After Dark Cannabis</strong> is the after-hours walk-in counter at <strong>1664 Jane Street, York, ON M9N 2S1</strong>, just south of Lawrence Avenue West. This homepage is the visit hub: address, phone <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>, 24-hour hours, map, and directions live here. Use <Link href="/visit">/visit</Link> for bus and parking, or the <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link> if you are coming from Weston or Mount Dennis.
             </p>
             <p className={styles.seoPanelText}>
-              Jane Street stays open when a conventional retail window would already be locked. Night-shift neighbours, late 35 Jane riders, and Mount Dennis walk-ups use the same York counter — there is no second After Dark address on Weston Road and no Mississauga or Etobicoke storefront. Compare flower tiers, pre-rolls, edibles, vapes, and concentrates on the live menu, then come in with government photo ID. Adults 19+ only.
+              Searching dispensary near me or cannabis store near me around Jane Street? Pin the walk-in on the <Link href={STORE.storePagePath}>York dispensary page</Link>. Late-night hours, ID, and Jane &amp; Lawrence arrival are on the <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Night-shift neighbours, late 35 Jane riders, and Mount Dennis walk-ups use the same York counter — there is no second After Dark address on Weston Road and no Mississauga or Etobicoke storefront.
             </p>
             <p className={styles.seoPanelText}>
-              Looking for a 24 hour dispensary near you that is open now? After Dark Cannabis at 1664 Jane Street is open around the clock. Use the <Link href={STORE.hoursPath}>open-now guide</Link> for late-night hours, ID, and Jane &amp; Lawrence arrival. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
+              Compare flower tiers, pre-rolls, edibles, vapes, and concentrates on the live menu, then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
             </p>
           </div>
         </div>
@@ -364,7 +404,7 @@ export default function HomePageClient() {
       <section className={styles.faqSection}>
         <div className={styles.faqContainer}>
           <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "32px" }}>
-            Frequently Asked Questions
+            FAQ: dispensary near me in York
           </h2>
           {HOME_FAQS.map((faq, i) => (
             <details key={i} className={styles.faqItem}>
@@ -372,62 +412,6 @@ export default function HomePageClient() {
               <p className={styles.faqAnswer}>{faq.a}</p>
             </details>
           ))}
-        </div>
-      </section>
-
-      {/* ── STORE LOCATION GRID ── */}
-      <section className={styles.storeSection} id="contact">
-        <div className={styles.container}>
-          <div className={styles.storeGrid}>
-            <div className={styles.storeCard}>
-              <span className={styles.storeIcon}>📍</span>
-              <h3 className={styles.storeCardTitle}>Location</h3>
-              <p className={styles.storeCardText}>
-                {STORE.streetAddress}
-                <br />
-                {STORE.addressLocality}, {STORE.addressRegion} {STORE.postalCode}
-                <br />
-                <a href={STORE.phoneTel} className={styles.storeLink}>{STORE.phoneDisplay}</a>
-              </p>
-            </div>
-            <div className={styles.storeCard}>
-              <span className={styles.storeIcon}>🕒</span>
-              <h3 className={styles.storeCardTitle}>Hours</h3>
-              <p className={styles.storeCardText}>
-                Open 7 Days a Week
-                <br />
-                <span className={styles.storeHighlight}>{STORE.hoursLabel}</span>
-              </p>
-            </div>
-            <div className={styles.storeCard}>
-              <span className={styles.storeIcon}>🔥</span>
-              <h3 className={styles.storeCardTitle}>Walk In</h3>
-              <p className={styles.storeCardText}>
-                No appointment needed
-                <br />
-                <span className={styles.storeHighlight}>Jane Street, York</span>
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.napActions}>
-            <a href={STORE.phoneTel} className={styles.napAction}>Call {STORE.phoneDisplay}</a>
-            <a href={mapsDirectionsUrl} className={styles.napAction} target="_blank" rel="noopener noreferrer">Directions</a>
-            <Link href="/visit" className={styles.napAction}>How to reach Jane Street</Link>
-            <Link href={STORE.hoursPath} className={styles.napAction}>Open now on Jane Street</Link>
-            <Link href={STORE.corridorPath} className={styles.napAction}>Jane &amp; Lawrence corridor</Link>
-          </div>
-
-          <div className={styles.mapWrap}>
-            <iframe
-              title="Map of After Dark Cannabis at 1664 Jane Street, York"
-              src={mapsEmbedUrl}
-              width="100%"
-              height="360"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
         </div>
       </section>
 
