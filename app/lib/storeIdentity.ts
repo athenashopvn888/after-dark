@@ -9,6 +9,7 @@ export const STORE = {
   visitPath: "/visit",
   visitGuidePath: "/resources/local-guides/jane-street-york-visit-guide",
   hoursPath: "/24-hour-dispensary-york",
+  corridorPath: "/jane-and-lawrence-dispensary",
   yorkDeliveryPath: "/weed-delivery-york",
   streetAddress: "1664 Jane Street",
   addressLocality: "York",
@@ -146,6 +147,34 @@ export const VISIT_FAQS: StoreFaq[] = [
   {
     q: "Is After Dark Cannabis a Mississauga or Etobicoke store?",
     a: "No. The only walk-in counter is 1664 Jane Street in York. Those other city pages are not locations.",
+  },
+];
+
+/** Visible /jane-and-lawrence-dispensary FAQs — keep in sync with that page's FAQPage JSON-LD. */
+export const CORRIDOR_FAQS: StoreFaq[] = [
+  {
+    q: "Is there a Jane and Lawrence dispensary?",
+    a: "Yes. After Dark Cannabis is the walk-in at 1664 Jane Street, York, ON M9N 2S1, just south of the Jane & Lawrence lights. Call +1 (437) 524-9344. The homepage is the NAP hub.",
+  },
+  {
+    q: "Is After Dark Cannabis in Weston?",
+    a: "Weston shoppers walk in on Jane Street. There is no second After Dark storefront on Weston Road. The pin is 1664 Jane Street, York.",
+  },
+  {
+    q: "Is there a Mount Dennis cannabis storefront?",
+    a: "Mount Dennis is a neighbourhood we serve for walk-in, not a second address. Come to 1664 Jane Street in York. Adults 19+ with government photo ID.",
+  },
+  {
+    q: "Is After Dark Toronto a different store?",
+    a: "No. Searches for After Dark Toronto resolve to this York walk-in on Jane Street — 1664 Jane Street, York, ON M9N 2S1. There is no downtown second counter.",
+  },
+  {
+    q: "Where is a cannabis store near me on Jane Street in York?",
+    a: "After Dark Cannabis is at 1664 Jane Street, York, just south of Lawrence Avenue West. Open 24 hours. Call +1 (437) 524-9344.",
+  },
+  {
+    q: "Do you have a Mississauga or Etobicoke dispensary?",
+    a: "No. Mississauga and Etobicoke URLs are not locations. Weed near Jane Street York still means this one walk-in at 1664 Jane Street.",
   },
 ];
 

@@ -114,14 +114,16 @@ export default function VisitPage() {
         <section>
           <h2>From Weston</h2>
           <p>
-            Weston shoppers should treat Jane Street as the destination, not Weston Road itself. Drive or bus toward Jane, then south of Lawrence to 1664. A Weston drop-off URL is not a Weston storefront.
+            Weston shoppers should treat Jane Street as the destination, not Weston Road itself. Drive or bus toward Jane, then south of Lawrence to 1664. A Weston drop-off URL is not a Weston storefront. Neighbourhood context is on the{" "}
+            <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
           </p>
         </section>
 
         <section>
           <h2>From Mount Dennis</h2>
           <p>
-            From Mount Dennis, approach on Jane, Weston Road, or Eglinton West and continue to 1664 Jane Street in York. Same 24-hour counter, same ID rule, same menu.
+            From Mount Dennis, approach on Jane, Weston Road, or Eglinton West and continue to 1664 Jane Street in York. Same 24-hour counter, same ID rule, same menu. See the{" "}
+            <Link href={STORE.corridorPath}>corridor walk-in guide</Link> for the neighbourhood map.
           </p>
         </section>
 
@@ -155,7 +157,9 @@ export default function VisitPage() {
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
             Confirm late-night hours on the{" "}
             <Link href={STORE.hoursPath}>24-hour open-now guide</Link>.
-            Neither replaces the homepage as the NAP hub.
+            Weston and Mount Dennis walk-in notes are on the{" "}
+            <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
+            None of those replace the homepage as the NAP hub.
           </p>
         </section>
 

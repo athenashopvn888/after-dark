@@ -139,7 +139,8 @@ export default function TwentyFourHourYorkPage() {
             Jane &amp; Lawrence is the nearest named intersection. Weston and Mount Dennis shoppers come
             to this York walk-in — there is no second After Dark storefront on Weston Road, and no
             Mississauga or Etobicoke counter. Corridor names (Jane Street, York, Weston, Mount Dennis)
-            all resolve to {STORE.addressLine}.
+            all resolve to {STORE.addressLine}. The neighbourhood map lives on the{" "}
+            <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
           </p>
           <p>
             Drop-off requests stay on the separate <Link href={STORE.yorkDeliveryPath}>York delivery</Link>{" "}
@@ -183,6 +184,8 @@ export default function TwentyFourHourYorkPage() {
             The shorter how-to-reach page is <Link href="/visit">/visit</Link>.
             The York store page is{" "}
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
+            Neighbourhood walk-in notes are on the{" "}
+            <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
             None of those replace the homepage as the website URL for this store.
           </p>
         </section>

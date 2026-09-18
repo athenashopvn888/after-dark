@@ -52,7 +52,7 @@ export function GBPLandingPage() {
           <p className={styles.eyebrow}>Open 24 Hours · Adults 19+</p>
           <h1>York Weed Dispensary on Jane Street — Open 24 Hours</h1>
           <p className={styles.heroAddress}>{store.address}</p>
-          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>Open now on Jane Street</Link></div>
+          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>Open now on Jane Street</Link><Link href={STORE.corridorPath} className={styles.secondaryAction}>Jane &amp; Lawrence corridor</Link></div>
         </section>
 
         <section className={styles.section}>
@@ -66,6 +66,11 @@ export function GBPLandingPage() {
         <section className={styles.section}>
           <h2>Open now on Jane Street</h2>
           <p>If you need a 24 hour dispensary near you in York, the Jane Street counter is open now around the clock. Use the <Link href={STORE.hoursPath}>24-hour open-now guide</Link> for late-night arrival, ID, and Jane &amp; Lawrence context. Bus, parking, and corridor notes are on the <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link> and the <Link href="/visit">how-to-reach page</Link>.</p>
+        </section>
+
+        <section className={styles.section}>
+          <h2>Jane &amp; Lawrence / Weston / Mount Dennis</h2>
+          <p>Jane &amp; Lawrence is the nearest named intersection. Weston and Mount Dennis shoppers walk in at 1664 Jane Street — there is no second After Dark storefront on Weston Road, and no Mississauga or Etobicoke counter. Use the <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link> for the neighbourhood map and pin.</p>
         </section>
 
         <section className={styles.section} id="find-your-weed">
@@ -93,7 +98,7 @@ export function GBPLandingPage() {
         <section className={styles.visitSection} id="visit">
           <div><p className={styles.kicker}>Open 24 Hours on Jane Street</p><h2>{store.storeName}</h2><address>{store.streetAddress}<br />{store.city}, {store.province} {store.postalCode}</address></div>
           <div className={styles.visitFacts}><strong>Open 24 Hours · 7 Days a Week</strong><a href={`tel:${store.phoneIntl}`}>Phone: {store.phoneDisplay}</a><span>Adults 19+</span></div>
-          <p>Being open around the clock gives adults 19+ flexibility to visit After Dark Cannabis at the time that suits them. Confirm late-night hours and ID on the <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Corridor notes live in the <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link>. For a particular product, call ahead before travelling specifically for that item.</p>
+          <p>Being open around the clock gives adults 19+ flexibility to visit After Dark Cannabis at the time that suits them. Confirm late-night hours and ID on the <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Neighbourhood walk-in notes live on the <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link> and the <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link>. For a particular product, call ahead before travelling specifically for that item.</p>
         </section>
 
         <section className={styles.section}>

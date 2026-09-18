@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/visit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/24-hour-dispensary-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE}/jane-and-lawrence-dispensary`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/weed-delivery-york`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
 

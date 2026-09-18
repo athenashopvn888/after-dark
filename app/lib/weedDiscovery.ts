@@ -37,5 +37,6 @@ export const afterDarkWeedOwner = {
     { label: "Jane Street York Visit Guide", description: "Find additional store-specific visit information.", href: "/resources/local-guides/jane-street-york-visit-guide" },
     { label: "How to Reach Jane Street", description: "Bus, parking, and the Lawrence West intersection.", href: "/visit" },
     { label: "24-Hour Open-Now Guide", description: "Confirm the Jane Street counter is open now, 24 hours.", href: "/24-hour-dispensary-york" },
+    { label: "Jane & Lawrence Corridor", description: "Weston and Mount Dennis walk-in to 1664 Jane Street.", href: "/jane-and-lawrence-dispensary" },
   ] satisfies WeedDiscoveryLink[],
 };
