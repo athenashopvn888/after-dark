@@ -3,28 +3,43 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import styles from "./GBPLandingPage.module.css";
 import { afterDarkWeedOwner as store } from "../lib/weedDiscovery";
+import {
+  STORE,
+  breadcrumbGraphNode,
+  faqPageGraphNode,
+  serializeJsonLd,
+  webpageGraphNode,
+} from "../lib/storeIdentity";
 
 const faqItems = [
-  { question: "Where is After Dark Cannabis?", answer: <>After Dark Cannabis is located at <strong>{store.address}</strong>.</> },
-  { question: "Is After Dark Cannabis open 24 hours?", answer: <>Yes. After Dark Cannabis is <strong>open 24 hours a day, seven days a week</strong>.</> },
-  { question: "What cannabis categories can I explore?", answer: <>Adults 19+ can explore Budget, AA, AAA+, Premium and Exotic flower tiers, plus pre-rolls, edibles, vapes, concentrates and accessories.</> },
-  { question: "What is the difference between weed and cannabis?", answer: <><strong>Weed</strong> is common everyday terminology for cannabis. <strong>Cannabis</strong> is the broader term and can include flower, pre-rolls, edibles, vapes, concentrates and other formats.</> },
-  { question: "What is the difference between bud and flower?", answer: <><strong>Flower</strong> is the category term for dried cannabis flower. <strong>Bud</strong> is a common informal word people use for flower.</> },
-  { question: "Can I explore different flower tiers?", answer: <>Yes. After Dark Cannabis has dedicated sections for Budget, AA, AAA+, Premium and Exotic flower browsing.</> },
-  { question: "Is ‘After Dark’ the name of a cannabis strain?", answer: <>After Dark Cannabis is the store name. If you are looking for a particular strain or product, call <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> before making a special trip.</> },
-  { question: "How can I check on a specific product before visiting?", answer: <>Call After Dark Cannabis at <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> before making a special trip for one particular product.</> },
-  { question: "Do I need to be 19+?", answer: <>Yes. After Dark Cannabis is for <strong>adults 19+</strong>.</> },
+  { question: "Where is After Dark Cannabis?", text: `After Dark Cannabis is located at ${store.address}.`, answer: <>After Dark Cannabis is located at <strong>{store.address}</strong>.</> },
+  { question: "Is After Dark Cannabis open 24 hours?", text: "Yes. After Dark Cannabis is open 24 hours a day, seven days a week.", answer: <>Yes. After Dark Cannabis is <strong>open 24 hours a day, seven days a week</strong>.</> },
+  { question: "Is After Dark Cannabis open now on Jane Street?", text: `Yes. The York walk-in at ${store.address} is open 24 hours, including after midnight.`, answer: <>Yes. The York walk-in at <strong>{store.address}</strong> is open 24 hours, including after midnight.</> },
+  { question: "What cannabis categories can I explore?", text: "Adults 19+ can explore Budget, AA, AAA+, Premium and Exotic flower tiers, plus pre-rolls, edibles, vapes, concentrates and accessories.", answer: <>Adults 19+ can explore Budget, AA, AAA+, Premium and Exotic flower tiers, plus pre-rolls, edibles, vapes, concentrates and accessories.</> },
+  { question: "What is the difference between weed and cannabis?", text: "Weed is common everyday terminology for cannabis. Cannabis is the broader term and can include flower, pre-rolls, edibles, vapes, concentrates and other formats.", answer: <><strong>Weed</strong> is common everyday terminology for cannabis. <strong>Cannabis</strong> is the broader term and can include flower, pre-rolls, edibles, vapes, concentrates and other formats.</> },
+  { question: "What is the difference between bud and flower?", text: "Flower is the category term for dried cannabis flower. Bud is a common informal word people use for flower.", answer: <><strong>Flower</strong> is the category term for dried cannabis flower. <strong>Bud</strong> is a common informal word people use for flower.</> },
+  { question: "Can I explore different flower tiers?", text: "Yes. After Dark Cannabis has dedicated sections for Budget, AA, AAA+, Premium and Exotic flower browsing.", answer: <>Yes. After Dark Cannabis has dedicated sections for Budget, AA, AAA+, Premium and Exotic flower browsing.</> },
+  { question: "Is ‘After Dark’ the name of a cannabis strain?", text: `After Dark Cannabis is the store name. If you are looking for a particular strain or product, call ${store.phoneDisplay} before making a special trip.`, answer: <>After Dark Cannabis is the store name. If you are looking for a particular strain or product, call <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> before making a special trip.</> },
+  { question: "How can I check on a specific product before visiting?", text: `Call After Dark Cannabis at ${store.phoneDisplay} before making a special trip for one particular product.`, answer: <>Call After Dark Cannabis at <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> before making a special trip for one particular product.</> },
+  { question: "Do I need to be 19+?", text: "Yes. After Dark Cannabis is for adults 19+.", answer: <>Yes. After Dark Cannabis is for <strong>adults 19+</strong>.</> },
 ];
 
-const storeSchema = {
+const faqSchemaItems = faqItems.map((item) => ({ q: item.question, a: item.text }));
+
+const pageSchema = {
   "@context": "https://schema.org",
-  "@type": "Store",
-  "@id": "https://afterdarkcannabis.com/weed-dispensary-york/",
-  name: store.storeName,
-  url: "https://afterdarkcannabis.com/weed-dispensary-york/",
-  telephone: store.phoneIntl,
-  address: { "@type": "PostalAddress", streetAddress: store.streetAddress, addressLocality: store.city, addressRegion: store.province, postalCode: store.postalCode, addressCountry: "CA" },
-  openingHours: "Mo-Su 00:00-23:59",
+  "@graph": [
+    webpageGraphNode({
+      id: `${STORE.baseUrl}${STORE.storePagePath}`,
+      name: "York Weed Dispensary on Jane Street — Open 24 Hours",
+      description: "Walk-in York dispensary page for After Dark Cannabis at 1664 Jane Street. The homepage is the website URL.",
+    }),
+    breadcrumbGraphNode([
+      { name: "Home", item: STORE.homepageUrl },
+      { name: "York dispensary", item: `${STORE.baseUrl}${STORE.storePagePath}` },
+    ]),
+    faqPageGraphNode(faqSchemaItems),
+  ],
 };
 
 export function GBPLandingPage() {
@@ -32,12 +47,12 @@ export function GBPLandingPage() {
     <>
       <Navbar />
       <main className={styles.main}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(storeSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(pageSchema) }} />
         <section className={styles.hero}>
           <p className={styles.eyebrow}>Open 24 Hours · Adults 19+</p>
           <h1>York Weed Dispensary on Jane Street — Open 24 Hours</h1>
           <p className={styles.heroAddress}>{store.address}</p>
-          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link></div>
+          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>24-Hour Hours</Link></div>
         </section>
 
         <section className={styles.section}>

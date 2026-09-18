@@ -21,15 +21,18 @@ test("MJ01 homepage schema keeps CannabisStore, adds FAQPage, and uses the FMD p
   const layout = read("app/layout.tsx");
   const home = read("app/page.tsx");
   const identity = read("app/lib/storeIdentity.ts");
-  assert.match(layout, /"@type": "CannabisStore"/);
-  assert.match(layout, /telephone: STORE\.phoneIntl/);
+  assert.match(layout, /cannabisStoreGraphNode/);
+  assert.match(identity, /"@type": "CannabisStore"/);
+  assert.match(identity, /telephone: STORE\.phoneIntl/);
+  assert.match(identity, /url: STORE\.homepageUrl/);
   assert.match(identity, /phoneIntl: "\+14375249344"/);
   assert.match(home, /faqPageJsonLd\(HOME_FAQS\)/);
   assert.match(identity, /"@type": "FAQPage"/);
   assert.doesNotMatch(layout, /7Clmh\.jpg/);
   assert.match(identity, /46Oi5\.jpg/);
   assert.match(layout, /canonical: STORE\.homepageUrl/);
-  assert.match(layout, /Jane Street York Dispensary/);
+  assert.match(identity, /Jane Street York Dispensary/);
+  assert.match(identity, /24-Hour Jane Street York Dispensary/);
 });
 
 test("MJ01 /visit is a real how-to-reach page with NAP, transit, and parking", () => {
@@ -76,15 +79,63 @@ test("MJ01 public source never reprints the citation 416 phone", () => {
 test("MJ01 homepage neighbourhood copy stays Jane / York, not GTA delivery", () => {
   const home = read("app/HomePageClient.tsx");
   assert.match(home, /Jane Street York Dispensary/);
+  assert.match(home, /24-Hour Jane Street York Dispensary/);
   assert.match(home, /1664 Jane Street/);
   assert.doesNotMatch(home, /weed delivery Mississauga/i);
   assert.match(home, /href="\/visit"/);
+  assert.match(home, /STORE\.hoursPath/);
+});
+
+test("MJ01 locks NAP to STORE on footer, contact, and the 24-hour landing", () => {
+  const footer = read("app/components/Footer.tsx");
+  const contact = read("app/contact/page.tsx");
+  const hours = read("app/24-hour-dispensary-york/page.tsx");
+  const identity = read("app/lib/storeIdentity.ts");
+  const sitemap = read("app/sitemap.ts");
+  assert.match(footer, /from "\.\.\/lib\/storeIdentity"/);
+  assert.match(footer, /STORE\.addressLine|STORE\.streetAddress/);
+  assert.match(footer, /STORE\.phoneDisplay/);
+  assert.match(footer, /STORE\.homepageUrl/);
+  assert.match(contact, /STORE\.addressLine/);
+  assert.match(contact, /STORE\.phoneDisplay/);
+  assert.match(contact, /mapsEmbedUrl/);
+  assert.match(hours, /24-Hour Dispensary in York on Jane Street/);
+  assert.match(hours, /faqPageGraphNode\(HOURS_FAQS\)/);
+  assert.match(hours, /1664 Jane Street/);
+  assert.match(identity, /hoursPath: "\/24-hour-dispensary-york"/);
+  assert.match(sitemap, /\$\{BASE\}\/24-hour-dispensary-york/);
+});
+
+test("MJ01 York store page schema points at the homepage store, not a second Store URL", () => {
+  const gbp = read("app/components/GBPLandingPage.tsx");
+  const identity = read("app/lib/storeIdentity.ts");
+  assert.match(gbp, /webpageGraphNode/);
+  assert.match(identity, /about: \{ "@id": `\$\{STORE\.baseUrl\}\/#store` \}/);
+  assert.match(identity, /url: STORE\.homepageUrl/);
+  assert.doesNotMatch(gbp, /"@type": "Store"/);
+  assert.doesNotMatch(gbp, /url: "https:\/\/afterdarkcannabis\.com\/weed-dispensary-york\/"/);
+});
+
+test("MJ01 info York landings keep NAP + map and demote the Mississauga city farm", () => {
+  const info = read("app/info/[seoPage]/page.tsx");
+  const seo = read("app/lib/seoPages.ts");
+  const sitemap = read("app/sitemap.ts");
+  assert.match(info, /mapsEmbedUrl/);
+  assert.match(info, /STORE\.addressLine/);
+  assert.match(info, /faqPageJsonLd\(page\.faqs\)/);
+  assert.match(info, /title: \{ absolute: page\.title \}/);
+  assert.match(info, /slug === "weed-store-near-mississauga"/);
+  assert.match(info, /index: false/);
+  assert.match(seo, /York Weed Dispensary on Jane Street/);
+  assert.match(sitemap, /p\.slug !== "weed-store-near-mississauga"/);
 });
 
 test("MJ01 frontend stays standalone", () => {
   const surfaces = [
     read("app/HomePageClient.tsx"),
     read("app/visit/page.tsx"),
+    read("app/24-hour-dispensary-york/page.tsx"),
+    read("app/contact/page.tsx"),
     read("app/layout.tsx"),
     read("app/components/Footer.tsx"),
   ].join("\n").toLowerCase();

@@ -1,15 +1,17 @@
+import { STORE } from "./storeIdentity";
+
 export type WeedDiscoveryLink = { label: string; description: string; href: string };
 
 export const afterDarkWeedOwner = {
-  storeName: "After Dark Cannabis",
-  city: "York",
-  address: "1664 Jane Street, York, ON M9N 2S1",
-  streetAddress: "1664 Jane Street",
-  province: "ON",
-  postalCode: "M9N 2S1",
-  phoneDisplay: "+1 (437) 524-9344",
-  phoneIntl: "+14375249344",
-  ownerPath: "/weed-dispensary-york/",
+  storeName: STORE.name,
+  city: STORE.addressLocality,
+  address: STORE.addressLine,
+  streetAddress: STORE.streetAddress,
+  province: STORE.addressRegion,
+  postalCode: STORE.postalCode,
+  phoneDisplay: STORE.phoneDisplay,
+  phoneIntl: STORE.phoneIntl,
+  ownerPath: STORE.storePagePath,
   flowerTiers: [
     { label: "Budget Weed", description: "Explore the Budget weed and flower tier.", href: "/budget-weed" },
     { label: "AA Weed", description: "Explore the AA weed and flower tier.", href: "/aa-weed" },
@@ -34,5 +36,6 @@ export const afterDarkWeedOwner = {
     { label: "Value Guides", description: "Read value-oriented context without relying on a current promotion.", href: "/resources/value-guides" },
     { label: "Jane Street York Visit Guide", description: "Find additional store-specific visit information.", href: "/resources/local-guides/jane-street-york-visit-guide" },
     { label: "How to Reach Jane Street", description: "Bus, parking, and the Lawrence West intersection.", href: "/visit" },
+    { label: "24-Hour York Dispensary", description: "Confirm the Jane Street counter is open around the clock.", href: "/24-hour-dispensary-york" },
   ] satisfies WeedDiscoveryLink[],
 };

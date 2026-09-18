@@ -8,6 +8,7 @@ export const STORE = {
   storePagePath: "/weed-dispensary-york/",
   visitPath: "/visit",
   visitGuidePath: "/resources/local-guides/jane-street-york-visit-guide",
+  hoursPath: "/24-hour-dispensary-york",
   yorkDeliveryPath: "/weed-delivery-york",
   streetAddress: "1664 Jane Street",
   addressLocality: "York",
@@ -20,12 +21,18 @@ export const STORE = {
   phoneTel: "tel:+14375249344",
   hoursLabel: "Open 24 Hours",
   hoursNote: "Open 24 hours a day, 7 days a week",
+  hoursDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const,
+  openingHours: "Mo-Su 00:00-23:59",
   latitude: 43.7020642,
   longitude: -79.5038822,
   intersection: "Jane Street just south of Lawrence Avenue West",
   corridor: ["Jane Street", "York", "Weston", "Mount Dennis"] as const,
   schemaImage: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/46Oi5.jpg",
+  logoUrl: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/46Oi5.jpg",
   mapsQuery: "1664 Jane Street, York, ON M9N 2S1",
+  seoTitleDefault: "After Dark Cannabis | 24-Hour Jane Street York Dispensary",
+  seoDescription:
+    "Open 24 hours at 1664 Jane Street, York, ON M9N 2S1. Walk-in cannabis dispensary on Jane Street. Call +1 (437) 524-9344. Adults 19+.",
 } as const;
 
 export const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.mapsQuery)}`;
@@ -63,6 +70,38 @@ export const HOME_FAQS: StoreFaq[] = [
   {
     q: "What is the cheapest weed at After Dark Cannabis?",
     a: "Budget flower starts at $3/g. AA daily drivers start at $4/g and AAA+ listings are posted from $5-$6/g. Check the live menu before travelling for one exact item.",
+  },
+  {
+    q: "Is After Dark Cannabis open now?",
+    a: "Yes. After Dark Cannabis at 1664 Jane Street, York is open 24 hours a day, every day, including after midnight. Call +1 (437) 524-9344 if you need one listed item confirmed before you travel.",
+  },
+  {
+    q: "Is there a 24-hour dispensary on Jane Street in York?",
+    a: "After Dark Cannabis is the 24-hour walk-in at 1664 Jane Street, York, ON M9N 2S1, just south of Lawrence Avenue West. Bring government photo ID. Adults 19+ only.",
+  },
+];
+
+/** Visible /24-hour-dispensary-york FAQs — keep in sync with that page's FAQPage JSON-LD. */
+export const HOURS_FAQS: StoreFaq[] = [
+  {
+    q: "Is After Dark Cannabis open 24 hours?",
+    a: "Yes. The Jane Street counter at 1664 Jane Street, York is open 24 hours a day, 7 days a week. There is no last-call close.",
+  },
+  {
+    q: "Can I walk in after midnight?",
+    a: "Yes. Late-night and overnight walk-ins use the same door at 1664 Jane Street. Bring valid government photo ID. Adults 19+ only.",
+  },
+  {
+    q: "Is the York dispensary open on holidays?",
+    a: "After Dark Cannabis lists open 24 hours, including typical holiday nights. Call +1 (437) 524-9344 if you are travelling for one exact item.",
+  },
+  {
+    q: "Where is the 24-hour York dispensary?",
+    a: "1664 Jane Street, York, ON M9N 2S1, just south of Lawrence Avenue West. The homepage is the NAP hub for address, phone, map, and directions.",
+  },
+  {
+    q: "Do late-night visits use a different menu?",
+    a: "No. Overnight shoppers see the same flower tiers and categories posted on the live menu. Availability of one exact pack can still change, so call ahead when that pack is the reason for the trip.",
   },
 ];
 
@@ -112,6 +151,107 @@ export function faqPageJsonLd(faqs: StoreFaq[]) {
   return {
     "@context": "https://schema.org",
     ...faqPageGraphNode(faqs),
+  };
+}
+
+export function websiteGraphNode() {
+  return {
+    "@type": "WebSite",
+    "@id": `${STORE.baseUrl}/#website`,
+    url: STORE.homepageUrl,
+    name: STORE.name,
+    publisher: { "@id": `${STORE.baseUrl}/#store` },
+  };
+}
+
+export function cannabisStoreGraphNode() {
+  return {
+    "@type": "CannabisStore",
+    "@id": `${STORE.baseUrl}/#store`,
+    name: STORE.name,
+    legalName: STORE.legalName,
+    description:
+      "24-hour walk-in cannabis dispensary at 1664 Jane Street in York, ON. Jane Street / Weston / Mount Dennis corridor. Flower tiers, edibles, prerolls, and vapes. Adults 19+.",
+    url: STORE.homepageUrl,
+    telephone: STORE.phoneIntl,
+    image: STORE.schemaImage,
+    logo: STORE.logoUrl,
+    priceRange: "$3 - $12/g",
+    openingHours: STORE.openingHours,
+    hasMap: mapsSearchUrl,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: STORE.streetAddress,
+      addressLocality: STORE.addressLocality,
+      addressRegion: STORE.addressRegion,
+      postalCode: STORE.postalCode,
+      addressCountry: STORE.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: STORE.latitude,
+      longitude: STORE.longitude,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [...STORE.hoursDays],
+        opens: "00:00",
+        closes: "23:59",
+      },
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: STORE.phoneIntl,
+      contactType: "customer service",
+      areaServed: `${STORE.addressLocality}, ${STORE.addressRegion}`,
+      availableLanguage: ["en"],
+    },
+    areaServed: STORE.corridor.map((name) => ({
+      "@type": name === "York" ? "City" : "Place",
+      name,
+    })),
+    knowsAbout: [
+      "24-hour dispensary York",
+      "Jane Street cannabis store",
+      "York walk-in dispensary",
+    ],
+  };
+}
+
+export function breadcrumbGraphNode(items: ReadonlyArray<{ name: string; item: string }>) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.item,
+    })),
+  };
+}
+
+export function webpageGraphNode({
+  id,
+  name,
+  description,
+}: {
+  id: string;
+  name: string;
+  description: string;
+}) {
+  return {
+    "@type": "WebPage",
+    "@id": id,
+    url: id,
+    name,
+    description,
+    isPartOf: { "@id": `${STORE.baseUrl}/#website` },
+    about: { "@id": `${STORE.baseUrl}/#store` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".nap"],
+    },
   };
 }
 

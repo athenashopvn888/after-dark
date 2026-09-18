@@ -5,6 +5,13 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SEO_PAGES, getSeoPageBySlug } from "../../lib/seoPages";
 import { TIER_CONFIG } from "../../lib/products";
+import {
+  STORE,
+  faqPageJsonLd,
+  mapsDirectionsUrl,
+  mapsEmbedUrl,
+  serializeJsonLd,
+} from "../../lib/storeIdentity";
 import styles from "./seo.module.css";
 
 /* ── Generate all SEO pages ── */
@@ -28,12 +35,14 @@ export async function generateMetadata({
   const page = getSeoPageBySlug(slug);
   if (!page) return {};
 
+  const demoted = slug === "weed-store-near-mississauga";
   return {
-    title: page.title,
+    title: { absolute: page.title },
     description: page.metaDescription,
     alternates: {
-      canonical: `https://afterdarkcannabis.com/info/${slug}`,
+      canonical: demoted ? STORE.homepageUrl : `https://afterdarkcannabis.com/info/${slug}`,
     },
+    robots: demoted ? { index: false, follow: true } : { index: true, follow: true },
   };
 }
 
@@ -51,6 +60,10 @@ export default async function SeoLandingPage({
 
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqPageJsonLd(page.faqs)) }}
+      />
       <Navbar />
 
       {/* Banner Image */}
@@ -106,11 +119,34 @@ export default async function SeoLandingPage({
           </div>
 
           {/* Map */}
-          <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Find Us</h2>
+          <div className={`${styles.section} nap`}>
+            <h2 className={styles.sectionTitle}>Find Us on Jane Street in York</h2>
+            <p className={styles.napLine}>
+              <strong>{STORE.name}</strong>
+              <br />
+              {STORE.addressLine}
+              <br />
+              <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>
+              {" · "}
+              {STORE.hoursLabel}
+              <br />
+              Website: <a href={STORE.homepageUrl}>{STORE.homepageUrl}</a>
+            </p>
             <div className={styles.mapWrap}>
+              <iframe
+                title="Map of After Dark Cannabis at 1664 Jane Street, York"
+                src={mapsEmbedUrl}
+                width="100%"
+                height="360"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
             <div className={styles.visitBtns}>
+              <Link href="/" className={styles.visitBtn}>Homepage NAP hub</Link>
+              <Link href="/visit" className={styles.visitBtn}>How to reach Jane Street</Link>
+              <Link href={STORE.hoursPath} className={styles.visitBtn}>24-hour hours</Link>
+              <a href={mapsDirectionsUrl} className={styles.visitBtn} target="_blank" rel="noopener noreferrer">Directions</a>
             </div>
           </div>
 
