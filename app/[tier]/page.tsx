@@ -11,6 +11,8 @@ import {
 import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_COMPARISON, TIER_SEO } from "../lib/tierSeoContent";
 import { buildTierCollectionJsonLd } from "../lib/tierStructuredData";
+import { faqPageGraphNode, serializeJsonLd } from "../lib/storeIdentity";
+import SccParityHub from "../components/SccParityHub";
 import seoContent from "../lib/seoContent.generated.json";
 import styles from "./tier.module.css";
 
@@ -76,24 +78,29 @@ export default async function TierPage({
   const { config } = tierInfo;
   const seo = TIER_SEO[tierInfo.key];
   const flowerCopy = seoContent.flowerTiers;
-  const tierLinks = Object.values(TIER_CONFIG);
-
   const saleFlowers = flowers.filter((f) => f.isSale);
   const regularFlowers = flowers.filter((f) => !f.isSale);
   const displayFlowers = [...saleFlowers, ...regularFlowers];
   const hotFlowers = flowers.filter((f) => f.isHot);
-  const tierJsonLd = buildTierCollectionJsonLd({
+  const collectionJsonLd = buildTierCollectionJsonLd({
     canonicalPath: `/${tierSlug}`,
     name: seo?.h1 || config.name,
     description: seo?.metaDescription || `${config.name} cannabis flower at After Dark Cannabis.`,
     flowers: displayFlowers,
   });
+  const tierJsonLd = {
+    ...collectionJsonLd,
+    "@graph": [
+      ...collectionJsonLd["@graph"],
+      ...(seo?.faqs.length ? [faqPageGraphNode(seo.faqs.map(({ q, a }) => ({ q, a })))] : []),
+    ],
+  };
 
   return (
     <>
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(tierJsonLd) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(tierJsonLd) }}
     />
     <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
@@ -226,10 +233,17 @@ export default async function TierPage({
             <div className={styles.seoBlock}>
               <h3 className={styles.seoHeading}>{config.name} at After Dark Cannabis</h3>
               {flowerCopy.paragraphs.map((paragraph) => <p key={paragraph} className={styles.seoBody}>{paragraph}</p>)}
-              <p className={styles.seoBody}>{flowerCopy.links.map((label, index) => {
-                const destination = tierLinks[index]?.slug || tierSlug;
-                return <span key={label}>{index ? " · " : ""}<Link href={`/${destination}`}>{label}</Link></span>;
-              })}</p>
+            </div>
+
+            <div className={styles.seoBlock}>
+              <SccParityHub
+                currentPath={`/${tierSlug}`}
+                heading={seo.hubHeading}
+                intro={seo.hubIntro}
+                geoSet="all"
+                includeTiers
+                tone="light"
+              />
             </div>
 
             <div className={styles.seoBlock}>

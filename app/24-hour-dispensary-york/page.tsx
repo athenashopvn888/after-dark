@@ -12,6 +12,7 @@ import {
   serializeJsonLd,
   webpageGraphNode,
 } from "../lib/storeIdentity";
+import SccParityHub from "../components/SccParityHub";
 import styles from "../visit/visit.module.css";
 
 const canonical = `${STORE.baseUrl}${STORE.hoursPath}`;
@@ -188,6 +189,17 @@ export default function TwentyFourHourYorkPage() {
             <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
             None of those replace the homepage as the website URL for this store.
           </p>
+        </section>
+
+        <section>
+          <SccParityHub
+            currentPath={STORE.hoursPath}
+            heading="Jane Street visit, York weed, and flower tiers"
+            intro="This open-now guide owns late-night hours. Flower tiers and the York weed hub stay on their own routes."
+            geoSet="all"
+            includeTiers
+            tone="dark"
+          />
         </section>
 
         <section>

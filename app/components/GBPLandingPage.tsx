@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import styles from "./GBPLandingPage.module.css";
 import { afterDarkWeedOwner as store } from "../lib/weedDiscovery";
+import SccParityHub from "./SccParityHub";
 import {
   STORE,
   breadcrumbGraphNode,
@@ -52,7 +53,7 @@ export function GBPLandingPage() {
           <p className={styles.eyebrow}>Open 24 Hours · Adults 19+</p>
           <h1>York Weed Dispensary on Jane Street — Open 24 Hours</h1>
           <p className={styles.heroAddress}>{store.address}</p>
-          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>Open now on Jane Street</Link><Link href={STORE.corridorPath} className={styles.secondaryAction}>Jane &amp; Lawrence corridor</Link></div>
+          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/" className={styles.secondaryAction}>Homepage NAP hub</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>Open now on Jane Street</Link><Link href={STORE.corridorPath} className={styles.secondaryAction}>Jane &amp; Lawrence corridor</Link></div>
         </section>
 
         <section className={styles.section}>
@@ -78,6 +79,14 @@ export function GBPLandingPage() {
           <h2>Start With Flower</h2>
           <div className={styles.cardGrid}>{store.flowerTiers.map((item) => <Link href={item.href} className={styles.card} key={item.href}><span>{item.label}</span><small>{item.description}</small></Link>)}</div>
           <div className={styles.inlineGuide}><span>Want more context before choosing a tier?</span><Link href="/resources/flower-guides">Explore the Flower Guides</Link></div>
+          <SccParityHub
+            currentPath={STORE.storePagePath}
+            heading="Visit hubs from the York weed page"
+            intro="This York weed page is the geo owner for 1664 Jane Street. The homepage stays the NAP hub. /visit covers 35 Jane and parking. Flower tiers sit in the cards above."
+            geoSet="all"
+            includeTiers={false}
+            tone="dark"
+          />
           <h3 className={styles.subheading}>Choose a Cannabis Format</h3>
           <div className={styles.cardGrid}>{store.categories.map((item) => <Link href={item.href} className={styles.card} key={item.href}><span>{item.label}</span><small>{item.description}</small></Link>)}</div>
           <p className={styles.note}>Individual products can change. Call <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> if a particular item is the reason for your visit.</p>

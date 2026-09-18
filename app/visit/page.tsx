@@ -10,6 +10,7 @@ import {
   mapsEmbedUrl,
   serializeJsonLd,
 } from "../lib/storeIdentity";
+import SccParityHub from "../components/SccParityHub";
 import styles from "./visit.module.css";
 
 const canonical = `${STORE.baseUrl}${STORE.visitPath}`;
@@ -161,6 +162,17 @@ export default function VisitPage() {
             <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
             None of those replace the homepage as the NAP hub.
           </p>
+        </section>
+
+        <section>
+          <SccParityHub
+            currentPath={STORE.visitPath}
+            heading="York weed, flower tiers, and 24-hour hubs"
+            intro="This page is the how-to-reach companion. Flower tiers stay narrow; the York weed hub owns broad weed intent."
+            geoSet="all"
+            includeTiers
+            tone="dark"
+          />
         </section>
 
         <section>
