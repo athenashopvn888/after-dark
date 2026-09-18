@@ -36,6 +36,6 @@ export const afterDarkWeedOwner = {
     { label: "Value Guides", description: "Read value-oriented context without relying on a current promotion.", href: "/resources/value-guides" },
     { label: "Jane Street York Visit Guide", description: "Find additional store-specific visit information.", href: "/resources/local-guides/jane-street-york-visit-guide" },
     { label: "How to Reach Jane Street", description: "Bus, parking, and the Lawrence West intersection.", href: "/visit" },
-    { label: "24-Hour York Dispensary", description: "Confirm the Jane Street counter is open around the clock.", href: "/24-hour-dispensary-york" },
+    { label: "24-Hour Open-Now Guide", description: "Confirm the Jane Street counter is open now, 24 hours.", href: "/24-hour-dispensary-york" },
   ] satisfies WeedDiscoveryLink[],
 };

@@ -196,7 +196,7 @@ export default function HomePageClient() {
             <span className={styles.brandIcon}>🌙</span>
             <h1 className={styles.brandTitle}>AFTER DARK CANNABIS</h1>
             <p className={styles.brandSub}>24-Hour Jane Street York Dispensary</p>
-            <div className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</div>
+            <Link href={STORE.hoursPath} className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</Link>
           </div>
 
           {/* Bento Grid */}
@@ -296,7 +296,7 @@ export default function HomePageClient() {
               Jane Street stays open when a conventional retail window would already be locked. Night-shift neighbours, late 35 Jane riders, and Mount Dennis walk-ups use the same York counter — there is no second After Dark address on Weston Road and no Mississauga or Etobicoke storefront. Compare flower tiers, pre-rolls, edibles, vapes, and concentrates on the live menu, then come in with government photo ID. Adults 19+ only.
             </p>
             <p className={styles.seoPanelText}>
-              Checking whether the counter is still open? Use the <Link href={STORE.hoursPath}>24-hour York dispensary page</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
+              Looking for a 24 hour dispensary near you that is open now? After Dark Cannabis at 1664 Jane Street is open around the clock. Use the <Link href={STORE.hoursPath}>open-now guide</Link> for late-night hours, ID, and Jane &amp; Lawrence arrival. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
             </p>
           </div>
         </div>
@@ -414,7 +414,7 @@ export default function HomePageClient() {
             <a href={STORE.phoneTel} className={styles.napAction}>Call {STORE.phoneDisplay}</a>
             <a href={mapsDirectionsUrl} className={styles.napAction} target="_blank" rel="noopener noreferrer">Directions</a>
             <Link href="/visit" className={styles.napAction}>How to reach Jane Street</Link>
-            <Link href={STORE.hoursPath} className={styles.napAction}>24-hour hours</Link>
+            <Link href={STORE.hoursPath} className={styles.napAction}>Open now on Jane Street</Link>
           </div>
 
           <div className={styles.mapWrap}>

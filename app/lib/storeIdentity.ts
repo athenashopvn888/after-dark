@@ -88,8 +88,24 @@ export const HOURS_FAQS: StoreFaq[] = [
     a: "Yes. The Jane Street counter at 1664 Jane Street, York is open 24 hours a day, 7 days a week. There is no last-call close.",
   },
   {
+    q: "Is there a 24 hour dispensary near me in York?",
+    a: "If you are around Jane Street, Jane & Lawrence, Weston, or Mount Dennis, After Dark Cannabis at 1664 Jane Street, York, ON M9N 2S1 is the 24-hour walk-in. Call +1 (437) 524-9344.",
+  },
+  {
+    q: "Is After Dark Cannabis open now?",
+    a: "Yes. After Dark Cannabis is open now, 24 hours a day, including after midnight. Walk in at 1664 Jane Street with government photo ID. Adults 19+ only.",
+  },
+  {
+    q: "Is there a 24hr dispensary near me on Jane Street?",
+    a: "Yes. After Dark Cannabis at 1664 Jane Street, just south of Lawrence Avenue West, is a 24hr walk-in. Same door overnight as at noon.",
+  },
+  {
     q: "Can I walk in after midnight?",
     a: "Yes. Late-night and overnight walk-ins use the same door at 1664 Jane Street. Bring valid government photo ID. Adults 19+ only.",
+  },
+  {
+    q: "Do I need ID for a late-night visit?",
+    a: "Yes. Valid government photo ID is required every visit, including overnight. Adults 19+ only — that rule does not loosen after midnight.",
   },
   {
     q: "Is the York dispensary open on holidays?",

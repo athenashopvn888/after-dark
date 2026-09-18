@@ -65,7 +65,7 @@ export default function Footer() {
               <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
               <Link href="/visit">How to Reach Jane Street</Link>
-              <Link href="/24-hour-dispensary-york">24-Hour York Dispensary</Link>
+              <Link href={STORE.hoursPath}>24-Hour / Open-Now Guide</Link>
               <Link href="/weed-delivery-york">WEED DELIVERY</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
