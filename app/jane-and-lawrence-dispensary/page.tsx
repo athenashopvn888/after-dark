@@ -12,6 +12,7 @@ import {
   serializeJsonLd,
   webpageGraphNode,
 } from "../lib/storeIdentity";
+import SccParityHub from "../components/SccParityHub";
 import styles from "../visit/visit.module.css";
 
 const canonical = `${STORE.baseUrl}${STORE.corridorPath}`;
@@ -206,6 +207,17 @@ export default function JaneLawrenceCorridorPage() {
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
             None of those replace the homepage as the website URL for this store.
           </p>
+        </section>
+
+        <section>
+          <SccParityHub
+            currentPath={STORE.corridorPath}
+            heading="York weed, visit, and Jane Street flower tiers"
+            intro="This corridor page maps Jane & Lawrence, Weston, and Mount Dennis to one York pin. Flower tiers and /visit stay separate."
+            geoSet="all"
+            includeTiers
+            tone="dark"
+          />
         </section>
 
         <section>

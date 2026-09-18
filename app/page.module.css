@@ -283,6 +283,13 @@
   grid-row: span 1;
 }
 
+/* ── YORK WEED / VISIT / TIER HUBS ── */
+.hubSection {
+  padding: 48px 0 24px;
+  background-color: #030712;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
 /* ── EXPLORE CATEGORIES ── */
 .categoriesSection {
   padding: 80px 0;

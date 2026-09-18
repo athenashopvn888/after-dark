@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import FlowerCard from "./components/FlowerCard";
 import SmokePilotSpotlight from "./components/SmokePilotSpotlight";
 import { WeedDiscoveryModule } from "./components/WeedDiscoveryModule";
+import SccParityHub from "./components/SccParityHub";
 import type { FlowerProduct } from "./lib/products";
 import Papa from "papaparse";
 import { HOME_FAQS, STORE, mapsDirectionsUrl, mapsEmbedUrl } from "./lib/storeIdentity";
@@ -262,6 +263,25 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      <section className={styles.hubSection} aria-label="York weed, visit, and flower hubs">
+        <div className={styles.container}>
+          <SccParityHub
+            currentPath="/"
+            heading="York weed hub and Jane Street visit"
+            intro={
+              <>
+                Flower shopping stays in the mosaic above. These cards open the York weed hub and how-to-reach page. Late-night hours live on the{" "}
+                <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Weston and Mount Dennis use the{" "}
+                <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
+              </>
+            }
+            geoSet="core"
+            includeTiers={false}
+            tone="dark"
+          />
+        </div>
+      </section>
+
       {/* ── EXPLORE CATEGORIES ── */}
       <section className={styles.categoriesSection} id="menu">
         <div className={styles.container}>
@@ -336,7 +356,13 @@ export default function HomePageClient() {
               Searching dispensary near me or cannabis store near me around Jane Street? Pin the walk-in on the <Link href={STORE.storePagePath}>York dispensary page</Link>. Late-night hours, ID, and Jane &amp; Lawrence arrival are on the <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Night-shift neighbours, late 35 Jane riders, and Mount Dennis walk-ups use the same York counter — there is no second After Dark address on Weston Road and no Mississauga or Etobicoke storefront.
             </p>
             <p className={styles.seoPanelText}>
-              Compare flower tiers, pre-rolls, edibles, vapes, and concentrates on the live menu, then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
+              Compare flower on Jane Street in five tiers:{" "}
+              <Link href="/exotic-weed">Exotic</Link>,{" "}
+              <Link href="/premium-weed">Premium</Link>,{" "}
+              <Link href="/aaa-weed">AAA+</Link>,{" "}
+              <Link href="/aa-weed">AA</Link>, and{" "}
+              <Link href="/budget-weed">Budget</Link>
+              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
             </p>
           </div>
         </div>
