@@ -18,13 +18,17 @@
   position: relative;
   width: 100%;
   padding: 40px 24px 80px;
-  margin-top: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background-color: #020617;
   animation: heroPulse 6s ease-in-out infinite;
+}
+
+.heroDoor {
+  margin-top: 110px;
+  padding: 16px 24px 28px;
 }
 
 .welcomeBannerSection {
@@ -94,13 +98,13 @@
 /* Branding block */
 .brandBlock {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   animation: fadeDown 0.8s ease;
 }
 
 .brandIcon {
-  font-size: 54px;
-  margin-bottom: 12px;
+  font-size: 36px;
+  margin-bottom: 6px;
   display: inline-block;
   animation: float 3s ease-in-out infinite;
 }
@@ -127,7 +131,7 @@
 .doorTest {
   width: 100%;
   max-width: 960px;
-  margin: 0 0 36px;
+  margin: 0;
   text-align: center;
 }
 
@@ -156,7 +160,7 @@
 }
 
 .doorTest .mapWrap iframe {
-  height: 240px;
+  height: 200px;
 }
 
 .brandSub {
@@ -980,12 +984,16 @@
     padding: 36px 12px 52px;
   }
 
+  .heroDoor {
+    padding: 20px 12px 24px;
+  }
+
   .brandBlock {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
   }
 
   .brandIcon {
-    font-size: 44px;
+    font-size: 32px;
   }
 
   .bentoGrid {

@@ -168,13 +168,11 @@ export default function HomePageClient() {
 
   return (
     <main className={styles.main}>
-      <FleetAnnouncementBanner />
       {/* ── NAVBAR ── */}
       <Navbar />
-      <HiringCallout />
 
-      {/* ── BENTO MOSAIC HERO ── */}
-      <section className={styles.hero}>
+      {/* ── DOOR-TEST HERO ── */}
+      <section className={`${styles.hero} ${styles.heroDoor}`}>
         <div className={styles.heroBg} />
         <div className={styles.heroOverlay} />
         <div className={styles.heroStars} />
@@ -213,14 +211,35 @@ export default function HomePageClient() {
                 title="Map of After Dark Cannabis at 1664 Jane Street, York"
                 src={mapsEmbedUrl}
                 width="100%"
-                height="240"
+                height="200"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </section>
+        </div>
+      </section>
 
-          {/* Bento Grid */}
+      <FleetAnnouncementBanner />
+      <HiringCallout compact />
+
+      {/* ── WELCOME BANNER ── */}
+      <section className={styles.welcomeBannerSection}>
+        <div className={styles.welcomeBannerContainer}>
+          <img
+            src="/banners/after_dark_welcome_banner.webp"
+            alt="Welcome to After Dark Cannabis — Jane Street York dispensary"
+            className={styles.welcomeBannerImg}
+          />
+        </div>
+      </section>
+
+      {/* ── BENTO MOSAIC ── */}
+      <section className={styles.hero} aria-label="Shop flower tiers">
+        <div className={styles.heroBg} />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroStars} />
+        <div className={styles.heroContent}>
           <div className={styles.bentoGrid}>
             {BENTO_TIERS.map((tier) => (
               <Link
@@ -240,17 +259,6 @@ export default function HomePageClient() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── WELCOME BANNER ── */}
-      <section className={styles.welcomeBannerSection}>
-        <div className={styles.welcomeBannerContainer}>
-          <img
-            src="/banners/after_dark_welcome_banner.webp"
-            alt="Welcome to After Dark Cannabis — Jane Street York dispensary"
-            className={styles.welcomeBannerImg}
-          />
         </div>
       </section>
 

@@ -257,6 +257,8 @@ test("MJ01 B14 homepage door-test CTR pack for dispensary near me", () => {
   const faqAt = home.indexOf("FAQ: dispensary near me in York");
   assert.ok(doorTestAt > -1 && bentoAt > doorTestAt, "NAP door-test must sit above the bento mosaic");
   assert.ok(home.indexOf("welcomeBannerSection") > doorTestAt, "Welcome banner must sit below the door-test NAP");
+  assert.ok(home.indexOf("<FleetAnnouncementBanner") > doorTestAt, "Promo banners must sit below the door-test NAP");
+  assert.ok(home.indexOf("<HiringCallout") > doorTestAt, "Hiring callout must sit below the door-test NAP");
   assert.match(home, /aria-label="Store name, address, hours, and map"/);
   assert.match(home, /Address, hours, and map/);
   assert.match(home, /STORE\.addressLine/);
