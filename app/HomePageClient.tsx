@@ -196,7 +196,7 @@ export default function HomePageClient() {
             <span className={styles.brandIcon}>🌙</span>
             <h1 className={styles.brandTitle}>AFTER DARK CANNABIS</h1>
             <p className={styles.brandSub}>24-Hour Jane Street York Dispensary</p>
-            <div className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</div>
+            <Link href={STORE.hoursPath} className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</Link>
           </div>
 
           {/* Bento Grid */}

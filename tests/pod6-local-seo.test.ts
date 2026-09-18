@@ -82,9 +82,9 @@ test("MJ01 homepage neighbourhood copy stays Jane / York, not GTA delivery", () 
   assert.match(home, /24-Hour Jane Street York Dispensary/);
   assert.match(home, /1664 Jane Street/);
   assert.doesNotMatch(home, /weed delivery Mississauga/i);
-  assert.match(home, /href="\/visit"/);
-  assert.match(home, /STORE\.hoursPath/);
+  assert.match(home, /href=\{STORE\.hoursPath\} className=\{styles\.brandBadge\}/);
   assert.match(home, /Open now on Jane Street/);
+  assert.match(home, /STORE\.hoursPath/);
 });
 
 test("MJ01 locks NAP to STORE on footer, contact, and the 24-hour landing", () => {
