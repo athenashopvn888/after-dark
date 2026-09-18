@@ -68,6 +68,7 @@ export default function Footer() {
               <Link href={STORE.hoursPath}>24-Hour / Open-Now Guide</Link>
               <Link href={STORE.corridorPath}>Jane &amp; Lawrence Corridor</Link>
               <Link href="/weed-delivery-york">WEED DELIVERY</Link>
+              <Link href="/cannabis-delivery-york">Cannabis Delivery York</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
               <Link href="/info/native-cigarettes-york">Native Cigarettes York</Link>

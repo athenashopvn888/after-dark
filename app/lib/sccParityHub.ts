@@ -24,6 +24,11 @@ export const SCC_GEO_HUBS = [
     blurb: "Broad York weed owner page for the Jane Street walk-in.",
   },
   {
+    href: STORE.cannabisDeliveryPath,
+    label: "York cannabis delivery",
+    blurb: "Jane Street York-radius drop-off. Dispatcher confirms address — not 24-hour delivery.",
+  },
+  {
     href: STORE.hoursPath,
     label: "24-hour open-now guide",
     blurb: "Late-night hours and ID at the York counter.",
@@ -71,6 +76,7 @@ export const SCC_TIER_HUBS = [
 export const HOME_HUB_HREFS = [
   STORE.storePagePath,
   STORE.visitPath,
+  STORE.cannabisDeliveryPath,
   ...SCC_TIER_HUBS.map((hub) => hub.href),
 ] as const;
 
@@ -89,9 +95,10 @@ export function hubLinksForPage({
   includeTiers?: boolean;
 }): SccHubLink[] {
   const current = normalizeHubPath(currentPath);
+  const coreHrefs: ReadonlySet<string> = new Set([STORE.visitPath, STORE.storePagePath, STORE.cannabisDeliveryPath]);
   const geo =
     geoSet === "core"
-      ? SCC_GEO_HUBS.filter((hub) => hub.href === STORE.visitPath || hub.href === STORE.storePagePath)
+      ? SCC_GEO_HUBS.filter((hub) => coreHrefs.has(hub.href))
       : [...SCC_GEO_HUBS];
   const tiers = includeTiers ? [...SCC_TIER_HUBS] : [];
   return [...geo, ...tiers].filter((hub) => normalizeHubPath(hub.href) !== current);

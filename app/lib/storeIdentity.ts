@@ -11,6 +11,7 @@ export const STORE = {
   hoursPath: "/24-hour-dispensary-york",
   corridorPath: "/jane-and-lawrence-dispensary",
   yorkDeliveryPath: "/weed-delivery-york",
+  cannabisDeliveryPath: "/cannabis-delivery-york",
   streetAddress: "1664 Jane Street",
   addressLocality: "York",
   addressRegion: "ON",
@@ -163,6 +164,42 @@ export const VISIT_FAQS: StoreFaq[] = [
 ];
 
 /** Visible /jane-and-lawrence-dispensary FAQs — keep in sync with that page's FAQPage JSON-LD. */
+/** Visible /cannabis-delivery-york FAQs — keep in sync with that page's FAQPage JSON-LD. */
+export const DELIVERY_FAQS: StoreFaq[] = [
+  {
+    q: "Do you offer cannabis delivery in York?",
+    a: "Yes. After Dark Cannabis coordinates York-radius drop-off from 1664 Jane Street, York, ON M9N 2S1 when the dispatcher can take the address. Start on this Jane Street delivery page, then send the order from the York delivery catalog. Walk-in stays at the same Jane Street pin.",
+  },
+  {
+    q: "Is York cannabis delivery available 24 hours?",
+    a: "No. The Jane Street walk-in at 1664 Jane Street is open 24 hours. Drop-off is a separate dispatcher service. Web Chat can be paused. The dispatcher confirms whether they can take your address at the time you order — do not treat the 24-hour door as a 24-hour delivery promise.",
+  },
+  {
+    q: "What area does After Dark deliver from Jane Street?",
+    a: "Drop-off is York-radius from 1664 Jane Street, just south of Lawrence Avenue West. Jane Street, Jane & Lawrence, Weston, and Mount Dennis addresses sit in the same basin, but coverage is confirmed after you send the order. This page does not promise every pin.",
+  },
+  {
+    q: "How do I order cannabis delivery from Jane Street?",
+    a: "Browse the York delivery catalog, note product names and weights, then open LIVE ORDER Web Chat. New customers complete a private selfie-with-ID step. The dispatcher confirms availability, delivery details, and next steps. There is a $60 product minimum.",
+  },
+  {
+    q: "Where is the store that handles Jane Street delivery?",
+    a: "After Dark Cannabis, 1664 Jane Street, York, ON M9N 2S1. Call +1 (437) 524-9344. The homepage is the NAP hub for address, phone, map, and website. This page explains drop-off; /visit covers 35 Jane and parking for the walk-in.",
+  },
+  {
+    q: "Do I need ID for a York drop-off?",
+    a: "Yes. Adults 19+ only. New customers verify with government photo ID in Web Chat. The same 19+ rule applies as the Jane Street walk-in at 1664 Jane Street.",
+  },
+  {
+    q: "Can I get weed delivered to Weston or Mount Dennis?",
+    a: "A Weston or Mount Dennis drop-off, if the dispatcher can take the address, still leaves from Jane Street in York. Leftover Weston or Etobicoke URLs are not extra shops. Confirm the address in chat.",
+  },
+  {
+    q: "What is the After Dark delivery minimum?",
+    a: "The York delivery catalog lists a $60 product minimum. The dispatcher confirms current availability and details before an order is accepted. Call +1 (437) 524-9344 if you need the Jane Street counter instead.",
+  },
+];
+
 export const CORRIDOR_FAQS: StoreFaq[] = [
   {
     q: "Is there a Jane and Lawrence dispensary?",
@@ -218,6 +255,14 @@ export function websiteGraphNode() {
     url: STORE.homepageUrl,
     name: STORE.name,
     publisher: { "@id": `${STORE.baseUrl}/#store` },
+  };
+}
+
+/** LocalBusiness + CannabisStore NAP node for neighbourhood LPs. Same @id as the homepage store. */
+export function localBusinessNapGraphNode() {
+  return {
+    ...cannabisStoreGraphNode(),
+    "@type": ["LocalBusiness", "CannabisStore"],
   };
 }
 

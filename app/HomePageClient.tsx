@@ -270,7 +270,7 @@ export default function HomePageClient() {
             heading="York weed hub and Jane Street visit"
             intro={
               <>
-                Flower shopping stays in the mosaic above. These cards open the York weed hub and how-to-reach page. Late-night hours live on the{" "}
+                Flower shopping stays in the mosaic above. These cards open the York weed hub, how-to-reach page, and Jane Street cannabis delivery guide. Late-night hours live on the{" "}
                 <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Weston and Mount Dennis use the{" "}
                 <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
               </>
@@ -362,7 +362,7 @@ export default function HomePageClient() {
               <Link href="/aaa-weed">AAA+</Link>,{" "}
               <Link href="/aa-weed">AA</Link>, and{" "}
               <Link href="/budget-weed">Budget</Link>
-              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
+              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, start on the <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link> guide, then order from the <Link href={STORE.yorkDeliveryPath}>York delivery catalog</Link>. Drop-off is not the 24-hour walk-in. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
             </p>
           </div>
         </div>
