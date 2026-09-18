@@ -141,3 +141,19 @@
 .placeItem p {
   margin: 0;
 }
+
+.steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 12px;
+}
+
+.steps li {
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.steps strong {
+  color: #fff;
+}

@@ -144,8 +144,10 @@ export default function TwentyFourHourYorkPage() {
             <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
           </p>
           <p>
-            Drop-off requests stay on the separate <Link href={STORE.yorkDeliveryPath}>York delivery</Link>{" "}
-            page. This open-now guide is for the physical 24-hour door on Jane Street.
+            Drop-off requests stay on the separate{" "}
+            <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link> guide and the{" "}
+            <Link href={STORE.yorkDeliveryPath}>York delivery catalog</Link>. This open-now guide is
+            for the physical 24-hour door on Jane Street — not a 24-hour delivery promise.
           </p>
         </section>
 

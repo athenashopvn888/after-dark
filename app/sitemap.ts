@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/24-hour-dispensary-york`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE}/jane-and-lawrence-dispensary`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/weed-delivery-york`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/cannabis-delivery-york`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
   ];
 
   /* Tier pages */

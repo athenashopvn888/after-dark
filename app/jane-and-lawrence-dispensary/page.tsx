@@ -190,8 +190,9 @@ export default function JaneLawrenceCorridorPage() {
           </p>
           <p>
             Drop-off, when it is offered at all, is confirmed from the Jane Street counter and lives on
-            the separate <Link href={STORE.yorkDeliveryPath}>York delivery</Link> page. It does not
-            create a Mississauga or Etobicoke location.
+            the separate <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link> guide.
+            Order from the <Link href={STORE.yorkDeliveryPath}>York delivery catalog</Link>. It does not
+            create a Mississauga or Etobicoke location, and it is not the 24-hour walk-in.
           </p>
         </section>
 

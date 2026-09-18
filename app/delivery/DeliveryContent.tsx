@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -106,6 +107,19 @@ export default function DeliveryContent() {
       <div><p>After Dark Cannabis</p><h1>Weed Delivery in York</h1><span>Browse the shared product catalog. The store confirms current availability and delivery details before an order is accepted.</span></div>
     </section>
     <section className={styles.deliveryDetails} aria-label="After Dark delivery details"><strong>$60 PRODUCT MINIMUM</strong></section>
+    <section className={styles.howToOrder} aria-labelledby="york-delivery-guide-title">
+      <div>
+        <p>YORK / JANE STREET</p>
+        <h2 id="york-delivery-guide-title">Neighbourhood delivery guide</h2>
+        <span>Drop-off area, hours, and FAQs sit on a separate page from this catalog.</span>
+      </div>
+      <p>
+        Jane Street / York-radius notes live on{" "}
+        <Link href="/cannabis-delivery-york">cannabis delivery in York</Link>. This catalog is the
+        order menu. The Jane Street walk-in at 1664 Jane Street is open 24 hours; drop-off is
+        confirmed by the dispatcher and is not advertised as 24/7.
+      </p>
+    </section>
     <section className={styles.loyalty} aria-labelledby="loyalty-title">
       <div><p>SAVE ON A LATER ORDER</p><h2 id="loyalty-title">Member Loyalty Savings</h2></div>
       <p>Qualify with an eligible regular-price 28g purchase in BC Premium, Crafts, or Exotics, or with a selected 2 × 28g tier offer. Rewards and coupons apply to a later order—not the qualifying purchase.</p>

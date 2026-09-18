@@ -160,6 +160,9 @@ export default function VisitPage() {
             <Link href={STORE.hoursPath}>24-hour open-now guide</Link>.
             Weston and Mount Dennis walk-in notes are on the{" "}
             <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
+            York-radius drop-off lives on the{" "}
+            <Link href={STORE.cannabisDeliveryPath}>cannabis delivery York</Link> guide — that
+            service is not the 24-hour walk-in.
             None of those replace the homepage as the NAP hub.
           </p>
         </section>
