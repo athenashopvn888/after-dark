@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { STORE } from "../lib/storeIdentity";
 import styles from "./Navbar.module.css";
 
 const ALL_LINKS = [
@@ -55,10 +56,10 @@ export default function Navbar() {
           <Link href="/weed-delivery-york" className={styles.gamesBtn}>
             WEED DELIVERY
           </Link>
-          <span className={styles.open}>
+          <Link href={STORE.hoursPath} className={styles.open}>
             <span className={styles.dot}></span>
             Open Now
-          </span>
+          </Link>
         </div>
       </div>
 

@@ -15,17 +15,27 @@ import {
 import styles from "../visit/visit.module.css";
 
 const canonical = `${STORE.baseUrl}${STORE.hoursPath}`;
+const pageTitle = "24-Hour Dispensary Near Me in York — Open Now | After Dark Cannabis";
+const pageH1 = "24-Hour York Dispensary on Jane Street — Open-Now Guide";
+const pageDescription =
+  "Open now 24 hours at 1664 Jane Street, York. 24 hour dispensary near Jane Street, Weston, and Mount Dennis. Call +1 (437) 524-9344. Adults 19+.";
 
 export const metadata: Metadata = {
-  title: { absolute: "24-Hour Dispensary in York on Jane Street | After Dark Cannabis" },
-  description:
-    "After Dark Cannabis is open 24 hours at 1664 Jane Street, York. Walk in after midnight — same door, same menu. Call +1 (437) 524-9344. Adults 19+.",
+  title: { absolute: pageTitle },
+  description: pageDescription,
+  keywords: [
+    "24 hour dispensary near me",
+    "24hr dispensary near me",
+    "24 hour dispensary",
+    "dispensary near me open now",
+    "24 hour cannabis near me",
+    "after dark dispensary",
+  ],
   alternates: { canonical },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "24-Hour Dispensary in York on Jane Street | After Dark Cannabis",
-    description:
-      "Open 24 hours at 1664 Jane Street, York, ON M9N 2S1. Walk-in cannabis store. Call +1 (437) 524-9344.",
+    title: pageTitle,
+    description: pageDescription,
     url: canonical,
     images: [{ url: STORE.schemaImage, alt: "After Dark Cannabis — 24-hour Jane Street York dispensary" }],
   },
@@ -36,13 +46,13 @@ const pageSchema = {
   "@graph": [
     webpageGraphNode({
       id: canonical,
-      name: "24-Hour Dispensary in York on Jane Street",
+      name: pageH1,
       description:
-        "Door-test page for the 24-hour After Dark Cannabis walk-in at 1664 Jane Street, York. The homepage is the NAP hub.",
+        "Open-now guide for the 24-hour After Dark Cannabis walk-in at 1664 Jane Street, York. The homepage is the NAP hub.",
     }),
     breadcrumbGraphNode([
       { name: "Home", item: STORE.homepageUrl },
-      { name: "24-hour York dispensary", item: canonical },
+      { name: "24-hour York open-now guide", item: canonical },
     ]),
     faqPageGraphNode(HOURS_FAQS),
   ],
@@ -58,12 +68,12 @@ export default function TwentyFourHourYorkPage() {
       <Navbar />
       <main className={styles.main}>
         <section className={styles.hero}>
-          <p className={styles.eyebrow}>Open 24 hours · Jane Street / York · Adults 19+</p>
-          <h1>24-Hour Dispensary in York on Jane Street</h1>
+          <p className={styles.eyebrow}>Open now · 24 hours · Jane Street / York · Adults 19+</p>
+          <h1>{pageH1}</h1>
           <p className={styles.lede}>
-            After Dark Cannabis stays open when a typical York retail window is already locked.
-            Walk in at {STORE.streetAddress} any hour. The <Link href="/">homepage</Link> stays the NAP hub
-            for address, phone, map, and directions.
+            After Dark Cannabis is open now, 24 hours a day, at {STORE.streetAddress} in York.
+            This page answers late-night hours, arrival, and ID. The <Link href="/">homepage</Link> is
+            the NAP hub for address, phone, map, and directions.
           </p>
         </section>
 
@@ -87,37 +97,61 @@ export default function TwentyFourHourYorkPage() {
         </section>
 
         <section>
-          <h2>Open now — including after midnight</h2>
+          <h2>Are we open 24 hours?</h2>
           <p>
-            If you are searching for a 24-hour dispensary in York, this is the Jane Street walk-in:
-            {" "}{STORE.addressLine}. The counter does not close at 9, 10, or 11. Night-shift neighbours,
-            late 35 Jane riders, and Mount Dennis walk-ups use the same door they would use at noon.
+            Yes. After Dark Cannabis lists open 24 hours a day, seven days a week, including after
+            midnight. If you searched for a 24 hour dispensary near me in York, this is the Jane Street
+            walk-in: {STORE.addressLine}. The counter does not close at 9, 10, or 11.
+          </p>
+          <p>
+            Overnight shoppers use the same door and the same posted menu as daytime visits. Flower
+            stays in five tiers — Budget from $3/g through Exotic at $10–$12/g — plus edibles, prerolls,
+            vapes, and concentrates when those categories are on the current menu. Posted names and
+            prices can still move; the 24-hour door does not freeze a SKU.
           </p>
         </section>
 
         <section>
-          <h2>What to bring for a late-night walk-in</h2>
+          <h2>1664 Jane Street — how to arrive late night</h2>
           <p>
-            Bring valid government photo ID. Adults 19+ only — that rule does not loosen after midnight.
+            Count south from the Jane &amp; Lawrence lights to {STORE.streetAddress}. Do not continue
+            north toward a different Jane Street number. The storefront sits {STORE.intersection}.
+            Night-shift neighbours, late 35 Jane riders, and Mount Dennis walk-ups use the same door
+            they would use at noon.
+          </p>
+          <p>
+            Overnight TTC headways stretch, so check live 35 Jane times before you leave. Street parking
+            on Jane and the side streets is typical after evening rush; read the pole in front of you.
             If one exact pack is the reason for the trip, call {STORE.phoneDisplay} first so the counter
             can check the posted menu before you travel.
           </p>
         </section>
 
         <section>
-          <h2>Same Jane Street menu at 3 a.m.</h2>
+          <h2>Jane &amp; Lawrence / Weston / Mount Dennis</h2>
           <p>
-            Overnight shoppers see the same five flower tiers — Budget from $3/g through Exotic at $10–$12/g —
-            plus edibles, prerolls, vapes, and concentrates when those categories are on the current menu.
-            Posted names and prices can still move; the 24-hour door does not freeze a SKU.
+            Jane &amp; Lawrence is the nearest named intersection. Weston and Mount Dennis shoppers come
+            to this York walk-in — there is no second After Dark storefront on Weston Road, and no
+            Mississauga or Etobicoke counter. Corridor names (Jane Street, York, Weston, Mount Dennis)
+            all resolve to {STORE.addressLine}.
+          </p>
+          <p>
+            Drop-off requests stay on the separate <Link href={STORE.yorkDeliveryPath}>York delivery</Link>{" "}
+            page. This open-now guide is for the physical 24-hour door on Jane Street.
           </p>
         </section>
 
         <section>
-          <h2>Jane Street, not a second address</h2>
+          <h2>Safety &amp; ID at night</h2>
           <p>
-            The 24-hour counter is this York walk-in only, {STORE.intersection}. Weston and Mount Dennis
-            shoppers come to Jane Street. There is no second After Dark storefront on Weston Road.
+            Bring valid government photo ID. Adults 19+ only — that rule does not loosen after midnight.
+            Staff the overnight counter the same way as a noon visit: show ID, stay on the posted menu,
+            and skip sending anyone under 19 to the door.
+          </p>
+          <p>
+            The Jane Street walk-in is a staffed retail counter, not an unattended hatch. If the block
+            looks busier than you want, call {STORE.phoneDisplay} before you leave. Do not treat a
+            Weston Road pin or an old 416 listing as this store.
           </p>
         </section>
 
@@ -136,18 +170,19 @@ export default function TwentyFourHourYorkPage() {
         </section>
 
         <section>
-          <h2>Plan the visit</h2>
+          <h2>Jane Street visit guide</h2>
           <p>
-            Need the 35 Jane stop or street parking notes? Use the{" "}
-            <Link href="/visit">how-to-reach page</Link>.
+            Need 35 Jane, parking, and corridor notes in one article? Open the{" "}
+            <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link>.
+            The shorter how-to-reach page is <Link href="/visit">/visit</Link>.
             The York store page is{" "}
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
-            Neither replaces the homepage as the website URL for this store.
+            None of those replace the homepage as the website URL for this store.
           </p>
         </section>
 
         <section>
-          <h2>24-hour questions</h2>
+          <h2>FAQ: 24 hour dispensary York / near me</h2>
           <div className={styles.faqList}>
             {HOURS_FAQS.map((faq) => (
               <article key={faq.q} className={styles.faqItem}>

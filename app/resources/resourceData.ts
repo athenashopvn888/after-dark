@@ -881,6 +881,13 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
         links: [{ label: "Open the how-to-reach page", href: "/visit" }],
       },
       {
+        heading: "Open now, 24 hours",
+        body: [
+          "The Jane Street counter lists open 24 hours. Confirm overnight hours, ID, and late arrival on the dedicated 24-hour open-now guide.",
+        ],
+        links: [{ label: "Open-now guide", href: "/24-hour-dispensary-york" }],
+      },
+      {
         heading: "Then choose a menu section",
         body: [
           "Once the local stop is clear, pick flower, pre-rolls, edibles, vapes, pouches, cigarettes, Backwoods, grabba, concentrates, or accessories from the live menu. Posted names and prices can change.",
@@ -889,6 +896,7 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
     ],
     commercialLinks: [
       { label: "How to reach Jane Street", href: "/visit" },
+      { label: "Open-now 24-hour guide", href: "/24-hour-dispensary-york" },
       { label: "Store page", href: SITE.storePage },
       { label: "Menu guide", href: "/resources/menu-guide" },
     ],

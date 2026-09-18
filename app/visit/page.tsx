@@ -154,7 +154,7 @@ export default function VisitPage() {
             The York store page is{" "}
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
             Confirm late-night hours on the{" "}
-            <Link href={STORE.hoursPath}>24-hour York dispensary page</Link>.
+            <Link href={STORE.hoursPath}>24-hour open-now guide</Link>.
             Neither replaces the homepage as the NAP hub.
           </p>
         </section>

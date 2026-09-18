@@ -84,6 +84,7 @@ test("MJ01 homepage neighbourhood copy stays Jane / York, not GTA delivery", () 
   assert.doesNotMatch(home, /weed delivery Mississauga/i);
   assert.match(home, /href="\/visit"/);
   assert.match(home, /STORE\.hoursPath/);
+  assert.match(home, /Open now on Jane Street/);
 });
 
 test("MJ01 locks NAP to STORE on footer, contact, and the 24-hour landing", () => {
@@ -99,7 +100,7 @@ test("MJ01 locks NAP to STORE on footer, contact, and the 24-hour landing", () =
   assert.match(contact, /STORE\.addressLine/);
   assert.match(contact, /STORE\.phoneDisplay/);
   assert.match(contact, /mapsEmbedUrl/);
-  assert.match(hours, /24-Hour Dispensary in York on Jane Street/);
+  assert.match(hours, /24-Hour Dispensary Near Me in York — Open Now/);
   assert.match(hours, /faqPageGraphNode\(HOURS_FAQS\)/);
   assert.match(hours, /1664 Jane Street/);
   assert.match(identity, /hoursPath: "\/24-hour-dispensary-york"/);
@@ -142,4 +143,40 @@ test("MJ01 frontend stays standalone", () => {
   for (const blocked of ["athena", "sister store", "our other locations", "fleet of stores", "chain of dispensaries"]) {
     assert.equal(surfaces.includes(blocked), false, `Standalone leak: ${blocked}`);
   }
+});
+
+test("MJ01 B02 24-hour open-now guide keeps unique titles and door-test links", () => {
+  const hours = read("app/24-hour-dispensary-york/page.tsx");
+  const home = read("app/HomePageClient.tsx");
+  const gbp = read("app/components/GBPLandingPage.tsx");
+  const identity = read("app/lib/storeIdentity.ts");
+  const visitGuide = read("app/resources/resourceData.ts");
+  const layout = read("app/layout.tsx");
+  const gbpLoc = read("app/lib/gbp-location.ts");
+  const visit = read("app/visit/page.tsx");
+  const navbar = read("app/components/Navbar.tsx");
+
+  assert.match(hours, /24-Hour Dispensary Near Me in York — Open Now \| After Dark Cannabis/);
+  assert.match(hours, /24-Hour York Dispensary on Jane Street — Open-Now Guide/);
+  assert.match(hours, /Are we open 24 hours\?/);
+  assert.match(hours, /1664 Jane Street — how to arrive late night/);
+  assert.match(hours, /Jane &amp; Lawrence \/ Weston \/ Mount Dennis/);
+  assert.match(hours, /Safety &amp; ID at night/);
+  assert.match(hours, /FAQ: 24 hour dispensary York \/ near me/);
+  assert.match(hours, /STORE\.visitGuidePath/);
+  assert.match(hours, /STORE\.storePagePath/);
+  assert.match(hours, /href="\/"/);
+  assert.match(hours, /href="\/visit"/);
+  assert.match(identity, /Is there a 24 hour dispensary near me in York\?/);
+  assert.match(identity, /phoneDisplay: "\+1 \(437\) 524-9344"/);
+  assert.match(home, /Open now on Jane Street/);
+  assert.match(home, /STORE\.hoursPath/);
+  assert.match(gbp, /Open now on Jane Street/);
+  assert.match(gbp, /STORE\.visitGuidePath/);
+  assert.match(visitGuide, /href: "\/24-hour-dispensary-york"/);
+  assert.match(navbar, /STORE\.hoursPath/);
+  assert.doesNotMatch(layout, /24-Hour Dispensary Near Me in York — Open Now/);
+  assert.doesNotMatch(gbpLoc, /24-Hour Dispensary Near Me in York — Open Now/);
+  assert.doesNotMatch(visit, /24-Hour Dispensary Near Me in York — Open Now/);
+  assert.doesNotMatch(hours, /GBP Name|google business profile name/i);
 });

@@ -52,7 +52,7 @@ export function GBPLandingPage() {
           <p className={styles.eyebrow}>Open 24 Hours · Adults 19+</p>
           <h1>York Weed Dispensary on Jane Street — Open 24 Hours</h1>
           <p className={styles.heroAddress}>{store.address}</p>
-          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>24-Hour Hours</Link></div>
+          <div className={styles.actions}><Link href="#find-your-weed" className={styles.primaryAction}>Find Your Weed</Link><Link href="/visit" className={styles.secondaryAction}>How to Reach Jane Street</Link><Link href={STORE.hoursPath} className={styles.secondaryAction}>Open now on Jane Street</Link></div>
         </section>
 
         <section className={styles.section}>
@@ -61,6 +61,11 @@ export function GBPLandingPage() {
           <p>This page is for people who want the physical store. If you are arranging a drop-off instead, use the separate <Link href="/weed-delivery-york/">York delivery page</Link>. The walk-in and delivery routes stay separate so each page gives the correct address and service expectation.</p>
           <p>Bring government photo ID. You must be 19 or older. Staff can walk you through the five posted flower tiers — Budget from $3/g, AA at $4/g, AAA+ at $5–$6/g, Premium at $7–$10/g, and Exotic at $10–$12/g — plus pre-rolls, edibles, vapes, concentrates, native cigarettes, and accessories. Posted menu prices can change.</p>
           <p>The 35 Jane TTC bus serves the Jane Street corridor. Check current transit, traffic, and parking conditions before travelling. Call <a href={`tel:${store.phoneIntl}`}><strong>{store.phoneDisplay}</strong></a> if one specific item is the reason for the trip.</p>
+        </section>
+
+        <section className={styles.section}>
+          <h2>Open now on Jane Street</h2>
+          <p>If you need a 24 hour dispensary near you in York, the Jane Street counter is open now around the clock. Use the <Link href={STORE.hoursPath}>24-hour open-now guide</Link> for late-night arrival, ID, and Jane &amp; Lawrence context. Bus, parking, and corridor notes are on the <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link> and the <Link href="/visit">how-to-reach page</Link>.</p>
         </section>
 
         <section className={styles.section} id="find-your-weed">
@@ -88,7 +93,7 @@ export function GBPLandingPage() {
         <section className={styles.visitSection} id="visit">
           <div><p className={styles.kicker}>Open 24 Hours on Jane Street</p><h2>{store.storeName}</h2><address>{store.streetAddress}<br />{store.city}, {store.province} {store.postalCode}</address></div>
           <div className={styles.visitFacts}><strong>Open 24 Hours · 7 Days a Week</strong><a href={`tel:${store.phoneIntl}`}>Phone: {store.phoneDisplay}</a><span>Adults 19+</span></div>
-          <p>Being open around the clock gives adults 19+ flexibility to visit After Dark Cannabis at the time that suits them. For a particular product, call ahead before travelling specifically for that item.</p>
+          <p>Being open around the clock gives adults 19+ flexibility to visit After Dark Cannabis at the time that suits them. Confirm late-night hours and ID on the <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Corridor notes live in the <Link href={STORE.visitGuidePath}>Jane Street York visit guide</Link>. For a particular product, call ahead before travelling specifically for that item.</p>
         </section>
 
         <section className={styles.section}>
