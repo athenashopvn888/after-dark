@@ -18,6 +18,7 @@
   position: relative;
   width: 100%;
   padding: 40px 24px 80px;
+  margin-top: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +30,7 @@
 .welcomeBannerSection {
   width: 100%;
   overflow: hidden;
-  margin-top: 92px;
+  margin-top: 8px;
   background-color: #020617;
 }
 
@@ -104,6 +105,15 @@
   animation: float 3s ease-in-out infinite;
 }
 
+.brandKicker {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c084fc;
+  margin: 0 0 10px;
+}
+
 .brandTitle {
   font-size: clamp(32px, 5.5vw, 62px);
   font-weight: 900;
@@ -112,6 +122,41 @@
   margin: 0 0 8px;
   letter-spacing: -0.03em;
   text-shadow: 0 4px 30px rgba(168,85,247,0.35);
+}
+
+.doorTest {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 0 36px;
+  text-align: center;
+}
+
+.doorTestTitle {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 14px;
+}
+
+.doorTestNap {
+  font-size: 16px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+
+.doorTestNap a {
+  color: #c084fc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.doorTestNap a:hover {
+  color: #fbbf24;
+}
+
+.doorTest .mapWrap iframe {
+  height: 240px;
 }
 
 .brandSub {

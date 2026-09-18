@@ -9,7 +9,7 @@ export function WeedDiscoveryModule() {
         <h2 id="weed-discovery-title">Weed in York at After Dark Cannabis</h2>
         <p>After Dark Cannabis is open 24 hours at <strong>1664 Jane Street</strong>. Adults 19+ looking specifically for Weed in York can explore flower tiers, cannabis formats and store information.</p>
         <div className={styles.actions}>
-          <Link href="/weed-dispensary-york/" className={styles.primary}>Explore Weed in York</Link>
+          <Link href="/weed-dispensary-york" className={styles.primary}>Explore Weed in York</Link>
           <Link href="/resources/flower-guides" className={styles.secondary}>Explore the Flower Guides</Link>
         </div>
       </div>

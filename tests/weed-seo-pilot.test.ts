@@ -10,14 +10,14 @@ test("MJ01 keeps the protected owner and exact metadata", () => {
   const sitemap = read("app/sitemap.ts");
   assert.match(location, /Jane Street York Weed Dispensary \| After Dark Cannabis/);
   assert.match(location, /After Dark Cannabis is open 24 hours at 1664 Jane Street/);
-  assert.match(sitemap, /weed-dispensary-york\//);
+  assert.match(sitemap, /weed-dispensary-york/);
   assert.match(page, /title: \{ absolute: gbpLocation\.seoTitle \}/);
   assert.match(page, /canonical:[\s\S]*gbpLocation\.slug/);
 });
 
 test("MJ01 static discovery uses only approved destinations", () => {
   const sources = [read("app/lib/weedDiscovery.ts"), read("app/components/WeedDiscoveryModule.tsx")].join("\n");
-  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide", "/visit", "/24-hour-dispensary-york", "/jane-and-lawrence-dispensary"]) {
+  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide", "/visit", "/24-hour-dispensary-york", "/jane-and-lawrence-dispensary"]) {
     assert.ok(sources.includes(href), `Missing approved link: ${href}`);
   }
 });
@@ -64,7 +64,7 @@ test("MJ01 tier pages use approved Weed, Cannabis and Flower copy", () => {
   }
   assert.match(sitemap, /Object\.values\(TIER_CONFIG\)/);
   assert.match(content, /Compare After Dark Weed & Flower Tiers/);
-  assert.match(content, /ownerHref: "\/weed-dispensary-york\/"/);
+  assert.match(content, /ownerHref: "\/weed-dispensary-york"/);
   assert.match(page, /TIER_COMPARISON\.ownerHref/);
   assert.match(page, /seo\?\.h1/);
   assert.match(page, /seo\?\.imageAlt/);
