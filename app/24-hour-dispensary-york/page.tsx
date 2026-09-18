@@ -39,6 +39,12 @@ export const metadata: Metadata = {
     url: canonical,
     images: [{ url: STORE.schemaImage, alt: "After Dark Cannabis — 24-hour Jane Street York dispensary" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [STORE.schemaImage],
+  },
 };
 
 const pageSchema = {
@@ -145,8 +151,8 @@ export default function TwentyFourHourYorkPage() {
           <h2>Safety &amp; ID at night</h2>
           <p>
             Bring valid government photo ID. Adults 19+ only — that rule does not loosen after midnight.
-            Staff the overnight counter the same way as a noon visit: show ID, stay on the posted menu,
-            and skip sending anyone under 19 to the door.
+            Treat a late-night visit like a noon visit: show ID, stay on the posted menu, and skip
+            sending anyone under 19 to the door.
           </p>
           <p>
             The Jane Street walk-in is a staffed retail counter, not an unattended hatch. If the block
