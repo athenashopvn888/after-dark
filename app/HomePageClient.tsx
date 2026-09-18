@@ -290,13 +290,13 @@ export default function HomePageClient() {
           <div className={styles.seoPanel}>
             <h2 className={styles.seoPanelTitle}>24-Hour Walk-In on Jane Street in York</h2>
             <p className={styles.seoPanelText}>
-              <strong>After Dark Cannabis</strong> is the after-hours walk-in counter at <strong>1664 Jane Street, York, ON M9N 2S1</strong>, just south of Lawrence Avenue West. This homepage is the visit hub: address, phone <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>, 24-hour hours, map, and directions live here. Use <Link href="/visit">/visit</Link> only if you need bus, parking, or corridor directions from Weston or Mount Dennis.
+              <strong>After Dark Cannabis</strong> is the after-hours walk-in counter at <strong>1664 Jane Street, York, ON M9N 2S1</strong>, just south of Lawrence Avenue West. This homepage is the visit hub: address, phone <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>, 24-hour hours, map, and directions live here. Use <Link href="/visit">/visit</Link> for bus and parking, or the <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link> if you are coming from Weston or Mount Dennis.
             </p>
             <p className={styles.seoPanelText}>
               Jane Street stays open when a conventional retail window would already be locked. Night-shift neighbours, late 35 Jane riders, and Mount Dennis walk-ups use the same York counter — there is no second After Dark address on Weston Road and no Mississauga or Etobicoke storefront. Compare flower tiers, pre-rolls, edibles, vapes, and concentrates on the live menu, then come in with government photo ID. Adults 19+ only.
             </p>
             <p className={styles.seoPanelText}>
-              Looking for a 24 hour dispensary near you that is open now? After Dark Cannabis at 1664 Jane Street is open around the clock. Use the <Link href={STORE.hoursPath}>open-now guide</Link> for late-night hours, ID, and Jane &amp; Lawrence arrival. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
+              Looking for a 24 hour dispensary near you that is open now? After Dark Cannabis at 1664 Jane Street is open around the clock. Use the <Link href={STORE.hoursPath}>open-now guide</Link> for late-night hours, ID, and Jane &amp; Lawrence arrival. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. If you want a drop-off instead of the physical counter, stay on the <Link href="/weed-delivery-york">York delivery</Link> route. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
             </p>
           </div>
         </div>
@@ -415,6 +415,7 @@ export default function HomePageClient() {
             <a href={mapsDirectionsUrl} className={styles.napAction} target="_blank" rel="noopener noreferrer">Directions</a>
             <Link href="/visit" className={styles.napAction}>How to reach Jane Street</Link>
             <Link href={STORE.hoursPath} className={styles.napAction}>Open now on Jane Street</Link>
+            <Link href={STORE.corridorPath} className={styles.napAction}>Jane &amp; Lawrence corridor</Link>
           </div>
 
           <div className={styles.mapWrap}>

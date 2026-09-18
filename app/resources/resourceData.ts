@@ -753,6 +753,7 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
     ],
     commercialLinks: [
       { label: "Jane Street visit guide", href: "/resources/local-guides/jane-street-york-visit-guide" },
+      { label: "Jane & Lawrence corridor", href: "/jane-and-lawrence-dispensary" },
       { label: "Store page", href: SITE.storePage },
     ],
     related: ["/resources/menu-guide", "/resources/value-guides"],
@@ -872,6 +873,7 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
         body: [
           "Shoppers describe this stop as Jane Street, York, Weston, or Mount Dennis. Those names all resolve to one counter. There is no After Dark storefront on Weston Road, in Mississauga, or in Etobicoke.",
         ],
+        links: [{ label: "Jane & Lawrence corridor guide", href: "/jane-and-lawrence-dispensary" }],
       },
       {
         heading: "Bus, parking, and ID",
@@ -897,6 +899,7 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
     commercialLinks: [
       { label: "How to reach Jane Street", href: "/visit" },
       { label: "Open-now 24-hour guide", href: "/24-hour-dispensary-york" },
+      { label: "Jane & Lawrence corridor", href: "/jane-and-lawrence-dispensary" },
       { label: "Store page", href: SITE.storePage },
       { label: "Menu guide", href: "/resources/menu-guide" },
     ],

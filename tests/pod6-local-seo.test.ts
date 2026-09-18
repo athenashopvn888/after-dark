@@ -136,6 +136,7 @@ test("MJ01 frontend stays standalone", () => {
     read("app/HomePageClient.tsx"),
     read("app/visit/page.tsx"),
     read("app/24-hour-dispensary-york/page.tsx"),
+    read("app/jane-and-lawrence-dispensary/page.tsx"),
     read("app/contact/page.tsx"),
     read("app/layout.tsx"),
     read("app/components/Footer.tsx"),
@@ -179,4 +180,53 @@ test("MJ01 B02 24-hour open-now guide keeps unique titles and door-test links", 
   assert.doesNotMatch(gbpLoc, /24-Hour Dispensary Near Me in York — Open Now/);
   assert.doesNotMatch(visit, /24-Hour Dispensary Near Me in York — Open Now/);
   assert.doesNotMatch(hours, /GBP Name|google business profile name/i);
+});
+
+test("MJ01 B08 Jane & Lawrence corridor guide keeps unique titles, NAP, and door-test links", () => {
+  const corridor = [read("app/jane-and-lawrence-dispensary/page.tsx"), read("app/lib/storeIdentity.ts")].join("\n");
+  const identity = read("app/lib/storeIdentity.ts");
+  const home = read("app/HomePageClient.tsx");
+  const gbp = read("app/components/GBPLandingPage.tsx");
+  const visit = read("app/visit/page.tsx");
+  const hours = read("app/24-hour-dispensary-york/page.tsx");
+  const visitGuide = read("app/resources/resourceData.ts");
+  const sitemap = read("app/sitemap.ts");
+  const layout = read("app/layout.tsx");
+  const gbpLoc = read("app/lib/gbp-location.ts");
+  const footer = read("app/components/Footer.tsx");
+  const discovery = read("app/lib/weedDiscovery.ts");
+
+  assert.match(identity, /corridorPath: "\/jane-and-lawrence-dispensary"/);
+  assert.match(identity, /phoneDisplay: "\+1 \(437\) 524-9344"/);
+  assert.match(identity, /Is there a Jane and Lawrence dispensary\?/);
+  assert.match(corridor, /Jane and Lawrence Dispensary — Weston \/ Mount Dennis Walk-In \| After Dark Cannabis/);
+  assert.match(corridor, /Jane & Lawrence \/ Weston \/ Mount Dennis Cannabis Walk-In/);
+  assert.match(corridor, /Corridor map/);
+  assert.match(corridor, /1664 Jane St pin/);
+  assert.match(corridor, /Sister-neighbourhoods we serve for walk-in/);
+  assert.match(corridor, /Mississauga and Etobicoke are not After Dark locations/);
+  assert.match(corridor, /FAQ: Jane and Lawrence dispensary \/ near me/);
+  assert.match(corridor, /1664 Jane Street, York, ON M9N 2S1/);
+  assert.match(corridor, /\+1 \(437\) 524-9344/);
+  assert.match(corridor, /href="\/"/);
+  assert.match(corridor, /href="\/visit"/);
+  assert.match(corridor, /STORE\.hoursPath/);
+  assert.match(corridor, /STORE\.storePagePath/);
+  assert.match(corridor, /STORE\.visitGuidePath/);
+  assert.match(corridor, /faqPageGraphNode\(CORRIDOR_FAQS\)/);
+  assert.match(home, /STORE\.corridorPath/);
+  assert.match(home, /Jane &amp; Lawrence corridor/);
+  assert.match(gbp, /STORE\.corridorPath/);
+  assert.match(visit, /STORE\.corridorPath/);
+  assert.match(hours, /STORE\.corridorPath/);
+  assert.match(visitGuide, /href: "\/jane-and-lawrence-dispensary"/);
+  assert.match(footer, /STORE\.corridorPath/);
+  assert.match(discovery, /\/jane-and-lawrence-dispensary/);
+  assert.match(sitemap, /\$\{BASE\}\/jane-and-lawrence-dispensary/);
+  assert.doesNotMatch(layout, /Jane and Lawrence Dispensary — Weston \/ Mount Dennis Walk-In/);
+  assert.doesNotMatch(gbpLoc, /Jane and Lawrence Dispensary — Weston \/ Mount Dennis Walk-In/);
+  assert.doesNotMatch(hours, /Jane and Lawrence Dispensary — Weston \/ Mount Dennis Walk-In/);
+  assert.doesNotMatch(visit, /Jane and Lawrence Dispensary — Weston \/ Mount Dennis Walk-In/);
+  assert.doesNotMatch(corridor, /GBP Name|google business profile name/i);
+  assert.doesNotMatch(corridor, /(?:\+?1[\s.-]*)?\(?416\)?[\s.-]*302[\s.-]*8127/);
 });

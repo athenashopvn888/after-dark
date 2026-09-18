@@ -150,7 +150,7 @@ export default function ContactPage() {
               />
             </div>
             <p className={styles.mapNote}>
-              The <Link href="/">homepage</Link> stays the NAP hub. Use <Link href="/visit">/visit</Link> for 35 Jane, parking, and corridor directions, or the <Link href={STORE.hoursPath}>24-hour York page</Link> if you are checking late-night hours.
+              The <Link href="/">homepage</Link> stays the NAP hub. Use <Link href="/visit">/visit</Link> for 35 Jane, parking, and corridor directions, the <Link href={STORE.hoursPath}>24-hour York page</Link> for late-night hours, or the <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link> if you are coming from Weston or Mount Dennis.
               <span> </span>
               <a href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer">Google Maps directions</a>.
             </p>

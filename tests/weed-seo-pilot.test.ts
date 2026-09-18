@@ -17,7 +17,7 @@ test("MJ01 keeps the protected owner and exact metadata", () => {
 
 test("MJ01 static discovery uses only approved destinations", () => {
   const sources = [read("app/lib/weedDiscovery.ts"), read("app/components/WeedDiscoveryModule.tsx")].join("\n");
-  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide", "/visit", "/24-hour-dispensary-york"]) {
+  for (const href of ["/budget-weed", "/aa-weed", "/aaa-weed", "/premium-weed", "/exotic-weed", "/items/prerolls", "/items/edibles", "/items/vapes", "/items/concentrates", "/items/add-ons", "/weed-dispensary-york/", "/resources/cannabis-101", "/resources/flower-guides", "/resources/local-guides/jane-street-york-visit-guide", "/visit", "/24-hour-dispensary-york", "/jane-and-lawrence-dispensary"]) {
     assert.ok(sources.includes(href), `Missing approved link: ${href}`);
   }
 });
