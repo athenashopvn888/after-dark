@@ -163,6 +163,8 @@ export default function VisitPage() {
             York-radius drop-off lives on the{" "}
             <Link href={STORE.cannabisDeliveryPath}>cannabis delivery York</Link> guide — that
             service is not the 24-hour walk-in.
+            Native cigarettes: <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link>.
+            Nicotine vapes: <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>.
             None of those replace the homepage as the NAP hub.
           </p>
         </section>

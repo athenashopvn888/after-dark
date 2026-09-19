@@ -7,6 +7,7 @@ import {
   STORE,
   breadcrumbGraphNode,
   faqPageGraphNode,
+  localBusinessNapGraphNode,
   mapsDirectionsUrl,
   mapsEmbedUrl,
   serializeJsonLd,
@@ -62,6 +63,7 @@ const pageSchema = {
       { name: "24-hour York open-now guide", item: canonical },
     ]),
     faqPageGraphNode(HOURS_FAQS),
+    localBusinessNapGraphNode(),
   ],
 };
 
@@ -93,6 +95,8 @@ export default function TwentyFourHourYorkPage() {
             <br />
             <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>
             <br />
+            <a href={STORE.homepageUrl}>{STORE.homepageUrl}</a>
+            <br />
             {STORE.hoursNote}
           </p>
           <div className={styles.actions}>
@@ -100,6 +104,7 @@ export default function TwentyFourHourYorkPage() {
             <a href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer">Google Maps directions</a>
             <Link href="/">Homepage NAP hub</Link>
             <Link href="/visit">How to reach Jane Street</Link>
+            <Link href={STORE.storePagePath}>York weed dispensary</Link>
           </div>
         </section>
 
@@ -152,6 +157,20 @@ export default function TwentyFourHourYorkPage() {
         </section>
 
         <section>
+          <h2>Overnight Native cigarettes and nicotine vapes</h2>
+          <p>
+            The 24-hour claim already on this site and on the homepage applies to the Jane Street
+            walk-in, not to a second after-hours shop. When Native cigarettes or nicotine vapes are
+            on the current menu, overnight shoppers use the same listed categories as daytime
+            visits. Neighbourhood guides:{" "}
+            <Link href={STORE.nativeCigarettesPath}>Native cigarettes on Jane Street</Link> and{" "}
+            <Link href={STORE.nicotineVapePath}>nicotine vapes on Jane Street</Link>. Live lists stay
+            on <Link href="/items/cigarettes">/items/cigarettes</Link> and{" "}
+            <Link href="/items/vapes">/items/vapes</Link>. Adults 19+. Nicotine is addictive.
+          </p>
+        </section>
+
+        <section>
           <h2>Safety &amp; ID at night</h2>
           <p>
             Bring valid government photo ID. Adults 19+ only — that rule does not loosen after midnight.
@@ -189,6 +208,8 @@ export default function TwentyFourHourYorkPage() {
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
             Neighbourhood walk-in notes are on the{" "}
             <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
+            Native cigarettes: <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link>.
+            Nicotine vapes: <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>.
             None of those replace the homepage as the website URL for this store.
           </p>
         </section>

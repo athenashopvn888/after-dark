@@ -12,6 +12,8 @@ export const STORE = {
   corridorPath: "/jane-and-lawrence-dispensary",
   yorkDeliveryPath: "/weed-delivery-york",
   cannabisDeliveryPath: "/cannabis-delivery-york",
+  nativeCigarettesPath: "/native-cigarettes-york",
+  nicotineVapePath: "/nicotine-vape-york",
   streetAddress: "1664 Jane Street",
   addressLocality: "York",
   addressRegion: "ON",
@@ -133,6 +135,22 @@ export const HOURS_FAQS: StoreFaq[] = [
     q: "Do late-night visits use a different menu?",
     a: "No. Overnight shoppers see the same flower tiers and categories posted on the live menu. Availability of one exact pack can still change, so call ahead when that pack is the reason for the trip.",
   },
+  {
+    q: "Is there a 24-hour dispensary at Jane and Lawrence in York?",
+    a: "The walk-in is at 1664 Jane Street, just south of the Jane & Lawrence lights in York. After Dark lists open 24 hours at that pin — not a second after-hours door on Lawrence Avenue West.",
+  },
+  {
+    q: "Can I buy Native cigarettes after midnight on Jane Street?",
+    a: "Yes, when they are on the current cigarette menu. The 24-hour claim is for the Jane Street walk-in at 1664 Jane Street. Check /native-cigarettes-york and /items/cigarettes before travelling for one pack.",
+  },
+  {
+    q: "Does the 24-hour York walk-in sell nicotine vapes overnight?",
+    a: "Nicotine vapes are a listed Jane Street category, separate from THC vapes. Overnight shoppers use the same /items/vapes menu as daytime visits. Start on /nicotine-vape-york, then confirm the live list. Adults 19+. Nicotine is addictive.",
+  },
+  {
+    q: "Is After Dark a 24-hour cannabis delivery service in York?",
+    a: "No. Open 24 hours applies to the physical counter at 1664 Jane Street. York-radius drop-off is a separate dispatcher service on /cannabis-delivery-york — not a 24-hour delivery promise.",
+  },
 ];
 
 /** Visible /visit FAQs — keep in sync with that page's FAQPage JSON-LD. */
@@ -197,6 +215,70 @@ export const DELIVERY_FAQS: StoreFaq[] = [
   {
     q: "What is the After Dark delivery minimum?",
     a: "The York delivery catalog lists a $60 product minimum. The dispatcher confirms current availability and details before an order is accepted. Call +1 (437) 524-9344 if you need the Jane Street counter instead.",
+  },
+];
+
+/** Visible /native-cigarettes-york FAQs — keep in sync with that page's FAQPage JSON-LD. */
+export const NATIVE_CIGARETTE_FAQS: StoreFaq[] = [
+  {
+    q: "Does After Dark Cannabis sell Native cigarettes on Jane Street in York?",
+    a: "Yes. Native cigarettes are a listed walk-in category at 1664 Jane Street, York, ON M9N 2S1. This page is the Jane Street / York neighbourhood guide. Use /items/cigarettes for the brands and prices currently posted.",
+  },
+  {
+    q: "Where do I check the current York cigarette menu?",
+    a: "Open the live cigarette category at /items/cigarettes. Names, pack styles, and posted prices move. This neighbourhood page does not freeze a brand list or invent stock.",
+  },
+  {
+    q: "Are Native cigarettes sold at the 24-hour Jane Street walk-in?",
+    a: "The Jane Street door lists open 24 hours. Cigarette shopping uses that same walk-in when the category is on the current menu. Confirm late-night hours on /24-hour-dispensary-york and the shelf on /items/cigarettes.",
+  },
+  {
+    q: "Do Weston or Mount Dennis shoppers use a different cigarette counter?",
+    a: "No. Weston and Mount Dennis walk-ins use 1664 Jane Street in York. There is no second After Dark cigarette counter on Weston Road.",
+  },
+  {
+    q: "Does this page list every cigarette brand on the shelf?",
+    a: "No. It explains how to reach the Jane Street cigarette category. The live menu is the only current brand list. Call +1 (437) 524-9344 if one pack is the reason for the trip.",
+  },
+  {
+    q: "Are nicotine pouches on a separate York landing page?",
+    a: "When pouches are listed, they appear on the Jane Street cigarette menu at /items/cigarettes. This site does not invent a standalone pouch catalog.",
+  },
+  {
+    q: "Do I need ID to buy cigarettes at After Dark?",
+    a: "Yes. Adults 19+ with valid government photo ID. The same rule applies overnight as at noon.",
+  },
+];
+
+/** Visible /nicotine-vape-york FAQs — keep in sync with that page's FAQPage JSON-LD. */
+export const NICOTINE_VAPE_FAQS: StoreFaq[] = [
+  {
+    q: "Does After Dark sell nicotine vapes on Jane Street in York?",
+    a: "Yes. Nicotine vapes are a listed category at 1664 Jane Street, York, ON M9N 2S1, kept separate from THC vapes. This page is the Jane Street / York neighbourhood guide. Use /items/vapes for devices currently posted.",
+  },
+  {
+    q: "Where is the live nicotine vape menu for York?",
+    a: "Open /items/vapes. That category is the nicotine vape menu. This neighbourhood page does not reprint every device or promise a flavour will stay on the shelf.",
+  },
+  {
+    q: "Are nicotine vapes the same as THC vapes at this Jane Street store?",
+    a: "No. Nicotine vapes live at /items/vapes. THC and cannabis vapes live at /items/vape-disposables. Read the label so you are in the right section.",
+  },
+  {
+    q: "Can I buy a nicotine vape after midnight on Jane Street?",
+    a: "The walk-in at 1664 Jane Street lists open 24 hours. Overnight shoppers use the same nicotine category as daytime visits. Confirm hours on /24-hour-dispensary-york and the live list on /items/vapes.",
+  },
+  {
+    q: "Does this page show every nicotine vape on the shelf?",
+    a: "No. It is a York / Jane Street guide, not a complete catalog. Use /items/vapes for current names. Call +1 (437) 524-9344 if one device is the reason you are travelling.",
+  },
+  {
+    q: "Are nicotine pouches part of this nicotine vape guide?",
+    a: "No. When pouches are listed they sit with the cigarette menu at /items/cigarettes, not on this nicotine vape page.",
+  },
+  {
+    q: "Who can buy a nicotine vape at After Dark?",
+    a: "Adults 19+ with valid government photo ID. Nicotine is addictive. The same 19+ rule applies after midnight.",
   },
 ];
 

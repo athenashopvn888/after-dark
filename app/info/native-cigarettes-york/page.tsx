@@ -37,11 +37,11 @@ export default async function NativeCigarettesYorkPage() {
         menuHeading="Native Cigarette Brands & Prices"
         menuIntro="Compare the cigarette brands, styles and listed prices available from After Dark Cannabis in York."
         crossLink={{
-          href: "/info/nicotine-vapes-york",
-          eyebrow: "Also at After Dark",
-          title: "Prefer a nicotine vape?",
-          body: "Shop disposable and pod-style nicotine vapes with device, flavour, puff-count and listed price details from After Dark Cannabis.",
-          label: "Shop nicotine vapes",
+          href: "/native-cigarettes-york",
+          eyebrow: "Jane Street neighbourhood guide",
+          title: "Looking for Native cigarettes in York?",
+          body: "Open the Jane Street / York neighbourhood page for walk-in context, then return here or to /items/cigarettes for listed brands.",
+          label: "Read the York Native cigarette guide",
         }}
         sections={[
           {
@@ -111,6 +111,10 @@ export default async function NativeCigarettesYorkPage() {
       />
       <section style={{ maxWidth: 1120, margin: "0 auto", padding: "24px 20px 48px" }}>
         <p>
+          York / Jane Street neighbourhood walk-in notes live on the{" "}
+          <Link href="/native-cigarettes-york">Native cigarettes on Jane Street</Link> page.
+          Nicotine vapes stay on{" "}
+          <Link href="/nicotine-vape-york">/nicotine-vape-york</Link>.
           For Ontario history, manufacturing and cigarette-stamp context, read the{" "}
           <Link href="/resources/native-cigarettes-ontario">Native Cigarettes in Ontario educational guide</Link>.
         </p>
