@@ -12,6 +12,7 @@ import {
 } from "../../lib/products";
 import { getAdcInventory } from "../../lib/adcInventoryService";
 import { buildCategoryCollectionJsonLd } from "../../lib/categoryStructuredData";
+import { STORE } from "../../lib/storeIdentity";
 import seoContent from "../../lib/seoContent.generated.json";
 import styles from "./items.module.css";
 
@@ -138,6 +139,35 @@ export default async function ItemsCategoryPage({
               ))}
             </div>
           )}
+
+          {catSlug === "cigarettes" ? (
+            <p className={styles.seoBody}>
+              Jane Street / York neighbourhood guide:{" "}
+              <Link href={STORE.nativeCigarettesPath}>Native cigarettes on Jane Street</Link>
+              {" · "}
+              <Link href={STORE.hoursPath}>24-hour open-now guide</Link>
+              {" · "}
+              <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link>
+              {" · "}
+              <Link href="/visit">How to reach Jane Street</Link>
+              {" · "}
+              <Link href={STORE.storePagePath}>York weed dispensary</Link>
+            </p>
+          ) : null}
+          {catSlug === "vapes" ? (
+            <p className={styles.seoBody}>
+              Jane Street / York neighbourhood guide:{" "}
+              <Link href={STORE.nicotineVapePath}>Nicotine vapes on Jane Street</Link>
+              {" · "}
+              <Link href={STORE.hoursPath}>24-hour open-now guide</Link>
+              {" · "}
+              <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link>
+              {" · "}
+              <Link href="/visit">How to reach Jane Street</Link>
+              {" · "}
+              <Link href={STORE.storePagePath}>York weed dispensary</Link>
+            </p>
+          ) : null}
 
           {/* Visit CTA */}
           <div className={styles.visitCta}>

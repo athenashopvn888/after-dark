@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SmokePilotLanding } from "../../components/SmokePilot";
@@ -34,11 +35,11 @@ export default async function NicotineVapesYorkPage() {
         warning="Adults 19+. Nicotine is addictive."
         showMenuSection={false}
         crossLink={{
-          href: "/info/native-cigarettes-york",
-          eyebrow: "Related After Dark Guide",
-          title: "Looking for the Native cigarette guide?",
-          body: "Open the dedicated After Dark Cannabis cigarette page for its separate adult-only category guide.",
-          label: "Read the Native cigarette guide",
+          href: "/nicotine-vape-york",
+          eyebrow: "Jane Street neighbourhood guide",
+          title: "Looking for nicotine vapes in York?",
+          body: "Open the Jane Street / York neighbourhood page for walk-in context, then use /items/vapes for the current nicotine category.",
+          label: "Read the York nicotine vape guide",
         }}
         sections={[
           {
@@ -72,6 +73,14 @@ export default async function NicotineVapesYorkPage() {
         hours="Open 24 Hours"
         theme="nicotine"
       />
+      <section style={{ maxWidth: 1120, margin: "0 auto", padding: "24px 20px 48px" }}>
+        <p>
+          York / Jane Street neighbourhood walk-in notes live on the{" "}
+          <Link href="/nicotine-vape-york">nicotine vapes on Jane Street</Link> page.
+          Native cigarettes stay on{" "}
+          <Link href="/native-cigarettes-york">/native-cigarettes-york</Link>.
+        </p>
+      </section>
       <Footer />
     </>
   );

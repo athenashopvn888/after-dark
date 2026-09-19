@@ -31,7 +31,17 @@ export const SCC_GEO_HUBS = [
   {
     href: STORE.hoursPath,
     label: "24-hour open-now guide",
-    blurb: "Late-night hours and ID at the York counter.",
+    blurb: "Late-night hours and ID at the York counter. Open 24 hours — walk-in only.",
+  },
+  {
+    href: STORE.nativeCigarettesPath,
+    label: "Native cigarettes York",
+    blurb: "Jane Street neighbourhood guide for the listed cigarette category.",
+  },
+  {
+    href: STORE.nicotineVapePath,
+    label: "Nicotine vapes York",
+    blurb: "Jane Street neighbourhood guide for the listed nicotine vape category.",
   },
   {
     href: STORE.corridorPath,
@@ -77,6 +87,9 @@ export const HOME_HUB_HREFS = [
   STORE.storePagePath,
   STORE.visitPath,
   STORE.cannabisDeliveryPath,
+  STORE.hoursPath,
+  STORE.nativeCigarettesPath,
+  STORE.nicotineVapePath,
   ...SCC_TIER_HUBS.map((hub) => hub.href),
 ] as const;
 
@@ -95,7 +108,14 @@ export function hubLinksForPage({
   includeTiers?: boolean;
 }): SccHubLink[] {
   const current = normalizeHubPath(currentPath);
-  const coreHrefs: ReadonlySet<string> = new Set([STORE.visitPath, STORE.storePagePath, STORE.cannabisDeliveryPath]);
+  const coreHrefs: ReadonlySet<string> = new Set([
+    STORE.visitPath,
+    STORE.storePagePath,
+    STORE.cannabisDeliveryPath,
+    STORE.hoursPath,
+    STORE.nativeCigarettesPath,
+    STORE.nicotineVapePath,
+  ]);
   const geo =
     geoSet === "core"
       ? SCC_GEO_HUBS.filter((hub) => coreHrefs.has(hub.href))

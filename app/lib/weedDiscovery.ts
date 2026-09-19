@@ -23,6 +23,7 @@ export const afterDarkWeedOwner = {
     { label: "Pre-Rolls", description: "Explore cannabis in pre-roll format.", href: "/items/prerolls" },
     { label: "Edibles", description: "Explore cannabis edibles.", href: "/items/edibles" },
     { label: "Vapes", description: "Explore the vape category.", href: "/items/vapes" },
+    { label: "Cigarettes", description: "Explore the cigarette category.", href: "/items/cigarettes" },
     { label: "Concentrates", description: "Explore cannabis concentrates.", href: "/items/concentrates" },
     { label: "Accessories", description: "Explore cannabis accessories.", href: "/items/add-ons" },
   ] satisfies WeedDiscoveryLink[],
@@ -38,5 +39,7 @@ export const afterDarkWeedOwner = {
     { label: "How to Reach Jane Street", description: "Bus, parking, and the Lawrence West intersection.", href: "/visit" },
     { label: "24-Hour Open-Now Guide", description: "Confirm the Jane Street counter is open now, 24 hours.", href: "/24-hour-dispensary-york" },
     { label: "Jane & Lawrence Corridor", description: "Weston and Mount Dennis walk-in to 1664 Jane Street.", href: "/jane-and-lawrence-dispensary" },
+    { label: "Native Cigarettes York", description: "Jane Street neighbourhood guide for the listed cigarette category.", href: "/native-cigarettes-york" },
+    { label: "Nicotine Vapes York", description: "Jane Street neighbourhood guide for the listed nicotine vape category.", href: "/nicotine-vape-york" },
   ] satisfies WeedDiscoveryLink[],
 };
