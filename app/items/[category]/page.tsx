@@ -147,6 +147,8 @@ export default async function ItemsCategoryPage({
               {" · "}
               <Link href={STORE.hoursPath}>24-hour open-now guide</Link>
               {" · "}
+              <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link>
+              {" · "}
               <Link href="/visit">How to reach Jane Street</Link>
               {" · "}
               <Link href={STORE.storePagePath}>York weed dispensary</Link>
@@ -158,6 +160,8 @@ export default async function ItemsCategoryPage({
               <Link href={STORE.nicotineVapePath}>Nicotine vapes on Jane Street</Link>
               {" · "}
               <Link href={STORE.hoursPath}>24-hour open-now guide</Link>
+              {" · "}
+              <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link>
               {" · "}
               <Link href="/visit">How to reach Jane Street</Link>
               {" · "}
