@@ -270,7 +270,7 @@ export default function HomePageClient() {
             heading="York weed hub and Jane Street visit"
             intro={
               <>
-                Flower shopping stays in the mosaic above. These cards open the York weed hub, how-to-reach page, Jane Street cannabis delivery guide, 24-hour open-now guide, and the Native cigarette and nicotine vape neighbourhood pages. Late-night hours live on the{" "}
+                Flower shopping stays in the mosaic above. The first card opens the Weed Dispensary in York neighbourhood page — the Jane Street owner for broad weed intent. The others open how-to-reach, Jane Street cannabis delivery, the 24-hour open-now guide, and the Native cigarette and nicotine vape neighbourhood pages. Late-night hours live on the{" "}
                 <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Weston and Mount Dennis use the{" "}
                 <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
               </>

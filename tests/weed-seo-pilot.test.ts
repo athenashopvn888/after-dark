@@ -11,8 +11,10 @@ test("MJ01 keeps the protected owner and exact metadata", () => {
   assert.match(location, /Jane Street York Weed Dispensary \| After Dark Cannabis/);
   assert.match(location, /After Dark Cannabis is open 24 hours at 1664 Jane Street/);
   assert.match(sitemap, /weed-dispensary-york/);
-  assert.match(page, /title: \{ absolute: gbpLocation\.seoTitle \}/);
-  assert.match(page, /canonical:[\s\S]*gbpLocation\.slug/);
+  assert.match(page, /title: \{ absolute: pageTitle \}/);
+  assert.match(page, /Weed Dispensary in York on Jane Street/);
+  assert.match(page, /canonical: `\$\{STORE\.baseUrl\}\$\{STORE\.storePagePath\}`/);
+  assert.doesNotMatch(page, /storePagePath\}\//);
 });
 
 test("MJ01 static discovery uses only approved destinations", () => {

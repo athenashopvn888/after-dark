@@ -20,8 +20,8 @@ export const SCC_GEO_HUBS = [
   },
   {
     href: STORE.storePagePath,
-    label: "York weed dispensary",
-    blurb: "Broad York weed owner page for the Jane Street walk-in.",
+    label: "Weed Dispensary in York",
+    blurb: "Jane Street neighbourhood owner for York weed, flower tiers, and walk-in formats.",
   },
   {
     href: STORE.cannabisDeliveryPath,
