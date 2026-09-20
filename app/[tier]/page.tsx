@@ -11,12 +11,12 @@ import {
 import { getAdcInventory } from "../lib/adcInventoryService";
 import { TIER_COMPARISON, TIER_SEO } from "../lib/tierSeoContent";
 import { buildTierCollectionJsonLd } from "../lib/tierStructuredData";
-import { faqPageGraphNode, serializeJsonLd } from "../lib/storeIdentity";
+import { STORE, faqPageGraphNode, serializeJsonLd } from "../lib/storeIdentity";
 import SccParityHub from "../components/SccParityHub";
 import seoContent from "../lib/seoContent.generated.json";
 import styles from "./tier.module.css";
 
-const SITE_ORIGIN = "https://afterdarkcannabis.com";
+const SITE_ORIGIN = STORE.baseUrl;
 const LEGACY_TIER_REDIRECTS: Record<string, string> = {
   exotic: "exotic-weed",
   premium: "premium-weed",
