@@ -181,6 +181,50 @@ export const VISIT_FAQS: StoreFaq[] = [
   },
 ];
 
+/** Visible /weed-dispensary-york FAQs — keep in sync with that page's FAQPage JSON-LD. */
+export const WEED_DISPENSARY_FAQS: StoreFaq[] = [
+  {
+    q: "Is there a weed dispensary in York on Jane Street?",
+    a: "Yes. After Dark Cannabis is the walk-in weed dispensary at 1664 Jane Street, York, ON M9N 2S1, just south of Lawrence Avenue West. This page is the York / Jane Street neighbourhood owner for weed. Call +1 (437) 524-9344. Adults 19+.",
+  },
+  {
+    q: "What weed and cannabis can I browse at the Jane Street York walk-in?",
+    a: "Adults 19+ can browse Budget, AA, AAA+, Premium, and Exotic flower tiers, plus pre-rolls, edibles, vapes, concentrates, Native cigarettes, nicotine vapes, and accessories. Posted names can change. Call +1 (437) 524-9344 if one listing is the reason for the trip.",
+  },
+  {
+    q: "What is the difference between weed and cannabis at this York store?",
+    a: "Weed is everyday language for cannabis. Cannabis is the broader term and can include flower, pre-rolls, edibles, vapes, concentrates, and other formats on the Jane Street menu.",
+  },
+  {
+    q: "What is the difference between bud and flower on the Jane Street menu?",
+    a: "Flower is the category term for dried cannabis flower. Bud is a common informal word for the same thing. Both sit in the five flower tiers at 1664 Jane Street.",
+  },
+  {
+    q: "Which flower tiers can I explore at the York weed dispensary?",
+    a: "Five posted tiers: Budget from $3/g, AA at $4/g, AAA+ at $5–$6/g, Premium at $7–$10/g, and Exotic at $10–$12/g. Each tier has its own page. This York weed page stays the broad owner.",
+  },
+  {
+    q: "Is After Dark a strain name or the Jane Street store?",
+    a: "After Dark Cannabis is the store name at 1664 Jane Street, York. It is not a strain listing. If you want one named flower, call +1 (437) 524-9344 before travelling.",
+  },
+  {
+    q: "Is the York weed hub the same as the 24-hour open-now guide?",
+    a: "No. This page owns broad York weed intent for the Jane Street walk-in. Late-night hours and ID live on /24-hour-dispensary-york. Address, phone, and map stay on the homepage.",
+  },
+  {
+    q: "Can I get cannabis delivery instead of walking in at Jane Street?",
+    a: "Yes, as a separate dispatcher service. Start on /cannabis-delivery-york, then the York delivery catalog. The 24-hour claim is for the walk-in door, not drop-off.",
+  },
+  {
+    q: "Does the York weed page also cover Native cigarettes and nicotine vapes?",
+    a: "Those are listed Jane Street categories at the same door. Neighbourhood guides live on /native-cigarettes-york and /nicotine-vape-york. Live lists stay on /items/cigarettes and /items/vapes. Adults 19+. Nicotine is addictive.",
+  },
+  {
+    q: "Do I need to be 19+ to shop the York weed dispensary?",
+    a: "Yes. After Dark Cannabis at 1664 Jane Street is for adults 19+ with valid government photo ID. The same rule applies overnight as at noon.",
+  },
+];
+
 /** Visible /jane-and-lawrence-dispensary FAQs — keep in sync with that page's FAQPage JSON-LD. */
 /** Visible /cannabis-delivery-york FAQs — keep in sync with that page's FAQPage JSON-LD. */
 export const DELIVERY_FAQS: StoreFaq[] = [
