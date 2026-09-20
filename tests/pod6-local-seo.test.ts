@@ -276,7 +276,8 @@ test("MJ01 B14 homepage door-test CTR pack for dispensary near me", () => {
   assert.doesNotMatch(identity, /storePagePath: "\/weed-dispensary-york\/"/);
   assert.match(sitemap, /\$\{BASE\}\/weed-dispensary-york`/);
   assert.doesNotMatch(sitemap, /weed-dispensary-york\//);
-  assert.match(yorkLp, /canonical: `\$\{STORE\.baseUrl\}\$\{STORE\.storePagePath\}`/);
+  assert.match(yorkLp, /const canonical = `\$\{STORE\.baseUrl\}\$\{STORE\.storePagePath\}`/);
+  assert.match(yorkLp, /alternates: \{ canonical \}/);
   assert.doesNotMatch(yorkLp, /storePagePath\}\//);
   assert.match(nextConfig, /do not add a second York LP page/);
   assert.doesNotMatch(nextConfig, /destination: "\/weed-dispensary-york\/"/);
