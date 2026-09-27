@@ -1,18 +1,10 @@
 "use client";
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  useSyncExternalStore,
-} from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./tv2.module.css";
-import {
-  TV2_HIRING_INTERVAL_MS,
-  TV2_HIRING_REDUCED_MOTION_MESSAGE,
-  TV2_HIRING_SLIDES,
-  getNextTv2HiringSlide,
-} from "./tv2Hiring";
+import HiringRibbon from "../components/HiringRibbon";
+import TvStoreHeader from "../components/TvStoreHeader";
+import { tvHiring } from "../lib/tvHiring";
+import { formatBoardTime, readStockUpdatedAt } from "../lib/tvStockTime";
 import {
   getTv2DaytimePromo,
   isCigaretteOfferVisible,
@@ -190,66 +182,12 @@ function VerticalTicker() {
   );
 }
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeToReducedMotion(onChange: () => void) {
-  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
-  mediaQuery.addEventListener("change", onChange);
-  return () => mediaQuery.removeEventListener("change", onChange);
-}
-
-function getReducedMotionSnapshot() {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function HiringRibbon() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const reducedMotion = useSyncExternalStore(
-    subscribeToReducedMotion,
-    getReducedMotionSnapshot,
-    () => false,
-  );
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const interval = window.setInterval(() => {
-      setActiveSlide((current) => getNextTv2HiringSlide(current));
-    }, TV2_HIRING_INTERVAL_MS);
-    return () => window.clearInterval(interval);
-  }, [reducedMotion]);
-
-  return (
-    <div
-      className={styles.hiringRibbon}
-      data-testid="tv2-hiring-ribbon"
-      aria-label="After Dark Cannabis hiring notice"
-    >
-      {reducedMotion ? (
-        <span className={styles.hiringStatic}>
-          {TV2_HIRING_REDUCED_MOTION_MESSAGE}
-        </span>
-      ) : (
-        TV2_HIRING_SLIDES.map((message, index) => (
-          <span
-            key={message}
-            className={`${styles.hiringMessage} ${
-              index === activeSlide ? styles.hiringMessageActive : ""
-            }`}
-            aria-hidden={index !== activeSlide}
-          >
-            {message}
-          </span>
-        ))
-      )}
-    </div>
-  );
-}
-
 /* -- MAIN TV2 PAGE -- */
 export default function TV2Page() {
   const [items, setItems] = useState<Item[]>([]);
   const [highlights, setHighlights] = useState<Record<string,number>>({});
   const [lastUpdate, setLastUpdate] = useState("");
+  const [stockUpdated, setStockUpdated] = useState<string | null>(null);
   const [daytime, setDaytime] = useState(() => isTv2Daytime());
   const [cigaretteOfferVisible, setCigaretteOfferVisible] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -275,10 +213,11 @@ export default function TV2Page() {
       const res = await fetch("/api/tv-data?type=items");
       const data: Item[] = res.ok ? await res.json() : [];
       setItems(data);
+      setStockUpdated(readStockUpdatedAt(res, data));
       const hi: Record<string,number> = {};
       CARD_CONFIG.forEach(c => { hi[c.id] = 0; });
       setHighlights(hi);
-      setLastUpdate(new Date().toLocaleTimeString());
+      setLastUpdate(formatBoardTime(new Date()) || "");
     } catch (err) { console.warn("[TV2] Load failed:", err); }
   }, []);
 
@@ -321,13 +260,13 @@ export default function TV2Page() {
   return (
     <div className={styles.tvPage}>
       <div className={styles.wrap} ref={wrapRef}>
-        {/* TV BANNER */}
-        <div style={{margin:"-40px -40px 30px -40px", width:"calc(100% + 80px)"}}>
-          <img src="/banners/ItemTv.webp" alt="After Dark Cannabis Items TV Menu" style={{width:"100%",display:"block"}} />
+        <TvStoreHeader eyebrow="Items Menu Board" stockUpdated={stockUpdated} />
+        <div className={styles.boardBanner}>
+          <img src="/banners/ItemTv.webp" alt="After Dark Cannabis Items TV Menu" />
         </div>
-        <HiringRibbon />
         {/* GRID */}
         <div className={styles.stage}>
+          <HiringRibbon hiring={tvHiring} />
           <div className={styles.grid}>
             {CARD_CONFIG.map(card => {
               const filtered = items.filter(card.filter);
@@ -376,7 +315,7 @@ export default function TV2Page() {
         </div>
         <VerticalTicker />
       </div>
-      <div className={styles.lastUpdated}>Updated: {lastUpdate}</div>
+      {lastUpdate ? <div className={styles.lastUpdated}>Refreshed {lastUpdate}</div> : null}
     </div>
   );
 }
