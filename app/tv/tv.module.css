@@ -1372,14 +1372,14 @@
 .boardBanner {
   margin: 0 -40px;
   width: calc(100% + 80px);
-  flex: 0 0 150px;
-  height: 150px;
+  flex: 0 0 120px;
+  height: 120px;
   overflow: hidden;
 }
 
 .boardBanner img {
   width: 100%;
-  height: 150px;
+  height: 120px;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -1444,15 +1444,15 @@
   gap: 20px;
 }
 .dealStrip {
-  margin: 4px 0;
+  margin: 2px 0;
 }
 .dealBox,
 .dealRotClip {
-  height: 40px;
+  height: 34px;
 }
 .dealBoxBig,
 .dealBoxBig .dealRotClip {
-  height: 44px;
+  height: 38px;
 }
 .mediaSide,
 .cardBody,
