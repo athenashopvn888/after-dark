@@ -14,8 +14,8 @@ const tvStyles = readFileSync(
 
 test("ADC top-three TV rows always use explicit equals-sign bundle labels", () => {
   assert.deepEqual(TOP_TIER_BUNDLE_LABELS, {
-    price3g: "2G = 3G",
-    price5g: "3G = 6G",
+    price3g: "2g=3g",
+    price5g: "3g=6g",
   });
   assert.match(tvPage, /TOP_TIER_BUNDLE_LABELS\.price3g/);
   assert.match(tvPage, /TOP_TIER_BUNDLE_LABELS\.price5g/);
@@ -27,7 +27,7 @@ test("ADC top-three TV rows always use explicit equals-sign bundle labels", () =
 test("ADC TV renders sale prices as old struck-through then new", () => {
   assert.match(
     tvPage,
-    /pp\.sale !== null && pp\.sale !== pp\.regular/,
+    /pp\.sale !== null && pp\.sale < pp\.regular/,
   );
   assert.match(tvPage, /<del className=\{styles\.oldPrice\}>/);
   assert.match(
