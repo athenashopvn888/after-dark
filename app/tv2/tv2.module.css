@@ -601,10 +601,20 @@
 }
 .detailCard {
   height: auto;
-  max-height: 88px;
-  margin-top: 6px;
-  padding: 8px 10px;
-  flex-shrink: 1;
+  max-height: none;
+  margin-top: 4px;
+  padding: 6px 10px;
+  flex: 0 0 auto;
+}
+.detailContent {
+  gap: 4px;
+}
+.detailName {
+  line-height: 1.08;
+}
+.detailPreset {
+  margin-top: 0;
+  line-height: 1.1;
 }
 .mediaSide,
 .cardMain,
