@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next";
-import {TIER_CONFIG, CATEGORY_CONFIG, allFlowers, allItems} from "./lib/products";
+import { TIER_CONFIG, CATEGORY_CONFIG, allItems } from "./lib/products";
+import { getAdcInventory } from "./lib/adcInventoryService";
 import { SEO_PAGES } from "./lib/seoPages";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 
 const BASE = "https://afterdarkcannabis.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date().toISOString();
+  const inStockFlowers = (await getAdcInventory()).snapshot.flowers;
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: "daily", priority: 1 },
@@ -40,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   /* Flower detail pages */
-  const flowerPages: MetadataRoute.Sitemap = allFlowers.map((f) => ({
+  const flowerPages: MetadataRoute.Sitemap = inStockFlowers.map((f) => ({
     url: `${BASE}/flower/${f.slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,

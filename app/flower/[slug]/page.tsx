@@ -34,13 +34,19 @@ export async function generateMetadata({
 
   const tierName = TIER_CONFIG[flower.tier]?.name || flower.tier;
   const strainData = getStrainData(flower.name, flower.type, flower.tier, flower.thc);
+  const canonical = `https://afterdarkcannabis.com/flower/${flower.slug}`;
+  const typeName = flower.type === "indica" ? "Indica" : flower.type === "sativa" ? "Sativa" : "Hybrid";
 
   return {
-    title: `${flower.name} | ${tierName} ${flower.type === "indica" ? "Indica" : flower.type === "sativa" ? "Sativa" : "Hybrid"} | THC ${flower.thc} | After Dark Cannabis York`,
+    title: {
+      absolute: `${flower.name} | ${tierName} ${typeName} | THC ${flower.thc} | After Dark Cannabis York`,
+    },
     description: strainData.metaDescription,
+    alternates: { canonical },
     openGraph: {
       title: `${flower.name} | After Dark Cannabis`,
       description: strainData.metaDescription,
+      url: canonical,
       images: flower.image ? [{ url: flower.image, width: 800, height: 800, alt: flower.name }] : [],
     },
   };
@@ -84,6 +90,7 @@ function getJsonLd(flower: FlowerProduct) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: flower.name,
+    category: TIER_CONFIG[flower.tier]?.name || flower.tier,
     image: flower.image ? [flower.image.startsWith('http') ? flower.image : `https://afterdarkcannabis.com${flower.image.startsWith('/') ? '' : '/'}${flower.image}`] : undefined,
     description: strainData.description,
     brand: { "@type": "Brand", name: "After Dark Cannabis" },
