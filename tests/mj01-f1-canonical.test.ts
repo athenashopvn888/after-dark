@@ -20,8 +20,15 @@ test("flower Product JSON-LD exposes the in-stock product category", () => {
 
 test("flower sitemap reads the live inventory without editing its source", () => {
   assert.match(sitemap, /getAdcInventory/);
-  assert.match(sitemap, /const inStockFlowers = \(await getAdcInventory\(\)\)\.snapshot\.flowers/);
+  assert.match(sitemap, /const liveInventory = \(await getAdcInventory\(\)\)\.snapshot/);
+  assert.match(sitemap, /const inStockFlowers = liveInventory\.flowers/);
   assert.match(sitemap, /inStockFlowers\.map/);
   assert.doesNotMatch(sitemap, /allFlowers\.map/);
   assert.match(sitemap, /export const dynamic = "force-dynamic"/);
+});
+
+test("item sitemap reads the live inventory without editing its source", () => {
+  assert.match(sitemap, /const inStockItems = liveInventory\.items/);
+  assert.match(sitemap, /inStockItems\.map/);
+  assert.doesNotMatch(sitemap, /allItems\.map/);
 });

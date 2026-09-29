@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { TIER_CONFIG, CATEGORY_CONFIG, allItems } from "./lib/products";
+import { TIER_CONFIG, CATEGORY_CONFIG } from "./lib/products";
 import { getAdcInventory } from "./lib/adcInventoryService";
 import { SEO_PAGES } from "./lib/seoPages";
 import { RESOURCE_PAGES } from "./resources/resourceData";
@@ -10,7 +10,9 @@ export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date().toISOString();
-  const inStockFlowers = (await getAdcInventory()).snapshot.flowers;
+  const liveInventory = (await getAdcInventory()).snapshot;
+  const inStockFlowers = liveInventory.flowers;
+  const inStockItems = liveInventory.items;
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: "daily", priority: 1 },
@@ -51,8 +53,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-    /* Item detail pages */
-  const itemDetailPages: MetadataRoute.Sitemap = allItems.map((i) => ({
+  /* Item detail pages */
+  const itemDetailPages: MetadataRoute.Sitemap = inStockItems.map((i) => ({
     url: `${BASE}/item/${i.slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
