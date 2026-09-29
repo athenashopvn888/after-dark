@@ -92,6 +92,13 @@ export default function VisitPage() {
         </section>
 
         <section>
+          <h2>Open 24/7</h2>
+          <p>
+            After Dark Cannabis is open 24 hours, 7 days a week at 1664 Jane Street in York. The same walk-in counter is open during the day, overnight, and after midnight. Adults 19+ should bring valid government photo ID.
+          </p>
+        </section>
+
+        <section>
           <h2>Nearest intersection</h2>
           <p>
             1664 Jane Street sits {STORE.intersection}. Count south from the Lawrence lights; do not continue north toward a different Jane Street number. After Dark is this York walk-in only — not a chain, not a second counter on Weston Road.
