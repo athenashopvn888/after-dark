@@ -31,8 +31,8 @@ test("MJ01 homepage schema keeps CannabisStore, adds FAQPage, and uses the FMD p
   assert.doesNotMatch(layout, /7Clmh\.jpg/);
   assert.match(identity, /46Oi5\.jpg/);
   assert.match(layout, /canonical: STORE\.homepageUrl/);
-  assert.match(identity, /Dispensary Near Me in York \| After Dark Cannabis Jane Street/);
-  assert.match(identity, /Cannabis store near me in York/);
+  assert.match(identity, /Open 24 Hours in York \| After Dark Cannabis/);
+  assert.match(identity, /Open 24 hours, 7 days a week/);
 });
 
 test("MJ01 /visit is a real how-to-reach page with NAP, transit, and parking", () => {
@@ -243,8 +243,8 @@ test("MJ01 B14 homepage door-test CTR pack for dispensary near me", () => {
   const nextConfig = read("next.config.ts");
   const footer = read("app/components/Footer.tsx");
 
-  assert.match(identity, /seoTitleDefault: "Dispensary Near Me in York \| After Dark Cannabis Jane Street"/);
-  assert.match(identity, /Cannabis store near me in York/);
+  assert.match(identity, /seoTitleDefault: "Open 24 Hours in York \| After Dark Cannabis"/);
+  assert.match(identity, /Open 24 hours, 7 days a week/);
   assert.match(homePage, /title: \{ absolute: STORE\.seoTitleDefault \}/);
   assert.match(homePage, /dispensary near me/);
   assert.match(layout, /dispensary near me/);

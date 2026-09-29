@@ -34,9 +34,9 @@ export const STORE = {
   schemaImage: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/46Oi5.jpg",
   logoUrl: "https://afterdarkcannabis.com/wp-content/uploads/2026/04/46Oi5.jpg",
   mapsQuery: "1664 Jane Street, York, ON M9N 2S1",
-  seoTitleDefault: "Dispensary Near Me in York | After Dark Cannabis Jane Street",
+  seoTitleDefault: "Open 24 Hours in York | After Dark Cannabis",
   seoDescription:
-    "Cannabis store near me in York: After Dark Cannabis at 1664 Jane Street, York, ON M9N 2S1. Open 24 hours. Call +1 (437) 524-9344. Map and directions on this page. Adults 19+.",
+    "Open 24 hours, 7 days a week. Visit After Dark Cannabis at 1664 Jane Street, York, ON M9N 2S1. Call +1 (437) 524-9344 for the Jane Street counter. Adults 19+.",
 } as const;
 
 export const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.mapsQuery)}`;
