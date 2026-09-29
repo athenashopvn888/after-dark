@@ -1,4 +1,8 @@
 "use client";
+import { HOME_TITLE } from "./lib/homeDelivery";
+import CohortDeliveryActions from "./components/CohortDeliveryActions";
+import HomeDeliverySection from "./components/HomeDeliverySection";
+import HomepageTopNotices from "./components/HomepageTopNotices";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -171,6 +175,7 @@ export default function HomePageClient() {
     <main className={styles.main}>
       {/* ── NAVBAR ── */}
       <Navbar />
+      <HomepageTopNotices />
 
       {/* ── DOOR-TEST HERO ── */}
       <section className={`${styles.hero} ${styles.heroDoor}`}>
@@ -183,7 +188,8 @@ export default function HomePageClient() {
           <div className={styles.brandBlock}>
             <span className={styles.brandIcon}>🌙</span>
             <p className={styles.brandKicker}>After Dark Cannabis</p>
-            <h1 className={styles.brandTitle}>York Dispensary Near Me on Jane Street</h1>
+            <h1 className={styles.brandTitle}>{HOME_TITLE}</h1>
+            <CohortDeliveryActions variant="hero" />
             <p className={styles.brandSub}>24-Hour Jane Street York Dispensary · Walk-in at 1664 Jane Street</p>
             <Link href={STORE.hoursPath} className={styles.brandBadge}>Open 24 Hours · 1664 Jane Street</Link>
           </div>
@@ -218,6 +224,8 @@ export default function HomePageClient() {
               />
             </div>
           </section>
+
+      <HomeDeliverySection />
         </div>
       </section>
 
