@@ -1,7 +1,6 @@
 import { HOME_TITLE } from "./lib/homeDelivery";
 import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
-import FleetAnnouncementBanner from "./components/FleetAnnouncementBanner";
 import { faqPageJsonLd, HOME_FAQS, STORE, serializeJsonLd } from "./lib/storeIdentity";
 
 export const metadata: Metadata = {
@@ -28,7 +27,6 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqPageJsonLd(HOME_FAQS)) }}
       />
-      <FleetAnnouncementBanner holidayOnly />
       <HomePageClient />
     </>
   );
