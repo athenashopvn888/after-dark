@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
-import AgeGate from "./components/AgeGate";
 import { STORE, cannabisStoreGraphNode, serializeJsonLd, websiteGraphNode } from "./lib/storeIdentity";
 
 export const metadata: Metadata = {
@@ -103,7 +102,6 @@ export default function RootLayout({
           WEED DELIVERY IS HERE — CLICK TO EXPLORE
         </Link>
         {children}
-        <AgeGate />
       </body>
     </html>
   );
