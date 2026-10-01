@@ -21,6 +21,7 @@ import {
   type BoardDeal,
 } from "../lib/flowerDeals";
 import styles from "./tier.module.css";
+import { getTierGuideLinks } from "../lib/guideRegistry";
 
 const SITE_ORIGIN = STORE.baseUrl;
 const LEGACY_TIER_REDIRECTS: Record<string, string> = {
@@ -82,6 +83,7 @@ export default async function TierPage({
   const inventory = await getAdcInventory();
   const flowers = inventory.snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
   const { config } = tierInfo;
+  const guideLinks = getTierGuideLinks(`/${tierSlug}`);
   const seo = TIER_SEO[tierInfo.key];
   const flowerCopy = seoContent.flowerTiers;
   const saleFlowers = flowers.filter((f) => f.isSale);
@@ -192,6 +194,14 @@ export default async function TierPage({
           </div>
         </div>
       </section>
+
+      {guideLinks.length > 0 && (
+        <nav className={styles.guideStrip} aria-label={`Popular ${config.name} strain guides`}>
+          <div className={styles.container}><h2>Popular strain guides</h2><div>
+            {guideLinks.map((guide) => <Link key={guide.slug} href={`/guides/${guide.slug}`}>{guide.name}</Link>)}
+          </div></div>
+        </nav>
+      )}
 
       {/* ── Product grid ── */}
       <section className={styles.products}>

@@ -178,3 +178,8 @@
 }
 .visitBtn:hover { background: #1B4332; }
 
+.guideStrip { padding: 24px 0; background: #f8faf9; border-bottom: 1px solid var(--border-subtle); }
+.guideGroup + .guideGroup { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border-subtle); }
+.guideGroup h2 { margin: 0 0 12px; font-size: 1.15rem; }
+.guideGroup > div { display: flex; flex-wrap: wrap; gap: 10px; }
+.guideGroup a { padding: 9px 13px; border: 1px solid #cfe0d4; border-radius: 999px; background: #fff; color: #176a38; font-size: .9rem; font-weight: 700; text-decoration: none; }
