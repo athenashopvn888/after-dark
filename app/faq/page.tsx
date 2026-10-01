@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { STORE } from "../lib/storeIdentity";
+import { TIER_CONFIG } from "../lib/products";
+import {
+  BOGO_BUY_2_GET_1,
+  BOGO_BUY_3_GET_3,
+  formatAsLowAsAfterPromos,
+  formatBoardDealLine,
+  formatDollars,
+  formatPayEquals,
+  formatPerGram,
+} from "../lib/flowerDeals";
 import styles from "./faq.module.css";
 
 export const metadata: Metadata = {
@@ -12,6 +22,33 @@ export const metadata: Metadata = {
     canonical: `${STORE.baseUrl}/faq`,
   },
 };
+
+function boardTierSentence(key: "AAA+" | "PREMIUM" | "EXOTIC"): string {
+  const tier = TIER_CONFIG[key];
+  const deal3 = tier.deal3g;
+  const deal6 = tier.deal6g;
+  if (!deal3 || !deal6) return "";
+  const shortName = tier.name.replace(/ Weed$/, "");
+  return `${shortName} lists at ${formatDollars(tier.unitPrice)}/g. ${formatBoardDealLine(deal3)} (${formatPerGram(deal3.price, deal3.grams)}). ${formatBoardDealLine(deal6)} (${formatPerGram(deal6.price, deal6.grams)}). ${formatAsLowAsAfterPromos(deal6.price, deal6.grams)}.`;
+}
+
+const BOARD_DEAL_ANSWER = [
+  "Exotic, Premium, and AAA+ use the in-store board deals. AA does not include these deals. Budget keeps a separate $10 / 3g Special.",
+  boardTierSentence("AAA+"),
+  boardTierSentence("PREMIUM"),
+  boardTierSentence("EXOTIC"),
+  "Board notation is 2g=3g and 3g=6g.",
+].join(" ");
+
+const aaaDeals = TIER_CONFIG["AAA+"];
+const BOARD_DEAL_HOW = [
+  `${BOGO_BUY_2_GET_1} means you pay for 2g and receive 3g.`,
+  aaaDeals.deal3g ? `On AAA+ that is ${formatPayEquals(aaaDeals.deal3g.price, aaaDeals.deal3g.grams)}.` : "",
+  `${BOGO_BUY_3_GET_3} means you pay for 3g and receive 6g.`,
+  aaaDeals.deal6g ? `On AAA+ that is ${formatPayEquals(aaaDeals.deal6g.price, aaaDeals.deal6g.grams)}.` : "",
+  "Premium and Exotic use the same FREE lines with their own paid totals.",
+  "The 6g total is on Exotic, Premium, and AAA+ only. AA has neither board deal.",
+].filter(Boolean).join(" ");
 
 const FAQ_CATEGORIES = [
   {
@@ -36,12 +73,12 @@ const FAQ_CATEGORIES = [
     ],
   },
   {
-    title: "💰 Pricing & Bundle Offers",
+    title: "💰 Pricing & Flower Deals",
     faqs: [
       { q: "What is the cheapest weed you sell?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. These are the most competitive prices you'll find in York." },
-      { q: "What bundle pricing do you offer?", a: "Flower bundle pricing includes a 3g total option — the 3g total is shown clearly before purchase. Our Exotic, Premium, and AAA+ tiers also offer 6g bundle pricing, with 6g total pricing." },
+      { q: "What flower deals match the in-store board?", a: BOARD_DEAL_ANSWER },
       { q: "Do you have ounce deals?", a: "Yes! Budget ounces from $40, AA ounces from $90, AAA+ ounces from $100. All with freshness and quality guaranteed." },
-      { q: "How does bundle pricing work?", a: "The 3g bundle pricing applies to every tier automatically. The 6g bundle pricing applies to Exotic, Premium, and AAA+ tiers. These are our standard everyday bundle offers." },
+      { q: "How do Buy 2g Get 1g FREE and Buy 3g Get 3g FREE work?", a: BOARD_DEAL_HOW },
       { q: "How does the tier pricing work?", a: "Each flower strain is graded into one of five quality tiers. The tier determines the per-gram price. This transparent system means you always know exactly what you're paying — no confusing markups or inconsistent pricing." },
     ],
   },
@@ -85,7 +122,7 @@ export default function FAQPage() {
         <Navbar />
 
         {/* FAQ Banner */}
-        <section style={{ width: "100%", overflow: "hidden", marginTop: "92px" }}>
+        <section style={{ width: "100%", overflow: "hidden", marginTop: 0 }}>
           <img
             src="/banners/07_FAQ.webp"
             alt="After Dark Cannabis FAQ — Your Questions Answered"

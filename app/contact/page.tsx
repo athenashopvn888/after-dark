@@ -54,7 +54,7 @@ export default function ContactPage() {
       <main className={styles.main}>
         <Navbar />
 
-        <section className={styles.hero} style={{ paddingTop: "92px" }}>
+        <section className={styles.hero} style={{ paddingTop: 0 }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
             <img src="/banners/08_Contact_Us.webp" alt="Contact After Dark Cannabis on Jane Street in York" style={{ width: "100%", height: "auto", display: "block", borderRadius: "var(--radius-lg)" }} />
           </div>

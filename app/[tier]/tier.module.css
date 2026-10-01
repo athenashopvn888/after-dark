@@ -9,7 +9,7 @@
 .bannerSection {
   width: 100%;
   overflow: hidden;
-  margin-top: 92px;
+  margin-top: 0;
 }
 
 .bannerImg {
@@ -140,7 +140,7 @@
   border: 1px solid rgba(45, 106, 79, 0.15);
   border-radius: var(--radius-md);
   padding: 10px 16px;
-  min-width: 180px;
+  min-width: 210px;
 }
 
 .dealLabel {
@@ -159,6 +159,31 @@
   font-size: 18px;
   font-weight: 900;
   color: var(--green-dark);
+}
+
+.asLowAsBanner {
+  margin: 0;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 900;
+  color: #1B4332;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.listAnchor {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.dealMeta {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  line-height: 1.35;
 }
 
 /* ── Product grid ── */
@@ -288,6 +313,11 @@
   .heroRight {
     align-items: flex-start;
     width: 100%;
+  }
+
+  .asLowAsBanner,
+  .listAnchor {
+    text-align: left;
   }
 
   .unitPriceBox {

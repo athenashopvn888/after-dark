@@ -4,6 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import type { FlowerProduct, PricePoint } from "../lib/products";
 import { TIER_CONFIG } from "../lib/products";
+import {
+  formatPayEquals,
+  formatPerGram,
+  isBogoDeal,
+  paidAmount,
+  type BoardDeal,
+} from "../lib/flowerDeals";
 import styles from "./FlowerCard.module.css";
 
 interface WeightOption {
@@ -11,7 +18,7 @@ interface WeightOption {
   label: string;
   grams: number;
   price: PricePoint | null;
-  promo?: string;
+  deal?: BoardDeal;
 }
 
 function getTypeLabel(t: string) {
@@ -34,26 +41,40 @@ export default function FlowerCard({
   tierKey: string;
 }) {
   const tierCfg = TIER_CONFIG[tierKey];
-  const isPromoTier = !!tierCfg?.deal6g; // Exotic, Premium, AAA+
+  const deal3 = tierCfg?.deal3g ?? null;
+  const deal6 = tierCfg?.deal6g ?? null;
+  const isBogoTier = isBogoDeal(deal6);
 
   const weights: WeightOption[] = [];
-  if (flower.price3g) {
+  if (flower.price3g && deal3) {
+    const paid = paidAmount(flower.price3g);
+    const applies = isBogoDeal(deal3) || paid === deal3.price;
+    if (applies) {
+      weights.push({
+        key: "3g",
+        label: "3g",
+        grams: deal3.grams,
+        price: flower.price3g,
+        deal: deal3,
+      });
+    }
+  }
+  if (flower.price3g && !weights.some((weight) => weight.key === "3g")) {
     weights.push({
       key: "3g",
       label: "3g",
       grams: 3,
       price: flower.price3g,
-      promo: isPromoTier ? "3g bundle" : tierCfg?.deal3g?.label,
     });
   }
   if (flower.price5g) {
-    const grams = isPromoTier ? 6 : 5;
+    const grams = isBogoTier && deal6 ? deal6.grams : 5;
     weights.push({
       key: "5g",
       label: `${grams}g`,
       grams,
       price: flower.price5g,
-      promo: isPromoTier ? "6g bundle" : undefined,
+      deal: isBogoTier && deal6 ? deal6 : undefined,
     });
   }
   if (flower.price14g) {
@@ -129,7 +150,7 @@ export default function FlowerCard({
             <span className={styles.priceMain}>${active.price?.regular}</span>
           )}
           <div className={styles.perGramWrap}>
-            {isPromoTier && tierCfg?.unitPrice ? (
+            {isBogoTier && tierCfg?.unitPrice ? (
               <>
                 <span className={styles.perGramOld}>${tierCfg.unitPrice}/g</span>
                 <span className={styles.perGram}>${perGram}/g</span>
@@ -140,10 +161,20 @@ export default function FlowerCard({
           </div>
         </div>
 
-        {/* Promo line */}
-        {active.promo && (
+        {active.deal && isBogoDeal(active.deal) && paidAmount(active.price) !== null && (
           <div className={styles.promoLine}>
-            🎁 {active.promo}
+            <span>{active.deal.label}</span>
+            <span className={styles.promoPay}>
+              {formatPayEquals(paidAmount(active.price) as number, active.grams)}
+            </span>
+          </div>
+        )}
+        {active.deal && !isBogoDeal(active.deal) && (
+          <div className={styles.promoLine}>🎁 {active.deal.label}</div>
+        )}
+        {isBogoTier && deal6 && flower.price5g && active.grams !== deal6.grams && paidAmount(flower.price5g) !== null && (
+          <div className={styles.promoHint}>
+            6g → {formatPerGram(paidAmount(flower.price5g) as number, deal6.grams)}
           </div>
         )}
 

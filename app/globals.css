@@ -466,28 +466,133 @@ button { cursor: pointer; font-family: inherit; }
   border: 1px solid var(--border-subtle);
 }
 
-/* Fleet homepage announcements: reserve their full height above the fixed navigation. */
+/* Promo banners follow the fixed nav in normal flow. */
 :root {
   --fleet-homepage-announcement-height: 144px;
+  --homepage-nav-clearance: 108px;
+  --flower-bogo-strip-height: 44px;
 }
 
-[data-fleet-homepage-announcement] {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+[data-flower-bogo-strip] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   width: 100%;
-  height: var(--fleet-homepage-announcement-height);
+  box-sizing: border-box;
+  margin: 0;
+  background: #c5161d;
+  color: #fff;
+  font-family: var(--font-display), system-ui, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  text-wrap: balance;
+  white-space: pre-wrap;
+}
+
+[data-bogo-strip-copy] { display: block; min-width: 0; max-width: 100%; text-wrap: balance; }
+[data-bogo-offer-gap] { white-space: pre; }
+
+[data-flower-bogo-strip="nav"] {
+  min-height: 34px;
+  padding: 6px 12px;
+  font-size: clamp(12px, 2.05vw, 15px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+[data-flower-bogo-strip="hero"] {
+  padding: 18px 20px 16px;
+  font-size: clamp(22px, 3.1vw, 36px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+[data-flower-bogo-strip="nav"]:hover,
+[data-flower-bogo-strip="nav"]:focus-visible,
+[data-flower-bogo-strip="hero"]:hover,
+[data-flower-bogo-strip="hero"]:focus-visible {
+  color: #fff;
+  background: #e11d2e;
+}
+
+[data-flower-bogo-strip="nav"]:hover,
+[data-flower-bogo-strip="nav"]:focus-visible { text-decoration: underline; text-underline-offset: 0.12em; }
+[data-flower-bogo-strip="hero"]:hover,
+[data-flower-bogo-strip="hero"]:focus-visible { text-decoration: none; }
+[data-flower-bogo-strip]:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
+
+[data-fleet-homepage-announcement] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin-top: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
 }
 
 [data-fleet-homepage-announcement] > p {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 0;
+  width: 100%;
   box-sizing: border-box;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
-main:has(> [data-fleet-homepage-announcement]:first-child) > #main-nav {
-  top: 0 !important;
+[data-thanksgiving-hours-notice] {
+  padding: 6px 16px;
+  background: #14532d;
+  color: #d1fae5;
+  font-size: clamp(11px, 1.5vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+}
+
+[data-cigarette-deal] {
+  padding: 12px 16px;
+  background: #fbbf24;
+  color: #111827;
+  font-size: clamp(14px, 2.15vw, 24px);
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  line-height: 1.15;
+}
+
+[data-bb-light-deal] {
+  padding: 7px 16px 8px;
+  background: #111827;
+  color: #fbbf24;
+  font-size: clamp(11px, 1.55vw, 15px);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+}
+
+[data-exotic-tier-banner],
+[data-cig-mix-banner],
+[data-bb-premium-banner] { display: block; width: 100%; line-height: 0; }
+
+[data-exotic-tier-banner] img,
+[data-cig-mix-banner] img,
+[data-bb-premium-banner] img { display: block; width: 100%; height: auto; }
+
+@media (max-width: 720px) {
+  :root { --flower-bogo-strip-height: 52px; }
+  [data-flower-bogo-strip] { letter-spacing: 0.012em; }
+  [data-bogo-strip-copy] { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; width: 100%; }
+  [data-bogo-offer-lead], [data-bogo-offer-tail] { display: block; max-width: 100%; text-wrap: balance; }
+  [data-bogo-offer-gap] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: pre; }
+  [data-flower-bogo-strip="nav"] { min-height: 0; padding: 5px 10px; font-size: 11.5px; font-weight: 800; line-height: 1.28; letter-spacing: 0.015em; }
+  [data-flower-bogo-strip="hero"] { padding: 8px 12px 7px; font-size: clamp(13px, 3.6vw, 16px); font-weight: 800; line-height: 1.28; letter-spacing: 0.018em; }
+  [data-thanksgiving-hours-notice] { padding: 5px 10px; font-size: 10px; letter-spacing: 0.045em; }
+  [data-cigarette-deal] { padding: 10px 12px; font-size: 13px; letter-spacing: 0.03em; }
+  [data-bb-light-deal] { padding: 6px 10px; font-size: 10px; letter-spacing: 0.035em; }
 }
 
 body:has(#home-delivery-heading) {
