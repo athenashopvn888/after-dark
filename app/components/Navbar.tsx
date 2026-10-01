@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { STORE } from "../lib/storeIdentity";
 import styles from "./Navbar.module.css";
+import FlowerBogoStrip from "./FlowerBogoStrip";
 
 const ALL_LINKS = [
   { href: "/careers/budtender", label: "Join Team" },
@@ -85,6 +86,7 @@ export default function Navbar() {
         {canAdvance && <button type="button" className={styles.scrollAdvance} aria-label="Show more navigation links" aria-controls="store-menu-scrollbar" onClick={advanceScrollBar}><span aria-hidden="true">›</span></button>}
       </div>
       <CohortDeliveryActions />
+      {pathname !== "/" ? <FlowerBogoStrip /> : null}
     </nav>
   );
 }

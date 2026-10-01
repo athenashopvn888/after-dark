@@ -46,7 +46,7 @@ export default function GamesContent() {
     <main>
       <Navbar />
 
-      <section style={{ width: "100%", overflow: "hidden", marginTop: "92px" }}>
+      <section style={{ width: "100%", overflow: "hidden", marginTop: 0 }}>
         <img
           src="/banners/10_Games.webp"
           alt="Games Arcade — Flappy Bud, Snake Munchies, Brick Breaker 420"

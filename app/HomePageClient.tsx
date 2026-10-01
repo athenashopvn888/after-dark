@@ -176,6 +176,7 @@ export default function HomePageClient() {
       {/* ── NAVBAR ── */}
       <Navbar />
       <HomepageTopNotices />
+      <FleetAnnouncementBanner />
 
       {/* ── DOOR-TEST HERO ── */}
       <section className={`${styles.hero} ${styles.heroDoor}`}>
@@ -229,7 +230,6 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <FleetAnnouncementBanner />
       <HiringCallout compact />
 
       {/* ── WELCOME BANNER ── */}

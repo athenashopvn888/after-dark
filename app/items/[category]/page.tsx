@@ -75,7 +75,7 @@ export default async function ItemsCategoryPage({
       <Navbar />
 
       {/* Hero Banner */}
-      <section style={{ width: "100%", overflow: "hidden", marginTop: "92px", marginBottom: "24px" }}>
+      <section style={{ width: "100%", overflow: "hidden", marginTop: 0, marginBottom: "24px" }}>
         {config.banner ? (
           <img
             src={config.banner}
