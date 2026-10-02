@@ -68,7 +68,7 @@ test("sitewide strip and homepage announcement order match the approved stack", 
   for (const file of [
     "public/banners/top-weed-tier-mj01.webp",
     "public/banners/2pack5cig.webp",
-    "public/banners/bb-premium-grade-full-lights.webp",
+    "public/banners/BB_Belmont_Premium_Grade.webp",
   ]) {
     assert.ok(fs.statSync(file).size > 1000, file);
   }

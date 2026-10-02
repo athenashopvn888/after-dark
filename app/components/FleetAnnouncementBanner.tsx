@@ -55,7 +55,7 @@ export default function FleetAnnouncementBanner() {
         CIGARETTE DEAL ! 2 PACK $5 MIX AND MATCH
       </p>
       <p data-bb-light-deal="">
-        EXCLUSIVE SPECIAL PREMIUM GRADE BB FULL &amp; BB LIGHT!
+        EXCLUSIVE SPECIAL PREMIUM GRADE BB FULL, BB LIGHT &amp; BELMONT KING SIZE!
       </p>
       <Link
         href="/items/cigarettes"
@@ -71,12 +71,12 @@ export default function FleetAnnouncementBanner() {
       <Link
         href="/items/cigarettes"
         data-bb-premium-banner=""
-        aria-label="Shop BB Premium Grade cigarettes"
+        aria-label="Shop BB and Belmont Premium Grade cigarettes"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/banners/bb-premium-grade-full-lights.webp"
-          alt="Exclusive BB Premium Grade cigarettes — Full Flavor and Lights Canadian blend tobacco packs and cartons at After Dark Cannabis."
+          src="/banners/BB_Belmont_Premium_Grade.webp"
+          alt="Exclusive Premium Grade BB Full Flavor, BB Lights, and Belmont King Size cigarettes at After Dark Cannabis — Exotic, Premium, and AAA+ weed with Buy 2g Get 1g FREE and Buy 3g Get 3g FREE."
         />
       </Link>
     </aside>
