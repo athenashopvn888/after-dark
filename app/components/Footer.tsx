@@ -77,7 +77,8 @@ export default function Footer() {
               <Link href="/info/nicotine-vapes-york">Nicotine Vapes product guide</Link>
               <Link href={STORE.storePagePath}>After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>
-                          <Link href="/resources">Resources</Link>
+              <Link href="/resources">Resources</Link>
+              <Link href="/guides">Guides</Link>
             </nav>
           </div>
         </div>

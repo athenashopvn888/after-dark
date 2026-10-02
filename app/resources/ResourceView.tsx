@@ -56,6 +56,7 @@ export default function ResourceView({ page }: ResourceViewProps) {
             <ResourceCards
               title={page.kind === "root" ? "Choose a Resource Section" : "Guides in This Section"}
               pages={children}
+              leadLink={page.kind === "root" ? page.guidesCard : undefined}
             />
           )}
 
@@ -167,15 +168,24 @@ function ResourceCards({
   title,
   pages,
   compact = false,
+  leadLink,
 }: {
   title: string;
   pages: ResourcePage[];
   compact?: boolean;
+  leadLink?: { label: string; href: string; description?: string };
 }) {
   return (
     <section className={styles.cardsSection}>
       <h2>{title}</h2>
       <div className={compact ? styles.cardGridCompact : styles.cardGrid}>
+        {leadLink && (
+          <Link href={leadLink.href} className={styles.resourceCard}>
+            <span className={styles.cardKicker}>Name Guides</span>
+            <h3>{leadLink.label}</h3>
+            {leadLink.description && <p>{leadLink.description}</p>}
+          </Link>
+        )}
         {pages.map((page) => {
           const author = AUTHORS[page.author];
           return (
