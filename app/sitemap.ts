@@ -83,5 +83,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
-  return [...guidePages, ...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...itemDetailPages, ...seoPages, ...resourcePages];
+  const guideIndex: MetadataRoute.Sitemap = [{
+    url: `${BASE}/guides`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }];
+
+  return [...guideIndex, ...guidePages, ...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...itemDetailPages, ...seoPages, ...resourcePages];
 }

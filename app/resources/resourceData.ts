@@ -56,6 +56,7 @@ export interface ResourcePage {
   faqs?: ResourceFaq[];
   commercialLinks: ResourceLink[];
   related: string[];
+  guidesCard?: ResourceLink;
 }
 
 export const SITE = {
@@ -151,6 +152,11 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
       "/resources/nicotine-pouches",
       "/resources/native-smokes/backwoods-grabba-guide",
     ],
+    guidesCard: {
+      label: "Name Guides",
+      href: "/guides",
+      description: "Browse all strain, Native Cigarettes, Nicotine Vape, and THC Vape name guides in one directory.",
+    },
   },
   {
     path: "/resources/cannabis-dispensary-vs-weed-dispensary",
