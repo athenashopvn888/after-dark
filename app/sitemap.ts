@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { DELIVERY_GUIDE_REGISTRY } from "./lib/deliveryGuideRegistry";
 import { TIER_CONFIG, CATEGORY_CONFIG } from "./lib/products";
 import { getAdcInventory } from "./lib/adcInventoryService";
 import { SEO_PAGES } from "./lib/seoPages";
@@ -76,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: page.path === "/resources" ? 0.75 : 0.65,
   }));
 
-  const guidePages: MetadataRoute.Sitemap = GUIDE_REGISTRY.map((guide) => ({
+  const guidePages: MetadataRoute.Sitemap = [...GUIDE_REGISTRY, ...DELIVERY_GUIDE_REGISTRY].map((guide) => ({
     url: `${BASE}/guides/${guide.slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
