@@ -6,6 +6,8 @@ import HiringRibbon from "../components/HiringRibbon";
 import TvStoreHeader from "../components/TvStoreHeader";
 import { tvHiring } from "../lib/tvHiring";
 import { formatBoardTime, readStockUpdatedAt } from "../lib/tvStockTime";
+import TvThemeArtwork from "../tv-theme/TvThemeArtwork";
+import { getTvTheme, getTvThemeVariables } from "../tv-theme/theme";
 import {
   getTv2DaytimePromo,
   isCigaretteOfferVisible,
@@ -193,6 +195,7 @@ function VerticalTicker() {
 
 /* -- MAIN TV2 PAGE -- */
 export default function TV2Page() {
+  const theme = getTvTheme(tvHiring?.store);
   const [items, setItems] = useState<Item[]>([]);
   const [highlights, setHighlights] = useState<Record<string,number>>({});
   const [lastUpdate, setLastUpdate] = useState("");
@@ -267,7 +270,8 @@ export default function TV2Page() {
   }, [items]);
 
   return (
-    <div className={styles.tvPage}>
+    <div className={styles.tvPage} data-tv-themed={theme ? "true" : undefined} style={theme ? getTvThemeVariables(theme) : undefined}>
+      <TvThemeArtwork theme={theme} />
       <div className={styles.wrap} ref={wrapRef}>
         <TvStoreHeader eyebrow="Items Menu Board" stockUpdated={stockUpdated} />
         <div className={styles.boardBanner}>

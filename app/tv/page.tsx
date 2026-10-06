@@ -9,6 +9,9 @@ import { TOP_TIER_BUNDLE_LABELS } from "./bundleLabels";
 import { getFlowerEffects } from "./flowerEffects";
 import { tvHiring } from "../lib/tvHiring";
 import { formatBoardTime, readStockUpdatedAt } from "../lib/tvStockTime";
+import TvThemeArtwork from "../tv-theme/TvThemeArtwork";
+import { getTvTheme, getTvThemeVariables } from "../tv-theme/theme";
+import TvReviewQr from "../TvReviewQr";
 
 /* -- Types -- */
 interface PricePoint { regular: number; sale: number | null; }
@@ -644,7 +647,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
           <div className={styles.addonsDetailCard}>
             <div className={styles.addonsDetailName}>{hi?.name||""}</div>
             <div className={styles.addonsDetailPrice}>PRICE {(hi?.price||'').replace(/\[object.*\]/,'')}</div>
-            <div className={styles.effectIcons}>CURRENT MENU ITEM</div>
+            <div className={styles.effectIcons}>MENU - TIERS - DETAILS</div>
           </div>
         </div>
 
@@ -671,6 +674,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
             </div>
           ))}
         </div>
+        <TvReviewQr storeName="After Dark Cannabis" />
       </div>
     </div>
   );
@@ -725,6 +729,7 @@ function VerticalTicker() {
    MAIN TV PAGE
    ============================================================ */
 export default function TVMenuPage() {
+  const theme = getTvTheme(tvHiring?.store);
   const [flowers, setFlowers] = useState<Record<string,Flower[]>>({});
   const [ozFlowers, setOzFlowers] = useState<Flower[]>([]);
   const [addOns, setAddOns] = useState<Item[]>([]);
@@ -844,7 +849,8 @@ export default function TVMenuPage() {
   };
 
   return (
-    <div className={styles.tvPage}>
+    <div className={styles.tvPage} data-tv-themed={theme ? "true" : undefined} style={theme ? getTvThemeVariables(theme) : undefined}>
+      <TvThemeArtwork theme={theme} />
       {/* Floating particles */}
       <div className={styles.particles}>
         {particles.map((p, i) => (
