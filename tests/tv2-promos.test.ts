@@ -1,42 +1,43 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  getCigaretteOfferPromo,
   getTv2DaytimePromo,
   isCigaretteOfferVisible,
   isTv2Daytime,
 } from "../app/tv2/tv2Promos.ts";
 
-test("TV2 daytime uses the local device hour from 10:00 through 16:59", () => {
-  assert.equal(isTv2Daytime(new Date(2026, 6, 29, 9, 59, 59)), false);
-  assert.equal(isTv2Daytime(new Date(2026, 6, 29, 10, 0, 0)), true);
-  assert.equal(isTv2Daytime(new Date(2026, 6, 29, 16, 59, 59)), true);
-  assert.equal(isTv2Daytime(new Date(2026, 6, 29, 17, 0, 0)), false);
+test("TV2 daytime is fixed to America/Toronto regardless of process timezone", () => {
+  assert.equal(isTv2Daytime(new Date("2026-10-07T17:35:00.000Z")), true);
+  assert.equal(isTv2Daytime(new Date("2026-10-07T13:59:00.000Z")), false);
+  assert.equal(isTv2Daytime(new Date("2026-10-07T21:30:00.000Z")), false);
 });
 
-test("daytime promo covers both Cigarettes and Vapes cards", () => {
+test("daytime Cigarettes promo rotates both approved assets every 10 seconds with fallback", () => {
+  assert.deepEqual(getTv2DaytimePromo("CIGARETTES", true, 0), {
+    src: "/banners/luxury_mix_match_600_web.webp",
+    alt: "Mix and Match 2 Packs for $5 and $25 Carton Offer",
+    fallbackSrc: "/banners/cig-poster-1.png",
+  });
   assert.equal(
-    getTv2DaytimePromo("CIGARETTES", true)?.src,
-    "/banners/cig-poster-1.png",
+    getTv2DaytimePromo("CIGARETTES", true, 10_000)?.src,
+    "/banners/marlboro_belmont_600x600.webp",
   );
-  assert.match(
-    getTv2DaytimePromo("VAPES", true)?.alt || "",
-    /Ultimate Cannabis Collection/,
+  assert.equal(
+    getTv2DaytimePromo("CIGARETTES", true, 20_000)?.src,
+    "/banners/luxury_mix_match_600_web.webp",
   );
-  assert.equal(getTv2DaytimePromo("VAPES", false), undefined);
-  assert.equal(getTv2DaytimePromo("EDIBLES", true), undefined);
+  assert.match(getTv2DaytimePromo("VAPES", true)?.alt || "", /Ultimate Cannabis Collection/);
+  assert.equal(getTv2DaytimePromo("CIGARETTES", false), undefined);
 });
 
-test("cigarette offer is visible for seconds 20 through 29 of each cycle", () => {
-  assert.equal(isCigaretteOfferVisible(false, 0), false);
-  assert.equal(isCigaretteOfferVisible(false, 19_999), false);
-  assert.equal(isCigaretteOfferVisible(false, 20_000), true);
-  assert.equal(isCigaretteOfferVisible(false, 29_999), true);
-  assert.equal(isCigaretteOfferVisible(false, 30_000), false);
-  assert.equal(isCigaretteOfferVisible(false, 50_000), true);
-});
-
-test("cigarette offer never overlays the daytime promo", () => {
-  assert.equal(isCigaretteOfferVisible(true, 20_000), false);
-  assert.equal(isCigaretteOfferVisible(true, 29_999), false);
-  assert.equal(isCigaretteOfferVisible(false, -1), false);
+test("5-second cigarette list overlay runs only outside Toronto daytime", () => {
+  assert.equal(isCigaretteOfferVisible(true, 0), false);
+  assert.equal(isCigaretteOfferVisible(false, 0), true);
+  assert.equal(isCigaretteOfferVisible(false, 4_999), true);
+  assert.equal(isCigaretteOfferVisible(false, 5_000), false);
+  assert.equal(isCigaretteOfferVisible(false, 30_000), true);
+  assert.equal(getCigaretteOfferPromo(true, 0), undefined);
+  assert.equal(getCigaretteOfferPromo(false, 0)?.src, "/banners/luxury_mix_match_600_web.webp");
+  assert.equal(getCigaretteOfferPromo(false, 30_000)?.src, "/banners/marlboro_belmont_600x600.webp");
 });
