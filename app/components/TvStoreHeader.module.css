@@ -102,3 +102,9 @@
   letter-spacing: 3px;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
 }
+
+/* MJ01 compact chrome (Oct 2026): slimmer header + 24h strip, same content. */
+.header { height: 100px; }
+.brand img { width: 72px; height: 72px; }
+.header h1 { font-size: 44px; }
+.hoursAlert { height: 50px; font-size: 32px; }

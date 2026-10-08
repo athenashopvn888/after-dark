@@ -1468,3 +1468,12 @@
 .tvPage[data-tv-themed="true"] .stage { background:rgba(3,30,21,.48); border-color:var(--tv-theme-card-border); box-shadow:0 22px 58px rgba(0,0,0,.5),0 0 36px var(--tv-theme-glow); }
 .tvPage[data-tv-themed="true"] .card { outline:3px solid var(--tv-theme-card-border); outline-offset:-1px; filter:drop-shadow(0 0 14px var(--tv-theme-glow)); }
 .tvPage[data-tv-themed="true"] .tierExotic .cardHeader,.tvPage[data-tv-themed="true"] .tierPremium .cardHeader,.tvPage[data-tv-themed="true"] .tierAaa .cardHeader,.tvPage[data-tv-themed="true"] .tierAa .cardHeader,.tvPage[data-tv-themed="true"] .tierBudget .cardHeader,.tvPage[data-tv-themed="true"] .tierOz .cardHeader,.tvPage[data-tv-themed="true"] .cardAddons .cardHeader { background:linear-gradient(120deg,var(--tv-theme-primary) 0%,#032f29 34%,var(--tv-theme-accent) 72%,var(--tv-theme-primary) 100%)!important; }
+
+/* MJ01 compact chrome (Oct 2026): same banner, notice, and delivery line, just slimmer,
+   so the flower/item cards and hero photos get the vertical space back (GJC01 parity). */
+.wrap { gap: 10px; }
+.boardBanner { flex: 0 0 76px; height: 76px; }
+.boardBanner img { height: 76px; object-position: center 52%; }
+.ticker,
+.tickerInner { height: 52px; }
+.ticker { font-size: 28px; }

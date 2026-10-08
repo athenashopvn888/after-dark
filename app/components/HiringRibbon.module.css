@@ -1,7 +1,7 @@
 /* Ported from the Apps Script hiring ribbon.
    Canvas is 3840×2160, so 148px / 60px scales to ~74px / ~30px at 1920×1080. */
 .hiringRibbon {
-  --hiringH: 148px;
+  --hiringH: 112px;
   --hiringTextRed: #ff5260;
   --hiringRed: #d51028;
   flex: 0 0 var(--hiringH);

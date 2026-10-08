@@ -671,3 +671,12 @@
 .tvPage[data-tv-themed="true"] .card { outline:3px solid var(--tv-theme-card-border); outline-offset:-1px; filter:drop-shadow(0 0 14px var(--tv-theme-glow)); }
 .tvPage[data-tv-themed="true"] .cardHeader { background:linear-gradient(120deg,var(--tv-theme-primary) 0%,#032f29 34%,var(--tv-theme-accent) 72%,var(--tv-theme-primary) 100%); }
 .tvPage[data-tv-themed="true"] .cardHeader::before { background:linear-gradient(180deg,var(--tv-theme-header-text),var(--tv-theme-accent),var(--tv-theme-primary)); }
+
+/* MJ01 compact chrome (Oct 2026): same banner, notice, and delivery line, just slimmer,
+   so the flower/item cards and hero photos get the vertical space back (GJC01 parity). */
+.wrap { gap: 10px; }
+.boardBanner { flex: 0 0 76px; height: 76px; }
+.boardBanner img { height: 76px; object-position: center 52%; }
+.ticker,
+.tickerInner { height: 52px; }
+.ticker { font-size: 28px; }
