@@ -15,6 +15,9 @@ export async function GET(request: Request) {
     "x-tv-data-cache-seconds": String(ADC_REFRESH_SECONDS),
     "x-tv-data-source": inventory.servedFrom,
     "x-tv-data-as-of": inventory.snapshot.sourceTimestamp,
+    // Grok 2026-10-08: lets /tv + /tv2 show a small "Menu updating" notice when stock is older than 48 h.
+    "x-tv-data-stale":
+      Number.isFinite(Date.parse(inventory.snapshot.sourceTimestamp || "")) && Date.now() - Date.parse(inventory.snapshot.sourceTimestamp || "") <= 48 * 60 * 60 * 1000 ? "0" : "1",
     "x-tv-data-version": inventory.snapshot.version,
     "x-tv-data-store": inventory.snapshot.storeCode,
     "x-tv-data-flower-count": String(inventory.snapshot.flowers.length),
