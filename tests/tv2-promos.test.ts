@@ -13,20 +13,12 @@ test("TV2 daytime is fixed to America/Toronto regardless of process timezone", (
   assert.equal(isTv2Daytime(new Date("2026-10-07T21:30:00.000Z")), false);
 });
 
-test("daytime Cigarettes promo rotates both approved assets every 10 seconds with fallback", () => {
-  assert.deepEqual(getTv2DaytimePromo("CIGARETTES", true, 0), {
-    src: "/banners/luxury_mix_match_600_web.webp",
-    alt: "Mix and Match 2 Packs for $5 and $25 Carton Offer",
-    fallbackSrc: "/banners/cig-poster-1.png",
-  });
-  assert.equal(
-    getTv2DaytimePromo("CIGARETTES", true, 10_000)?.src,
-    "/banners/marlboro_belmont_600x600.webp",
-  );
-  assert.equal(
-    getTv2DaytimePromo("CIGARETTES", true, 20_000)?.src,
-    "/banners/luxury_mix_match_600_web.webp",
-  );
+test("daytime cigarette slot shows the category collage without cigarette promo content", () => {
+  for (const elapsedMs of [0, 10_000, 20_000]) {
+    const promo = getTv2DaytimePromo("CIGARETTES", true, elapsedMs);
+    assert.equal(promo?.src, "/banners/tv2-category-collage.png");
+    assert.doesNotMatch(`${promo?.src} ${promo?.alt}`, /cig|marlboro|belmont/i);
+  }
   assert.match(getTv2DaytimePromo("VAPES", true)?.alt || "", /Ultimate Cannabis Collection/);
   assert.equal(getTv2DaytimePromo("CIGARETTES", false), undefined);
 });
