@@ -1,10 +1,11 @@
+import { getLiveMenu } from "../../lib/liveMenu";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cache } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { allFlowers, TIER_CONFIG, type FlowerProduct, type PricePoint } from "../../lib/products";
+import { TIER_CONFIG, type FlowerProduct, type PricePoint } from "../../lib/products";
 import { getAdcInventory } from "../../lib/adcInventoryService";
 import { resolveLiveProduct } from "../../lib/liveProductResolver";
 import {
@@ -19,15 +20,25 @@ import RelatedScroll from "./RelatedScroll";
 import Magnifier from "../../components/Magnifier";
 import styles from "./flower.module.css";
 
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  resolveFlower = __compute_resolveFlower();
+}
+
 export const dynamic = "force-dynamic";
 
-const resolveFlower = cache(async (slug: string) => {
+function __compute_resolveFlower() {
+  return cache(async (slug: string) => {
   return resolveLiveProduct({
     slug,
     loadLive: async () => (await getAdcInventory()).snapshot.flowers,
-    fallback: allFlowers,
+    fallback: __menu.flowers,
   });
 });
+}
+let resolveFlower!: ReturnType<typeof __compute_resolveFlower>;
 
 /* -- SEO metadata per strain -- */
 export async function generateMetadata({
@@ -35,6 +46,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+    await __loadMenuData();
   const { slug } = await params;
   const flower = await resolveFlower(slug);
   if (!flower) return {};
@@ -146,6 +158,7 @@ export default async function FlowerPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+    await __loadMenuData();
   const { slug } = await params;
   const flower = await resolveFlower(slug);
   if (!flower) notFound();
@@ -185,7 +198,7 @@ export default async function FlowerPage({
   const bestValue = perGram[0];
 
   // Related strains from same tier
-  const related = allFlowers
+  const related = __menu.flowers
     .filter((f) => f.tier === flower.tier && f.slug !== flower.slug);
 
   return (

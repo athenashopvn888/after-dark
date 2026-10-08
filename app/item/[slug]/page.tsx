@@ -1,10 +1,11 @@
+import { getLiveMenu } from "../../lib/liveMenu";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cache } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { allItems, CATEGORY_CONFIG, type ItemProduct } from "../../lib/products";
+import { CATEGORY_CONFIG, type ItemProduct } from "../../lib/products";
 import { getAdcInventory } from "../../lib/adcInventoryService";
 import { resolveLiveProduct } from "../../lib/liveProductResolver";
 import { getItemData } from "../../lib/itemData";
@@ -12,15 +13,25 @@ import { getItemPriceDisplay } from "../../lib/itemPricing";
 import Magnifier from "../../components/Magnifier";
 import styles from "../../flower/[slug]/flower.module.css";
 
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  resolveItem = __compute_resolveItem();
+}
+
 export const dynamic = "force-dynamic";
 
-const resolveItem = cache(async (slug: string) => {
+function __compute_resolveItem() {
+  return cache(async (slug: string) => {
   return resolveLiveProduct({
     slug,
     loadLive: async () => (await getAdcInventory()).snapshot.items,
-    fallback: allItems,
+    fallback: __menu.items,
   });
 });
+}
+let resolveItem!: ReturnType<typeof __compute_resolveItem>;
 
 /* -- SEO metadata per item -- */
 export async function generateMetadata({
@@ -28,6 +39,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+    await __loadMenuData();
   const { slug } = await params;
   const item = await resolveItem(slug);
   if (!item) return {};
@@ -125,6 +137,7 @@ export default async function ItemPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+    await __loadMenuData();
   const { slug } = await params;
   const item = await resolveItem(slug);
   if (!item) notFound();
