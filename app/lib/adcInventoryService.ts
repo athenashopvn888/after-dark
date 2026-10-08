@@ -34,8 +34,13 @@ async function fetchJson<T>(url: string): Promise<T> {
   throw lastError;
 }
 
+// Shared fleet feed (cached ONHAND copy, refreshed 11:15/19:15 Toronto). It never reads Gmail per request,
+// unlike the legacy APPS_SCRIPT_URL deployment, which fails with "Service invoked too many times for one day: gmail".
+export const ADC_SHARED_FEED_URL =
+  "https://script.google.com/macros/s/AKfycbx09_sDal1eMVF1r-hUck4e7oq_XBHEWhGvA79JuhZNQ6P4CdhCas0xE3FfexWQ3hq4/exec";
+
 async function fetchInputs() {
-  const endpoint = process.env.APPS_SCRIPT_URL;
+  const endpoint = process.env.ADC_FEED_URL || ADC_SHARED_FEED_URL;
   if (!endpoint) throw new Error("ADC inventory endpoint is not configured.");
   const separator = endpoint.includes("?") ? "&" : "?";
   const base = `${endpoint}${separator}store=MJ01`;
@@ -67,7 +72,14 @@ export async function getAdcInventory(options: { force?: boolean } = {}): Promis
   const result = await resolveAdcInventory({
     lastGood,
     loadFresh: async () => {
-    const { inventory, catalog } = await cachedInputs(Boolean(options.force));
+    let inputs: Awaited<ReturnType<typeof fetchInputs>>;
+    try {
+      inputs = await cachedInputs(Boolean(options.force));
+    } catch (error) {
+      console.warn("[ADC inventory] feed fetch failed:", String((error as Error)?.message || error).slice(0, 200));
+      throw error;
+    }
+    const { inventory, catalog } = inputs;
       return buildAdcInventorySnapshot({
       inventory,
       catalog,
@@ -79,7 +91,7 @@ export async function getAdcInventory(options: { force?: boolean } = {}): Promis
       try {
         await writeAdcInventorySnapshot(snapshot);
       } catch (error) {
-        console.warn("[ADC inventory] LKG persistence unavailable");
+        console.warn("[ADC inventory] LKG persistence unavailable", String((error as Error)?.message || error).slice(0, 200));
         throw error;
       }
     },
