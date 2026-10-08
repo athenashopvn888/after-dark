@@ -35,8 +35,9 @@ export async function writeAdcInventorySnapshot(snapshot: AdcInventorySnapshot) 
         await put(ADC_INVENTORY_SNAPSHOT_PATH, JSON.stringify(snapshot), { access: "private", contentType: "application/json", cacheControlMaxAge: 60, allowOverwrite: false });
         return;
       }
+      // GET (CDN header) and HEAD (API) etags use different formats, so comparing them never matched and every
+      // write ended as "snapshot was busy" (LKG stuck at Aug 9). ifMatch on the HEAD etag keeps the write atomic.
       const latest = await head(ADC_INVENTORY_SNAPSHOT_PATH);
-      if (latest.etag.replaceAll('"', "") !== current.etag.replaceAll('"', "")) continue;
       await put(ADC_INVENTORY_SNAPSHOT_PATH, JSON.stringify(snapshot), { access: "private", contentType: "application/json", cacheControlMaxAge: 60, allowOverwrite: true, ifMatch: latest.etag });
       return;
     } catch (error) {
