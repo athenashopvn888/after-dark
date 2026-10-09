@@ -64,6 +64,7 @@ export default function Footer() {
               <Link href="/items/vapes">Nicotine Vape Menu</Link>
               <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
+              <Link href="/hours">Store Hours</Link>
               <Link href="/visit">How to Reach Jane Street</Link>
               <Link href={STORE.hoursPath}>24-Hour / Open-Now Guide</Link>
               <Link href={STORE.corridorPath}>Jane &amp; Lawrence Corridor</Link>
