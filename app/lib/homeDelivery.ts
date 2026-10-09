@@ -25,3 +25,6 @@ export const HOME_DELIVERY_FAQS = [
   { q: "Does the homepage promise live inventory?", a: "No. Use the linked menu or delivery page for current details and confirm a specific item before relying on availability." },
   { q: "Is the delivery information limited to York?", a: "This homepage describes the York delivery context only. The current delivery page confirms whether a specific address can be served." },
 ] as const;
+
+// Document <title>/og/twitter: exact Google name | area. H1 keeps HOME_TITLE (previous keyword text).
+export const HOME_DOC_TITLE = "After Dark Cannabis | York Dispensary";

@@ -1,10 +1,10 @@
-import { HOME_TITLE } from "./lib/homeDelivery";
+import { HOME_DOC_TITLE } from "./lib/homeDelivery";
 import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
 import { faqPageJsonLd, HOME_FAQS, STORE, serializeJsonLd } from "./lib/storeIdentity";
 
 export const metadata: Metadata = {
-  title: { absolute: HOME_TITLE },
+  title: { absolute: HOME_DOC_TITLE },
   description: STORE.seoDescription,
   keywords: [
     "dispensary near me",
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: STORE.homepageUrl },
 
-  openGraph: { title: HOME_TITLE },
+  openGraph: { title: HOME_DOC_TITLE },
 
-  twitter: { card: "summary_large_image", title: HOME_TITLE },
+  twitter: { card: "summary_large_image", title: HOME_DOC_TITLE },
 };
 
 export default function HomePage() {
