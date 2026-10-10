@@ -15,6 +15,7 @@ import {
 } from "../lib/storeIdentity";
 import SccParityHub from "../components/SccParityHub";
 import styles from "../visit/visit.module.css";
+import VapeActionPanel from "../components/VapeActionPanel";
 
 const canonical = `${STORE.baseUrl}${STORE.nicotineVapePath}`;
 const pageTitle = "Nicotine Vapes on Jane Street in York | After Dark Cannabis";
@@ -87,6 +88,7 @@ export default function NicotineVapeYorkPage() {
             <Link href="/items/vapes">/items/vapes</Link>. Nicotine is addictive. The{" "}
             <Link href="/">homepage</Link> stays the NAP hub for address, phone, map, and website.
           </p>
+          <VapeActionPanel compact />
         </section>
 
         <section className={`${styles.nap} nap`} aria-label="Store name, address, and phone">
