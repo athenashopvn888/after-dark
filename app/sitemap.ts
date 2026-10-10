@@ -30,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/cannabis-delivery-york`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/native-cigarettes-york`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/nicotine-vape-york`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE}/vape-shop-york`, lastModified: now, changeFrequency: "daily", priority: 0.85 },
   ];
 
   /* Tier pages */
