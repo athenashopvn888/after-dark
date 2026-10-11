@@ -22,6 +22,7 @@ import {
 } from "../lib/flowerDeals";
 import styles from "./tier.module.css";
 import { getTierGuideLinks } from "../lib/guideRegistry";
+import { storeTierRange, tierRangeText } from "../lib/tierPriceRanges";
 
 const SITE_ORIGIN = STORE.baseUrl;
 const LEGACY_TIER_REDIRECTS: Record<string, string> = {
@@ -33,6 +34,23 @@ const LEGACY_TIER_REDIRECTS: Record<string, string> = {
 };
 
 export const dynamic = "force-dynamic";
+
+async function tierInventory(tier: string) {
+  try {
+    const { snapshot } = await getAdcInventory();
+    return {
+      flowers: snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tier.toUpperCase()),
+      version: snapshot.version,
+      sourceTimestamp: snapshot.sourceTimestamp,
+    };
+  } catch {
+    return {
+      flowers: [],
+      version: "live-inventory-unavailable",
+      sourceTimestamp: "",
+    };
+  }
+}
 
 /* -- Generate all tier pages at build -- */
 export function generateStaticParams() {
@@ -48,8 +66,7 @@ export async function generateMetadata({
   const { tier: tierSlug } = await params;
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) return {};
-  const { snapshot } = await getAdcInventory();
-  const flowers = snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
+  const { flowers } = await tierInventory(tierInfo.key);
   const seo = TIER_SEO[tierInfo.key];
 
   return {
@@ -80,8 +97,8 @@ export default async function TierPage({
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) notFound();
 
-  const inventory = await getAdcInventory();
-  const flowers = inventory.snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
+  const inventory = await tierInventory(tierInfo.key);
+  const flowers = inventory.flowers;
   const { config } = tierInfo;
   const guideLinks = getTierGuideLinks(`/${tierSlug}`);
   const seo = TIER_SEO[tierInfo.key];
@@ -90,6 +107,7 @@ export default async function TierPage({
   const regularFlowers = flowers.filter((f) => !f.isSale);
   const displayFlowers = [...saleFlowers, ...regularFlowers];
   const hotFlowers = flowers.filter((f) => f.isHot);
+  const rangeLine = tierRangeText(storeTierRange(flowers, tierInfo.key));
   const collectionJsonLd = buildTierCollectionJsonLd({
     canonicalPath: `/${tierSlug}`,
     name: seo?.h1 || config.name,
@@ -110,7 +128,7 @@ export default async function TierPage({
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: serializeJsonLd(tierJsonLd) }}
     />
-    <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
+    <main className={styles.main} data-inventory-version={inventory.version} data-inventory-as-of={inventory.sourceTimestamp}>
       <Navbar />
 
       {/* ── Banner Image (standalone, no overlay text) ── */}
@@ -136,6 +154,8 @@ export default async function TierPage({
               </h1>
             </div>
             <p className={styles.heroTagline}>{config.tagline}</p>
+            {rangeLine ? <p className="tier-range-line"><strong className="price-scope-label">In-store price</strong>{rangeLine}</p> : null}
+            <p className="price-rule-notice"><strong>IN-STORE PRICES ONLY.</strong> These prices do not apply to delivery orders. Delivery has its own prices. Why? <Link href="/faq#delivery-price-rule">See the FAQ</Link></p>
             <div className={styles.heroStats}>
               <span className={styles.stat}>
                 <strong>{flowers.length}</strong> strains
@@ -163,7 +183,7 @@ export default async function TierPage({
               </>
             ) : (
               <div className={styles.unitPriceBox}>
-                <span className={styles.unitPriceLabel}>Starting at</span>
+                <span className={styles.unitPriceLabel}>In-store price · Starting at</span>
                 <span className={styles.unitPriceValue}>${config.unitPrice}/g</span>
               </div>
             )}
@@ -172,7 +192,7 @@ export default async function TierPage({
             <div className={styles.dealRow}>
               {[config.deal3g, config.deal6g].filter((deal): deal is BoardDeal => deal !== null).map((deal) => (
                 <div className={styles.dealBox} key={deal.total}>
-                  <div className={styles.dealLabel}>
+                  <div className={styles.dealLabel}>In-store price ·{" "}
                     {isBogoDeal(deal) ? deal.label : `🎁 ${deal.label}`}
                   </div>
                   <div className={styles.dealPrice}>

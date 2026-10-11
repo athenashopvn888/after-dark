@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import AfterDarkWebChat from "./AfterDarkWebChat";
 import menu from "./delivery-menu.json";
 import styles from "./delivery.module.css";
+import { deliveryTierRanges, tierRangeText } from "../lib/tierPriceRanges";
 
 type Tier = "SHREDS" | "Budget" | "BC Premium" | "CRAFTS" | "Exotics";
 type PriceOption = { key: string; label: string; price: number };
@@ -43,6 +44,7 @@ function ProductPricing({ product }: { product: Product }) {
   const bundles = eligible && loyalty ? [{ quantity: 2, perUnitPrice: loyalty, totalPrice: loyalty * 2 }, ...suppliedBundles] : product.offers?.filter((offer) => offer.kind === "multi_ounce") ?? [];
 
   return <div className={styles.pricing}>
+    <strong className="price-scope-label">Delivery price</strong>
     {compact.length > 0 && <div className={styles.compactPrices}>{compact.map((option) => <span key={option.key}>{option.label} <strong>{formatCurrency(option.price)}</strong></span>)}</div>}
     <div className={styles.decisionPrices}>
       {loyalty !== null && <span className={styles.loyalty}><small>MEMBER LOYALTY 28g</small><strong>{formatCurrency(loyalty)}</strong></span>}
@@ -100,13 +102,16 @@ export default function DeliveryContent() {
     return products.filter((product) => (filter === "ALL" || product.tier === filter) && (!needle || `${product.name} ${product.category} ${product.strain}`.toLowerCase().includes(needle)))
       .sort((a, b) => tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier) || entryPrice(a) - entryPrice(b) || a.name.localeCompare(b.name));
   }, [filter, products, search]);
+  const tierRanges = useMemo(() => deliveryTierRanges(products).map(({ tier, range }) => ({ tier, line: tierRangeText(range) })).filter((item): item is { tier: string; line: string } => Boolean(item.line)), [products]);
 
   return <main className={styles.main}>
     <Navbar />
     <section className={`${styles.hero} ${styles.heroPlain}`}>
       <div><p>After Dark Cannabis</p><h1>Weed Delivery in York</h1><span>Browse the shared product catalog. The store confirms current availability and delivery details before an order is accepted.</span></div>
     </section>
+    <p className="price-rule-notice"><strong>DELIVERY PRICES ONLY.</strong> Delivery orders are charged these prices, not in-store prices. <Link href="/faq#delivery-price-rule">See the FAQ</Link></p>
     <section className={styles.deliveryDetails} aria-label="After Dark delivery details"><strong>$60 PRODUCT MINIMUM</strong></section>
+    {tierRanges.length > 0 ? <section className="tier-range-list" aria-label="Delivery prices per gram by flower tier"><h2>Delivery prices per gram</h2><ul>{tierRanges.map(({ tier, line }) => <li key={tier}><strong>{tier}</strong><span><b className="price-scope-label">Delivery price</b>{line}</span></li>)}</ul></section> : null}
     <section className={styles.howToOrder} aria-labelledby="york-delivery-guide-title">
       <div>
         <p>YORK / JANE STREET</p>

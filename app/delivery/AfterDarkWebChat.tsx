@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import "./AfterDarkWebChat.css";
 
 const API_BASE = (process.env.NEXT_PUBLIC_SOD_WEB_CHAT_API_BASE || "https://milestone-1-demo.vercel.app").replace(/\/$/, "");
@@ -325,7 +326,7 @@ export default function AfterDarkWebChat() {
           <label className={intent === "NEW_CUSTOMER" ? "checked" : ""}><input required type="radio" name="customerIntent" value="NEW_CUSTOMER" checked={intent === "NEW_CUSTOMER"} onChange={() => setIntent("NEW_CUSTOMER")} /><span><strong>I&apos;m new</strong><small>Create my account and place my first order</small></span></label>
           <label className={intent === "RETURNING_CUSTOMER" ? "checked" : ""}><input required type="radio" name="customerIntent" value="RETURNING_CUSTOMER" checked={intent === "RETURNING_CUSTOMER"} onChange={() => setIntent("RETURNING_CUSTOMER")} /><span><strong>I&apos;m returning</strong><small>Use my existing mobile account and place an order</small></span></label>
         </fieldset>
-        {intent === "NEW_CUSTOMER" && <><div className="sod-chat-welcome"><h2>Welcome!</h2><p>Have a valid government-issued photo ID and a Canadian mobile number ready. Your mobile number will be used as your account number.</p><p>Use a mobile number that can receive verification texts.</p></div>
+        {intent === "NEW_CUSTOMER" && <><div className="sod-chat-welcome"><h2>Welcome!</h2><p><strong>DELIVERY PRICES ONLY.</strong> Delivery orders are charged these prices, not in-store prices. <Link href="/faq#delivery-price-rule">See the FAQ</Link></p><p>Have a valid government-issued photo ID and a Canadian mobile number ready. Your mobile number will be used as your account number.</p><p>Use a mobile number that can receive verification texts.</p></div>
         <label>Full name<input required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" /></label></>}
         {intent && <><label>Canadian mobile number<input required inputMode="tel" value={phone} onChange={(event) => setPhone(event.target.value)} autoComplete="tel" placeholder="647 555 0123" aria-describedby={intent === "NEW_CUSTOMER" ? "sod-phone-help" : undefined} />{intent === "NEW_CUSTOMER" && <small id="sod-phone-help">Must be able to receive verification texts. This becomes your account number.</small>}</label>
         <label className="sod-sms-consent"><input required type="checkbox" checked={smsConsent} onChange={(event) => setSmsConsent(event.target.checked)} /><span>I agree to receive one READY delivery-link text for this order. Message and data rates may apply.</span></label>

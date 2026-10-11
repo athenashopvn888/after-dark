@@ -5,6 +5,12 @@ export const ADC_STORE_CODE = "MJ01";
 export const ADC_REFRESH_SECONDS = 300;
 export const ADC_FRESHNESS_MAX_HOURS = 36;
 export const ADC_TIERS = ["EXOTIC", "PREMIUM", "AAA+", "AA", "BUDGET"] as const;
+const IGNORED_MALFORMED_SKUS = new Set(["1000", "1001"]);
+
+function isIgnoredMalformedSku(value: string) {
+  const parts = skuParts(value);
+  return parts.length > 0 && parts.every((sku) => IGNORED_MALFORMED_SKUS.has(sku));
+}
 export const ADC_CATEGORIES = [
   "EDIBLES",
   "VAPE PENS",
@@ -71,6 +77,7 @@ function skuParts(value: unknown) {
 }
 
 function positiveQuantities(inventory: AdcRawInventory, sku: string) {
+  if (isIgnoredMalformedSku(sku)) return {};
   return inventory.stock[sku] || {};
 }
 
@@ -127,7 +134,9 @@ function validateInventory(inventory: AdcRawInventory, now: Date) {
   const skus = Object.keys(inventory.stock);
   if (!Number.isInteger(inventory.skuCount) || inventory.skuCount !== skus.length || skus.length === 0) throw new AdcInventoryError("PARTIAL_STOCK", "ADC stock payload is incomplete.");
   for (const [sku, quantities] of Object.entries(inventory.stock)) {
-    if (!/^\d+$/.test(sku) || !quantities || typeof quantities !== "object" || Array.isArray(quantities) || Object.keys(quantities).length === 0) throw new AdcInventoryError("MALFORMED_QUANTITY", `ADC quantity map is invalid for SKU ${sku}.`);
+    if (isIgnoredMalformedSku(sku)) continue;
+    const parts = skuParts(sku);
+    if (parts.length === 0 || parts.some((part) => !/^\d+$/.test(part)) || !quantities || typeof quantities !== "object" || Array.isArray(quantities) || Object.keys(quantities).length === 0) throw new AdcInventoryError("MALFORMED_QUANTITY", `ADC quantity map is invalid for SKU ${sku}.`);
     for (const quantity of Object.values(quantities)) {
       if (!Number.isFinite(quantity) || quantity < 0) throw new AdcInventoryError("MALFORMED_QUANTITY", `ADC quantity is invalid for SKU ${sku}.`);
     }

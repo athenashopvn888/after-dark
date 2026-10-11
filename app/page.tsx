@@ -1,6 +1,7 @@
 import { HOME_DOC_TITLE } from "./lib/homeDelivery";
 import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
+import { getLiveMenu } from "./lib/liveMenu";
 import { faqPageJsonLd, HOME_FAQS, STORE, serializeJsonLd } from "./lib/storeIdentity";
 
 export const metadata: Metadata = {
@@ -20,14 +21,22 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: HOME_DOC_TITLE },
 };
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  let flowers: Awaited<ReturnType<typeof getLiveMenu>>["flowers"] = [];
+  try {
+    flowers = (await getLiveMenu()).flowers;
+  } catch (error) {
+    console.warn("Live homepage ranges unavailable:", error);
+  }
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqPageJsonLd(HOME_FAQS)) }}
       />
-      <HomePageClient />
+      <HomePageClient initialFlowers={flowers} />
     </>
   );
 }
