@@ -15,7 +15,7 @@ import FlowerCard from "./components/FlowerCard";
 import SmokePilotSpotlight from "./components/SmokePilotSpotlight";
 import { WeedDiscoveryModule } from "./components/WeedDiscoveryModule";
 import SccParityHub from "./components/SccParityHub";
-import type { FlowerProduct } from "./lib/products";
+import { allFlowers, type FlowerProduct } from "./lib/products";
 import Papa from "papaparse";
 import { HOME_FAQS, STORE, mapsDirectionsUrl, mapsEmbedUrl } from "./lib/storeIdentity";
 import { storeTierRange, tierRangeText } from "./lib/tierPriceRanges";
@@ -95,7 +95,7 @@ interface ReviewStats {
 
 export default function HomePageClient() {
   const [featuredStrains, setFeaturedStrains] = useState<FlowerProduct[]>([]);
-  const [menuFlowers, setMenuFlowers] = useState<FlowerProduct[]>([]);
+  const [menuFlowers, setMenuFlowers] = useState<FlowerProduct[]>(allFlowers);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsStats, setReviewsStats] = useState<ReviewStats | null>(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
@@ -160,6 +160,7 @@ export default function HomePageClient() {
     fetch("/api/tv-data?type=flowers")
       .then((response) => response.ok ? response.json() as Promise<FlowerProduct[]> : Promise.reject(new Error(`Inventory returned ${response.status}`)))
       .then((flowers) => {
+        if (!Array.isArray(flowers) || flowers.length === 0) return;
         setMenuFlowers(flowers);
         const pool = flowers.filter((flower) => flower.image);
         for (let i = pool.length - 1; i > 0; i--) {
