@@ -12,6 +12,7 @@ test("feed ranges use sale price per gram and source THC", () => {
 });
 test("price rules, labels, FAQ schema source, delivery ranges, and chat greeting are wired", () => {
   for (const file of ["app/HomePageClient.tsx", "app/[tier]/page.tsx"]) assert.match(read(file), /IN-STORE PRICES ONLY\./);
+  assert.match(read("app/[tier]/page.tsx"), /flowers: allFlowers\.filter/);
   assert.match(read("app/delivery/DeliveryContent.tsx"), /DELIVERY PRICES ONLY\./);
   assert.match(read("app/delivery/DeliveryContent.tsx"), /deliveryTierRanges\(products\)/);
   assert.match(read("app/faq/page.tsx"), /Can I get the store price on a delivery order\?/);

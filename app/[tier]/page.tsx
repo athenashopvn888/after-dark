@@ -5,7 +5,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FlowerCard from "../components/FlowerCard";
 import {
+  allFlowers,
   getTierFromSlug,
+  productSnapshotMeta,
   TIER_CONFIG,
 } from "../lib/products";
 import { getAdcInventory } from "../lib/adcInventoryService";
@@ -35,6 +37,23 @@ const LEGACY_TIER_REDIRECTS: Record<string, string> = {
 
 export const dynamic = "force-dynamic";
 
+async function tierInventory(tier: string) {
+  try {
+    const { snapshot } = await getAdcInventory();
+    return {
+      flowers: snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tier.toUpperCase()),
+      version: snapshot.version,
+      sourceTimestamp: snapshot.sourceTimestamp,
+    };
+  } catch {
+    return {
+      flowers: allFlowers.filter((flower) => flower.tier.toUpperCase() === tier.toUpperCase()),
+      version: "build-feed-snapshot",
+      sourceTimestamp: productSnapshotMeta.sourceAsOf,
+    };
+  }
+}
+
 /* -- Generate all tier pages at build -- */
 export function generateStaticParams() {
   return Object.values(TIER_CONFIG).map((t) => ({ tier: t.slug }));
@@ -49,8 +68,7 @@ export async function generateMetadata({
   const { tier: tierSlug } = await params;
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) return {};
-  const { snapshot } = await getAdcInventory();
-  const flowers = snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
+  const { flowers } = await tierInventory(tierInfo.key);
   const seo = TIER_SEO[tierInfo.key];
 
   return {
@@ -81,8 +99,8 @@ export default async function TierPage({
   const tierInfo = getTierFromSlug(tierSlug);
   if (!tierInfo) notFound();
 
-  const inventory = await getAdcInventory();
-  const flowers = inventory.snapshot.flowers.filter((flower) => flower.tier.toUpperCase() === tierInfo.key.toUpperCase());
+  const inventory = await tierInventory(tierInfo.key);
+  const flowers = inventory.flowers;
   const { config } = tierInfo;
   const guideLinks = getTierGuideLinks(`/${tierSlug}`);
   const seo = TIER_SEO[tierInfo.key];
@@ -112,7 +130,7 @@ export default async function TierPage({
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: serializeJsonLd(tierJsonLd) }}
     />
-    <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
+    <main className={styles.main} data-inventory-version={inventory.version} data-inventory-as-of={inventory.sourceTimestamp}>
       <Navbar />
 
       {/* ── Banner Image (standalone, no overlay text) ── */}
