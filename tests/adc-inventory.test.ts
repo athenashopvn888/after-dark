@@ -72,6 +72,22 @@ test("rejects malformed, stale, partial, duplicate, and wrong-category source in
   for (const [code, run] of cases) assert.throws(run, (error) => error instanceof AdcInventoryError && error.code === code);
 });
 
+test("skips known malformed inventory SKUs 1000 and 1001", () => {
+  const base = fixture();
+  const inventory: AdcRawInventory = {
+    ...base.inventory,
+    skuCount: base.inventory.skuCount + 2,
+    stock: {
+      ...base.inventory.stock,
+      "1000": { each: Number.NaN },
+      "1001": {} as Record<string, number>,
+    },
+  };
+  const snapshot = buildAdcInventorySnapshot({ ...base, inventory });
+  assert.equal(snapshot.flowers.some((row) => row.sku === "1000" || row.sku === "1001"), false);
+  assert.equal(snapshot.items.some((row) => String(row.sku).includes("1000") || String(row.sku).includes("1001")), false);
+});
+
 test("fresh source wins even when persistence fails; LKG is source-failure only", async () => {
   const input = fixture();
   const fresh = buildAdcInventorySnapshot(input);

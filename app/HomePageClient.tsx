@@ -15,7 +15,7 @@ import FlowerCard from "./components/FlowerCard";
 import SmokePilotSpotlight from "./components/SmokePilotSpotlight";
 import { WeedDiscoveryModule } from "./components/WeedDiscoveryModule";
 import SccParityHub from "./components/SccParityHub";
-import { allFlowers, type FlowerProduct } from "./lib/products";
+import { type FlowerProduct } from "./lib/products";
 import Papa from "papaparse";
 import { HOME_FAQS, STORE, mapsDirectionsUrl, mapsEmbedUrl } from "./lib/storeIdentity";
 import { storeTierRange, tierRangeText } from "./lib/tierPriceRanges";
@@ -93,9 +93,8 @@ interface ReviewStats {
   avg: number;
 }
 
-export default function HomePageClient() {
+export default function HomePageClient({ initialFlowers }: { initialFlowers: Parameters<typeof storeTierRange>[0] }) {
   const [featuredStrains, setFeaturedStrains] = useState<FlowerProduct[]>([]);
-  const [menuFlowers, setMenuFlowers] = useState<FlowerProduct[]>(allFlowers);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsStats, setReviewsStats] = useState<ReviewStats | null>(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
@@ -161,7 +160,6 @@ export default function HomePageClient() {
       .then((response) => response.ok ? response.json() as Promise<FlowerProduct[]> : Promise.reject(new Error(`Inventory returned ${response.status}`)))
       .then((flowers) => {
         if (!Array.isArray(flowers) || flowers.length === 0) return;
-        setMenuFlowers(flowers);
         const pool = flowers.filter((flower) => flower.image);
         for (let i = pool.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -274,7 +272,7 @@ export default function HomePageClient() {
                 <div className={styles.bentoTileOverlay} />
                 <div className={styles.bentoTileContent}>
                   <span className={styles.bentoLabel}>{tier.name}</span>
-                  {tier.key ? (() => { const line = tierRangeText(storeTierRange(menuFlowers, tier.key)); return line ? <span className={styles.bentoPrice}><small className="price-scope-label">In-store price</small>{line}</span> : null; })() : <span className={styles.bentoPrice}>{tier.price}</span>}
+                  {tier.key ? (() => { const line = tierRangeText(storeTierRange(initialFlowers, tier.key)); return line ? <span className={styles.bentoPrice}><small className="price-scope-label">In-store price</small>{line}</span> : null; })() : <span className={styles.bentoPrice}>{tier.price}</span>}
                 </div>
               </Link>
             ))}
