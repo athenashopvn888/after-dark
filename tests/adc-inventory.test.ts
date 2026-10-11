@@ -88,6 +88,20 @@ test("skips known malformed inventory SKUs 1000 and 1001", () => {
   assert.equal(snapshot.items.some((row) => String(row.sku).includes("1000") || String(row.sku).includes("1001")), false);
 });
 
+test("skips the combined malformed inventory key for SKUs 1000 and 1001", () => {
+  const base = fixture();
+  const inventory: AdcRawInventory = {
+    ...base.inventory,
+    skuCount: base.inventory.skuCount + 1,
+    stock: { ...base.inventory.stock, "1000, 1001": {} },
+  };
+
+  const snapshot = buildAdcInventorySnapshot({ ...base, inventory });
+
+  assert.equal(snapshot.flowers.some((row) => row.sku === "1000" || row.sku === "1001"), false);
+  assert.equal(snapshot.items.some((row) => String(row.sku).includes("1000") || String(row.sku).includes("1001")), false);
+});
+
 test("fresh source wins even when persistence fails; LKG is source-failure only", async () => {
   const input = fixture();
   const fresh = buildAdcInventorySnapshot(input);
