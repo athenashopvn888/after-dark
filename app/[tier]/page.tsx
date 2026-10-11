@@ -5,9 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FlowerCard from "../components/FlowerCard";
 import {
-  allFlowers,
   getTierFromSlug,
-  productSnapshotMeta,
   TIER_CONFIG,
 } from "../lib/products";
 import { getAdcInventory } from "../lib/adcInventoryService";
@@ -47,9 +45,9 @@ async function tierInventory(tier: string) {
     };
   } catch {
     return {
-      flowers: allFlowers.filter((flower) => flower.tier.toUpperCase() === tier.toUpperCase()),
-      version: "build-feed-snapshot",
-      sourceTimestamp: productSnapshotMeta.sourceAsOf,
+      flowers: [],
+      version: "live-inventory-unavailable",
+      sourceTimestamp: "",
     };
   }
 }
