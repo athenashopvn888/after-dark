@@ -85,6 +85,7 @@ const FAQ_CATEGORIES = [
   {
     title: "🛒 Shopping & Experience",
     faqs: [
+      { q: "Can I get the store price on a delivery order?", a: "No. In-store prices are for purchases made in the store. Delivery orders always use delivery prices." },
       { q: "Do I need an appointment?", a: "No! After Dark Cannabis is walk-in only. Just show up anytime — we're open 24 hours." },
       { q: "Can I order online?", a: "After Dark Cannabis is an in-store shopping experience. You can browse the online menu before visiting, but the site does not provide online checkout." },
       { q: "Do you offer delivery?", a: "York-radius drop-off is coordinated from the Jane Street store when the dispatcher can take the address. Use the cannabis delivery York page, then the York delivery catalog. Delivery is not 24-hour; the walk-in at 1664 Jane Street, York is. There is no Mississauga or Etobicoke After Dark storefront." },
@@ -140,7 +141,7 @@ export default function FAQPage() {
             <div key={cat.title} className={styles.category}>
               <h2 className={styles.categoryTitle}>{cat.title}</h2>
               {cat.faqs.map((faq) => (
-                <details key={faq.q} className={styles.faqItem}>
+                <details key={faq.q} id={faq.q === "Can I get the store price on a delivery order?" ? "delivery-price-rule" : undefined} className={styles.faqItem}>
                   <summary className={styles.faqQuestion}>{faq.q}</summary>
                   <p className={styles.faqAnswer}>{faq.a}</p>
                 </details>

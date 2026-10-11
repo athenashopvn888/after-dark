@@ -18,11 +18,13 @@ import SccParityHub from "./components/SccParityHub";
 import type { FlowerProduct } from "./lib/products";
 import Papa from "papaparse";
 import { HOME_FAQS, STORE, mapsDirectionsUrl, mapsEmbedUrl } from "./lib/storeIdentity";
+import { storeTierRange, tierRangeText } from "./lib/tierPriceRanges";
 
 /* ── Bento Mosaic Config ── */
 const BENTO_TIERS = [
   {
     name: "Exotic Weed",
+    key: "EXOTIC",
     slug: "exotic-weed",
     price: "$10-$12/g",
     banner: "/banners/after_dark_exotics_banner.webp",
@@ -30,6 +32,7 @@ const BENTO_TIERS = [
   },
   {
     name: "Premium Weed",
+    key: "PREMIUM",
     slug: "premium-weed",
     price: "$7-$10/g",
     banner: "/banners/after_dark_premium_banner.webp",
@@ -37,6 +40,7 @@ const BENTO_TIERS = [
   },
   {
     name: "AAA+ Weed",
+    key: "AAA+",
     slug: "aaa-weed",
     price: "$5-$6/g",
     banner: "/banners/after_dark_aaa_plus_banner.webp",
@@ -44,6 +48,7 @@ const BENTO_TIERS = [
   },
   {
     name: "AA Weed",
+    key: "AA",
     slug: "aa-weed",
     price: "$4/g",
     banner: "/banners/after_dark_aa_banner.webp",
@@ -51,6 +56,7 @@ const BENTO_TIERS = [
   },
   {
     name: "Budget Weed",
+    key: "BUDGET",
     slug: "budget-weed",
     price: "$3/g",
     banner: "/banners/after_dark_budget_banner.webp",
@@ -58,6 +64,7 @@ const BENTO_TIERS = [
   },
   {
     name: "EDIBLES • PREROLLS • MORE",
+    key: null,
     slug: "items/edibles",
     price: "Shop Tiers",
     banner: "/banners/after_dark_edibles_prerolls_more_banner.webp",
@@ -88,6 +95,7 @@ interface ReviewStats {
 
 export default function HomePageClient() {
   const [featuredStrains, setFeaturedStrains] = useState<FlowerProduct[]>([]);
+  const [menuFlowers, setMenuFlowers] = useState<FlowerProduct[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsStats, setReviewsStats] = useState<ReviewStats | null>(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
@@ -152,6 +160,7 @@ export default function HomePageClient() {
     fetch("/api/tv-data?type=flowers")
       .then((response) => response.ok ? response.json() as Promise<FlowerProduct[]> : Promise.reject(new Error(`Inventory returned ${response.status}`)))
       .then((flowers) => {
+        setMenuFlowers(flowers);
         const pool = flowers.filter((flower) => flower.image);
         for (let i = pool.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -249,6 +258,7 @@ export default function HomePageClient() {
         <div className={styles.heroOverlay} />
         <div className={styles.heroStars} />
         <div className={styles.heroContent}>
+          <p className="price-rule-notice"><strong>IN-STORE PRICES ONLY.</strong> These prices do not apply to delivery orders. Delivery has its own prices. Why? <Link href="/faq#delivery-price-rule">See the FAQ</Link></p>
           <div className={styles.bentoGrid}>
             {BENTO_TIERS.map((tier) => (
               <Link
@@ -263,7 +273,7 @@ export default function HomePageClient() {
                 <div className={styles.bentoTileOverlay} />
                 <div className={styles.bentoTileContent}>
                   <span className={styles.bentoLabel}>{tier.name}</span>
-                  <span className={styles.bentoPrice}>{tier.price}</span>
+                  {tier.key ? (() => { const line = tierRangeText(storeTierRange(menuFlowers, tier.key)); return line ? <span className={styles.bentoPrice}><small className="price-scope-label">In-store price</small>{line}</span> : null; })() : <span className={styles.bentoPrice}>{tier.price}</span>}
                 </div>
               </Link>
             ))}
