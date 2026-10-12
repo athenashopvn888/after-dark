@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { FlowerProduct, PricePoint } from "../lib/products";
 import { TIER_CONFIG } from "../lib/products";
 import {
+  formatDollars,
   formatPayEquals,
   formatPerGram,
   isBogoDeal,
@@ -44,6 +45,8 @@ export default function FlowerCard({
   const deal3 = tierCfg?.deal3g ?? null;
   const deal6 = tierCfg?.deal6g ?? null;
   const isBogoTier = isBogoDeal(deal6);
+  const listPrice3g = flower.price3g ? flower.price3g.regular : null;
+  const listPerGram = listPrice3g !== null ? listPrice3g / 2 : null;
 
   const weights: WeightOption[] = [];
   if (flower.price3g && deal3) {
@@ -151,9 +154,9 @@ export default function FlowerCard({
             <span className={styles.priceMain}>${active.price?.regular}</span>
           )}
           <div className={styles.perGramWrap}>
-            {isBogoTier && tierCfg?.unitPrice ? (
+            {isBogoTier && listPerGram !== null ? (
               <>
-                <span className={styles.perGramOld}>${tierCfg.unitPrice}/g</span>
+                <span className={styles.perGramOld}>{formatDollars(listPerGram)}/g</span>
                 <span className={styles.perGram}>${perGram}/g</span>
               </>
             ) : (
