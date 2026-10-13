@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
-import { resolveItemBanner } from "../../lib/corePromotionBanners";
 import Footer from "../../components/Footer";
 import SafeImage from "../../components/SafeImage";
 import { getItemPriceDisplay } from "../../lib/itemPricing";
@@ -66,7 +65,6 @@ export default async function ItemsCategoryPage({
     items = [...items, ...uniqueAccessories];
   }
   const { config } = catInfo;
-  const categoryBanner = resolveItemBanner(catSlug, config.banner);
   const guideGroups = getCategoryGuideGroups(`/items/${catSlug}`);
   const seoKey = config.name.toLowerCase().includes("thc") ? "vape-disposables" : config.name.toLowerCase().includes("nic") ? "vapes" : catSlug;
   const seoCopy = seoContent.categories[seoKey as keyof typeof seoContent.categories];
@@ -83,7 +81,7 @@ export default async function ItemsCategoryPage({
       <section style={{ width: "100%", overflow: "hidden", marginTop: 0, marginBottom: "24px" }}>
         {config.banner ? (
           <img
-              src={categoryBanner}
+            src={config.banner}
             alt={config.name}
             style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
           />
