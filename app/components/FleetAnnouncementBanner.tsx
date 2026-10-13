@@ -28,7 +28,7 @@ export default function FleetAnnouncementBanner() {
           </div>
           <Link href={promo.href} aria-label={promo.alt} style={{ display: "block", width: "100%", background: THEME.background }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={promo.image} alt={promo.alt} title={promo.caption} style={imageStyle} loading={promo.key === "weed" ? "eager" : "lazy"} />
+            <img src={promo.image} alt={promo.alt} title={promo.caption} width={1672} height={941} style={imageStyle} loading="eager" />
           </Link>
           <figcaption style={{ ...captionStyle, borderBottom: `3px solid ${THEME.accent}` }}>{promo.caption}</figcaption>
         </figure>
