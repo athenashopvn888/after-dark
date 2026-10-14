@@ -183,6 +183,10 @@ export default function AfterDarkWebChat() {
       setNotice("Choose whether you are new or returning.");
       return;
     }
+    if (!firstMessage.trim()) {
+      setNotice("Enter your order details before starting Web Chat.");
+      return;
+    }
     if (!availability || availability.state !== "AVAILABLE") {
       setNotice(availability?.message || "Delivery status is temporarily unavailable. Please check back soon.");
       return;
@@ -330,8 +334,8 @@ export default function AfterDarkWebChat() {
         <label>Full name<input required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" /></label></>}
         {intent && <><label>Canadian mobile number<input required inputMode="tel" value={phone} onChange={(event) => setPhone(event.target.value)} autoComplete="tel" placeholder="647 555 0123" aria-describedby={intent === "NEW_CUSTOMER" ? "sod-phone-help" : undefined} />{intent === "NEW_CUSTOMER" && <small id="sod-phone-help">Must be able to receive verification texts. This becomes your account number.</small>}</label>
         <label className="sod-sms-consent"><input required type="checkbox" checked={smsConsent} onChange={(event) => setSmsConsent(event.target.checked)} /><span>I agree to receive one READY delivery-link text for this order. Message and data rates may apply.</span></label>
-        <label>Order details (optional)<textarea maxLength={1000} value={firstMessage} onChange={(event) => setFirstMessage(event.target.value)} placeholder="What would you like to order today?" /></label>
-        <button type="submit" disabled={busy || !smsConsent}>{busy ? "Starting…" : "Start order chat"}</button></>}
+        <label>Order details<textarea required maxLength={1000} value={firstMessage} onChange={(event) => setFirstMessage(event.target.value)} placeholder="What would you like to order today?" /></label>
+        <button type="submit" disabled={busy || !smsConsent || !firstMessage.trim()}>{busy ? "Starting…" : "Start order chat"}</button></>}
       </form>) : <>
         <div className="sod-chat-scroll">
           <section className="sod-chat-account" aria-label="Order account">
