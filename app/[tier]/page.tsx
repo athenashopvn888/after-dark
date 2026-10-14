@@ -24,6 +24,7 @@ import {
 import styles from "./tier.module.css";
 import { getTierGuideLinks } from "../lib/guideRegistry";
 import { storeTierRange, tierRangeText } from "../lib/tierPriceRanges";
+import nearMeFaq from "../lib/nearMeFaq.json";
 
 const SITE_ORIGIN = STORE.baseUrl;
 const LEGACY_TIER_REDIRECTS: Record<string, string> = {
@@ -268,6 +269,7 @@ export default async function TierPage({
               <h2 className={styles.seoMainTitle}>{seo.seoTitle}</h2>
             )}
             <p className={styles.seoIntro}>{seo.seoIntro}</p>
+            {/^(exotic|premium|aaa)(-weed)?$/.test(tierSlug) ? <p className={styles.seoIntro} data-tier-near-line="">{nearMeFaq.tierLine}</p> : null}
 
             {seo.sections.map((s, i) => (
               <div key={i} className={styles.seoBlock}>
