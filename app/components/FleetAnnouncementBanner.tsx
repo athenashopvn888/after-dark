@@ -16,12 +16,17 @@ const figureStyle = { margin: 0, width: "100%" } as const;
 const imageStyle = { display: "block", width: "100%", maxWidth: "100%", height: "auto" } as const;
 const captionStyle = { margin: 0, padding: "10px 14px", background: "#111827", color: "#ffffff", textAlign: "center" as const, fontWeight: 800, lineHeight: 1.35 };
 
+import { Fragment } from "react";
+import CigaretteSeasonalNotice from "./CigaretteSeasonalNotice";
+
 export default function FleetAnnouncementBanner() {
   return (
     <aside data-fleet-homepage-announcement="" aria-label="Store promotions" style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "100%", height: "auto", minHeight: 0, overflow: "visible", position: "relative", zIndex: 50 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": bannerImageObjects }).replace(/</g, "\\u003c") }} />
       {promos.map((promo) => (
-        <figure key={promo.key} data-core-banner={promo.key} style={{ ...figureStyle, boxShadow: `inset 0 0 0 2px ${THEME.accent}` }}>
+        <Fragment key={promo.key}>
+        {promo.key === "cigarettes" && <CigaretteSeasonalNotice />}
+        <figure data-core-banner={promo.key} style={{ ...figureStyle, boxShadow: `inset 0 0 0 2px ${THEME.accent}` }}>
           <Link href={promo.href} aria-label={promo.alt} style={{ display: "block", width: "100%", background: THEME.background }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -36,6 +41,7 @@ export default function FleetAnnouncementBanner() {
           </Link>
           <figcaption style={{ ...captionStyle, borderBottom: `3px solid ${THEME.accent}` }}>{promo.caption}</figcaption>
         </figure>
+        </Fragment>
       ))}
     </aside>
   );

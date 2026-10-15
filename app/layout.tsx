@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import PinnedNavClearance from "./components/PinnedNavClearance";
 import { STORE, cannabisStoreGraphNode, serializeJsonLd, websiteGraphNode } from "./lib/storeIdentity";
 
 export const metadata: Metadata = {
@@ -102,6 +103,7 @@ export default function RootLayout({
           WEED DELIVERY IS HERE — CLICK TO EXPLORE
         </Link>
         {children}
+        <PinnedNavClearance />
       </body>
     </html>
   );
