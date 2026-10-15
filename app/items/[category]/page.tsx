@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import CigaretteSeasonalNotice from "../../components/CigaretteSeasonalNotice";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
@@ -78,6 +79,7 @@ export default async function ItemsCategoryPage({
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryJsonLd) }} />
     <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
+      {catSlug === "cigarettes" && <CigaretteSeasonalNotice sticky />}
 
       {/* Hero Banner */}
       <section style={{ width: "100%", overflow: "hidden", marginTop: 0, marginBottom: "24px" }}>
