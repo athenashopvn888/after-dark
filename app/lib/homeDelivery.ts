@@ -27,4 +27,4 @@ export const HOME_DELIVERY_FAQS = [
 ] as const;
 
 // Document <title>/og/twitter: exact Google name | area. H1 keeps HOME_TITLE (previous keyword text).
-export const HOME_DOC_TITLE = "After Dark Cannabis | York Dispensary";
+export const HOME_DOC_TITLE = "After Dark Cannabis Dispensary Weed Delivery | York Dispensary";
