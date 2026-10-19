@@ -400,7 +400,9 @@ export function cannabisStoreGraphNode() {
   return {
     "@type": "CannabisStore",
     "@id": `${STORE.baseUrl}/#store`,
-    name: STORE.name,
+    name: "After Dark Cannabis Dispensary Weed Delivery",
+    alternateName: STORE.name,
+    sameAs: ["https://www.google.com/maps/place/?q=place_id:ChIJha2UQegxK4gRAGK9yMNa6Fo"],
     legalName: STORE.legalName,
     description:
       "24-hour walk-in cannabis dispensary at 1664 Jane Street in York, ON. Jane Street / Weston / Mount Dennis corridor. Flower tiers, edibles, prerolls, and vapes. Adults 19+.",

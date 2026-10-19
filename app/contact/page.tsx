@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FULL_NAME_NAP } from "../lib/fullNameNap";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -57,6 +58,7 @@ export default function ContactPage() {
         <section className={styles.hero} style={{ paddingTop: 0 }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
             <img src="/banners/08_Contact_Us.webp" alt="Contact After Dark Cannabis on Jane Street in York" style={{ width: "100%", height: "auto", display: "block", borderRadius: "var(--radius-lg)" }} />
+          <h1 className={styles.heroTitle} data-fullname-contact-h1="" style={{ marginTop: "16px", textAlign: "center", fontSize: "clamp(22px, 4vw, 34px)", lineHeight: 1.2, overflowWrap: "anywhere" }}>Contact {FULL_NAME_NAP.fullName}</h1>
           </div>
         </section>
 
