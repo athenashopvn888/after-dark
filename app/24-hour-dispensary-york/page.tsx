@@ -14,6 +14,7 @@ import {
   webpageGraphNode,
 } from "../lib/storeIdentity";
 import SccParityHub from "../components/SccParityHub";
+import { presentFaq, SHOW_CIGARETTES } from "../lib/siteConfig";
 import styles from "../visit/visit.module.css";
 
 const canonical = `${STORE.baseUrl}${STORE.hoursPath}`;
@@ -156,6 +157,7 @@ export default function TwentyFourHourYorkPage() {
           </p>
         </section>
 
+        {SHOW_CIGARETTES ? (
         <section>
           <h2>Overnight Native cigarettes and nicotine vapes</h2>
           <p>
@@ -169,6 +171,19 @@ export default function TwentyFourHourYorkPage() {
             <Link href="/items/vapes">/items/vapes</Link>. Adults 19+. Nicotine is addictive.
           </p>
         </section>
+        ) : (
+        <section>
+          <h2>Overnight nicotine vapes</h2>
+          <p>
+            The 24-hour claim already on this site and on the homepage applies to the Jane Street
+            walk-in, not to a second after-hours shop. When nicotine vapes are
+            on the current menu, overnight shoppers use the same listed category as daytime
+            visits. Neighbourhood guide:{" "}
+            <Link href={STORE.nicotineVapePath}>nicotine vapes on Jane Street</Link>. The live list stays
+            on <Link href="/items/vapes">/items/vapes</Link>. Adults 19+. Nicotine is addictive.
+          </p>
+        </section>
+        )}
 
         <section>
           <h2>Safety &amp; ID at night</h2>
@@ -208,7 +223,7 @@ export default function TwentyFourHourYorkPage() {
             <Link href={STORE.storePagePath}>Weed Dispensary in York</Link>.
             Neighbourhood walk-in notes are on the{" "}
             <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
-            Native cigarettes: <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link>.
+            {SHOW_CIGARETTES && <>Native cigarettes: <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link>. </>}
             Nicotine vapes: <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>.
             None of those replace the homepage as the website URL for this store.
           </p>
@@ -228,12 +243,16 @@ export default function TwentyFourHourYorkPage() {
         <section>
           <h2>FAQ: 24 hour dispensary York / near me</h2>
           <div className={styles.faqList}>
-            {HOURS_FAQS.map((faq) => (
-              <article key={faq.q} className={styles.faqItem}>
-                <h3>{faq.q}</h3>
-                <p>{faq.a}</p>
+            {HOURS_FAQS.map((faq) => {
+              const visible = presentFaq(faq);
+              if (!visible) return null;
+              return (
+              <article key={visible.q} className={styles.faqItem}>
+                <h3>{visible.q}</h3>
+                <p>{visible.a}</p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
       </main>

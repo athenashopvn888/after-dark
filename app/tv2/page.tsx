@@ -14,6 +14,7 @@ import {
   isTv2Daytime,
   type Tv2DaytimePromo,
 } from "./tv2Promos";
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 
 /* -- TYPES -- */
 interface Item {
@@ -30,6 +31,7 @@ const CARD_CONFIG = [
   { id:"CIGARETTES",      title:"🚬 CIGARETTES",         accent:"#78350f", filter:(it:Item)=>it.category==="CIGARETTES", preset:"" },
   { id:"MAGIC",           title:"🍄 MAGIC & OTHERS",     accent:"#9333ea", filter:(it:Item)=>it.category==="MAGIC & OTHERS", preset:"🍫 START SMALL · WAIT 45 MIN · THEN MORE" },
 ];
+const VISIBLE_CARDS = SHOW_CIGARETTES ? CARD_CONFIG : CARD_CONFIG.filter((card) => card.id !== "CIGARETTES");
 
 /* -- HELPERS -- */
 const fmtPrice = (v?:string) => { const s=String(v||"").trim(); if(!s)return""; return /^\$/.test(s)?s:"$"+s; };
@@ -185,7 +187,7 @@ function VerticalTicker() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [exitIdx, setExitIdx] = useState(-1);
   const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => isCigaretteFlashWindow());
-  const slides = showCigaretteFlash ? [...TICKER_SLIDES, CIGARETTE_FLASH_MESSAGE] : TICKER_SLIDES;
+  const slides = SHOW_CIGARETTES && showCigaretteFlash ? [...TICKER_SLIDES, CIGARETTE_FLASH_MESSAGE] : TICKER_SLIDES;
 
   useEffect(() => {
     const update = () => setShowCigaretteFlash(isCigaretteFlashWindow());
@@ -245,7 +247,7 @@ export default function TV2Page() {
       setItems(data);
       setStockUpdated(readStockUpdatedAt(res, data));
       const hi: Record<string,number> = {};
-      CARD_CONFIG.forEach(c => { hi[c.id] = 0; });
+      VISIBLE_CARDS.forEach(c => { hi[c.id] = 0; });
       setHighlights(hi);
       setLastUpdate(formatBoardTime(new Date()) || "");
     } catch (err) { console.warn("[TV2] Load failed:", err); }
@@ -277,7 +279,7 @@ export default function TV2Page() {
     const interval = setInterval(() => {
       setHighlights(prev => {
         const next = {...prev};
-        CARD_CONFIG.forEach(c => {
+        VISIBLE_CARDS.forEach(c => {
           const filtered = items.filter(c.filter);
           next[c.id] = ((prev[c.id]||0) + 1) % Math.max(1, filtered.length);
         });
@@ -299,7 +301,7 @@ export default function TV2Page() {
         <div className={styles.stage}>
           <HiringRibbon hiring={tvHiring} />
           <div className={styles.grid}>
-            {CARD_CONFIG.map(card => {
+            {VISIBLE_CARDS.map(card => {
               const filtered = items.filter(card.filter).filter(it => !(daytime && isNicotineItem(it)));
               const promo = getTv2DaytimePromo(card.id, daytime, promoElapsedMs);
 

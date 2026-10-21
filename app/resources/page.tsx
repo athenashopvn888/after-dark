@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import ResourceView from "./ResourceView";
-import { AUTHORS, RESOURCE_HOME, SITE } from "./resourceData";
+import { AUTHORS, publicResourcePage, RESOURCE_HOME, SITE } from "./resourceData";
 
-export const metadata: Metadata = buildResourceMetadata(RESOURCE_HOME);
+const homePage = publicResourcePage(RESOURCE_HOME);
+
+export const metadata: Metadata = buildResourceMetadata(homePage);
 
 export default function ResourcesPage() {
-  return <ResourceView page={RESOURCE_HOME} />;
+  return <ResourceView page={homePage} />;
 }
 
 function buildResourceMetadata(page: typeof RESOURCE_HOME): Metadata {

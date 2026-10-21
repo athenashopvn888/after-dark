@@ -1,3 +1,5 @@
+import { presentFaqs } from "./siteConfig.ts";
+
 /** FMD / Master Line identity for After Dark Cannabis (MJ01). Homepage is the NAP hub. */
 export const STORE = {
   name: "After Dark Cannabis",
@@ -360,7 +362,7 @@ export const CORRIDOR_FAQS: StoreFaq[] = [
 export function faqPageGraphNode(faqs: StoreFaq[]) {
   return {
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: presentFaqs(faqs).map((faq) => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: {

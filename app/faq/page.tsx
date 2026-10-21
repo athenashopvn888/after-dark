@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { presentFaq } from "../lib/siteConfig";
 import { STORE } from "../lib/storeIdentity";
 import { TIER_CONFIG } from "../lib/products";
 import {
@@ -102,7 +103,7 @@ export default function FAQPage() {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: FAQ_CATEGORIES.flatMap((cat) =>
-      cat.faqs.map((faq) => ({
+      cat.faqs.map((faq) => presentFaq(faq)).filter((faq): faq is NonNullable<typeof faq> => faq !== null).map((faq) => ({
         "@type": "Question",
         name: faq.q,
         acceptedAnswer: {
@@ -140,12 +141,16 @@ export default function FAQPage() {
           {FAQ_CATEGORIES.map((cat) => (
             <div key={cat.title} className={styles.category}>
               <h2 className={styles.categoryTitle}>{cat.title}</h2>
-              {cat.faqs.map((faq) => (
-                <details key={faq.q} id={faq.q === "Can I get the store price on a delivery order?" ? "delivery-price-rule" : undefined} open={faq.q === "Can I get the store price on a delivery order?"} className={styles.faqItem}>
-                  <summary className={styles.faqQuestion}>{faq.q}</summary>
-                  <p className={styles.faqAnswer}>{faq.a}</p>
+              {cat.faqs.map((faq) => {
+                const visible = presentFaq(faq);
+                if (!visible) return null;
+                return (
+                <details key={visible.q} id={visible.q === "Can I get the store price on a delivery order?" ? "delivery-price-rule" : undefined} open={visible.q === "Can I get the store price on a delivery order?"} className={styles.faqItem}>
+                  <summary className={styles.faqQuestion}>{visible.q}</summary>
+                  <p className={styles.faqAnswer}>{visible.a}</p>
                 </details>
-              ))}
+                );
+              })}
             </div>
           ))}
 

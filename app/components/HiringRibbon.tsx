@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { TvHiringConfig } from "../lib/tvHiring";
 import { TV_POLICY_MESSAGE } from "../lib/tvPolicy";
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "../tv/flashMessages";
 import styles from "./HiringRibbon.module.css";
 
@@ -54,7 +55,7 @@ function fitPolicyLine(node: HTMLSpanElement) {
 }
 
 export default function HiringRibbon({ hiring }: { hiring: TvHiringConfig | null }) {
-  const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => isCigaretteFlashWindow());
+  const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => SHOW_CIGARETTES && isCigaretteFlashWindow());
   const policy = trimmed(TV_POLICY_MESSAGE);
   const hiringOn = hiring !== null && trimmed(hiring.displayUrl).length > 0;
   const messages = [
@@ -72,7 +73,7 @@ export default function HiringRibbon({ hiring }: { hiring: TvHiringConfig | null
   const policyRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const update = () => setShowCigaretteFlash(isCigaretteFlashWindow());
+    const update = () => setShowCigaretteFlash(SHOW_CIGARETTES && isCigaretteFlashWindow());
     const timer = window.setInterval(update, 60_000);
     return () => window.clearInterval(timer);
   }, []);

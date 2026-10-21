@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 
 const STORE_NAME = "After Dark Cannabis";
 const THEME = { accent: "#a855f7", background: "#090512" };
@@ -9,8 +10,10 @@ const promos = [
   { key: "premium-cigarettes", href: "/items/cigarettes", image: "/banners/core-premium-cigarettes.webp", alt: `${STORE_NAME} BB Full Flavor and Lights, Marlboro and Belmont cigarettes`, caption: "BB Full Flavor + Lights 2 packs $5 · Marlboro & Belmont $10/pack" },
 ] as const;
 
+const visiblePromos = SHOW_CIGARETTES ? promos : promos.filter((promo) => promo.key !== "cigarettes" && promo.key !== "premium-cigarettes");
+
 const STORE_ORIGIN = "https://afterdarkcannabis.com";
-const bannerImageObjects = promos.map((promo) => ({ "@type": "ImageObject", name: promo.alt, contentUrl: `${STORE_ORIGIN}${promo.image}`, description: `${promo.alt} at ${STORE_NAME}.`, caption: promo.caption }));
+const bannerImageObjects = visiblePromos.map((promo) => ({ "@type": "ImageObject", name: promo.alt, contentUrl: `${STORE_ORIGIN}${promo.image}`, description: `${promo.alt} at ${STORE_NAME}.`, caption: promo.caption }));
 
 const figureStyle = { margin: 0, width: "100%" } as const;
 const imageStyle = { display: "block", width: "100%", maxWidth: "100%", height: "auto" } as const;
@@ -23,7 +26,7 @@ export default function FleetAnnouncementBanner() {
   return (
     <aside data-fleet-homepage-announcement="" aria-label="Store promotions" style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "100%", height: "auto", minHeight: 0, overflow: "visible", position: "relative", zIndex: 50 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": bannerImageObjects }).replace(/</g, "\\u003c") }} />
-      {promos.map((promo) => (
+      {visiblePromos.map((promo) => (
         <Fragment key={promo.key}>
         {promo.key === "cigarettes" && <CigaretteSeasonalNotice />}
         <figure data-core-banner={promo.key} style={{ ...figureStyle, boxShadow: `inset 0 0 0 2px ${THEME.accent}` }}>

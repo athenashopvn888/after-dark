@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { presentFaq } from "../../lib/siteConfig";
 import ResourceView from "../ResourceView";
 import {
   AUTHORS,
@@ -109,7 +110,7 @@ function buildSchema(page: ResourcePage) {
         ? [
             {
               "@type": "FAQPage",
-              mainEntity: page.faqs.map((faq) => ({
+              mainEntity: page.faqs.map((faq) => presentFaq(faq)).filter((faq): faq is NonNullable<typeof faq> => faq !== null).map((faq) => ({
                 "@type": "Question",
                 name: faq.q,
                 acceptedAnswer: { "@type": "Answer", text: faq.a },

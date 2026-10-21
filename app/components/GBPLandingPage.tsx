@@ -2,6 +2,7 @@ import Link from "next/link";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import styles from "./GBPLandingPage.module.css";
+import { isHiddenCigaretteHref, presentFaq, SHOW_CIGARETTES } from "../lib/siteConfig";
 import { afterDarkWeedOwner as store } from "../lib/weedDiscovery";
 import SccParityHub from "./SccParityHub";
 import {
@@ -89,7 +90,7 @@ export function GBPLandingPage() {
           <h2>Walk-In Cannabis Store at 1664 Jane St, York</h2>
           <p>After Dark Cannabis is the walk-in York weed dispensary at <strong>{STORE.streetAddress}</strong>, just south of Lawrence Avenue West. The counter is open 24 hours a day, seven days a week, so Jane Street, Weston, Mount Dennis, Keelesdale, Trethewey, and Black Creek shoppers can visit around their own schedule.</p>
           <p>This page is for people who want the physical store. If you are arranging a drop-off instead, start on the <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link> guide, then order from the <Link href={STORE.yorkDeliveryPath}>York delivery catalog</Link>. The walk-in and delivery routes stay separate so each page gives the correct address and service expectation. The 24-hour claim is for this Jane Street door, not for drop-off.</p>
-          <p>Bring government photo ID. You must be 19 or older. Staff can walk you through the five posted flower tiers — Budget from $3/g, AA at $4/g, AAA+ at $5–$6/g, Premium at $7–$10/g, and Exotic at $10–$12/g — plus pre-rolls, edibles, vapes, concentrates, <Link href={STORE.nativeCigarettesPath}>native cigarettes</Link>, <Link href={STORE.nicotineVapePath}>nicotine vapes</Link>, and accessories. Posted menu prices can change. Live cigarette and nic-vape lists stay on <Link href="/items/cigarettes">/items/cigarettes</Link> and <Link href="/items/vapes">/items/vapes</Link>.</p>
+          <p>Bring government photo ID. You must be 19 or older. Staff can walk you through the five posted flower tiers — Budget from $3/g, AA at $4/g, AAA+ at $5–$6/g, Premium at $7–$10/g, and Exotic at $10–$12/g — plus pre-rolls, edibles, vapes, concentrates, {SHOW_CIGARETTES && <><Link href={STORE.nativeCigarettesPath}>native cigarettes</Link>, </>}<Link href={STORE.nicotineVapePath}>nicotine vapes</Link>, and accessories. Posted menu prices can change. {SHOW_CIGARETTES ? <>Live cigarette and nic-vape lists stay on <Link href="/items/cigarettes">/items/cigarettes</Link> and <Link href="/items/vapes">/items/vapes</Link>.</> : <>The live nic-vape list stays on <Link href="/items/vapes">/items/vapes</Link>.</>}</p>
           <p>The 35 Jane TTC bus serves the Jane Street corridor. Check current transit, traffic, and parking conditions before travelling. Call <a href={`tel:${STORE.phoneIntl}`}><strong>{STORE.phoneDisplay}</strong></a> if one specific item is the reason for the trip.</p>
         </section>
 
@@ -117,13 +118,15 @@ export function GBPLandingPage() {
           <SccParityHub
             currentPath={STORE.storePagePath}
             heading="Visit hubs from the York weed page"
-            intro="This York weed page is the geo owner for 1664 Jane Street. The homepage stays the NAP hub. /visit covers 35 Jane and parking. Flower tiers, delivery, 24-hour hours, Native cigarettes, and nicotine vapes sit in the cards."
+            intro={SHOW_CIGARETTES
+              ? "This York weed page is the geo owner for 1664 Jane Street. The homepage stays the NAP hub. /visit covers 35 Jane and parking. Flower tiers, delivery, 24-hour hours, Native cigarettes, and nicotine vapes sit in the cards."
+              : "This York weed page is the geo owner for 1664 Jane Street. The homepage stays the NAP hub. /visit covers 35 Jane and parking. Flower tiers, delivery, 24-hour hours, and nicotine vapes sit in the cards."}
             geoSet="all"
             includeTiers
             tone="dark"
           />
           <h3 className={styles.subheading}>Choose a Cannabis Format</h3>
-          <div className={styles.cardGrid}>{store.categories.map((item) => <Link href={item.href} className={styles.card} key={item.href}><span>{item.label}</span><small>{item.description}</small></Link>)}</div>
+          <div className={styles.cardGrid}>{store.categories.map((item) => isHiddenCigaretteHref(item.href) ? null : <Link href={item.href} className={styles.card} key={item.href}><span>{item.label}</span><small>{item.description}</small></Link>)}</div>
           <p className={styles.note}>Individual products can change. Call <a href={`tel:${STORE.phoneIntl}`}><strong>{STORE.phoneDisplay}</strong></a> if a particular item is the reason for your visit.</p>
         </section>
 
@@ -160,7 +163,7 @@ export function GBPLandingPage() {
             How to reach: <Link href="/visit">/visit</Link>.
             Late-night walk-in: <Link href={STORE.hoursPath}>24-hour open-now guide</Link>.
             Delivery is a different service: <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link>.
-            Native cigarettes: <Link href={STORE.nativeCigarettesPath}>Native cigarettes on Jane Street</Link>.
+            {SHOW_CIGARETTES && <>Native cigarettes: <Link href={STORE.nativeCigarettesPath}>Native cigarettes on Jane Street</Link>. </>}
             Nicotine vapes: <Link href={STORE.nicotineVapePath}>nicotine vapes on Jane Street</Link>.
             Flower tiers:{" "}
             <Link href="/exotic-weed">Exotic</Link>, <Link href="/premium-weed">Premium</Link>,{" "}
@@ -180,7 +183,7 @@ export function GBPLandingPage() {
 
         <section className={styles.section}>
           <h2>Explore After Dark Cannabis Guides</h2>
-          <div className={styles.guideGrid}>{store.guides.map((guide) => <article className={styles.guideCard} key={guide.href}><h3>{guide.label}</h3><p>{guide.description}</p><Link href={guide.href}>Explore {guide.label}</Link></article>)}</div>
+          <div className={styles.guideGrid}>{store.guides.map((guide) => isHiddenCigaretteHref(guide.href) ? null : <article className={styles.guideCard} key={guide.href}><h3>{guide.label}</h3><p>{guide.description}</p><Link href={guide.href}>Explore {guide.label}</Link></article>)}</div>
           <div className={styles.inlineGuide}>
             <span>New to the terminology or planning your first visit?</span>
             <Link href="/resources/cannabis-dispensary-vs-weed-dispensary">Cannabis dispensary vs. weed dispensary</Link>
@@ -192,12 +195,16 @@ export function GBPLandingPage() {
         <section className={styles.section} id="faq">
           <h2>FAQ: weed dispensary York / Jane Street</h2>
           <div className={styles.faqList}>
-            {WEED_DISPENSARY_FAQS.map((faq) => (
-              <article className={styles.faqItem} key={faq.q}>
-                <h3>{faq.q}</h3>
-                <p>{faq.a}</p>
+            {WEED_DISPENSARY_FAQS.map((faq) => {
+              const visible = presentFaq(faq);
+              if (!visible) return null;
+              return (
+              <article className={styles.faqItem} key={visible.q}>
+                <h3>{visible.q}</h3>
+                <p>{visible.a}</p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
       </main>

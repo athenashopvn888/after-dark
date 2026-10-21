@@ -17,6 +17,7 @@ import SmokePilotSpotlight from "./components/SmokePilotSpotlight";
 import { WeedDiscoveryModule } from "./components/WeedDiscoveryModule";
 import SccParityHub from "./components/SccParityHub";
 import { type FlowerProduct } from "./lib/products";
+import { SHOW_CIGARETTES } from "./lib/siteConfig";
 import Papa from "papaparse";
 import { HOME_FAQS, STORE, mapsDirectionsUrl, mapsEmbedUrl } from "./lib/storeIdentity";
 import { storeTierRange, tierRangeText } from "./lib/tierPriceRanges";
@@ -288,11 +289,19 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
             currentPath="/"
             heading="York weed hub and Jane Street visit"
             intro={
+              SHOW_CIGARETTES ? (
               <>
                 Flower shopping stays in the mosaic above. The first card opens the Weed Dispensary in York neighbourhood page — the Jane Street owner for broad weed intent. The others open how-to-reach, Jane Street cannabis delivery, the 24-hour open-now guide, and the Native cigarette and nicotine vape neighbourhood pages. Late-night hours live on the{" "}
                 <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Weston and Mount Dennis use the{" "}
                 <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
               </>
+              ) : (
+              <>
+                Flower shopping stays in the mosaic above. The first card opens the Weed Dispensary in York neighbourhood page — the Jane Street owner for broad weed intent. The others open how-to-reach, Jane Street cannabis delivery, the 24-hour open-now guide, and the nicotine vape neighbourhood page. Late-night hours live on the{" "}
+                <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Weston and Mount Dennis use the{" "}
+                <Link href={STORE.corridorPath}>Jane &amp; Lawrence corridor guide</Link>.
+              </>
+              )
             }
             geoSet="core"
             includeTiers={false}
@@ -307,7 +316,9 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Explore Categories</h2>
             <p className={styles.sectionSubtitle}>
-              From custom disposable vapes and concentrates to accessories and cigarettes.
+              {SHOW_CIGARETTES
+                ? "From custom disposable vapes and concentrates to accessories and cigarettes."
+                : "From custom disposable vapes and concentrates to accessories."}
             </p>
           </div>
 
@@ -381,7 +392,11 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
               <Link href="/aaa-weed">AAA+</Link>,{" "}
               <Link href="/aa-weed">AA</Link>, and{" "}
               <Link href="/budget-weed">Budget</Link>
-              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. Native cigarettes and nicotine vapes have Jane Street neighbourhood guides at <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link> and <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>, with live lists on <Link href="/items/cigarettes">/items/cigarettes</Link> and <Link href="/items/vapes">/items/vapes</Link>. If you want a drop-off instead of the physical counter, start on the <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link> guide, then order from the <Link href={STORE.yorkDeliveryPath}>York delivery catalog</Link>. Drop-off is not the 24-hour walk-in. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
+              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. {SHOW_CIGARETTES ? (
+              <>Native cigarettes and nicotine vapes have Jane Street neighbourhood guides at <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link> and <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>, with live lists on <Link href="/items/cigarettes">/items/cigarettes</Link> and <Link href="/items/vapes">/items/vapes</Link>. </>
+              ) : (
+              <>Nicotine vapes have a Jane Street neighbourhood guide at <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>, with the live list on <Link href="/items/vapes">/items/vapes</Link>. </>
+              )}If you want a drop-off instead of the physical counter, start on the <Link href={STORE.cannabisDeliveryPath}>York cannabis delivery</Link> guide, then order from the <Link href={STORE.yorkDeliveryPath}>York delivery catalog</Link>. Drop-off is not the 24-hour walk-in. City-farm URLs outside this Jane / York / Weston / Mount Dennis basin are not locations.
               Current nicotine listings and contact options are also collected on the <Link href="/vape-shop-york">York vape shop page</Link>.
             </p>
           </div>

@@ -1,3 +1,4 @@
+import { SHOW_CIGARETTES } from "./siteConfig";
 import { STORE } from "./storeIdentity";
 
 export type SccHubLink = {
@@ -121,5 +122,5 @@ export function hubLinksForPage({
       ? SCC_GEO_HUBS.filter((hub) => coreHrefs.has(hub.href))
       : [...SCC_GEO_HUBS];
   const tiers = includeTiers ? [...SCC_TIER_HUBS] : [];
-  return [...geo, ...tiers].filter((hub) => normalizeHubPath(hub.href) !== current);
+  return [...geo, ...tiers].filter((hub) => normalizeHubPath(hub.href) !== current && (SHOW_CIGARETTES || hub.href !== STORE.nativeCigarettesPath));
 }

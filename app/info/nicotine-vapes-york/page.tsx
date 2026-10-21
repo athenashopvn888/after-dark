@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SHOW_CIGARETTES } from "../../lib/siteConfig";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SmokePilotLanding } from "../../components/SmokePilot";
@@ -77,8 +78,8 @@ export default async function NicotineVapesYorkPage() {
         <p>
           York / Jane Street neighbourhood walk-in notes live on the{" "}
           <Link href="/nicotine-vape-york">nicotine vapes on Jane Street</Link> page.
-          Native cigarettes stay on{" "}
-          <Link href="/native-cigarettes-york">/native-cigarettes-york</Link>.
+          {SHOW_CIGARETTES && <>Native cigarettes stay on{" "}
+          <Link href="/native-cigarettes-york">/native-cigarettes-york</Link>.</>}
         </p>
       </section>
       <Footer />
