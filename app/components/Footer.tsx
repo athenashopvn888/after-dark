@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 import { STORE } from "../lib/storeIdentity";
 import styles from "./Footer.module.css";
 
@@ -60,7 +61,7 @@ export default function Footer() {
               <Link href="/aa-weed">AA Weed</Link>
               <Link href="/budget-weed">Budget Weed</Link>
               <Link href="/items/edibles">Edibles</Link>
-              <Link href="/items/cigarettes">Cigarettes</Link>
+              {SHOW_CIGARETTES && <Link href="/items/cigarettes">Cigarettes</Link>}
               <Link href="/items/vapes">Nicotine Vape Menu</Link>
               <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
@@ -72,9 +73,9 @@ export default function Footer() {
               <Link href="/cannabis-delivery-york">Cannabis Delivery York</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
-              <Link href="/native-cigarettes-york">Native Cigarettes York</Link>
+              {SHOW_CIGARETTES && <Link href="/native-cigarettes-york">Native Cigarettes York</Link>}
               <Link href="/nicotine-vape-york">Nicotine Vapes York</Link>
-              <Link href="/info/native-cigarettes-york">Native Cigarettes product guide</Link>
+              {SHOW_CIGARETTES && <Link href="/info/native-cigarettes-york">Native Cigarettes product guide</Link>}
               <Link href="/info/nicotine-vapes-york">Nicotine Vapes product guide</Link>
               <Link href={STORE.storePagePath}>After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>

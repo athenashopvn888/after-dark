@@ -3,12 +3,16 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { getGuidesByLane } from "../lib/guideRegistry";
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 import styles from "./page.module.css";
 
 const BASE = "https://afterdarkcannabis.com";
 const CANONICAL = `${BASE}/guides`;
 const TITLE = "Guides | After Dark Cannabis";
-const DESCRIPTION = "Browse After Dark Cannabis name guides for strains, Native Cigarettes, Nicotine Vape, and THC Vape. Adults 19+ only; check today's menu for current listings.";
+const CIGARETTE_GUIDE_DESCRIPTION = "Browse After Dark Cannabis name guides for strains, Native Cigarettes, Nicotine Vape, and THC Vape. Adults 19+ only; check today's menu for current listings.";
+const DESCRIPTION = SHOW_CIGARETTES
+  ? CIGARETTE_GUIDE_DESCRIPTION
+  : "Browse After Dark Cannabis name guides for strains, Nicotine Vape, and THC Vape. Adults 19+ only; check today's menu for current listings.";
 
 export const metadata: Metadata = {
   title: TITLE,

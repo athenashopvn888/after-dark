@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SHOW_CIGARETTES } from "../lib/siteConfig";
 import styles from "./SmokePilot.module.css";
 
 interface SmokePilotSpotlightProps {
@@ -14,6 +15,32 @@ export default function SmokePilotSpotlight({
   cigaretteHref,
   nicotineHref,
 }: SmokePilotSpotlightProps) {
+  if (!SHOW_CIGARETTES) {
+    return (
+      <section className={styles.spotlight} aria-labelledby="smoke-spotlight-title">
+        <div className={styles.spotlightInner}>
+          <div className={styles.spotlightCopy}>
+            <span className={styles.kicker}>Smoke Shop Spotlight</span>
+            <h2 id="smoke-spotlight-title">Nicotine Vapes</h2>
+            <p>
+              Find nicotine vape devices, flavours and listed prices at {storeName} in {locationLabel}.
+            </p>
+          </div>
+          <div className={styles.spotlightCards}>
+            <Link href={nicotineHref} className={`${styles.spotlightCard} ${styles.nicotineCard}`}>
+              <span className={styles.cardCode}>NV</span>
+              <span>
+                <strong>Nicotine Vapes</strong>
+                <small>Devices, flavours and menu prices</small>
+              </span>
+              <b aria-hidden="true">→</b>
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.spotlight} aria-labelledby="smoke-spotlight-title">
       <div className={styles.spotlightInner}>

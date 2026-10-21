@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { SHOW_CIGARETTES } from "./app/lib/siteConfig";
 
 const nextConfig: NextConfig = {
   images: {
@@ -36,7 +37,9 @@ const nextConfig: NextConfig = {
       { source: "/concentrates", destination: "/items/concentrates", permanent: true },
       { source: "/prerolls", destination: "/items/prerolls", permanent: true },
       { source: "/add-ons", destination: "/items/add-ons", permanent: true },
-      { source: "/cigarettes", destination: "/items/cigarettes", permanent: true },
+      ...(SHOW_CIGARETTES
+        ? [{ source: "/cigarettes", destination: "/items/cigarettes", permanent: true }]
+        : []),
       { source: "/magic", destination: "/items/magic", permanent: true },
       // B14 slash-dupe: do not add a second York LP page.
       // Next trailingSlash:false already 308s `/weed-dispensary-york/` → `/weed-dispensary-york`.

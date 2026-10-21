@@ -1,3 +1,4 @@
+import { isHiddenCigaretteHref, isKeptSmokePath, presentFaq, SHOW_CIGARETTES, stripCigaretteMentions } from "../lib/siteConfig";
 import { STORE } from "../lib/storeIdentity";
 
 export type ResourceAuthorKey = "team" | "menu" | "local";
@@ -924,6 +925,67 @@ export const RESOURCE_PAGES: ResourcePage[] = [
 
 export const RESOURCE_HOME = RESOURCE_PAGES[0];
 
+function cleanLinkList(links: ResourceLink[] | undefined): ResourceLink[] | undefined {
+  if (!links) return links;
+  return links
+    .filter((link) => !isHiddenCigaretteHref(link.href))
+    .map((link) => ({
+      ...link,
+      label: stripCigaretteMentions(link.label),
+      description: link.description ? stripCigaretteMentions(link.description) : link.description,
+    }))
+    .filter((link) => link.label.length > 0);
+}
+
+function cleanSection(section: ResourceSection): ResourceSection | null {
+  if (isCigaretteSection(section.heading)) return null;
+  const next: ResourceSection = {
+    ...section,
+    heading: stripCigaretteMentions(section.heading),
+    body: section.body.map(stripCigaretteMentions).filter((paragraph) => paragraph.length > 0),
+    bullets: section.bullets?.map(stripCigaretteMentions).filter((bullet) => bullet.length > 0),
+    subsections: section.subsections
+      ?.filter((subsection) => !isCigaretteSection(subsection.heading))
+      .map((subsection) => ({
+        ...subsection,
+        heading: stripCigaretteMentions(subsection.heading),
+        body: subsection.body.map(stripCigaretteMentions).filter((paragraph) => paragraph.length > 0),
+        bullets: subsection.bullets?.map(stripCigaretteMentions).filter((bullet) => bullet.length > 0),
+      })),
+    links: cleanLinkList(section.links),
+  };
+  if (!next.heading || (next.body.length === 0 && !next.links?.length && !next.bullets?.length)) return null;
+  return next;
+}
+
+function isCigaretteSection(heading: string): boolean {
+  return /\bcigarettes?\b|\btobacco\b/i.test(heading);
+}
+
+/** Hide cigarette copy on mixed resource pages. Backwoods pages stay as written. */
+export function publicResourcePage(page: ResourcePage): ResourcePage {
+  if (SHOW_CIGARETTES || isKeptSmokePath(page.path)) return page;
+  return {
+    ...page,
+    categoryLabel: stripCigaretteMentions(page.categoryLabel),
+    title: stripCigaretteMentions(page.title),
+    seoTitle: stripCigaretteMentions(page.seoTitle),
+    metaDescription: stripCigaretteMentions(page.metaDescription),
+    h1: stripCigaretteMentions(page.h1),
+    excerpt: stripCigaretteMentions(page.excerpt),
+    primaryKeyword: stripCigaretteMentions(page.primaryKeyword),
+    supportingKeywords: page.supportingKeywords.map(stripCigaretteMentions).filter((keyword) => keyword.length > 0 && !/\bcigarettes?\b|\btobacco\b/i.test(keyword)),
+    searchIntent: stripCigaretteMentions(page.searchIntent),
+    image: { ...page.image, alt: stripCigaretteMentions(page.image.alt) },
+    intro: page.intro.map(stripCigaretteMentions).filter((paragraph) => paragraph.length > 0),
+    sections: page.sections.map(cleanSection).filter((section): section is ResourceSection => section !== null),
+    faqs: page.faqs?.map((faq) => presentFaq(faq)).filter((faq): faq is ResourceFaq => faq !== null),
+    commercialLinks: cleanLinkList(page.commercialLinks) ?? [],
+    related: page.related.filter((path) => !isHiddenCigaretteHref(path)),
+    guidesCard: page.guidesCard ? cleanLinkList([page.guidesCard])?.[0] : undefined,
+  };
+}
+
 export function normalizeResourcePath(path: string) {
   const clean = path.trim().replace(/^\/+|\/+$/g, "");
   return clean ? `/resources/${clean.replace(/^resources\/?/, "")}` : "/resources";
@@ -936,7 +998,8 @@ export function slugFromPath(path: string) {
 export function getResourcePageBySlug(slug?: string[] | string) {
   const slugPath = Array.isArray(slug) ? slug.join("/") : slug || "";
   const path = normalizeResourcePath(slugPath);
-  return RESOURCE_PAGES.find((page) => page.path === path);
+  const page = RESOURCE_PAGES.find((item) => item.path === path);
+  return page ? publicResourcePage(page) : undefined;
 }
 
 export function getStaticResourceParams() {
@@ -946,11 +1009,11 @@ export function getStaticResourceParams() {
 }
 
 export function getCategoryPages() {
-  return RESOURCE_PAGES.filter((page) => page.parent === "/resources");
+  return RESOURCE_PAGES.filter((page) => page.parent === "/resources" && !isHiddenCigaretteHref(page.path)).map(publicResourcePage);
 }
 
 export function getChildPages(parentPath: string) {
-  return RESOURCE_PAGES.filter((page) => page.parent === parentPath);
+  return RESOURCE_PAGES.filter((page) => page.parent === parentPath && !isHiddenCigaretteHref(page.path)).map(publicResourcePage);
 }
 
 export function getFeaturedPages() {
@@ -963,9 +1026,17 @@ export function getFeaturedPages() {
     "/resources/local-guides/jane-street-york-visit-guide",
     "/resources/value-guides",
   ];
-  return featured.map((path) => RESOURCE_PAGES.find((page) => page.path === path)).filter(Boolean) as ResourcePage[];
+  return featured
+    .filter((path) => !isHiddenCigaretteHref(path))
+    .map((path) => RESOURCE_PAGES.find((page) => page.path === path))
+    .filter((page): page is ResourcePage => Boolean(page))
+    .map(publicResourcePage);
 }
 
 export function getRelatedPages(page: ResourcePage) {
-  return page.related.map((path) => RESOURCE_PAGES.find((item) => item.path === path)).filter(Boolean) as ResourcePage[];
+  return page.related
+    .filter((path) => !isHiddenCigaretteHref(path))
+    .map((path) => RESOURCE_PAGES.find((item) => item.path === path))
+    .filter((item): item is ResourcePage => Boolean(item))
+    .map(publicResourcePage);
 }

@@ -1,3 +1,5 @@
+import { presentFaq, SHOW_CIGARETTES, stripCigaretteMentions } from "./siteConfig";
+
 export interface SeoPageData {
   slug: string;
   title: string;
@@ -130,5 +132,17 @@ export const SEO_PAGES: SeoPageData[] = [
 ];
 
 export function getSeoPageBySlug(slug: string): SeoPageData | undefined {
-  return SEO_PAGES.find((page) => page.slug === slug);
+  const page = SEO_PAGES.find((entry) => entry.slug === slug);
+  if (!page || SHOW_CIGARETTES) return page;
+  return {
+    ...page,
+    title: stripCigaretteMentions(page.title),
+    metaDescription: stripCigaretteMentions(page.metaDescription),
+    h1: stripCigaretteMentions(page.h1),
+    heroTagline: stripCigaretteMentions(page.heroTagline),
+    sections: page.sections
+      .map((section) => ({ heading: stripCigaretteMentions(section.heading), body: stripCigaretteMentions(section.body) }))
+      .filter((section) => section.heading.length > 0 && section.body.length > 0),
+    faqs: page.faqs.map((faq) => presentFaq(faq)).filter((faq): faq is { q: string; a: string } => faq !== null),
+  };
 }

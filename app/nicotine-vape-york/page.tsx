@@ -14,6 +14,7 @@ import {
   webpageGraphNode,
 } from "../lib/storeIdentity";
 import SccParityHub from "../components/SccParityHub";
+import { presentFaq, SHOW_CIGARETTES } from "../lib/siteConfig";
 import styles from "../visit/visit.module.css";
 import VapeActionPanel from "../components/VapeActionPanel";
 
@@ -168,6 +169,7 @@ export default function NicotineVapeYorkPage() {
           </div>
         </section>
 
+        {SHOW_CIGARETTES && (
         <section>
           <h2>Pouches stay on the cigarette menu</h2>
           <p>
@@ -178,6 +180,7 @@ export default function NicotineVapeYorkPage() {
             <Link href={STORE.nativeCigarettesPath}>Native cigarettes on Jane Street</Link>.
           </p>
         </section>
+        )}
 
         <section>
           <h2>Map</h2>
@@ -222,12 +225,16 @@ export default function NicotineVapeYorkPage() {
         <section>
           <h2>FAQ: nicotine vape York / Jane Street</h2>
           <div className={styles.faqList}>
-            {NICOTINE_VAPE_FAQS.map((faq) => (
-              <article key={faq.q} className={styles.faqItem}>
-                <h3>{faq.q}</h3>
-                <p>{faq.a}</p>
+            {NICOTINE_VAPE_FAQS.map((faq) => {
+              const visible = presentFaq(faq);
+              if (!visible) return null;
+              return (
+              <article key={visible.q} className={styles.faqItem}>
+                <h3>{visible.q}</h3>
+                <p>{visible.a}</p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
       </main>
