@@ -5,6 +5,7 @@ import { TIER_CONFIG, CATEGORY_CONFIG } from "./lib/products";
 import { SHOW_CIGARETTES, isHiddenCigaretteGuideSlug, isHiddenCigaretteHref } from "./lib/siteConfig";
 import { getAdcInventory } from "./lib/adcInventoryService";
 import { SEO_PAGES } from "./lib/seoPages";
+import { ARTICLE_CANONICAL, ARTICLE_DATE } from "./resources/how-cannabis-delivery-works-ontario/articleMeta";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 import { GUIDE_REGISTRY } from "./lib/guideRegistry";
 
@@ -97,5 +98,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }];
 
-  return [...guideIndex, ...guidePages, ...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...itemDetailPages, ...seoPages, ...resourcePages];
+  const publishedArticlePages: MetadataRoute.Sitemap = [
+    { url: ARTICLE_CANONICAL, lastModified: ARTICLE_DATE, changeFrequency: "monthly", priority: 0.65 },
+  ];
+
+  return [...guideIndex, ...guidePages, ...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...itemDetailPages, ...seoPages, ...resourcePages, ...publishedArticlePages];
 }

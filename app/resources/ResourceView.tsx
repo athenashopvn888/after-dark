@@ -4,6 +4,12 @@ import Footer from "../components/Footer";
 import PreferredSourceButton from "./PreferredSourceButton";
 import styles from "./resources.module.css";
 import {
+  ARTICLE_CARD_EXCERPT,
+  ARTICLE_DATE,
+  ARTICLE_PATH,
+  ARTICLE_TITLE,
+} from "./how-cannabis-delivery-works-ontario/articleMeta";
+import {
   AUTHORS,
   SITE,
   getCategoryPages,
@@ -57,6 +63,7 @@ export default function ResourceView({ page }: ResourceViewProps) {
               title={page.kind === "root" ? "Choose a Resource Section" : "Guides in This Section"}
               pages={children}
               leadLink={page.kind === "root" ? page.guidesCard : undefined}
+              extraCards={page.kind === "root" ? [deliveryArticleCard] : undefined}
             />
           )}
 
@@ -164,16 +171,26 @@ function Breadcrumbs({ page }: { page: ResourcePage }) {
   );
 }
 
+const deliveryArticleCard = {
+  href: ARTICLE_PATH,
+  kicker: "How it works",
+  title: ARTICLE_TITLE,
+  excerpt: ARTICLE_CARD_EXCERPT,
+  updated: ARTICLE_DATE,
+};
+
 function ResourceCards({
   title,
   pages,
   compact = false,
   leadLink,
+  extraCards = [],
 }: {
   title: string;
   pages: ResourcePage[];
   compact?: boolean;
   leadLink?: { label: string; href: string; description?: string };
+  extraCards?: { href: string; kicker: string; title: string; excerpt: string; updated: string }[];
 }) {
   return (
     <section className={styles.cardsSection}>
@@ -200,6 +217,17 @@ function ResourceCards({
             </Link>
           );
         })}
+        {extraCards.map((card) => (
+          <Link href={card.href} key={card.href} className={styles.resourceCard}>
+            <span className={styles.cardKicker}>{card.kicker}</span>
+            <h3>{card.title}</h3>
+            <p>{card.excerpt}</p>
+            <div className={styles.cardMeta}>
+              <span>After Dark Cannabis</span>
+              <span>Updated {formatDate(card.updated)}</span>
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );
