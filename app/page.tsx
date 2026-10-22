@@ -1,10 +1,11 @@
 import { HOME_DOC_TITLE } from "./lib/homeDelivery";
 import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
+import { getFleetContent } from "./lib/fleetContent";
 import { getLiveMenu } from "./lib/liveMenu";
 import { faqPageJsonLd, HOME_FAQS, STORE, serializeJsonLd } from "./lib/storeIdentity";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: { absolute: HOME_DOC_TITLE },
   description: STORE.seoDescription,
   keywords: [
@@ -20,6 +21,21 @@ export const metadata: Metadata = {
 
   twitter: { card: "summary_large_image", title: HOME_DOC_TITLE },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const fleet = await getFleetContent();
+  const page = fleet.pages.Home;
+  if (!fleet.active || !page || (page.metaDescription === metadata.description && page.metaTitle === HOME_DOC_TITLE)) return metadata;
+  const title = page.metaTitle || HOME_DOC_TITLE;
+  const description = page.metaDescription || metadata.description || "";
+  return {
+    ...metadata,
+    title: { absolute: title },
+    description,
+    openGraph: { ...metadata.openGraph, title, description },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}
 
 export const dynamic = "force-dynamic";
 

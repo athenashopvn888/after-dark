@@ -1,9 +1,16 @@
+import CigaretteStateProvider from "./components/CigaretteStateProvider";
+import FleetContentProvider from "./components/FleetContentProvider";
 import FullNameNap from "./components/FullNameNap";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import PinnedNavClearance from "./components/PinnedNavClearance";
+import { getCigaretteSnapshot, toPublicCigaretteState } from "./lib/cigaretteFeed";
+import { sheetNap } from "./lib/fleet/coded";
+import { getFleetContent } from "./lib/fleetContent";
 import { STORE, cannabisStoreGraphNode, serializeJsonLd, websiteGraphNode } from "./lib/storeIdentity";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   metadataBase: new URL(STORE.baseUrl),
@@ -69,14 +76,46 @@ const jsonLd = {
   "@graph": [websiteGraphNode(), cannabisStoreGraphNode()],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [fleet, cigarettes] = await Promise.all([getFleetContent(), getCigaretteSnapshot()]);
+  const nap = sheetNap(fleet);
+  const storeNode = nap ? cannabisStoreGraphNode() : null;
+  const renderedJsonLd = nap && storeNode
+    ? {
+        ...jsonLd,
+        "@graph": [
+          websiteGraphNode(),
+          {
+            ...storeNode,
+            name: nap.schemaName,
+            alternateName: nap.name,
+            telephone: nap.phoneTel.replace(/^tel:/, ""),
+            url: nap.website,
+            hasMap: nap.mapsSearchUrl,
+            address: {
+              ...storeNode.address,
+              streetAddress: nap.street,
+              addressLocality: nap.city,
+              addressRegion: nap.province,
+              postalCode: nap.postalCode,
+            },
+            geo: {
+              ...storeNode.geo,
+              latitude: Number(nap.lat),
+              longitude: Number(nap.lng),
+            },
+          },
+        ],
+      }
+    : jsonLd;
   return (
     <html lang="en">
       <head>
+        <meta name="fleet-content-version" content={fleet.version} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -85,7 +124,7 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(renderedJsonLd) }}
         />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBJCQPFFX4"></script>
         <script
@@ -103,9 +142,13 @@ export default function RootLayout({
         <Link className="deliveryAnnouncement" href="/weed-delivery-york">
           WEED DELIVERY IS HERE — CLICK TO EXPLORE
         </Link>
-        {children}
-        <FullNameNap />
-        <PinnedNavClearance />
+        <FleetContentProvider value={{ active: fleet.active, version: fleet.version, nap: fleet.nap, banners: fleet.banners }}>
+          <CigaretteStateProvider value={toPublicCigaretteState(cigarettes)}>
+            {children}
+            <FullNameNap />
+            <PinnedNavClearance />
+          </CigaretteStateProvider>
+        </FleetContentProvider>
       </body>
     </html>
   );

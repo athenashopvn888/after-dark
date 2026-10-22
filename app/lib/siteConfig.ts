@@ -11,6 +11,17 @@ function readShowCigarettes(value: string | undefined): boolean {
 
 export const SHOW_CIGARETTES = readShowCigarettes(process.env.NEXT_PUBLIC_SHOW_CIGARETTES);
 
+function hardOffRaw(raw: string | undefined): string | undefined {
+  if (raw != null) return raw;
+  return process.env.SHOW_CIGARETTES ?? process.env.NEXT_PUBLIC_SHOW_CIGARETTES;
+}
+
+/** Explicit false / 0 / no / off. An empty value is not a hard off. */
+export function cigaretteEnvHardOff(raw: string | undefined = hardOffRaw(undefined)): boolean {
+  if (raw == null) return false;
+  return /^(0|false|no|off)$/i.test(raw.trim());
+}
+
 /** Temporary redirect target while cigarette pages are hidden. */
 export const VAPE_PAGE_PATH = "/vape-shop-york";
 
@@ -65,13 +76,18 @@ export function isHiddenCigaretteGuideSlug(slug: string): boolean {
   return HIDDEN_GUIDE_SLUGS.has(slug);
 }
 
-export function isHiddenCigaretteHref(href: string): boolean {
-  if (SHOW_CIGARETTES) return false;
+/** Path is a cigarette URL even when the coded switch is on. Kept smoke paths stay open. */
+export function isCodedCigaretteHref(href: string): boolean {
   const path = normalizePath(href);
   if (isKeptSmokePath(path)) return false;
   if (HIDDEN_EXACT_PATHS.has(path)) return true;
   if (path.startsWith("/guides/")) return HIDDEN_GUIDE_SLUGS.has(path.slice("/guides/".length));
   return false;
+}
+
+export function isHiddenCigaretteHref(href: string): boolean {
+  if (SHOW_CIGARETTES) return false;
+  return isCodedCigaretteHref(href);
 }
 
 export function isCigaretteTopic(text: string): boolean {

@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { SHOW_CIGARETTES } from "../lib/siteConfig";
+import { useCigaretteState } from "./CigaretteStateProvider";
 import styles from "./SmokePilot.module.css";
 
 interface SmokePilotSpotlightProps {
@@ -15,7 +17,8 @@ export default function SmokePilotSpotlight({
   cigaretteHref,
   nicotineHref,
 }: SmokePilotSpotlightProps) {
-  if (!SHOW_CIGARETTES) {
+  const showCigarettes = useCigaretteState().web;
+  if (!showCigarettes) {
     return (
       <section className={styles.spotlight} aria-labelledby="smoke-spotlight-title">
         <div className={styles.spotlightInner}>

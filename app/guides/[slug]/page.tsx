@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar";
 import { DELIVERY_GUIDE_REGISTRY, getDeliveryGuide } from "../../lib/deliveryGuideRegistry";
 import { GUIDE_REGISTRY, GUIDE_STORE, getGuide, resolveGuideProduct, type GuideEntry } from "../../lib/guideRegistry";
 import GuideBody, { stripMarkdown } from "./GuideBody";
+import CigaretteUnavailableGate from "../../components/CigaretteUnavailableGate";
 import DeliveryGuidePage from "./DeliveryGuidePage";
 import styles from "./guide.module.css";
 
@@ -43,7 +44,7 @@ const relatedEntries = (guide: GuideEntry) => guide.relatedSlugs.map(getGuide).f
 export default async function GuidePage({ params }: GuidePageProps) {
   const slug = (await params).slug;
   const deliveryGuide = getDeliveryGuide(slug);
-  if (deliveryGuide) return <DeliveryGuidePage guide={deliveryGuide} />;
+  if (deliveryGuide) return (<><CigaretteUnavailableGate pathname={`/guides/${slug}`} /><DeliveryGuidePage guide={deliveryGuide} /></>);
   const guide = getGuide(slug);
   if (!guide) notFound();
   const product = resolveGuideProduct(guide);
@@ -77,6 +78,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
     <main className={styles.main}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <Navbar />
+      <CigaretteUnavailableGate pathname={`/guides/${slug}`} />
       <article className={styles.article}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/guides">Guides</Link><span>/</span><span>{guide.name}</span></nav>
         <header className={styles.hero}>

@@ -1,5 +1,12 @@
+"use client";
+
+import { Fragment } from "react";
 import Link from "next/link";
-import { SHOW_CIGARETTES } from "../lib/siteConfig";
+import { bannersMatchCoded } from "../lib/fleet/coded";
+import CigaretteSeasonalNotice from "./CigaretteSeasonalNotice";
+import { useCigaretteState } from "./CigaretteStateProvider";
+import FleetSheetBanners from "./FleetSheetBanners";
+import { useFleetContent } from "./FleetContentProvider";
 
 const STORE_NAME = "After Dark Cannabis";
 const THEME = { accent: "#a855f7", background: "#090512" };
@@ -10,19 +17,20 @@ const promos = [
   { key: "premium-cigarettes", href: "/items/cigarettes", image: "/banners/core-premium-cigarettes.webp", alt: `${STORE_NAME} BB Full Flavor and Lights, Marlboro and Belmont cigarettes`, caption: "BB Full Flavor + Lights 2 packs $5 · Marlboro & Belmont $10/pack" },
 ] as const;
 
-const visiblePromos = SHOW_CIGARETTES ? promos : promos.filter((promo) => promo.key !== "cigarettes" && promo.key !== "premium-cigarettes");
-
 const STORE_ORIGIN = "https://afterdarkcannabis.com";
-const bannerImageObjects = visiblePromos.map((promo) => ({ "@type": "ImageObject", name: promo.alt, contentUrl: `${STORE_ORIGIN}${promo.image}`, description: `${promo.alt} at ${STORE_NAME}.`, caption: promo.caption }));
 
 const figureStyle = { margin: 0, width: "100%" } as const;
 const imageStyle = { display: "block", width: "100%", maxWidth: "100%", height: "auto" } as const;
 const captionStyle = { margin: 0, padding: "10px 14px", background: "#111827", color: "#ffffff", textAlign: "center" as const, fontWeight: 800, lineHeight: 1.35 };
 
-import { Fragment } from "react";
-import CigaretteSeasonalNotice from "./CigaretteSeasonalNotice";
-
 export default function FleetAnnouncementBanner() {
+  const fleet = useFleetContent();
+  const showCigarettes = useCigaretteState().web;
+  if (fleet.active && fleet.banners.length > 0 && !bannersMatchCoded(fleet.banners)) {
+    return <FleetSheetBanners banners={fleet.banners} />;
+  }
+  const visiblePromos = showCigarettes ? promos : promos.filter((promo) => promo.key !== "cigarettes" && promo.key !== "premium-cigarettes");
+  const bannerImageObjects = visiblePromos.map((promo) => ({ "@type": "ImageObject", name: promo.alt, contentUrl: `${STORE_ORIGIN}${promo.image}`, description: `${promo.alt} at ${STORE_NAME}.`, caption: promo.caption }));
   return (
     <aside data-fleet-homepage-announcement="" aria-label="Store promotions" style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "100%", height: "auto", minHeight: 0, overflow: "visible", position: "relative", zIndex: 50 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": bannerImageObjects }).replace(/</g, "\\u003c") }} />

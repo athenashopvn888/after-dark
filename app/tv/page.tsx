@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./tv.module.css";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
-import { SHOW_CIGARETTES } from "../lib/siteConfig";
+import { useCigaretteState } from "../components/CigaretteStateProvider";
 import HiringRibbon from "../components/HiringRibbon";
 import TvStoreHeader from "../components/TvStoreHeader";
 import { TOP_TIER_BUNDLE_LABELS } from "./bundleLabels";
@@ -696,7 +696,7 @@ function VerticalTicker() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [exitIdx, setExitIdx] = useState(-1);
   const [showCigaretteFlash, setShowCigaretteFlash] = useState(() => isCigaretteFlashWindow());
-  const slides = SHOW_CIGARETTES && showCigaretteFlash ? [...TICKER_SLIDES, CIGARETTE_FLASH_MESSAGE] : TICKER_SLIDES;
+  const slides = useCigaretteState().tv && showCigaretteFlash ? [...TICKER_SLIDES, CIGARETTE_FLASH_MESSAGE] : TICKER_SLIDES;
 
   useEffect(() => {
     const update = () => setShowCigaretteFlash(isCigaretteFlashWindow());

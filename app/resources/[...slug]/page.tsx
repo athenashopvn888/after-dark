@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { presentFaq } from "../../lib/siteConfig";
 import ResourceView from "../ResourceView";
+import CigaretteUnavailableGate from "../../components/CigaretteUnavailableGate";
 import {
   AUTHORS,
   SITE,
@@ -34,6 +35,7 @@ export default async function ResourceRoute({ params }: { params: PageParams }) 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <CigaretteUnavailableGate pathname={`/resources/${(slug ?? []).join("/")}`} />
       <ResourceView page={page} />
     </>
   );
