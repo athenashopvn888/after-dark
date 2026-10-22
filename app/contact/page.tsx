@@ -15,6 +15,8 @@ import {
 } from "../lib/storeIdentity";
 import styles from "./contact.module.css";
 
+export const dynamic = "force-dynamic";
+
 const canonical = `${STORE.baseUrl}/contact`;
 
 const metadata: Metadata = {
