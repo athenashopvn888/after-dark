@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { FULL_NAME_NAP } from "../lib/fullNameNap";
+import { sheetNap } from "../lib/fleet/coded";
+import { getFleetContent } from "../lib/fleetContent";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -15,7 +17,7 @@ import styles from "./contact.module.css";
 
 const canonical = `${STORE.baseUrl}/contact`;
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: { absolute: "Contact After Dark Cannabis | 1664 Jane Street York" },
   description:
     "Contact After Dark Cannabis at 1664 Jane Street, York, ON M9N 2S1. Open 24 hours. Call +1 (437) 524-9344. The homepage stays the visit hub.",
@@ -29,6 +31,20 @@ export const metadata: Metadata = {
     url: canonical,
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const fleet = await getFleetContent();
+  const page = fleet.pages.Contact;
+  if (!fleet.active || !page || page.metaDescription === metadata.description) return metadata;
+  const title = page.metaTitle || "Contact After Dark Cannabis | 1664 Jane Street York";
+  const description = page.metaDescription;
+  return {
+    ...metadata,
+    title: { absolute: title },
+    description,
+    openGraph: { ...metadata.openGraph, title, description },
+  };
+}
 
 const pageSchema = {
   "@context": "https://schema.org",
@@ -45,7 +61,21 @@ const pageSchema = {
   ],
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const nap = sheetNap(await getFleetContent());
+  const name = nap?.name ?? STORE.name;
+  const addressLine = nap ? `${nap.street}, ${nap.cityLine}` : STORE.addressLine;
+  const street = nap?.street ?? STORE.streetAddress;
+  const locality = nap?.city ?? STORE.addressLocality;
+  const region = nap?.province ?? STORE.addressRegion;
+  const postal = nap?.postalCode ?? STORE.postalCode;
+  const intersection = nap?.intersection ?? STORE.intersection;
+  const phoneDisplay = nap?.phoneDisplay ?? STORE.phoneDisplay;
+  const phoneTel = nap?.phoneTel ?? STORE.phoneTel;
+  const hoursNote = nap?.hours ?? STORE.hoursNote;
+  const hoursLabel = nap?.hours ?? STORE.hoursLabel;
+  const website = nap?.website ?? STORE.homepageUrl;
+  const mapSrc = nap?.mapsEmbedUrl ?? mapsEmbedUrl;
   return (
     <>
       <script
@@ -66,15 +96,15 @@ export default function ContactPage() {
           <div className={styles.container}>
             <div className={`${styles.nap} nap`} aria-label="Store name, address, and phone">
               <p>
-                <strong>{STORE.name}</strong>
+                <strong>{name}</strong>
                 <br />
-                {STORE.addressLine}
+                {addressLine}
                 <br />
-                <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>
+                <a href={phoneTel}>{phoneDisplay}</a>
                 <br />
-                {STORE.hoursNote}
+                {hoursNote}
                 <br />
-                Website: <a href={STORE.homepageUrl}>{STORE.homepageUrl}</a>
+                Website: <a href={website}>{website}</a>
               </p>
             </div>
 
@@ -83,13 +113,13 @@ export default function ContactPage() {
                 <div className={styles.infoIcon}>PIN</div>
                 <h2 className={styles.infoTitle}>Location</h2>
                 <p className={styles.infoText}>
-                  {STORE.streetAddress}
+                  {street}
                   <br />
-                  {STORE.addressLocality}, {STORE.addressRegion} {STORE.postalCode}
+                  {locality}, {region} {postal}
                   <br />
-                  <span className={styles.infoMuted}>{STORE.intersection}</span>
+                  <span className={styles.infoMuted}>{intersection}</span>
                   <br />
-                  <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>
+                  <a href={phoneTel}>{phoneDisplay}</a>
                 </p>
               </div>
 
@@ -106,7 +136,7 @@ export default function ContactPage() {
                 </div>
                 <div className={styles.openBadge}>
                   <span className={styles.openDot}></span>
-                  {STORE.hoursLabel} — Never Closed
+                  {hoursLabel} — Never Closed
                 </div>
               </div>
 
@@ -144,7 +174,7 @@ export default function ContactPage() {
             <div className={styles.mapSection}>
               <iframe
                 title="Map of After Dark Cannabis at 1664 Jane Street, York"
-                src={mapsEmbedUrl}
+                src={mapSrc}
                 width="100%"
                 height="360"
                 loading="lazy"

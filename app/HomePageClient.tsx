@@ -17,7 +17,9 @@ import SmokePilotSpotlight from "./components/SmokePilotSpotlight";
 import { WeedDiscoveryModule } from "./components/WeedDiscoveryModule";
 import SccParityHub from "./components/SccParityHub";
 import { type FlowerProduct } from "./lib/products";
-import { SHOW_CIGARETTES } from "./lib/siteConfig";
+import { useCigaretteState } from "./components/CigaretteStateProvider";
+import { useFleetContent } from "./components/FleetContentProvider";
+import { sheetNap } from "./lib/fleet/coded";
 import Papa from "papaparse";
 import { HOME_FAQS, STORE, mapsDirectionsUrl, mapsEmbedUrl } from "./lib/storeIdentity";
 import { storeTierRange, tierRangeText } from "./lib/tierPriceRanges";
@@ -96,6 +98,15 @@ interface ReviewStats {
 }
 
 export default function HomePageClient({ initialFlowers }: { initialFlowers: Parameters<typeof storeTierRange>[0] }) {
+  const showCigarettes = useCigaretteState().web;
+  const nap = sheetNap(useFleetContent());
+  const doorName = nap?.name ?? STORE.name;
+  const doorAddress = nap ? `${nap.street}, ${nap.cityLine}` : STORE.addressLine;
+  const doorPhone = nap?.phoneDisplay ?? STORE.phoneDisplay;
+  const doorTel = nap?.phoneTel ?? STORE.phoneTel;
+  const doorHours = nap?.hours ?? STORE.hoursNote;
+  const doorMap = nap?.mapsEmbedUrl ?? mapsEmbedUrl;
+  const doorDirections = nap?.mapsSearchUrl ?? mapsDirectionsUrl;
   const [featuredStrains, setFeaturedStrains] = useState<FlowerProduct[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsStats, setReviewsStats] = useState<ReviewStats | null>(null);
@@ -209,17 +220,17 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
           <section className={`${styles.doorTest} nap`} id="contact" aria-label="Store name, address, hours, and map">
             <h2 className={styles.doorTestTitle}>Address, hours, and map</h2>
             <p className={styles.doorTestNap}>
-              <strong>{STORE.name}</strong>
+              <strong>{doorName}</strong>
               <br />
-              {STORE.addressLine}
+              {doorAddress}
               <br />
-              <a href={STORE.phoneTel}>{STORE.phoneDisplay}</a>
+              <a href={doorTel}>{doorPhone}</a>
               <br />
-              {STORE.hoursNote}
+              {doorHours}
             </p>
             <div className={styles.napActions}>
-              <a href={STORE.phoneTel} className={styles.napAction}>Call {STORE.phoneDisplay}</a>
-              <a href={mapsDirectionsUrl} className={styles.napAction} target="_blank" rel="noopener noreferrer">Directions</a>
+              <a href={doorTel} className={styles.napAction}>Call {doorPhone}</a>
+              <a href={doorDirections} className={styles.napAction} target="_blank" rel="noopener noreferrer">Directions</a>
               <Link href={STORE.storePagePath} className={styles.napAction}>York dispensary</Link>
               <Link href={STORE.hoursPath} className={styles.napAction}>Open now on Jane Street</Link>
               <Link href="/visit" className={styles.napAction}>How to reach Jane Street</Link>
@@ -228,7 +239,7 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
             <div className={styles.mapWrap}>
               <iframe
                 title="Map of After Dark Cannabis at 1664 Jane Street, York"
-                src={mapsEmbedUrl}
+                src={doorMap}
                 width="100%"
                 height="200"
                 loading="lazy"
@@ -289,7 +300,7 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
             currentPath="/"
             heading="York weed hub and Jane Street visit"
             intro={
-              SHOW_CIGARETTES ? (
+              showCigarettes ? (
               <>
                 Flower shopping stays in the mosaic above. The first card opens the Weed Dispensary in York neighbourhood page — the Jane Street owner for broad weed intent. The others open how-to-reach, Jane Street cannabis delivery, the 24-hour open-now guide, and the Native cigarette and nicotine vape neighbourhood pages. Late-night hours live on the{" "}
                 <Link href={STORE.hoursPath}>24-hour open-now guide</Link>. Weston and Mount Dennis use the{" "}
@@ -316,7 +327,7 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Explore Categories</h2>
             <p className={styles.sectionSubtitle}>
-              {SHOW_CIGARETTES
+              {showCigarettes
                 ? "From custom disposable vapes and concentrates to accessories and cigarettes."
                 : "From custom disposable vapes and concentrates to accessories."}
             </p>
@@ -392,7 +403,7 @@ export default function HomePageClient({ initialFlowers }: { initialFlowers: Par
               <Link href="/aaa-weed">AAA+</Link>,{" "}
               <Link href="/aa-weed">AA</Link>, and{" "}
               <Link href="/budget-weed">Budget</Link>
-              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. {SHOW_CIGARETTES ? (
+              — plus pre-rolls, edibles, vapes, and concentrates on the live menu. Then come in with government photo ID. Adults 19+ only. Searching Jane and Lawrence dispensary, Weston, or Mount Dennis? Use the <Link href={STORE.corridorPath}>corridor walk-in guide</Link>. {showCigarettes ? (
               <>Native cigarettes and nicotine vapes have Jane Street neighbourhood guides at <Link href={STORE.nativeCigarettesPath}>/native-cigarettes-york</Link> and <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>, with live lists on <Link href="/items/cigarettes">/items/cigarettes</Link> and <Link href="/items/vapes">/items/vapes</Link>. </>
               ) : (
               <>Nicotine vapes have a Jane Street neighbourhood guide at <Link href={STORE.nicotineVapePath}>/nicotine-vape-york</Link>, with the live list on <Link href="/items/vapes">/items/vapes</Link>. </>

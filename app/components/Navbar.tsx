@@ -4,7 +4,7 @@ import CohortDeliveryActions from "./CohortDeliveryActions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { SHOW_CIGARETTES } from "../lib/siteConfig";
+import { useCigaretteState } from "./CigaretteStateProvider";
 import { STORE } from "../lib/storeIdentity";
 import styles from "./Navbar.module.css";
 import FlowerBogoStrip from "./FlowerBogoStrip";
@@ -31,10 +31,10 @@ const ALL_LINKS = [
   { href: "/guides", label: "Guides" },
 ];
 
-const NAV_LINKS = SHOW_CIGARETTES ? ALL_LINKS : ALL_LINKS.filter((link) => link.href !== "/items/cigarettes");
-
 export default function Navbar() {
   const pathname = usePathname();
+  const showCigarettes = useCigaretteState().web;
+  const navLinks = showCigarettes ? ALL_LINKS : ALL_LINKS.filter((link) => link.href !== "/items/cigarettes");
   const scrollBarRef = useRef<HTMLDivElement>(null);
   const [canAdvance, setCanAdvance] = useState(false);
   const updateScrollState = useCallback(() => { const scrollBar = scrollBarRef.current; if (!scrollBar) return; setCanAdvance(scrollBar.scrollWidth - scrollBar.clientWidth - scrollBar.scrollLeft > 2); }, []);
@@ -73,7 +73,7 @@ export default function Navbar() {
       <div className={styles.scrollShell}>
         <div ref={scrollBarRef} id="store-menu-scrollbar" className={styles.scrollBar}>
           <div className={styles.scrollInner}>
-          {NAV_LINKS.map((link) => {
+          {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link

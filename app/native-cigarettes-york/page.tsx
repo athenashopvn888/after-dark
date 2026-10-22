@@ -3,6 +3,7 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CigaretteSeasonalNotice from "../components/CigaretteSeasonalNotice";
+import CigaretteUnavailableGate from "../components/CigaretteUnavailableGate";
 import {
   NATIVE_CIGARETTE_FAQS,
   STORE,
@@ -75,6 +76,7 @@ export default function NativeCigarettesYorkPage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(pageSchema) }}
       />
       <Navbar />
+      <CigaretteUnavailableGate pathname="/native-cigarettes-york" />
       <CigaretteSeasonalNotice sticky />
       <main className={styles.main}>
         <section className={styles.hero}>

@@ -17,7 +17,9 @@ import { buildCategoryCollectionJsonLd } from "../../lib/categoryStructuredData"
 import { STORE } from "../../lib/storeIdentity";
 import seoContent from "../../lib/seoContent.generated.json";
 import styles from "./items.module.css";
-import { isHiddenCigaretteItem } from "../../lib/cigaretteCatalog";
+import { isCigaretteItemHidden } from "../../lib/cigaretteCatalog";
+import CigaretteUnavailableGate from "../../components/CigaretteUnavailableGate";
+import { getCigaretteSnapshot } from "../../lib/cigaretteFeed";
 import { getCategoryGuideGroups } from "../../lib/guideRegistry";
 import VapeActionPanel from "../../components/VapeActionPanel";
 
@@ -38,7 +40,8 @@ export async function generateMetadata({
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) return {};
   const { snapshot } = await getAdcInventory();
-  const items = snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isHiddenCigaretteItem(item));
+  const showWeb = (await getCigaretteSnapshot()).web.show;
+  const items = snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isCigaretteItemHidden(item, showWeb));
 
   return {
     title: catInfo.config.seoTitle || `${catInfo.config.name} — ${items.length} Products`,
@@ -60,7 +63,8 @@ export default async function ItemsCategoryPage({
 
   /* Pre-Rolls also shows accessories (ADD ONS) */
   const inventory = await getAdcInventory();
-  let items = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isHiddenCigaretteItem(item));
+  const showWeb = (await getCigaretteSnapshot()).web.show;
+  let items = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isCigaretteItemHidden(item, showWeb));
   if (catInfo.key === "PREROLLS") {
     const accessories = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === "ADD ONS");
     const existingIds = new Set(items.map(i => `${i.sku}\u0000${i.category}\u0000${i.name}`));
@@ -80,6 +84,7 @@ export default async function ItemsCategoryPage({
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryJsonLd) }} />
     <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
+      <CigaretteUnavailableGate pathname={`/items/${catSlug}`} />
       {catSlug === "cigarettes" && <CigaretteSeasonalNotice sticky />}
 
       {/* Hero Banner */}

@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server";
 import { ADC_REFRESH_SECONDS } from "../../lib/adcInventoryCore";
 import { getAdcInventory } from "../../lib/adcInventoryService";
-import { isHiddenCigaretteItem } from "../../lib/cigaretteCatalog";
+import { isCigaretteItemHidden } from "../../lib/cigaretteCatalog";
+import { getCigaretteSnapshot, snapshotHeaders } from "../../lib/cigaretteFeed";
 
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get("type") || "flowers";
-  const inventory = await getAdcInventory();
+  const [inventory, cigarettes] = await Promise.all([getAdcInventory(), getCigaretteSnapshot()]);
   const selectedType = type === "items" ? "items" : "flowers";
-  const visibleItems = inventory.snapshot.items.filter((item) => !isHiddenCigaretteItem(item));
+  const visibleItems = inventory.snapshot.items.filter((item) => !isCigaretteItemHidden(item, cigarettes.tv.show));
   const data = selectedType === "items" ? visibleItems : inventory.snapshot.flowers;
   const headers = {
     "cache-control": `public, s-maxage=${ADC_REFRESH_SECONDS}, stale-while-revalidate=60`,
@@ -24,6 +25,7 @@ export async function GET(request: Request) {
     "x-tv-data-store": inventory.snapshot.storeCode,
     "x-tv-data-flower-count": String(inventory.snapshot.flowers.length),
     "x-tv-data-item-count": String(visibleItems.length),
+    ...snapshotHeaders(cigarettes),
   };
 
   return NextResponse.json(data, { headers });

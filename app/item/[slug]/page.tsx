@@ -11,6 +11,9 @@ import { resolveLiveProduct } from "../../lib/liveProductResolver";
 import { getItemData } from "../../lib/itemData";
 import { getItemPriceDisplay } from "../../lib/itemPricing";
 import Magnifier from "../../components/Magnifier";
+import CigaretteUnavailable from "../../components/CigaretteUnavailable";
+import { isGatedCigarettePath } from "../../lib/cigaretteCatalog";
+import { getWebGate } from "../../lib/cigaretteFeed";
 import styles from "../../flower/[slug]/flower.module.css";
 
 // ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
@@ -141,6 +144,15 @@ export default async function ItemPage({
   const { slug } = await params;
   const item = await resolveItem(slug);
   if (!item) notFound();
+  if (isGatedCigarettePath(`/item/${item.slug}`) && (await getWebGate()) === "unavailable") {
+    return (
+      <>
+        <Navbar />
+        <CigaretteUnavailable />
+        <Footer />
+      </>
+    );
+  }
 
   const catInfo = Object.values(CATEGORY_CONFIG).find(c => c.name.toUpperCase() === item.category.toUpperCase() || c.name === item.category);
   const catColor = catInfo?.color || "#94a3b8";

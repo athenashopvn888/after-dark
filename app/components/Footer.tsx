@@ -1,9 +1,24 @@
+"use client";
+
 import Link from "next/link";
-import { SHOW_CIGARETTES } from "../lib/siteConfig";
+import { sheetNap } from "../lib/fleet/coded";
+import { useCigaretteState } from "./CigaretteStateProvider";
+import { useFleetContent } from "./FleetContentProvider";
 import { STORE } from "../lib/storeIdentity";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
+  const nap = sheetNap(useFleetContent());
+  const showCigarettes = useCigaretteState().web;
+  const street = nap?.street ?? STORE.streetAddress;
+  const locality = nap?.city ?? STORE.addressLocality;
+  const region = nap?.province ?? STORE.addressRegion;
+  const postal = nap?.postalCode ?? STORE.postalCode;
+  const phoneDisplay = nap?.phoneDisplay ?? STORE.phoneDisplay;
+  const phoneTel = nap?.phoneTel ?? STORE.phoneTel;
+  const hoursLabel = nap?.hours ?? STORE.hoursLabel;
+  const name = nap?.name ?? STORE.name;
+  const website = nap?.website ?? STORE.homepageUrl;
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -14,12 +29,12 @@ export default function Footer() {
               AFTER DARK
             </div>
             <p className={styles.desc}>
-              Jane Street York walk-in at {STORE.streetAddress}. {STORE.name}
-              for flower, edibles, vapes and more. {STORE.hoursLabel}. Call {STORE.phoneDisplay}.
+              Jane Street York walk-in at {street}. {name}
+              for flower, edibles, vapes and more. {hoursLabel}. Call {phoneDisplay}.
             </p>
             <div className={styles.buttons}>
               <a
-                href={STORE.phoneTel}
+                href={phoneTel}
                 className={styles.btnPrimary}
               >
                 Call Now
@@ -32,21 +47,21 @@ export default function Footer() {
             <h3 className={styles.colTitle}>Contact Info</h3>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Address:</span>
-              <span>{STORE.streetAddress}</span>
-              <span>{STORE.addressLocality}, {STORE.addressRegion} {STORE.postalCode}</span>
+              <span>{street}</span>
+              <span>{locality}, {region} {postal}</span>
               <span>Canada</span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Phone:</span>
-              <span><a href={STORE.phoneTel} style={{color: "inherit"}}>{STORE.phoneDisplay}</a></span>
+              <span><a href={phoneTel} style={{color: "inherit"}}>{phoneDisplay}</a></span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
-              <span className={styles.highlight}>{STORE.hoursLabel}</span>
+              <span className={styles.highlight}>{hoursLabel}</span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Website:</span>
-              <span><a href={STORE.homepageUrl} style={{color: "inherit"}}>{STORE.homepageUrl}</a></span>
+              <span><a href={website} style={{color: "inherit"}}>{website}</a></span>
             </div>
           </div>
 
@@ -61,7 +76,7 @@ export default function Footer() {
               <Link href="/aa-weed">AA Weed</Link>
               <Link href="/budget-weed">Budget Weed</Link>
               <Link href="/items/edibles">Edibles</Link>
-              {SHOW_CIGARETTES && <Link href="/items/cigarettes">Cigarettes</Link>}
+              {showCigarettes && <Link href="/items/cigarettes">Cigarettes</Link>}
               <Link href="/items/vapes">Nicotine Vape Menu</Link>
               <Link href="/items/vape-disposables">THC Vape Menu</Link>
               <Link href="/faq">FAQ</Link>
@@ -73,9 +88,9 @@ export default function Footer() {
               <Link href="/cannabis-delivery-york">Cannabis Delivery York</Link>
               <Link href="/info/york-weed-dispensary">York Dispensary</Link>
               <Link href="/info/cheap-weed-york">Cheap Weed York</Link>
-              {SHOW_CIGARETTES && <Link href="/native-cigarettes-york">Native Cigarettes York</Link>}
+              {showCigarettes && <Link href="/native-cigarettes-york">Native Cigarettes York</Link>}
               <Link href="/nicotine-vape-york">Nicotine Vapes York</Link>
-              {SHOW_CIGARETTES && <Link href="/info/native-cigarettes-york">Native Cigarettes product guide</Link>}
+              {showCigarettes && <Link href="/info/native-cigarettes-york">Native Cigarettes product guide</Link>}
               <Link href="/info/nicotine-vapes-york">Nicotine Vapes product guide</Link>
               <Link href={STORE.storePagePath}>After Dark Cannabis Weed Dispensary in York</Link>
               <Link href="/contact">Contact Us</Link>
