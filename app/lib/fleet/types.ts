@@ -7,19 +7,21 @@
  *   schemaVersion, storeCode, domain, contentVersion, publishedAt,
  *   sourceHash, jobId, storeInfo?, all?: { slots }, slots?
  * }
- * Each slot: { page, spot, mode, image?, imageWidth?, imageHeight?,
+ * Each slot: { page, spot, mode, image?, offImage?, imageWidth?, imageHeight?,
  *   textBar?, alt?, title?, caption?, description?, metaTitle?,
- *   metaDescription?, categoryName? }
+ *   metaDescription?, categoryName?, promoStart?, promoEnd?,
+ *   showSeconds?, everyMinutes? }
  * Mode is Follow ALL | Custom | Coded | Hidden.
  * storeInfo fields are { mode?, value? }.
+ * TV2 spots use page "TV2" and the card name. Fullscreen spots use page "TV".
  */
 export const FLEET_SCHEMA_VERSION = 1;
-export const FLEET_STORE_CODE = "MJ01";
-export const FLEET_DOMAIN = "afterdarkcannabis.com";
+export { FLEET_DOMAIN, FLEET_DOMAINS, FLEET_STORE_CODE } from "./config.ts";
+import { defaultManifestUrl } from "./config.ts";
 export const FLEET_CONTENT_TAG = "fleet-content";
 export const FLEET_MAX_BUNDLE_BYTES = 750_000;
 /** Public blob. Used when FLEET_CONTENT_MANIFEST_URL is unset. Not a secret. */
-export const FLEET_DEFAULT_MANIFEST_URL = `https://dhaah0upvlpukv56.public.blob.vercel-storage.com/${FLEET_STORE_CODE}/manifest.json`;
+export const FLEET_DEFAULT_MANIFEST_URL = defaultManifestUrl();
 
 export const FLEET_MODES = ["Follow ALL", "Custom", "Coded", "Hidden"] as const;
 export type FieldMode = (typeof FLEET_MODES)[number];
@@ -62,6 +64,13 @@ export type ContentSlot = {
   metaTitle?: string;
   metaDescription?: string;
   categoryName?: string;
+  /** ISO instant. Promo image shows only when now is inside [promoStart, promoEnd). */
+  promoStart?: string;
+  promoEnd?: string;
+  /** Off graphic for a TV2 card when that category is switched off or has no items. */
+  offImage?: string;
+  showSeconds?: number | string;
+  everyMinutes?: number | string;
 };
 
 export type ContentManifest = {
@@ -131,6 +140,8 @@ export type ResolvedBanner = {
   hidden: boolean;
   render: "image" | "text";
   image: string;
+  /** Slot default. Used when a sheet image fails in the browser. */
+  codedImage: string;
   imageWidth?: number;
   imageHeight?: number;
   alt: string;
@@ -143,6 +154,22 @@ export type ResolvedPage = {
   description: string;
   metaTitle: string;
   metaDescription: string;
+};
+
+export type TvCardSlot = {
+  card: string;
+  promoImage: string | null;
+  promoAlt: string;
+  offImage: string | null;
+  offAlt: string;
+};
+
+export type TvFullscreenPromo = {
+  spot: string;
+  image: string;
+  alt: string;
+  showSeconds: number;
+  everyMinutes: number;
 };
 
 export type FleetState = {
@@ -158,4 +185,6 @@ export type FleetState = {
   nap: Nap;
   banners: ResolvedBanner[];
   pages: Record<string, ResolvedPage>;
+  tvCards: Record<string, TvCardSlot>;
+  fullscreenPromos: TvFullscreenPromo[];
 };

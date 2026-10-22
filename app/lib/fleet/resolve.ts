@@ -3,7 +3,7 @@ import type { ContentBundle, ContentField, ContentSlot, FieldMode, Nap, Resolved
 
 const BLOCKED_COPY = /3\.5|farmers\s*link|telnyx|\bSOD\b/i;
 
-function safeText(value: string | undefined, coded: string): string {
+export function safeText(value: string | undefined, coded: string): string {
   const trimmed = value?.trim() ?? "";
   if (!trimmed || BLOCKED_COPY.test(trimmed)) return coded;
   return trimmed;
@@ -95,6 +95,7 @@ export function resolveBanners(bundle: ContentBundle | null): ResolvedBanner[] {
       hidden: false,
       render: missing ? "text" : "image",
       image: missing ? "" : imageValue,
+      codedImage: coded.codedImage,
       imageWidth: source?.imageWidth || coded.imageWidth,
       imageHeight: source?.imageHeight || coded.imageHeight,
       alt,

@@ -1,5 +1,6 @@
 import {
   FLEET_DOMAIN,
+  FLEET_DOMAINS,
   FLEET_MAX_BUNDLE_BYTES,
   FLEET_SCHEMA_VERSION,
   FLEET_STORE_CODE,
@@ -31,8 +32,9 @@ function hasIdentity(record: Record<string, unknown>, keys: readonly string[]): 
 }
 
 function domainMatches(domain: string): boolean {
-  const host = domain.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/\/.*$/, "").replace(/^www\./, "");
-  return host === FLEET_DOMAIN;
+  const host = domain.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/\/.*$/, "");
+  if ((FLEET_DOMAINS as readonly string[]).includes(host)) return true;
+  return host.replace(/^www\./, "") === FLEET_DOMAIN;
 }
 
 function versionOrder(bundle: ContentBundle, previous: ContentBundle | null): RejectReason | null {
@@ -73,7 +75,7 @@ export function imageUrlAllowed(value: unknown): boolean {
 
 function slotsHaveSafeImages(slots: ContentSlot[] | undefined): boolean {
   if (!slots) return true;
-  return slots.every((slot) => imageUrlAllowed(slot.image));
+  return slots.every((slot) => imageUrlAllowed(slot.image) && imageUrlAllowed(slot.offImage));
 }
 
 export function parseBundle(raw: string, previous: ContentBundle | null = null): AcceptResult<ContentBundle> {
