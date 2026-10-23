@@ -3,12 +3,13 @@ import {
   cigarettePublicHeaders,
   decideCigaretteGuide,
   decideCigaretteSurface,
+  publicWebsiteCigaretteFlag,
   webGateFromDecision,
   type CigaretteSurfaceDecision,
   type CigaretteWording,
   type WebGate,
 } from "./cigDecision.ts";
-import { cigaretteEnvHardOff } from "./siteConfig.ts";
+import { SHOW_CIGARETTES, cigaretteEnvHardOff } from "./siteConfig.ts";
 import type { ItemProduct } from "./products.ts";
 
 const MENU_FEED_DEFAULT =
@@ -52,6 +53,7 @@ function feedEndpoint(): string {
 export async function readCigaretteFeed(options: { fetchImpl?: typeof fetch; endpoint?: string; now?: number } = {}): Promise<CigaretteSnapshot> {
   if (cigaretteEnvHardOff()) return snapshotFrom(null, [], false, false);
   const now = options.now ?? Date.now();
+  // A last-good snapshot inside this window still follows its saved tvOn. No extra timer.
   if (!options.fetchImpl && memory && now - memory.at < MEMORY_MS) return memory.snap;
   try {
     const response = await (options.fetchImpl ?? fetch)(options.endpoint ?? feedEndpoint(), {
@@ -74,14 +76,22 @@ export async function readCigaretteFeed(options: { fetchImpl?: typeof fetch; end
 export const getCigaretteSnapshot = cache(readCigaretteFeed);
 
 export function toPublicCigaretteState(snap: CigaretteSnapshot): PublicCigaretteState {
-  return { web: snap.web.show, tv: snap.tv.show, wording: snap.wording };
+  return {
+    web: publicWebsiteCigaretteFlag(snap.web, SHOW_CIGARETTES),
+    tv: snap.tv.show,
+    wording: snap.wording,
+  };
 }
 
 export function snapshotHeaders(snap: CigaretteSnapshot): Record<string, string> {
-  return cigarettePublicHeaders({ web: snap.web.show, tv: snap.tv.show, wording: snap.wording });
+  const state = toPublicCigaretteState(snap);
+  return cigarettePublicHeaders(state);
 }
 
 export async function getWebGate(): Promise<WebGate> {
   const snap = await getCigaretteSnapshot();
-  return webGateFromDecision(snap.web);
+  const gate = webGateFromDecision(snap.web);
+  // The static switch stays in front of a live webOn. Do not open cigarette URLs while it is off.
+  if (!SHOW_CIGARETTES && gate === "show") return "coded";
+  return gate;
 }

@@ -1,4 +1,5 @@
 import itemsJson from "./items.json";
+import { isRealCigaretteItem } from "./cigMarkers.ts";
 import {
   SHOW_CIGARETTES,
   VAPE_PAGE_PATH,
@@ -38,13 +39,12 @@ export function isGatedCigarettePath(pathname: string): boolean {
 }
 
 /**
- * Hide a cigarette row for this request.
- * `show` comes from webOn / tvOn. Coded behaviour matches the existing switch.
+ * Hide a real cigarette row for this request.
+ * `show` comes from webOn / tvOn. Wraps, pouches, Backwoods, cigarillos, papers, Zyn, and Velo stay.
  */
 export function isCigaretteItemHidden(item: { name: string; slug: string; category: string }, show: boolean): boolean {
   if (show) return false;
-  if (isKeptSmokeAccessoryName(item.name, item.slug)) return false;
-  return item.category.toUpperCase() === "CIGARETTES" || hiddenItemSlugs.has(item.slug);
+  return isRealCigaretteItem(item);
 }
 
 /** 302 target while the coded switch is off. Null keeps the original URL. */

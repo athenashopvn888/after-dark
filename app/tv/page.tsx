@@ -3,7 +3,8 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./tv.module.css";
 import { CIGARETTE_FLASH_MESSAGE, isCigaretteFlashWindow } from "./flashMessages";
-import { useCigaretteState } from "../components/CigaretteStateProvider";
+import CigaretteStateProvider, { useCigaretteState } from "../components/CigaretteStateProvider";
+import { readCigaretteTvHeader } from "../lib/cigDecision";
 import HiringRibbon from "../components/HiringRibbon";
 import TvStoreHeader from "../components/TvStoreHeader";
 import { TOP_TIER_BUNDLE_LABELS } from "./bundleLabels";
@@ -732,6 +733,10 @@ function VerticalTicker() {
    MAIN TV PAGE
    ============================================================ */
 export default function TVMenuPage() {
+  const seeded = useCigaretteState();
+  const seededRef = useRef(seeded);
+  seededRef.current = seeded;
+  const [tvCig, setTvCig] = useState({ show: seeded.tv, wording: seeded.wording });
   const theme = getTvTheme(tvHiring?.store);
   const [flowers, setFlowers] = useState<Record<string,Flower[]>>({});
   const [ozFlowers, setOzFlowers] = useState<Flower[]>([]);
@@ -753,6 +758,7 @@ export default function TVMenuPage() {
       ]);
       const fData: Flower[] = fRes.ok ? await fRes.json() : [];
       const iData: Item[] = iRes.ok ? await iRes.json() : [];
+      setTvCig(iRes.ok ? readCigaretteTvHeader(iRes.headers) : { show: false, wording: seededRef.current.wording });
       setStockUpdated(readStockUpdatedAt(fRes, fData) || readStockUpdatedAt(iRes, iData));
 
       for (const f of fData) {
@@ -853,6 +859,7 @@ export default function TVMenuPage() {
   };
 
   return (
+    <CigaretteStateProvider value={{ web: seeded.web, tv: tvCig.show, wording: tvCig.wording }}>
     <div className={styles.tvPage} data-tv-themed={theme ? "true" : undefined} style={theme ? getTvThemeVariables(theme) : undefined}>
       <TvThemeArtwork theme={theme} />
       {/* Floating particles */}
@@ -900,5 +907,6 @@ export default function TVMenuPage() {
       {lastUpdate ? <div className={styles.lastUpdated}>Refreshed {lastUpdate}</div> : null}
       <FleetTvTakeover promos={fleetTv.fullscreenPromos} />
     </div>
+    </CigaretteStateProvider>
   );
 }

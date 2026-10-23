@@ -19,7 +19,7 @@ import seoContent from "../../lib/seoContent.generated.json";
 import styles from "./items.module.css";
 import { isCigaretteItemHidden } from "../../lib/cigaretteCatalog";
 import CigaretteUnavailableGate from "../../components/CigaretteUnavailableGate";
-import { getCigaretteSnapshot } from "../../lib/cigaretteFeed";
+import { getCigaretteSnapshot, toPublicCigaretteState } from "../../lib/cigaretteFeed";
 import { getCategoryGuideGroups } from "../../lib/guideRegistry";
 import VapeActionPanel from "../../components/VapeActionPanel";
 
@@ -40,7 +40,7 @@ export async function generateMetadata({
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) return {};
   const { snapshot } = await getAdcInventory();
-  const showWeb = (await getCigaretteSnapshot()).web.show;
+  const showWeb = toPublicCigaretteState(await getCigaretteSnapshot()).web;
   const items = snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isCigaretteItemHidden(item, showWeb));
 
   return {
@@ -63,7 +63,7 @@ export default async function ItemsCategoryPage({
 
   /* Pre-Rolls also shows accessories (ADD ONS) */
   const inventory = await getAdcInventory();
-  const showWeb = (await getCigaretteSnapshot()).web.show;
+  const showWeb = toPublicCigaretteState(await getCigaretteSnapshot()).web;
   let items = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isCigaretteItemHidden(item, showWeb));
   if (catInfo.key === "PREROLLS") {
     const accessories = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === "ADD ONS");
