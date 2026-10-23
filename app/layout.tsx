@@ -6,6 +6,7 @@ import Link from "next/link";
 import "./globals.css";
 import PinnedNavClearance from "./components/PinnedNavClearance";
 import { getCigaretteSnapshot, toPublicCigaretteState } from "./lib/cigaretteFeed";
+import { SHOW_CIGARETTES } from "./lib/siteConfig";
 import { sheetNap } from "./lib/fleet/coded";
 import { getFleetContent } from "./lib/fleetContent";
 import { STORE, cannabisStoreGraphNode, serializeJsonLd, websiteGraphNode } from "./lib/storeIdentity";
@@ -81,7 +82,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [fleet, cigarettes] = await Promise.all([getFleetContent(), getCigaretteSnapshot()]);
+  const [fleet, cigaretteSnapshot] = await Promise.all([getFleetContent(), getCigaretteSnapshot()]);
+  const cigarettes = toPublicCigaretteState(cigaretteSnapshot);
   const nap = sheetNap(fleet);
   const storeNode = nap ? cannabisStoreGraphNode() : null;
   const renderedJsonLd = nap && storeNode
@@ -143,7 +145,7 @@ export default async function RootLayout({
           WEED DELIVERY IS HERE — CLICK TO EXPLORE
         </Link>
         <FleetContentProvider value={{ active: fleet.active, version: fleet.version, nap: fleet.nap, banners: fleet.banners }}>
-          <CigaretteStateProvider value={toPublicCigaretteState(cigarettes)}>
+          <CigaretteStateProvider value={{ ...cigarettes, web: SHOW_CIGARETTES ? cigarettes.web : false }}>
             {children}
             <FullNameNap />
             <PinnedNavClearance />
