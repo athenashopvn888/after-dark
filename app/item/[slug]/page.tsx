@@ -12,8 +12,9 @@ import { getItemData } from "../../lib/itemData";
 import { getItemPriceDisplay } from "../../lib/itemPricing";
 import Magnifier from "../../components/Magnifier";
 import CigaretteUnavailable from "../../components/CigaretteUnavailable";
+import { isItemPageCigaretteGated } from "../../lib/cigMarkers";
 import { isGatedCigarettePath } from "../../lib/cigaretteCatalog";
-import { getWebGate } from "../../lib/cigaretteFeed";
+import { getCigaretteSnapshot, getWebGate, toPublicCigaretteState } from "../../lib/cigaretteFeed";
 import styles from "../../flower/[slug]/flower.module.css";
 
 // ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
@@ -144,7 +145,11 @@ export default async function ItemPage({
   const { slug } = await params;
   const item = await resolveItem(slug);
   if (!item) notFound();
-  if (isGatedCigarettePath(`/item/${item.slug}`) && (await getWebGate()) === "unavailable") {
+  const websiteCigarettesOn = toPublicCigaretteState(await getCigaretteSnapshot()).web;
+  if (
+    isItemPageCigaretteGated(item, isGatedCigarettePath(`/item/${item.slug}`)) &&
+    ((await getWebGate()) === "unavailable" || !websiteCigarettesOn)
+  ) {
     return (
       <>
         <Navbar />

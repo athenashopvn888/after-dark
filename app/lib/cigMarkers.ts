@@ -19,3 +19,14 @@ export function isRealCigaretteItem(item: { category?: string; name?: string; sl
   if ((item.category || "").toUpperCase() === "CIGARETTES") return true;
   return /\b(cigarettes?|tobacco|marlboro|belmont)\b/i.test(blob);
 }
+
+/**
+ * Item-page soft gate. `pathIsGated` is the static hidden-slug check, which misses live-only rows.
+ * Wraps, pouches, Backwoods, cigarillos, papers, Zyn, and Velo stay product pages.
+ */
+export function isItemPageCigaretteGated(
+  item: { category?: string; name?: string; slug?: string },
+  pathIsGated: boolean,
+): boolean {
+  return (pathIsGated || isRealCigaretteItem(item)) && isRealCigaretteItem(item);
+}
