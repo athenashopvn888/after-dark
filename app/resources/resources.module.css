@@ -147,6 +147,12 @@
   margin-top: 16px;
 }
 
+.introBlock p a,
+.contentSection p a {
+  color: #fdba74;
+  font-weight: 800;
+}
+
 .cardsSection,
 .contentSection,
 .linkPanel,

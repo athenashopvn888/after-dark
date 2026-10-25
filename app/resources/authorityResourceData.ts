@@ -3292,7 +3292,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "body": [
           "People use different language.",
           "Cannabis is the formal word. Weed is common everyday slang. Dispensary, cannabis store and weed store are commonly used to describe the retail destination.",
-          "The important part is the actual licensed/authorized status and the exact store you are visiting, not which slang term brought you to the page."
+          "The important part is the actual licensed/authorized status and the exact store you are visiting, not which slang term brought you to the page.",
+          "If that wording is how you found this store, the [weed dispensary in York](/weed-dispensary-york) page is where the Jane Street visit details live."
         ]
       },
       {
@@ -3322,7 +3323,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
           {
             "heading": "Vapes",
             "body": [
-              "Cannabis extracts formulated for vaporization in compatible devices or disposable formats."
+              "Cannabis extracts formulated for vaporization in compatible devices or disposable formats.",
+              "Nicotine devices stay on a separate list at the [vape shop in York](/vape-shop-york)."
             ]
           },
           {
@@ -3399,7 +3401,8 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
         "heading": "Plan the Visit Separately From Product Education",
         "body": [
           "Use the After Dark York store page to confirm the address, current hours, phone and visit information.",
-          "Use the Resource Centre to explore terminology, flower quality, genetics, cultivation and product education."
+          "Use the Resource Centre to explore terminology, flower quality, genetics, cultivation and product education.",
+          "If the plan is delivery rather than a walk-in, start with [weed delivery in York](/weed-delivery-york)."
         ],
         "bullets": [
           "address",
