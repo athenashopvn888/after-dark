@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PreferredSourceButton from "./PreferredSourceButton";
@@ -22,6 +23,29 @@ import {
 type ResourceViewProps = {
   page: ResourcePage;
 };
+
+const SAME_SITE_LINK = /\[([^\]]+)\]\((\/(?!\/)[^)\s]*)\)/g;
+
+/** Turn same-site markdown links into anchors. Paragraphs without that pattern stay plain text. */
+function renderSameSiteCopy(text: string): ReactNode {
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let index = 0;
+  for (const match of text.matchAll(SAME_SITE_LINK)) {
+    const start = match.index ?? 0;
+    if (start > last) nodes.push(text.slice(last, start));
+    nodes.push(
+      <Link key={`${match[2]}-${index}`} href={match[2]}>
+        {match[1]}
+      </Link>,
+    );
+    last = start + match[0].length;
+    index += 1;
+  }
+  if (nodes.length === 0) return text;
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
+}
 
 export default function ResourceView({ page }: ResourceViewProps) {
   const author = AUTHORS[page.author];
@@ -74,8 +98,8 @@ export default function ResourceView({ page }: ResourceViewProps) {
           {page.sections.map((section) => (
             <section key={section.heading} className={styles.contentSection}>
               <h2>{section.heading}</h2>
-              {section.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+              {section.body.map((paragraph, paragraphIndex) => (
+                <p key={`${section.heading}-${paragraphIndex}`}>{renderSameSiteCopy(paragraph)}</p>
               ))}
               {section.bullets && (
                 <ul>
@@ -87,8 +111,8 @@ export default function ResourceView({ page }: ResourceViewProps) {
               {section.subsections?.map((subsection) => (
                 <div key={subsection.heading} className={styles.subsection}>
                   <h3>{subsection.heading}</h3>
-                  {subsection.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                  {subsection.body.map((paragraph, paragraphIndex) => (
+                    <p key={`${subsection.heading}-${paragraphIndex}`}>{renderSameSiteCopy(paragraph)}</p>
                   ))}
                   {subsection.bullets && (
                     <ul>
