@@ -3323,8 +3323,7 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
           {
             "heading": "Vapes",
             "body": [
-              "Cannabis extracts formulated for vaporization in compatible devices or disposable formats.",
-              "Nicotine devices stay on a separate list at the [vape shop in York](/vape-shop-york)."
+              "Cannabis extracts formulated for vaporization in compatible devices or disposable formats."
             ]
           },
           {
