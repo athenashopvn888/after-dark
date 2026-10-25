@@ -2,5 +2,11 @@
 .link { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.32); border-radius: 10px; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 900; text-decoration: none; }
 .primary { color: #111827; background: linear-gradient(180deg, #fde68a, #fbbf24); border-color: #fbbf24; box-shadow: 0 5px 18px rgba(251,191,36,.2); }
 .secondary { background: #b91c1c; border-color: #fecaca; }
+.directions { display: none; gap: 6px; border-color: #c084fc; background: linear-gradient(180deg, #7e22ce, #581c87); box-shadow: 0 5px 18px rgba(168,85,247,.28); }
+.directions svg { width: 18px; height: 18px; flex: 0 0 18px; }
+.directions:active { transform: scale(.97); box-shadow: 0 2px 10px rgba(168,85,247,.2); }
+.directions:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .hero { width: min(100%, 440px); margin-top: 18px; padding: 0; }
-@media (max-width: 520px) { .actions { gap: 6px; padding-inline: 10px; } .link { min-height: 46px; font-size: 11px; } .hero { padding: 0; } }
+@media (max-width: 768px) { .actions:not(.hero) { grid-template-columns: repeat(3, minmax(0, 1fr)); } .directions { display: inline-flex; } }
+@media (max-width: 520px) { .actions { gap: 6px; padding-inline: 10px; } .link { min-height: 46px; padding-inline: 8px; font-size: 11px; } .directions { gap: 4px; } .directions svg { width: 16px; height: 16px; flex-basis: 16px; } .hero { padding: 0; } }
+@media (prefers-reduced-motion: reduce) { .directions { transition: none; } }

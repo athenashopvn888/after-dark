@@ -42,7 +42,8 @@ export const STORE = {
 } as const;
 
 export const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.mapsQuery)}`;
-export const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STORE.mapsQuery)}`;
+const mapsDirectionsDestination = `${STORE.name}, ${STORE.streetAddress}, ${STORE.addressLocality}, ${STORE.addressRegion}`;
+export const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapsDirectionsDestination)}`;
 export const mapsEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(STORE.mapsQuery)}&z=16&output=embed`;
 
 export type StoreFaq = { q: string; a: string };
