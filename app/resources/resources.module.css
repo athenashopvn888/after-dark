@@ -408,6 +408,40 @@
   color: #f8fafc;
 }
 
+.prose h2 {
+  margin-top: 32px;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin: 18px 0 8px;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  color: #e2e8f0;
+}
+
+.prose th {
+  color: #ffffff;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.04);
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: 500px;
