@@ -9,6 +9,7 @@ import { loadFleetArticles } from "./lib/fleet/articles";
 import { codedArticleSlugs } from "./lib/fleet/codedLinks";
 import { ARTICLE_CANONICAL, ARTICLE_DATE } from "./resources/how-cannabis-delivery-works-ontario/articleMeta";
 import { ARTICLE_CANONICAL as AUTOFLOWER_CANONICAL, ARTICLE_DATE as AUTOFLOWER_DATE } from "./resources/autoflower-vs-photoperiod-cannabis/articleMeta";
+import { ARTICLE_CANONICAL as GRINDER_CANONICAL, ARTICLE_DATE as GRINDER_DATE } from "./resources/how-to-clean-a-weed-grinder/articleMeta";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 import { GUIDE_REGISTRY } from "./lib/guideRegistry";
 
@@ -104,6 +105,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const publishedArticlePages: MetadataRoute.Sitemap = [
     { url: ARTICLE_CANONICAL, lastModified: ARTICLE_DATE, changeFrequency: "monthly", priority: 0.65 },
     { url: AUTOFLOWER_CANONICAL, lastModified: AUTOFLOWER_DATE, changeFrequency: "monthly", priority: 0.65 },
+    { url: GRINDER_CANONICAL, lastModified: GRINDER_DATE, changeFrequency: "monthly", priority: 0.65 },
   ];
 
   let fleetArticlePages: MetadataRoute.Sitemap = [];
