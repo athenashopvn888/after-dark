@@ -1,5 +1,15 @@
 import { isHiddenCigaretteHref, isKeptSmokePath, presentFaq, SHOW_CIGARETTES, stripCigaretteMentions } from "../lib/siteConfig";
 import { STORE } from "../lib/storeIdentity";
+import {
+  ARTICLE_DESCRIPTION as AUTOFLOWER_DESCRIPTION,
+  ARTICLE_PATH as AUTOFLOWER_PATH,
+  ARTICLE_TITLE as AUTOFLOWER_TITLE,
+} from "./autoflower-vs-photoperiod-cannabis/articleMeta.ts";
+import {
+  ARTICLE_DESCRIPTION as GRINDER_DESCRIPTION,
+  ARTICLE_PATH as GRINDER_PATH,
+  ARTICLE_TITLE as GRINDER_TITLE,
+} from "./how-to-clean-a-weed-grinder/articleMeta.ts";
 
 export type ResourceAuthorKey = "team" | "menu" | "local";
 
@@ -140,6 +150,24 @@ const BASE_RESOURCE_PAGES: ResourcePage[] = [
           "The Native Cigarettes in Ontario guide is a separate educational resource covering history, manufacturing and cigarette-stamp context. Local product and store information remains on the separate York page.",
         ],
         links: [{ label: "Native Cigarettes in Ontario", href: "/resources/native-cigarettes-ontario" }],
+      },
+      {
+        heading: "Latest articles",
+        body: [
+          "Recent explainers from the Jane Street counter. Adults 19+.",
+        ],
+        links: [
+          {
+            label: GRINDER_TITLE,
+            href: GRINDER_PATH,
+            description: GRINDER_DESCRIPTION,
+          },
+          {
+            label: AUTOFLOWER_TITLE,
+            href: AUTOFLOWER_PATH,
+            description: AUTOFLOWER_DESCRIPTION,
+          },
+        ],
       },
     ],
     commercialLinks: [
