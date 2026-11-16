@@ -1,4 +1,9 @@
 import type { ResourcePage } from "./resourceData";
+import {
+  ARTICLE_DESCRIPTION as GRINDER_DESCRIPTION,
+  ARTICLE_PATH as GRINDER_PATH,
+  ARTICLE_TITLE as GRINDER_TITLE,
+} from "./how-to-clean-a-weed-grinder/articleMeta.ts";
 
 // Generated mechanically from the owner-approved corrected PINKY master.
 // Do not hand-edit supplied copy; regenerate from the approved source instead.
@@ -1242,6 +1247,11 @@ export const AUTHORITY_RESOURCE_PAGES: ResourcePage[] = [
       {
         "label": "Budget Weed",
         "href": "/budget-weed"
+      },
+      {
+        "label": GRINDER_TITLE,
+        "href": GRINDER_PATH,
+        "description": GRINDER_DESCRIPTION
       }
     ],
     "related": [
