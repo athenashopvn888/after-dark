@@ -12,7 +12,7 @@ test("MJ01 keeps the protected owner and exact metadata", () => {
   assert.match(location, /After Dark Cannabis is open 24 hours at 1664 Jane Street/);
   assert.match(sitemap, /weed-dispensary-york/);
   assert.match(page, /title: \{ absolute: pageTitle \}/);
-  assert.match(page, /Weed Dispensary in York on Jane Street/);
+  assert.match(page, /Weed Dispensary near me in York on Jane Street \| After Dark Cannabis/);
   assert.match(page, /const canonical = `\$\{STORE\.baseUrl\}\$\{STORE\.storePagePath\}`/);
   assert.match(page, /alternates: \{ canonical \}/);
   assert.doesNotMatch(page, /storePagePath\}\//);

@@ -19,7 +19,7 @@ test("MJ01 Wave 4 keeps the live /weed-dispensary-york owner and unique York/Jan
 
   assert.match(identity, /storePagePath: "\/weed-dispensary-york"/);
   assert.doesNotMatch(identity, /storePagePath: "\/weed-dispensary-york\/"/);
-  assert.match(page, /Weed Dispensary in York on Jane Street \| After Dark Cannabis/);
+  assert.match(page, /Weed Dispensary near me in York on Jane Street \| After Dark Cannabis/);
   assert.match(york, /pageH1 = "Weed Dispensary in York on Jane Street"/);
   assert.match(york, /<h1>\{pageH1\}<\/h1>/);
   assert.match(page, /title: \{ absolute: pageTitle \}/);
