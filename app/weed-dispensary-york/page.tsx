@@ -3,7 +3,7 @@ import { GBPLandingPage } from "@/app/components/GBPLandingPage";
 import { STORE } from "@/app/lib/storeIdentity";
 
 const canonical = `${STORE.baseUrl}${STORE.storePagePath}`;
-const pageTitle = "Weed Dispensary in York on Jane Street | After Dark Cannabis";
+const pageTitle = "Weed Dispensary near me in York on Jane Street | After Dark Cannabis";
 const pageDescription =
   "Weed dispensary in York at 1664 Jane Street, York, ON M9N 2S1. Jane Street walk-in for flower tiers, prerolls, edibles, and vapes. Call +1 (437) 524-9344. Adults 19+.";
 
