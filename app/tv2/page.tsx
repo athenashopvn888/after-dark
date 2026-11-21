@@ -330,7 +330,7 @@ export default function TV2Page() {
           <HiringRibbon hiring={tvHiring} />
           <div className={styles.grid}>
             {cards.map(card => {
-              const shelf = items.filter(card.filter).filter(it => !(daytime && isNicotineItem(it)));
+              const shelf = items.filter(card.filter).filter(it => card.id === "CIGARETTES" || !(daytime && isNicotineItem(it)));
               const filtered = card.id === "CIGARETTES" && !showTvCigarettes ? shelf.filter((it) => !isRealCigaretteItem(it)) : shelf;
               const broken = sheetBroken[card.id] || {};
               const sheet = pickTv2Sheet(fleetTv.cards[card.id], {
