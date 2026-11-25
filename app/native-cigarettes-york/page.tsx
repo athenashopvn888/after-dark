@@ -3,7 +3,8 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CigaretteSeasonalNotice from "../components/CigaretteSeasonalNotice";
-import CigaretteUnavailableGate from "../components/CigaretteUnavailableGate";
+import CigaretteUnavailable from "../components/CigaretteUnavailable";
+import { getCigaretteSnapshot, toPublicCigaretteState } from "../lib/cigaretteFeed";
 import {
   NATIVE_CIGARETTE_FAQS,
   STORE,
@@ -68,7 +69,10 @@ const pageSchema = {
   ],
 };
 
-export default function NativeCigarettesYorkPage() {
+export default async function NativeCigarettesYorkPage() {
+  if (!toPublicCigaretteState(await getCigaretteSnapshot()).web) {
+    return <><Navbar /><main><CigaretteUnavailable /></main><Footer /></>;
+  }
   return (
     <>
       <script
@@ -76,7 +80,6 @@ export default function NativeCigarettesYorkPage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(pageSchema) }}
       />
       <Navbar />
-      <CigaretteUnavailableGate pathname="/native-cigarettes-york" />
       <CigaretteSeasonalNotice sticky />
       <main className={styles.main}>
         <section className={styles.hero}>

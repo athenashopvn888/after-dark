@@ -62,8 +62,9 @@ export default async function ItemsCategoryPage({
   if (!catInfo) notFound();
 
   /* Pre-Rolls also shows accessories (ADD ONS) */
-  const inventory = await getAdcInventory();
   const showWeb = toPublicCigaretteState(await getCigaretteSnapshot()).web;
+  const cigaretteCategoryOff = catSlug === "cigarettes" && !showWeb;
+  const inventory = await getAdcInventory();
   let items = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === catInfo.key.toUpperCase() && !isCigaretteItemHidden(item, showWeb));
   if (catInfo.key === "PREROLLS") {
     const accessories = inventory.snapshot.items.filter((item) => item.category.toUpperCase() === "ADD ONS");
@@ -85,11 +86,11 @@ export default async function ItemsCategoryPage({
     <main className={styles.main} data-inventory-version={inventory.snapshot.version} data-inventory-as-of={inventory.snapshot.sourceTimestamp}>
       <Navbar />
       <CigaretteUnavailableGate pathname={`/items/${catSlug}`} />
-      {catSlug === "cigarettes" && <CigaretteSeasonalNotice sticky />}
+      {showWeb && catSlug === "cigarettes" && <CigaretteSeasonalNotice sticky />}
 
       {/* Hero Banner */}
       <section style={{ width: "100%", overflow: "hidden", marginTop: 0, marginBottom: "24px" }}>
-        {config.banner ? (
+        {config.banner && !cigaretteCategoryOff ? (
           <img
               src={categoryBanner}
             alt={config.name}
@@ -163,7 +164,7 @@ export default async function ItemsCategoryPage({
             </div>
           )}
 
-          {catSlug === "cigarettes" ? (
+          {showWeb && catSlug === "cigarettes" ? (
             <p className={styles.seoBody}>
               Jane Street / York neighbourhood guide:{" "}
               <Link href={STORE.nativeCigarettesPath}>Native cigarettes on Jane Street</Link>
