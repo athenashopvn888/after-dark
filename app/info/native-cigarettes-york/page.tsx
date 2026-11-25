@@ -3,8 +3,8 @@ import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { SmokePilotLanding } from "../../components/SmokePilot";
-import CigaretteUnavailableGate from "../../components/CigaretteUnavailableGate";
-import { getWebGate } from "../../lib/cigaretteFeed";
+import CigaretteUnavailable from "../../components/CigaretteUnavailable";
+import { getCigaretteSnapshot, toPublicCigaretteState } from "../../lib/cigaretteFeed";
 import { getAdcInventory } from "../../lib/adcInventoryService";
 
 export const dynamic = "force-dynamic";
@@ -17,17 +17,18 @@ export const metadata: Metadata = {
 };
 
 export default async function NativeCigarettesYorkPage() {
+  if (!toPublicCigaretteState(await getCigaretteSnapshot()).web) {
+    return <><Navbar /><main><CigaretteUnavailable /></main><Footer /></>;
+  }
   const inventory = await getAdcInventory().catch(() => {
     console.warn("[ADC smoke pilot] verified inventory unavailable; rendering without product listings");
     return null;
   });
-  const unavailable = (await getWebGate()) === "unavailable";
-  const items = unavailable ? [] : inventory?.snapshot.items.filter((item) => item.category === "CIGARETTES") ?? [];
+  const items = inventory?.snapshot.items.filter((item) => item.category === "CIGARETTES") ?? [];
 
   return (
     <>
       <Navbar />
-      <CigaretteUnavailableGate pathname="/info/native-cigarettes-york" />
       <SmokePilotLanding
         canonicalUrl="https://afterdarkcannabis.com/info/native-cigarettes-york"
         storeName="After Dark Cannabis"

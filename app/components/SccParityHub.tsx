@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { hubLinksForPage } from "../lib/sccParityHub";
+import { useCigaretteState } from "./CigaretteStateProvider";
 import styles from "./SccParityHub.module.css";
 
 export default function SccParityHub({
@@ -18,7 +21,8 @@ export default function SccParityHub({
   includeTiers?: boolean;
   tone?: "dark" | "light";
 }) {
-  const links = hubLinksForPage({ currentPath, geoSet, includeTiers });
+  const { web: showCigarettes } = useCigaretteState();
+  const links = hubLinksForPage({ currentPath, geoSet, includeTiers, showCigarettes });
   if (links.length === 0) return null;
 
   return (

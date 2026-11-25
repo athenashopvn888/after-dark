@@ -103,10 +103,12 @@ export function hubLinksForPage({
   currentPath,
   geoSet = "all",
   includeTiers = true,
+  showCigarettes = SHOW_CIGARETTES,
 }: {
   currentPath: string;
   geoSet?: "core" | "all";
   includeTiers?: boolean;
+  showCigarettes?: boolean;
 }): SccHubLink[] {
   const current = normalizeHubPath(currentPath);
   const coreHrefs: ReadonlySet<string> = new Set([
@@ -122,5 +124,5 @@ export function hubLinksForPage({
       ? SCC_GEO_HUBS.filter((hub) => coreHrefs.has(hub.href))
       : [...SCC_GEO_HUBS];
   const tiers = includeTiers ? [...SCC_TIER_HUBS] : [];
-  return [...geo, ...tiers].filter((hub) => normalizeHubPath(hub.href) !== current && (SHOW_CIGARETTES || hub.href !== STORE.nativeCigarettesPath));
+  return [...geo, ...tiers].filter((hub) => normalizeHubPath(hub.href) !== current && (showCigarettes || hub.href !== STORE.nativeCigarettesPath));
 }
